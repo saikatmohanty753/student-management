@@ -26,21 +26,22 @@
                     </div>
                 @endif
 
-                <form method="post" action="{{ url('/store-user') }}" id="myForm">
+                <form method="post" action="{{ url('/update-user') }}" id="myForm">
                     @csrf
-                    <input type="hidden" id="hid" value="{{ $id }}" name="college_id">
+                    
+                    <input type="hidden" id="hid" value="{{ $user->id }}" name="hid">
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-label">Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Enter Name" name="name">
+                                    <input type="text" class="form-control" placeholder="Enter Name" name="name" value="{{ $user->name }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-label">Email <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Enter Email" name="email">
+                                    <input type="text" class="form-control" placeholder="Enter Email" name="email" value="{{$user->email}}">
 
                                 </div>
                             </div>
@@ -51,7 +52,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="Enter Mobile Number"
-                                        name="mob_no">
+                                        name="mob_no" value="{{$user->mob_no}}">
 
                                 </div>
                             </div>
@@ -62,7 +63,7 @@
                                         name="role">
                                         <option value=""> Select Role</option>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            <option value="{{ $role->id }}" {{$role->id == $user->role_id ? 'selected' : ''}}>{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -101,58 +102,6 @@
                 </form>
             </div>
 
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-xl-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table
-                            class="text-fade table table-bordered display no-footer datatable table-responsive-lg dt-table">
-                            <thead>
-                                <tr class="text-dark">
-                                    <th style="">Sl. No</th>
-                                    <th>Name</th>
-                                    <th>College Name</th>
-                                    <th>Email</th>
-                                    <th>Mobile Number</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
-
-                                    {{-- <th>Action</th> --}}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $key => $clg)
-                                    <tr>
-                                        <td>{{ ++$key }}</td>
-                                        <td>{{ $clg->name }}</td>
-                                        <td>{{ $clg->clg_name }}</td>
-                                        <td>{{ $clg->email }}</td>
-                                        <td>{{ $clg->mob_no }}</td>
-                                        <td>{{ $clg->role_name }}</td>
-                                        <td>
-                                             {{-- @can('user-list')
-                                                <a class="btn btn-info" href="{{ route('users.show', $user->id) }}"><i
-                                                        class="fa-solid fa-eye"></i></a>
-                                            @endcan --}}
-
-                                            <a class="btn btn-primary waves-effect waves-themed" href="{{ route('college-users.edit',$clg->id) }}"><i class="fa fa-edit"></i></a>
-
-                                            <a class="btn btn-primary waves-effect waves-themed" href="{{ route('college-users.delete',$clg->id) }}"><i class="fa fa-trash"></i></a>
-                                           
-                                            
-                                        </td>
-
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 @endsection

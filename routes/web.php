@@ -50,7 +50,10 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard']);
     Route::resource('users', UserController::class);
     Route::get('create-user/{id}', [UserController::class, 'createClgUser']);
+    Route::get('edit-user/{id}', [UserController::class, 'editClgUser'])->name('college-users.edit');
     Route::post('store-user', [UserController::class, 'storeClgUser']);
+    Route::post('update-user', [UserController::class, 'updateClgUser']);
+    Route::get('delete-user/{id}', [UserController::class, 'deleteClgUser'])->name('college-users.delete');
 
     Route::resource('roles', RoleController::class);
 
@@ -70,6 +73,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::post('get-course', [AjaxController::class, 'getCourse']);
     Route::post('publish-notice', [AjaxController::class, 'publishNotice']);
+    Route::get('notice/view/{id}', [NoticesController::class, 'show']);
 
     Route::get('uuc-admission/{id}/{dep}/{depId}', [AdmissionController::class, 'index']);
     Route::post('student-admission', [AdmissionController::class, 'store']);

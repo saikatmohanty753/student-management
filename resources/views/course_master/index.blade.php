@@ -50,8 +50,8 @@
                             <thead>
                                 <tr class="text-dark">
                                     <th style="width: 10%;">Sl. No</th>
-                                    <th style="width: 80%;">Course</th>
-                                    {{-- <th>Action</th> --}}
+                                    <th style="width: 50%;">Course</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,11 +59,11 @@
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $value->name }}</td>
-                                        {{-- <td>
+                                        <td>
                                     <form action="{{ url('course', $value->id) }}" method="post">
                                         @csrf
 
-                                        <a class="btn btn-info" href=""><i class="fa-solid fa-eye"></i></a>
+                                        {{-- <a class="btn btn-info" href=""><i class="fa-solid fa-eye"></i></a> --}}
 
                                         <a class="btn btn-primary" href="{{ url('course', $value->id) }}"
                                             data-toggle="modal" data-target="#exampleModal{{ $value->id }}"><i
@@ -72,7 +72,7 @@
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                                     </form>
-                                </td> --}}
+                                </td>
                                     </tr>
                                 @endforeach
                             </tbody>

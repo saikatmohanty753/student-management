@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\Notice;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class NoticesController extends Controller
 {
@@ -67,7 +68,13 @@ class NoticesController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = DB::table('notices')
+            ->select('notices.*', 'course_fors.course_for as course', 'courses.name as couse_name')
+            ->leftJoin('course_fors', 'notices.department_id', "=", 'course_fors.id')
+            ->leftJoin('courses', 'notices.course_id', "=", 'courses.id')
+            ->where('notices.id', $id)
+            ->first();
+        return view('notices.view', compact('data'));
     }
 
     /**

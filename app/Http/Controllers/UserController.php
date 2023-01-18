@@ -252,6 +252,52 @@ class UserController extends Controller
         $user->password = Hash::make($request['password']);
         $user->save();
         $user->assignRole($request->input('role'));
-        return redirect()->back()->with('message', 'Student Added Successfully');
+        return redirect()->back()->with('success', 'Student Added Successfully');
     }
+
+    public function editClgUser(Request $request, $id)
+    {
+        $roles = Role::whereIn('id', [13, 14])->get();
+        $user = User::find($id);
+       return view('colleges.edit_user', compact('roles', 'user'));
+
+    }
+    public function updateClgUser(Request $request)
+    {
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $request->hid,
+            'password' => 'same:comfirm_password',
+            'role' => 'required',
+            'mob_no' =>  'required',
+
+        ]);
+
+
+        $user = User::find($request->hid);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mob_no = $request->mob_no;
+        $user->role_id = $request->role;
+        if (!empty($input['password'])) {
+            $user->password = Hash::make($request['password']);
+
+        }
+        $user->save();
+        $user->assignRole($request->input('role'));
+        return redirect()->action([UserController::class, 'createClgUser'], ['id' => $user->clg_user_id])->with('success', 'User updated Successfully');
+
+    }
+
+    public function deleteClgUser($id)
+    {
+
+
+        $user = User::find($id);
+        $clgId = $user->clg_user_id;
+        $user->delete();
+        return redirect()->action([UserController::class, 'createClgUser'], ['id' => $clgId]);
+    }
+
 }
