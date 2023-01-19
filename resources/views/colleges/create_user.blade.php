@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Comfirm Pasword <span class="text-danger">*</span></label>
+                                    <label class="form-label">Confirm Pasword <span class="text-danger">*</span></label>
                                     <input type="password" class="form-control" placeholder="Enter Confirm Pasword"
                                         name="comfirm_password">
 
@@ -90,7 +90,7 @@
                         <div class="row">
                             <div class="col-md-12 text-center mt-4">
                                 
-                                <a href="http://localhost:8000/colleges" class="btn btn-danger"> Cancel </a>
+                                <a href="{{url('colleges/')}}" class="btn btn-danger"> Cancel </a>
                                 <button type="submit" class="btn btn-info pull-right">Submit</button>
                                 
                                 

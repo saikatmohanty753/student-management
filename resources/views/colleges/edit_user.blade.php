@@ -90,7 +90,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center mt-4">
-                                <a href="http://localhost:8000/create-user/{{$user->clg_user_id}}" class="btn btn-danger"> Cancel </a>
+                                <a href="{{url('create-user/'.$user->clg_user_id)}}" class="btn btn-danger"> Cancel </a>
                                 <button type="submit" class="btn btn-info pull-right">Submit</button>
                                 
                             </div>
