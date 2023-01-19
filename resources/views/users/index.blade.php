@@ -8,7 +8,7 @@
                     <div class="card-actions float-right">
                         @can('user-create')
                             <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}"> <i class="fa-solid fa-plus"></i>
-                                Create New User</a>
+                                Create New User </a>
                         @endcan
                     </div>
                 </div>

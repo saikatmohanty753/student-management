@@ -33,8 +33,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Name <span class="text-danger">*</span></label>
+                                    <label class="form-label">Name<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="Enter Name" name="name">
+                                
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -79,7 +80,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Comfirm Pasword <span class="text-danger">*</span></label>
+                                    <label class="form-label">Confirm Pasword <span class="text-danger">*</span></label>
                                     <input type="password" class="form-control" placeholder="Enter Confirm Pasword"
                                         name="comfirm_password">
 
@@ -89,9 +90,15 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center mt-4">
-                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
-                                    style="margin-right: 8px;">Cancel</button>
+                                
+                                <a href="{{url('colleges/')}}" class="btn btn-danger"> Cancel </a>
                                 <button type="submit" class="btn btn-info pull-right">Submit</button>
+                                
+                                
+                                
+                                
+                                
+                                
                             </div>
 
                         </div>
@@ -141,7 +148,6 @@
                                             <a class="btn btn-primary waves-effect waves-themed" href="{{ route('college-users.edit',$clg->id) }}"><i class="fa fa-edit"></i></a>
 
                                             <a class="btn btn-primary waves-effect waves-themed" href="{{ route('college-users.delete',$clg->id) }}"><i class="fa fa-trash"></i></a>
-                                           
                                             
                                         </td>
 
