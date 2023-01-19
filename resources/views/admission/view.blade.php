@@ -69,7 +69,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 d-flex">
+                                <div class="col-sm-6 d-flex">
                                     <div class="table-responsive">
                                         <table class="table table-clean table-sm align-self-end">
                                             <tbody>

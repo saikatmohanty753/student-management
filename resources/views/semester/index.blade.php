@@ -16,7 +16,7 @@
                                 <tr>
                                     <th style="width: 25%;">No</th>
                                     <th style="width: 25%;">Course Name</th>
-                                    <th style="width: 25%;">Semesters</th>
+                                    <th style="width: 25%;">Semesters </th>
                                     <th style="width: 25%;">Action</th>
                                 </tr>
                             </thead>
