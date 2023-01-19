@@ -273,7 +273,8 @@ class UserController extends Controller
             'mob_no' =>  'required',
 
         ]);
-
+    
+        
 
         $user = User::find($request->hid);
         $user->name = $request->name;
