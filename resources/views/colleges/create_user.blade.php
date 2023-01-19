@@ -89,9 +89,15 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center mt-4">
-                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
-                                    style="margin-right: 8px;">Cancel</button>
+                                
+                                <a href="http://localhost:8000/colleges" class="btn btn-danger"> Cancel </a>
                                 <button type="submit" class="btn btn-info pull-right">Submit</button>
+                                
+                                
+                                
+                                
+                                
+                                
                             </div>
 
                         </div>
@@ -141,7 +147,6 @@
                                             <a class="btn btn-primary waves-effect waves-themed" href="{{ route('college-users.edit',$clg->id) }}"><i class="fa fa-edit"></i></a>
 
                                             <a class="btn btn-primary waves-effect waves-themed" href="{{ route('college-users.delete',$clg->id) }}"><i class="fa fa-trash"></i></a>
-                                           
                                             
                                         </td>
 

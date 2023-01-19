@@ -93,6 +93,7 @@
                                 <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
                                     style="margin-right: 8px;">Cancel</button>
                                 <button type="submit" class="btn btn-info pull-right">Submit</button>
+                                
                             </div>
 
                         </div>
