@@ -40,7 +40,7 @@ class DashboardController extends Controller
 
     public function checkUser($id)
     {
-        $role = [ 3, 9, 10, 11, 12, 13, 14];
+        $role = [ 3, 9, 10, 11, 14];
         return in_array($id, $role) == true ? 1 : 0;
     }
 

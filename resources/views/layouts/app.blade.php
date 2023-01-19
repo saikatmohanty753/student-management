@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/vendors.bundle.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/app.bundle.css') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('backend/img/favicon/apple-touch-icon.png') }}">
@@ -28,6 +29,7 @@
 </head>
 
 <body class="mod-bg-1 ">
+    <div class="cover-spin"></div>
 
     <!-- BEGIN Page Wrapper -->
     <div class="page-wrapper">
@@ -75,7 +77,6 @@
     @livewireScripts
     @yield('js')
     <script>
-
         $(document).ready(function() {
             toastr.options = {
                 "closeButton": false,

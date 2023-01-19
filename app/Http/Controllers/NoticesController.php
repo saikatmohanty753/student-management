@@ -39,7 +39,6 @@ class NoticesController extends Controller
 
     public function store(Request $request)
     {
-        return back()->with('success', 'Notification Created Successfully');
         $startDate = Carbon::parse($request->start_date);
         $startDate->hour   = 00;
         $startDate->minute = 00;

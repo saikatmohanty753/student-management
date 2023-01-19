@@ -7,7 +7,7 @@
     height: 100px;
 }
 .page-logo img {
-    
+
     height: 71px;
     width: 69px;
 }
@@ -16,11 +16,11 @@
         <div class="blankpage-form-field">
             <div
                 class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
-                
+
                 <a href="javascript:void(0)" class="page-logo-link text-center press-scale-down d-flex align-items-center"><h4></h4>
                     <img src="{{ asset('backend/img/favicon/stud.jpg') }}" alt="Utkal University Of Culture"
                         aria-roledescription="logo">
-                        
+
                     <span class="page-logo-text mr-1">Utkal University of Culture<br>Student Portal</span>
                 </a>
             </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group text-left">
                         <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" name="remember" id="remember"
+                            <input class="custom-control-input" type="checkbox" name="remember" id="rememberme"
                                 {{ old('remember') ? 'checked' : '' }}>
                             <label class="custom-control-label" for="rememberme"> Remember me! </label>
                         </div>

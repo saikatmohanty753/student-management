@@ -18,11 +18,15 @@ class AjaxController extends Controller
 
     public function publishNotice(Request $request)
     {
-        //College-Exam-Section = 13
-        //College-Academic-Section = 14
-        //Academic-Section = 10
-        //Exam-Section = 12
-        //Student = 3
+        /*
+        College-Exam-Section = 13
+        College-Academic-Section = 14
+        Academic-Section = 10
+        Exam-Section = 12
+        Student = 3
+        UUC-Exam-Section = 17
+        UUC-Academic-Section = 16
+        */
 
         $check = Notice::where([['id', $request->id], ['status', 0]])->count();
         if ($check == 1) {
@@ -33,7 +37,7 @@ class AjaxController extends Controller
             $status = "Published";
             if ($notice->notice_type == 1) {
                 //academic
-                $users = User::whereIn('role_id', [10, 14])->get();
+                $users = User::whereIn('role_id', [14, 16])->get();
                 foreach ($users as $key => $user) {
                     $user->notice_id = $request->id;
                     $user->notify(new UucNotice());
@@ -41,14 +45,17 @@ class AjaxController extends Controller
             } elseif ($notice->notice_type == 2) {
                 //exam
 
-                $users = User::whereIn('role_id', [12, 13])->get();
+                $users = User::whereIn('role_id', [13, 17])->get();
                 foreach ($users as $key => $user) {
                     $user->notice_id = $request->id;
                     $user->notify(new UucNotice());
                 }
             } elseif ($notice->notice_type == 3) {
-                #others
-
+                $users = User::whereIn('role_id', [3, 13, 14, 16, 17])->get();
+                foreach ($users as $key => $user) {
+                    $user->notice_id = $request->id;
+                    $user->notify(new UucNotice());
+                }
             }
 
             // $user->notify(new Notice());

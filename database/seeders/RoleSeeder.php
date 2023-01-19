@@ -27,6 +27,8 @@ class RoleSeeder extends Seeder
             'Exam-Section',
             'College-Exam-Section',
             'College-Academic-Section',
+            'UUC-Academic-Section',
+            'UUC-Exam-Section',
         ];
 
         foreach ($roles as $role) {
