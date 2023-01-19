@@ -261,16 +261,17 @@ class UserController extends Controller
     }
     public function updateClgUser(Request $request)
     {
-
+        
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $request->hid,
-            'password' => 'same:comfirm_password',
+            'password' => 'required|same:comfirm_password',
             'role' => 'required',
             'mob_no' =>  'required',
 
         ]);
-
+    
+        
 
         $user = User::find($request->hid);
         $user->name = $request->name;
