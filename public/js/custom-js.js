@@ -95,3 +95,5 @@ function upload_image_view(url) {
         '" frameborder="0" width="100%" id="view_upload_image" height="400px">');
     $('#upload_image_view').modal('show');
 }
+
+$('.remove-alert').delay(5000).fadeOut('slow');

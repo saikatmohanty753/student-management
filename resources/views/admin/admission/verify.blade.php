@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="row">
 
         <div class="col-xl-12">
@@ -388,6 +387,7 @@
 
                                 <div
                                     class="panel-content border-faded border-top-0 border-left-0 border-right-0 border-bottom-0 d-flex flex-row justify-content-center">
+                                    <a href="{{ url('applied-admission-list') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
 
                                     <button class="btn btn-outline-success waves-effect waves-themed ml-4"
                                         type="submit">Submit
@@ -442,7 +442,7 @@
             $('#upload_image_view').modal('show');
         }
 
-        $('#regStatus').change(function(){
+        $('#regStatus').change(function() {
             if ($(this).val() == 2) {
                 $('.regIssue').removeClass('d-none');
             } else {

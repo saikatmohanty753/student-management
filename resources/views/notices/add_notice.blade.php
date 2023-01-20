@@ -10,7 +10,23 @@
                     </div>
                 </div>
                 <div class="card-body">
+
                     <div class="col-md-6 offset-md-3">
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger remove-alert">
+
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+
+                                <ul>
+
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+
+                                </ul>
+
+                            </div>
+                        @endif
                         <form method="post" action="{{ url('uuc-create-notice') }}" id="myForm">
                             @csrf
                             <div class="row mb-2">
@@ -60,7 +76,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group semester d-none">
                                         <label class="form-label">Semester<span class="text-danger">*</span></label>
-                                        <select class="form-select form-control" aria-label="Default select example" name="semester">
+                                        <select class="form-select form-control" aria-label="Default select example"
+                                            name="semester">
                                             <option value="" selected>Select Department</option>
                                             @foreach ($dept as $item)
                                                 <option value="{{ $item->id }}">{{ $item->semester }}</option>
@@ -74,7 +91,7 @@
                                     <div class="form-group start_date d-none">
                                         <label class="form-label">Start date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control datepicker-1"
-                                            placeholder="Enter Department" name="start_date">
+                                            placeholder="Enter Start Date" name="start_date">
                                     </div>
                                 </div>
                             </div>
@@ -82,8 +99,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group end_date d-none">
                                         <label class="form-label">Expiry date<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control datepicker-1"
-                                            placeholder="Enter Department" name="exp_date">
+                                        <input type="text" class="form-control datepicker-1" placeholder="Enter End Date"
+                                            name="exp_date">
                                     </div>
                                 </div>
                             </div>
@@ -96,9 +113,9 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-12 text-center mb-4">
-                                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
-                                        style="margin-right: 8px;">Cancel</button>
-                                    <button type="submit"  class="btn btn-info pull-right">Submit</button>
+                                    <a href="{{ url('/notices') }}" class="btn btn-danger" data-bs-dismiss="modal"
+                                        style="margin-right: 8px;">Cancel</a>
+                                    <button type="submit" class="btn btn-info pull-right">Submit</button>
                                 </div>
 
                             </div>

@@ -39,6 +39,15 @@ class NoticesController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'notice_type' => 'required',
+            'department' => 'required',
+            'start_date' => 'required',
+            'exp_date' => 'required',
+            'details' => 'required'
+
+        ]);
+
         $startDate = Carbon::parse($request->start_date);
         $startDate->hour   = 00;
         $startDate->minute = 00;
