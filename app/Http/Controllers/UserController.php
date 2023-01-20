@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
-
+use Illuminate\Support\Str;
 class UserController extends Controller
 {
     function __construct()
@@ -242,7 +242,7 @@ class UserController extends Controller
 
         $user = new User();
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->email = Str::lower($request->email);
         $user->mob_no = $request->mob_no;
         $user->role_id = $request->role;
         $user->clg_user_id = $request->college_id;
@@ -265,7 +265,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $request->hid,
-            'password' => 'required|same:comfirm_password',
+            'password' => 'same:comfirm_password',
             'role' => 'required',
             'mob_no' =>  'required',
 
@@ -275,7 +275,7 @@ class UserController extends Controller
 
         $user = User::find($request->hid);
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->email = Str::lower($request->email);
         $user->mob_no = $request->mob_no;
         $user->role_id = $request->role;
         if (!empty($input['password'])) {

@@ -41,7 +41,6 @@ class NoticesController extends Controller
     {
         $this->validate($request, [
             'notice_type' => 'required',
-            'department' => 'required',
             'start_date' => 'required',
             'exp_date' => 'required',
             'details' => 'required'
