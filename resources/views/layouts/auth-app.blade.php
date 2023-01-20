@@ -25,10 +25,17 @@
             transform: translate(-50%, -50%);
             position: fixed;
         }
+        .bg-img {
+            position: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
     </style>
 </head>
 
-<body>
+<body class="hold-transition theme-primary bg-img" style="background-image: url({{ asset('backend/img/bg-16.jpg') }})">
     @yield('content')
     </div>
     {{-- @endsection --}}

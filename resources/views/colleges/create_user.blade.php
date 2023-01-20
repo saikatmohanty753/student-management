@@ -33,8 +33,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Name <span class="text-danger">*</span></label>
+                                    <label class="form-label">Name<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="Enter Name" name="name">
+                                
                                 </div>
                             </div>
                             <div class="col-md-6">

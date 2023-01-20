@@ -1,0 +1,49 @@
+ .cover-spin {
+     position: fixed;
+     width: 100%;
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 0;
+     background-color: rgba(255, 255, 255, 0.7);
+     z-index: 1;
+     display: none;
+ }
+
+ @-webkit-keyframes spin {
+     from {
+         -webkit-transform: rotate(0deg);
+     }
+
+     to {
+         -webkit-transform: rotate(360deg);
+     }
+ }
+
+ @keyframes spin {
+     from {
+         transform: rotate(0deg);
+     }
+
+     to {
+         transform: rotate(360deg);
+     }
+ }
+
+ .cover-spin::after {
+     content: '';
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     color: #2196F3 !important;
+     display: inline-block;
+     width: 2rem;
+     height: 2rem;
+     vertical-align: text-bottom;
+     border: 0.25em solid currentColor;
+     border-right-color: currentcolor;
+     border-right-color: transparent;
+     border-radius: 50%;
+     -webkit-animation: spinner-border .75s linear infinite;
+     animation: spinner-border .75s linear infinite;
+ }

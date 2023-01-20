@@ -25,15 +25,17 @@ class RoleSeeder extends Seeder
             'Academic-Section',
             'Student-Portal',
             'Exam-Section',
-            'College-Exam-Section',
+            'College-Exam-Section',      
             'College-Academic-Section',
+            'UUC-Academic-Section',
+            'UUC-Exam-Section',
         ];
 
         foreach ($roles as $role) {
             $model = Role::whereName($role);
             if ($model->count() == 0) {
                 Role::create(['name' => $role, 'guard_name' => 'web']);
-            }
+            }  
         }
     }
 }

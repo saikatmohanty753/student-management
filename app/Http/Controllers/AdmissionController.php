@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\District;
 use App\Models\Notice;
+use App\Models\Role;
 use App\Models\StudentAddress;
 use App\Models\StudentDetails;
 use App\Models\StudentDocuments;
 use App\Models\StudentEducationDetails;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdmissionController extends Controller
 {
@@ -23,7 +26,7 @@ class AdmissionController extends Controller
     public function index($id, $dep, $depId)
     {
         $count = Notice::whereDate('start_date', '>=', Carbon::now())->whereDate('exp_date', '>', Carbon::now())->where('id', $id)->count();
-        if($count == 0){
+        if ($count == 0) {
             return redirect()->intended('dashboard')->with('error', 'Now the admission process has been stopped.');
         }
         $course = Course::where('course_for', $depId)->get();
@@ -307,12 +310,23 @@ class AdmissionController extends Controller
                 $student->regd_no = $regdNo;
                 $student->regd_no_issued = '1';
             }
-        }else{
+        } else {
             $student->regd_no_issued = '0';
-
+        }
+        $student->save();
+        if ($request->status == 2) {
+            $user = new User();
+            $user->name = $student->name;
+            $user->email = $request->email;
+            $user->mob_no = $request->mobile;
+            $user->clg_id = $request->clg_id;
+            $user->role_id = 3;
+            $user->password = Hash::make($request['password']);
+            $user->save();
+            $user->assignRole(3);
         }
 
-        $student->save();
+
         return redirect()->action([AdmissionController::class, 'appliedAdmissionList'])->with('success', 'Application examined successfully.');
     }
 
@@ -325,13 +339,14 @@ class AdmissionController extends Controller
 
         return view('admin.admission.view', compact('id', 'student', 'address', 'education', 'documents'));
     }
-    public function appliedApplication($id){
+    public function appliedApplication($id)
+    {
 
         $district = District::get();
         $documents = StudentDocuments::where('id', $id)->first();
         $student  = StudentDetails::where('id', $id)->first();
         $education = StudentEducationDetails::where('id', $id)->first();
         $address = StudentAddress::where('id', $id)->first();
-        return view('admission.apply_app',compact('student', 'address', 'education', 'district', 'documents'));
+        return view('admission.apply_app', compact('student', 'address', 'education', 'district', 'documents'));
     }
 }

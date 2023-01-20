@@ -24,6 +24,10 @@ class DashboardController extends Controller
             return $this->academicSection();
         } elseif (Str::lower(Auth::user()->role->name) == 'student-portal') {
             return $this->adminDashboard();
+        } elseif (Str::lower(Auth::user()->role->name) == 'uuc-academic-section') {
+            return $this->uucAcademicSection();
+        } elseif (Str::lower(Auth::user()->role->name) == 'uuc-exam-section') {
+            return $this->uucExamSection();
         } elseif (Str::lower(Auth::user()->role->name) == 'exam-section') {
             return $this->examSection();
         } elseif (Str::lower(Auth::user()->role->name) == 'college-exam-section') {
@@ -40,7 +44,7 @@ class DashboardController extends Controller
 
     public function checkUser($id)
     {
-        $role = [ 3, 9, 10, 11, 12, 13, 14];
+        $role = [3, 9, 10, 11, 14, 16, 17];
         return in_array($id, $role) == true ? 1 : 0;
     }
 
@@ -55,6 +59,14 @@ class DashboardController extends Controller
     public function examSection()
     {
         return view('dashboard.examination.index');
+    }
+    public function uucAcademicSection()
+    {
+        return view('dashboard.college-academic.index');
+    }
+    public function uucExamSection()
+    {
+        return view('dashboard.college-examination.index');
     }
     public function studentDashboard()
     {

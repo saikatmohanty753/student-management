@@ -14,6 +14,7 @@ use App\Http\Controllers\NoticesController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\ClgNoticeController;
 use App\Http\Livewire\Notification;
 use App\Providers\RouteServiceProvider;
 
@@ -91,6 +92,12 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('uuc-verify-admission/{id}', [AdmissionController::class, 'verifyAdmission']);
     Route::post('uuc-verify-admission', [AdmissionController::class, 'verifyStudentAdmission']);
     Route::get('uuc-applicant-admission-details/{id}', [AdmissionController::class, 'admissionDetails']);
+
+    Route::get('academic-notices', [ClgNoticeController::class, 'index']);
+    Route::get('academic-notices/{id}', [ClgNoticeController::class, 'show']);
+
+
+
 
 
 

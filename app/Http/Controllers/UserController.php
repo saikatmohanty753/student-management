@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'ASC')->whereIn('role_id', [9, 10, 11, 12])->get();
+        $data = User::orderBy('id', 'ASC')->whereIn('role_id', [9, 10, 11, 12, 16, 17])->get();
         return view('users.index', compact('data'));
         // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -154,10 +154,7 @@ class UserController extends Controller
      */
 
     public function update(Request $request, $id)
-
     {
-
-
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,

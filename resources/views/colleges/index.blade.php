@@ -18,7 +18,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>College Name</th>
+                                    <th>College Name </th>
                                    <th>Create User</th>
                                 </tr>
                             </thead>

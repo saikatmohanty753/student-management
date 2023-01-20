@@ -128,83 +128,12 @@
                                                     </td>
                                                 </tr>
 
-                                                {{-- <tr>
-                                                    <td>
-                                                        Net:
-                                                    </td>
-                                                    <td>
-                                                        21
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Currency:
-                                                    </td>
-                                                    <td>
-                                                        USD
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        P.O. #
-                                                    </td>
-                                                    <td>
-                                                        1/3-147
-                                                    </td>
-                                                </tr> --}}
+                                                
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                {{-- <div class="col-sm-4 d-flex">
-                                    <div class="table-responsive">
-                                        <table class="table table-clean table-sm align-self-end">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        Course Name:
-                                                    </td>
-                                                    <td>
-                                                        Culture of sadsa
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>Due Date:</strong>
-                                                    </td>
-                                                    <td>
-                                                        05/25/2019
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Net:
-                                                    </td>
-                                                    <td>
-                                                        21
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Currency:
-                                                    </td>
-                                                    <td>
-                                                        USD
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        P.O. #
-                                                    </td>
-                                                    <td>
-                                                        1/3-147
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div> --}}
-
+                                
                             </div>
                         </div>
                         <div

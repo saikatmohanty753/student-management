@@ -86,6 +86,12 @@ class PermissionTableSeeder extends Seeder
             'notice-edit',
             'notice-delete',
 
+            'college-notice-module',
+            'college-notice-list',
+            'college-notice-create',
+            'college-notice-edit',
+            'college-notice-delete',
+
             'semester-module',
             'semester-list',
             'semester-create',

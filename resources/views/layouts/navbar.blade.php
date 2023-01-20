@@ -106,6 +106,14 @@
             </a>
         </li>
         @endcan
+        @can('college-notice-module')
+        <li>
+            <a href="{{ url('/academic-notices') }}" title="Notices" data-filter-tags="Notice">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span class="nav-link-text" data-i18n="nav.application_notice">Notices</span>
+            </a>
+        </li>
+        @endcan
 
         @can('admission-module')
 
