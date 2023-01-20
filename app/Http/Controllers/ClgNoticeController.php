@@ -20,8 +20,9 @@ class ClgNoticeController extends Controller
         foreach ($notification as $key => $value) {
             $noticeIds[] = $value['data']['notice_id'];
         }
-        $notice = Notice::whereIn('id', $noticeIds)->get();
-        return view('publish-notices.index', compact('notice'));
+        $notice = Notice::whereIn('id', $noticeIds)->where('notice_type', '1')->get();
+        $OtherNotice = Notice::whereIn('id', $noticeIds)->where('notice_type', '3')->get();
+        return view('publish-notices.index', compact('notice', 'OtherNotice'));
     }
 
     /**
