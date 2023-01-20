@@ -153,7 +153,7 @@
                     data: postData,
                     processData: false,
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
                         publish.prop("checked")
                         $('.publish').html('Published');
                         /* $("#course_name").append('<option value="">Select Course</option>');
