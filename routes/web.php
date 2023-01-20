@@ -96,7 +96,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('uuc-applicant-admission-details/{id}', [AdmissionController::class, 'admissionDetails']);
 
     Route::get('academic-notices', [ClgNoticeController::class, 'index']);
-    Route::get('academic-notices/{id}', [ClgNoticeController::class, 'show']);
+    Route::get('view-notice/{id}/{notification_id}', [ClgNoticeController::class, 'show']);
 
 
 

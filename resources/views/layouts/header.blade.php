@@ -13,20 +13,20 @@
     </div>
     <!-- DOC: nav menu layout change shortcut -->
     <div class="hidden-md-down dropdown-icon-menu position-relative">
-        <a href="javascript:void(0);" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-hidden"
-            title="Hide Navigation">
+        <a href="javascript:void(0);" class="header-btn btn js-waves-off" data-action="toggle"
+            data-class="nav-function-hidden" title="Hide Navigation">
             <i class="ni ni-menu"></i>
         </a>
         <ul>
             <li>
-                <a href="javascript:void(0);" class="btn js-waves-off" data-action="toggle" data-class="nav-function-minify"
-                    title="Minify Navigation">
+                <a href="javascript:void(0);" class="btn js-waves-off" data-action="toggle"
+                    data-class="nav-function-minify" title="Minify Navigation">
                     <i class="ni ni-minify-nav"></i>
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);" class="btn js-waves-off" data-action="toggle" data-class="nav-function-fixed"
-                    title="Lock Navigation">
+                <a href="javascript:void(0);" class="btn js-waves-off" data-action="toggle"
+                    data-class="nav-function-fixed" title="Lock Navigation">
                     <i class="ni ni-lock-nav"></i>
                 </a>
             </li>
@@ -34,7 +34,8 @@
     </div>
     <!-- DOC: mobile button appears during mobile width -->
     <div class="hidden-lg-up">
-        <a href="javascript:void(0);" class="header-btn btn press-scale-down" data-action="toggle" data-class="mobile-nav-on">
+        <a href="javascript:void(0);" class="header-btn btn press-scale-down" data-action="toggle"
+            data-class="mobile-nav-on">
             <i class="ni ni-menu"></i>
         </a>
     </div>
@@ -42,8 +43,9 @@
         <form class="app-forms hidden-xs-down" role="search" action="page_search.html" autocomplete="off">
             <input type="text" id="search-field" placeholder="Search for anything" class="form-control"
                 tabindex="1">
-            <a href="javascript:void(0);" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none"
-                data-action="toggle" data-class="mobile-search-on">
+            <a href="javascript:void(0);" onclick="return false;"
+                class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle"
+                data-class="mobile-search-on">
                 <i class="fal fa-times"></i>
             </a>
         </form>
@@ -63,12 +65,12 @@
             </a>
         </div>
         @if (Auth::user()->role_id == 3 ||
-            Auth::user()->role_id == 16 ||
-            Auth::user()->role_id == 17 ||
-            Auth::user()->role_id == 13 ||
-            Auth::user()->role_id == 14)
+                Auth::user()->role_id == 16 ||
+                Auth::user()->role_id == 17 ||
+                Auth::user()->role_id == 13 ||
+                Auth::user()->role_id == 14)
             <div>
-                <a href="javascript:void(0);" class="header-icon" data-toggle="dropdown" title="You got {{ Auth::user()->unreadNotifications->count() }} notifications">
+                <a href="javascript:void(0);" class="header-icon" data-toggle="dropdown">
                     <i class="fal fa-bell"></i>
                     <span class="badge badge-icon">{{ Auth::user()->unreadNotifications->count() }}</span>
                 </a>
@@ -88,14 +90,7 @@
                                 <li class="unread">
                                     <div class="d-flex align-items-center show-child-on-hover">
                                         @php
-                                            if ($notification['data']['notice_type'] == 'Admission Notice') {
-                                                $url = url('uuc-admission/'.$notification['data']['notice_id'].'/'. str_slug($notification['data']['department']) .'/'.$notification['data']['department_id']);
-                                            }elseif ($notification['data']['notice_type'] == 'Exam Notice') {
-                                                $url = url('uuc-examination');
-                                            }else{
-                                                $url = '';
-
-                                            }
+                                            $url = url('view-notice/' . $notification['data']['notice_id']. '/'. $notification->id);
                                         @endphp
                                         <a href="{{ $url }}">
                                             <span class="d-flex flex-column flex-1">
@@ -103,9 +98,29 @@
                                                     class="name d-flex align-items-center">{{ $notification['data']['notice_type'] }}
                                                     <span class="badge badge-success fw-n ml-1">New</span></span>
                                                 <span class="msg-a fs-sm">
-                                                    {{ $notification['data']['details'] }}
+                                                    {{ Str::limit($notification['data']['details'], 30) }}
                                                 </span>
                                                 {{-- <span class="fs-nano text-muted mt-1">5 mins ago</span> --}}
+                                            </span>
+                                        </a>
+
+                                    </div>
+                                </li>
+                            @endforeach
+                            @foreach (Auth::user()->readNotifications as $notification)
+                                <li>
+                                    <div class="d-flex align-items-center show-child-on-hover">
+                                        @php
+                                            $url = url('view-notice/' . $notification['data']['notice_id']. '/'. $notification->id);
+                                        @endphp
+                                        <a href="{{ $url }}">
+                                            <span class="d-flex flex-column flex-1">
+                                                <span
+                                                    class="name d-flex align-items-center">{{ $notification['data']['notice_type'] }}</span>
+
+                                                <span class="msg-a fs-sm">
+                                                    {{ Str::limit($notification['data']['details'], 30) }}
+                                                </span>
                                             </span>
                                         </a>
 
@@ -148,7 +163,8 @@
                 <a href="javascript:void(0);" class="dropdown-item" data-action="app-reset">
                     <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
                 </a>
-                <a href="javascript:void(0);" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
+                <a href="javascript:void(0);" class="dropdown-item" data-toggle="modal"
+                    data-target=".js-modal-settings">
                     <span data-i18n="drpdwn.settings">Settings</span>
                 </a>
                 <div class="dropdown-divider m-0"></div>
