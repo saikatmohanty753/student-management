@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('notices', [NoticesController::class, 'index']);
     Route::get('add-notices', [NoticesController::class, 'create']);
     Route::post('uuc-create-notice', [NoticesController::class, 'store']);
+    Route::resource('notices', NoticesController::class);
+
 
     Route::post('get-course', [AjaxController::class, 'getCourse']);
     Route::post('publish-notice', [AjaxController::class, 'publishNotice']);

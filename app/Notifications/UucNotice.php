@@ -85,7 +85,6 @@ class UucNotice extends Notification
                 'notice_type' => 'Other Notice',
                 'notice_id' => $notifiable->notice_id,
                 'details' => $notice->details,
-                'department' => $notice->department->course_for,
                 'start_date' => $notice->start_date,
                 'end_date' => $notice->exp_date,
             ];

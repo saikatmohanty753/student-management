@@ -26,8 +26,9 @@ class NoticesController extends Controller
     }
     public function index()
     {
-        $notice = Notice::all();
-        return view('notices.notices', compact('notice'));
+        $notice = Notice::where('notice_type', '1')->get();
+        $otherNotice = Notice::where('notice_type', '3')->get();
+        return view('notices.notices', compact('notice', 'otherNotice'));
     }
 
     public function create()
@@ -39,15 +40,6 @@ class NoticesController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'notice_type' => 'required',
-            'department' => 'required',
-            'start_date' => 'required',
-            'exp_date' => 'required',
-            'details' => 'required'
-
-        ]);
-
         $startDate = Carbon::parse($request->start_date);
         $startDate->hour   = 00;
         $startDate->minute = 00;
@@ -116,6 +108,15 @@ class NoticesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $count = Notice::where([['id', $id], ['status', 0]])->count();
+        if ($count == 1) {
+            Notice::find($id)->delete();
+            return redirect()->route('notices.index')
+            ->with('success', 'Notice deleted successfully');
+        }else{
+            return redirect()->route('notices.index')
+            ->with('error', 'Notice can not be deleted..');
+        }
+
     }
 }

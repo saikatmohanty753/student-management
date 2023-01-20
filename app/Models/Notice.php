@@ -17,4 +17,13 @@ class Notice extends Model
     {
         return $this->belongsTo(CourseFor::class, 'department_id', 'id');
     }
+
+    public function noticeStatus(){
+        $chk = $this->status;
+        if ($chk == 1) {
+            return '<span class="badge badge-success">Published</span>';
+        } else {
+            return '<span class="badge badge-danger">Not Publish</span>';
+        }
+    }
 }
