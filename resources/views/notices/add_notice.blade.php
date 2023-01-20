@@ -96,8 +96,7 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-12 text-center mb-4">
-                                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
-                                        style="margin-right: 8px;">Cancel</button>
+                                    <a href="{{url('notices/')}}" class="btn btn-danger"> Cancel </a>
                                     <button type="submit"  class="btn btn-info pull-right">Submit</button>
                                 </div>
 
