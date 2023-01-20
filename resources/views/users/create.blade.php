@@ -15,7 +15,8 @@
 
         <div class="pull-right">
 
-            <a class="btn btn-primary" href="{{ url()->previous() }}"> Back</a>
+            <a href="{{url('users')}}" class="btn btn-primary"> Back </a>
+
 
         </div>
 
