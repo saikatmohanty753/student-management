@@ -14,7 +14,7 @@
                         <div class="flex-fill">
                             <span class="h5">Admission for {{ $data->course }} from
                                 <strong>{{ Carbon\Carbon::parse($data->start_date)->format('d-m-Y') }}</strong> to
-                                <strong>{{ Carbon\Carbon::parse($data->end_date)->format('d-m-Y') }}</strong></span>
+                                <strong>{{ Carbon\Carbon::parse($data->exp_date)->format('d-m-Y') }}</strong></span>
 
                             @php
                                 $url = url('uuc-admission/' . $data->id . '/' . str_slug($data->course) . '/' . $data->department_id);

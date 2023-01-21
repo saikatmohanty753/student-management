@@ -335,16 +335,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3 col-12">
-                                        <div class="mb-2">
-                                            <div class="form-group input-cont">
-                                                <label class="form-label">Last Pursued Course Name <span
-                                                        class="text-danger">*</span></label>
-                                                <input name="last_course_name" type="text"
-                                                    class="form-control chk_blank" id="last_course_name">
-                                                <span class="error-msg"></span>
-                                            </div>
-                                        </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="mb-2">
+                                        <div class="form-group input-cont">
+                                        <label class="form-label">Last Purchased Course Name <span
+                                                class="text-danger">*</span></label>
+                                        <input name="last_course_name" type="text" class="form-control chk_blank"
+                                            id="last_course_name">
+                                            <span class="error-msg"></span>
                                     </div>
 
                                     <div class="col-md-3 col-12">
@@ -415,17 +413,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Migration Certificate</label>
-                                            <div class="custom-file input-cont">
-                                                <input type="file"
-                                                    class="custom-file-input form-control chk_pdf_file chk_doc_size"
-                                                    name="migration_cert" id="migration_cert">
-                                                <small
-                                                    class="form-text text-secondary">{{ __('common.file_format') }}</small>
-                                                <label class="custom-file-label">Choose
-                                                    file...</label>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Migration Certificate</label>
+                                        <div class="custom-file input-cont">
+                                            <input type="file" class="custom-file-input form-control chk_pdf_file chk_doc_size chk_blank" name="migration_cert"
+                                                id="migration_cert">
+                                                <small class="form-text text-secondary">{{ __('common.file_format') }}</small>
+                                            <label class="custom-file-label">Choose
+                                                file...</label>
                                                 <span class="error-msg"></span>
                                             </div>
                                         </div>
@@ -485,6 +482,7 @@
             });
             if ($.inArray('false', validation) >= '0') {
                 return false;
+
             } else {
                 $(this)[0].submit();
             }

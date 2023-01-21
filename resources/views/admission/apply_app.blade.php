@@ -6,7 +6,8 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Applied Application Details<span class="badge badge-{{ $student->statusColor() }} position-absolute pos-right">{{ $student->applicationStatus() }}</span>
+                        Applied Application Details<span
+                            class="badge badge-{{ $student->statusColor() }} position-absolute pos-right">{{ $student->applicationStatus() }}</span>
                     </h2>
                 </div>
                 <div class="panel-container show">
@@ -38,29 +39,30 @@
                                                 </tr> --}}
                                                 <tr>
                                                     <td>
-                                                    Course Name <strong>: {{ $student->course->name }}</strong>
+                                                        Course Name <strong>: {{ $student->course->name }}</strong>
                                                     </td>
                                                     <td>
-                                                        Name <strong>: {{$student->name}}</strong>
+                                                        Name <strong>: {{ $student->name }}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Email <strong>: {{$student->email}}</strong>
+                                                        Email <strong>: {{ $student->email }}</strong>
                                                     </td>
                                                     <td>
-                                                        Caste Category<strong>: {{$student->cast}}</strong>
+                                                        Caste Category<strong>: {{ $student->cast }}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        If Specially Abled<strong>:{{ $student->specially_abled == 1 ? 'Yes' : 'No' }}</strong>
+                                                        If Specially
+                                                        Abled<strong>:{{ $student->specially_abled == 1 ? 'Yes' : 'No' }}</strong>
                                                     </td>
                                                     <td>
-                                                        Mobile No<strong>: {{$student->mobile}}</strong>
+                                                        Mobile No<strong>: {{ $student->mobile }}</strong>
                                                     </td>
                                                 </tr>
-                                            </tbody>  
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -69,26 +71,26 @@
                                         <table class="table table-clean table-sm align-self-end">
                                             <tbody>
                                                 <tr>
-                                                   
+
                                                     <td>
-                                                        Father's Name<strong>: {{$student->father_name}}</strong>
+                                                        Father's Name<strong>: {{ $student->father_name }}</strong>
                                                     </td>
 
                                                     <td>
-                                                        Mother's name <strong>: {{$student->mother_name}}</strong>
+                                                        Mother's name <strong>: {{ $student->mother_name }}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        DOB <strong>: {{$student->dob}}</strong>
+                                                        DOB <strong>: {{ $student->dob }}</strong>
                                                     </td>
                                                     <td>
-                                                        Gender <strong>: {{$student->gender}}</strong>
+                                                        Gender <strong>: {{ $student->gender }}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Aadhar No <strong>: {{$student->aadhaar_no}}</strong>
+                                                        Aadhar No <strong>: {{ $student->aadhaar_no }}</strong>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -114,26 +116,27 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        State <strong>: {{$address->present_state}}</strong>
+                                                        State <strong>: {{ $address->present_state }}</strong>
                                                     </td>
                                                     <td>
-                                                        District <strong>: {{ $address->presentDistrict->district_name }}</strong>
+                                                        District <strong>:
+                                                            {{ $address->presentDistrict->district_name }}</strong>
                                                     </td>
                                                     <td>
-                                                        Pincode<strong>: {{$address->present_pin_code}}</strong>
+                                                        Pincode<strong>: {{ $address->present_pin_code }}</strong>
                                                     </td>
                                                     <td>
 
-                                                        Present Address<strong>: {{$address->present_address}}</strong>
+                                                        Present Address<strong>: {{ $address->present_address }}</strong>
                                                     </td>
                                                 </tr>
 
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div
@@ -152,17 +155,20 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        State <strong>: {{$address->permanent_state}}</strong>
+                                                        State <strong>: {{ $address->permanent_state }}</strong>
                                                     </td>
                                                     <td>
-                                                        District <strong>: {{ $address->permanentDistrict->district_name }}</strong>
+                                                        District <strong>:
+                                                            {{ $address->permanentDistrict->district_name }}</strong>
                                                     </td>
                                                     <td>
-                                                        <strong>Pincode<strong>: {{$address->permanent_pin_code}}</strong>
+                                                        <strong>Pincode<strong>:
+                                                                {{ $address->permanent_pin_code }}</strong>
                                                     </td>
                                                     <td>
 
-                                                        Permanent Address <strong>: {{$address->permanent_address}}</strong>
+                                                        Permanent Address <strong>:
+                                                            {{ $address->permanent_address }}</strong>
                                                     </td>
                                                 </tr>
 
@@ -191,19 +197,20 @@
                                                 <tr>
                                                     <td>
                                                         Last Attended College Name
-                                                        <strong>: {{$education->clg_name}}</strong>
+                                                        <strong>: {{ $education->clg_name }}</strong>
                                                     </td>
                                                     <td>
                                                         Year of Passing Last Exam
-                                                        <strong>: {{$education->year_of_passing}}</strong>
+                                                        <strong>: {{ $education->year_of_passing }}</strong>
                                                     </td>
                                                     <td>
                                                         Last Pursued Course Name
-                                                        <strong>: {{$education->course_name}}</strong>
+                                                        <strong>: {{ $education->course_name }}</strong>
                                                     </td>
                                                     <td>
                                                         Migration Certificate is availiable
-                                                        <strong>: {{ $education->is_migration_cert == 0 ? 'No' : 'Yes' }}</strong>
+                                                        <strong>:
+                                                            {{ $education->is_migration_cert == 0 ? 'No' : 'Yes' }}</strong>
                                                     </td>
                                                 </tr>
 
@@ -233,21 +240,26 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        Photo <strong>:  <strong>:<a href="javascript:void(0)" onclick="upload_image_view('{{ asset($documents->photo) }}')">
-                                                            {{ !empty($documents->photo) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
+                                                        Photo <strong>: <strong>:<a href="javascript:void(0)"
+                                                                    onclick="upload_image_view('{{ asset($documents->photo) }}')">
+                                                                    {{ !empty($documents->photo) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
                                                     </td>
                                                     <td>
-                                                        Aadhaar Card <strong>: <strong>:<a href="javascript:void(0)" onclick="upload_image_view('{{ asset($documents->aadhaar_card) }}')">
-                                                            {{ !empty ($documents->aadhaar_card) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
+                                                        Aadhaar Card <strong>: <strong>:<a href="javascript:void(0)"
+                                                                    onclick="upload_image_view('{{ asset($documents->aadhaar_card) }}')">
+                                                                    {{ !empty($documents->aadhaar_card) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
                                                     </td>
                                                     <td>
-                                                        HSC Certificate<strong>: <strong>:<a href="javascript:void(0)" onclick="upload_image_view('{{ asset($documents->hsc_cert) }}')">
-                                                            {{ !empty ($documents->hsc_cert) ? 'View Upload File' : 'Not Uploaded' }}</a></strong> </strong>
+                                                        HSC Certificate<strong>: <strong>:<a href="javascript:void(0)"
+                                                                    onclick="upload_image_view('{{ asset($documents->hsc_cert) }}')">
+                                                                    {{ !empty($documents->hsc_cert) ? 'View Upload File' : 'Not Uploaded' }}</a></strong>
+                                                        </strong>
                                                     </td>
                                                     <td>
                                                         Migration Certificate
-                                                        <strong>:<a href="javascript:void(0)" onclick="upload_image_view('{{ asset($documents->migration_cert) }}')">
-                                                            {{ !empty($documents->migration_cert) ? 'View Upload File' : 'Not Uploaded' }}</a></strong>
+                                                        <strong>:<a href="javascript:void(0)"
+                                                                onclick="upload_image_view('{{ asset($documents->migration_cert) }}')">
+                                                                {{ !empty($documents->migration_cert) ? 'View Upload File' : 'Not Uploaded' }}</a></strong>
                                                     </td>
                                                 </tr>
 
@@ -255,17 +267,17 @@
                                         </table>
                                     </div>
                                 </div>
+                               
 
                             </div>
                         </div>
 
+                        <div class="panel-content border-faded border-top-0 border-left-0 border-right-0 border-bottom-0 d-flex flex-row justify-content-center">
+                        <a href="{{ url('uuc-admission') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
 
-                        <div
-                                    class="panel-content border-faded border-top-0 border-left-0 border-right-0 border-bottom-0 d-flex flex-row justify-content-center">
-                                    <a href="{{ url('uuc-admission') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
 
-                                    
-                                </div>
+                    </div>
+                       
 
 
                     </div>
@@ -302,5 +314,4 @@
 @endsection
 
 @section('js')
-
 @endsection
