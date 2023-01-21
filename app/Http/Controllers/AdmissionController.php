@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdmissionSeat;
+use App\Models\AffiliationMaster;
 use App\Models\Course;
 use App\Models\District;
 use App\Models\Notice;
@@ -14,6 +16,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdmissionController extends Controller
@@ -23,13 +26,46 @@ class AdmissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function AdmissionSeat()
+    {
+        $course =  DB::table('affiliation_masters')->select('affiliation_masters.*', DB::raw('SUM(seat_no) as total_seat_no'))
+            ->groupBy('affiliation_masters.course')
+            ->groupBy('affiliation_masters.college_name')
+            ->get();
+
+        foreach ($course as $key => $value) {
+            $crs = Course::where('id', $value->course)->first(['course_for']);
+            $chk = DB::table('admission_seats')
+                ->where('clg_id', $value->college_name)
+                ->where('course_id', $value->course)
+                ->where('admission_year', date('Y'))
+                ->count();
+            if ($chk == 0) {
+                DB::table('admission_seats')->insert([
+                    'admission_year' => date('Y'),
+                    'clg_id' => $value->college_name,
+                    'department_id' => $crs->course_for,
+                    'course_id' => $value->course,
+                    'available_seat' => $value->total_seat_no,
+                    'consumption_seat' => 0,
+                    'created_at' => Carbon::now()
+                ]);
+            }
+        }
+    }
+
     public function index($id, $dep, $depId)
     {
         $count = Notice::whereDate('start_date', '>=', Carbon::now())->whereDate('exp_date', '>', Carbon::now())->where('id', $id)->count();
         if ($count == 0) {
             return redirect()->intended('dashboard')->with('error', 'Now the admission process has been stopped.');
         }
-        $course = Course::where('course_for', $depId)->get();
+        $course =  DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+            ->where('clg_id', Auth::user()->clg_user_id)
+            ->where('admission_year', date('Y'))
+            ->join('courses', 'admission_seats.course_id', 'courses.id')
+            ->where('courses.course_for', $depId)
+            ->get();
         $district = District::all();
         return view('admission.index', compact('course', 'district'));
     }
@@ -53,8 +89,11 @@ class AdmissionController extends Controller
     public function store(Request $request)
     {
 
-        $course = Course::find($request->course);
         $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
+        if ($this->checkSeatAvl($clgId, $request->course) == 0) {
+            return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
+        }
+        $course = Course::find($request->course);
         $student = new StudentDetails();
         $student->clg_id = $clgId;
         $student->department_id = $course->course_for;
@@ -70,8 +109,8 @@ class AdmissionController extends Controller
         $student->specially_abled = $request->specially_abled;
         $student->aadhaar_no = $request->aadhar_no;
         $student->app_status = 1;
-
         $student->save();
+
         $std_id = $student->id;
         $address = new StudentAddress();
         $address->student_id = $std_id;
@@ -159,7 +198,12 @@ class AdmissionController extends Controller
         $student = StudentDetails::where('id', $id)->first();
         $education = StudentEducationDetails::where('id', $id)->first();
         $address = StudentAddress::where('id', $id)->first();
-        $course = Course::where('course_for', $student->department_id)->get();
+        $course =  DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+            ->where('clg_id', Auth::user()->clg_user_id)
+            ->where('admission_year', date('Y'))
+            ->join('courses', 'admission_seats.course_id', 'courses.id')
+            ->where('courses.course_for', $student->department_id)
+            ->get();
         return view('admission.edit', compact('student', 'address', 'education', 'course', 'district', 'documents'));
     }
 
@@ -172,6 +216,11 @@ class AdmissionController extends Controller
      */
     public function update(Request $request)
     {
+
+        $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
+        if ($this->checkSeatAvl($clgId, $request->course) == 0) {
+            return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
+        }
 
         $id = $request->hid;
         $student = StudentDetails::find($id);
@@ -258,10 +307,26 @@ class AdmissionController extends Controller
     }
     public function apply(Request $request)
     {
+
         $application = StudentDetails::find($request->id);
+        $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
+        if ($this->checkSeatAvl($clgId, $application->course_id) == 0) {
+            return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
+        }
         $application->status = 1;
         $application->app_status = 2;
         $application->save();
+
+        $course =  AdmissionSeat::where('clg_id', $application->clg_id)
+            ->where('admission_year', date('Y'))
+            ->where('course_id', $application->course_id)
+            ->first();
+        $avl_seat = $course->available_seat;
+        $cons_seat = $course->consumption_seat;
+        $course->available_seat = $avl_seat - 1;
+        $course->consumption_seat = $cons_seat + 1;
+        $course->save();
+
         return redirect()->action([AdmissionController::class, 'admissionList'])->with('success', 'Application submitted successfully.');
     }
     public function admissionList(Request $request)
@@ -348,5 +413,13 @@ class AdmissionController extends Controller
         $education = StudentEducationDetails::where('id', $id)->first();
         $address = StudentAddress::where('id', $id)->first();
         return view('admission.apply_app', compact('student', 'address', 'education', 'district', 'documents'));
+    }
+
+    public function checkSeatAvl($clg_id, $course_id){
+        $course =  AdmissionSeat::where('clg_id', $clg_id)
+            ->where('admission_year', date('Y'))
+            ->where('course_id', $course_id)
+            ->first();
+        return $course->available_seat;
     }
 }

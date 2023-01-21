@@ -17,7 +17,8 @@
                         @csrf
                         <input type="hidden" name="hid" value="{{ $student->id }}">
                         <div class="border rounded p-2 mb-2">
-                            <h2>Personal Information</h2>
+                            <h2>Personal Information <span class="badge badge-danger float-right fs-xs d-none seat-div"> Remaing Admission  <span id="remaining"></span></span>
+                                <input type="hidden" name="remaining_seat" id="remaining_seat"></h2>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6 col-12" style="display:none;">
@@ -25,15 +26,17 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="mb-2">
+
                                         <div class="form-group input-cont">
                                             <label class="form-label" for="course_name">Course Name<span
                                                     class="text-danger">*</span></label>
-                                            <select class="custom-select form-control select2 chk_blank" name="course">
+                                            <select class="custom-select form-control select2 chk_blank" name="course"
+                                                id="course_name">
                                                 <option value="">Select Course</option>
                                                 @foreach ($course as $item)
-                                                    <option value="{{ $item->id }}"
-                                                        {{ $item->id == $student->course_id ? 'selected' : '' }}>
-                                                        {{ $item->name }}</option>
+                                                    <option value="{{ $item->course_id }}"
+                                                        data-id="{{ $item->available_seat }}" {{ $item->course_id == $student->course_id ? 'selected' : '' }}>{{ $item->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             <span class="error-msg"></span>
@@ -550,6 +553,19 @@
                 return false;
             } else {
                 $(this)[0].submit();
+            }
+        });
+
+        $('#course_name').on('change', function() {
+            if(this.value != '' ){
+                $('.seat-div').removeClass('d-none');
+                var seat =  $(this).find(':selected').data('id');
+
+                $('#remaining_seat').val(seat)
+                $('#remaining').html(seat)
+
+            }else{
+                $('.seat-div').addClass('d-none');
             }
         });
     </script>

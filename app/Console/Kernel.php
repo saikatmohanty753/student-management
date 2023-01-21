@@ -2,8 +2,12 @@
 
 namespace App\Console;
 
+use App\Jobs\CollegeAdmissionSeat;
+use App\Models\AdmissionSeat;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,7 +19,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // $schedule->call('\App\Http\Controllers\AdmissionController@AdmissionSeat')->everyMinute();
+        $schedule->call('\App\Http\Controllers\AdmissionController@AdmissionSeat')->yearlyOn(1, 1, '00:00');
         // $schedule->command('inspire')->hourly();
+
     }
 
     /**
@@ -25,7 +32,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
