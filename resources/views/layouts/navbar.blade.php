@@ -110,7 +110,8 @@
         <li>
             <a href="{{ url('/academic-notices') }}" title="Notices" data-filter-tags="Notice">
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="nav-link-text" data-i18n="nav.application_notice">Notices</span>
+                <span class="nav-link-text" data-i18n="nav.application_notice">Notices </span>
+                <span class="dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top">{{ Auth::user()->unreadNotifications->count() }}</span>
             </a>
         </li>
         @endcan
