@@ -28,7 +28,7 @@ class ClgNoticeController extends Controller
         foreach ($noticeIds as $value) {
             $data = Notice::where('id', $value['notice_id'])->where('notice_type', '1')->first();
             if ($data) {
-                $data['->notification_id'] = $value['notification_id'];
+                $data['notification_id'] = $value['notification_id'];
                 $notice[] = $data;
             }
         }

@@ -35,6 +35,7 @@ Route::get('/', function () {
     }
     return view('auth.login');
 });
+Route::get('test-admission', [AdmissionController::class, 'AdmissionSeat']);
 
 // Route::get('/student, function () {
 //     return view('colleges.create_user');
