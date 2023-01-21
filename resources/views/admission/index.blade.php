@@ -8,7 +8,8 @@
                         @csrf
                         <div class="border rounded p-2 mb-2">
                             <h2>Personal Information
-                                <span class="badge badge-danger float-right fs-xs d-none seat-div"> Remaing Admission  <span id="remaining"></span></span>
+                                <span class="badge badge-danger float-right fs-xs d-none seat-div"> Remaing Admission <span
+                                        id="remaining"></span></span>
                                 <input type="hidden" name="remaining_seat" id="remaining_seat">
                             </h2>
 
@@ -335,14 +336,16 @@
                                         </div>
                                     </div>
 
-                                <div class="col-md-3 col-12">
-                                    <div class="mb-2">
-                                        <div class="form-group input-cont">
-                                        <label class="form-label">Last Purchased Course Name <span
-                                                class="text-danger">*</span></label>
-                                        <input name="last_course_name" type="text" class="form-control chk_blank"
-                                            id="last_course_name">
-                                            <span class="error-msg"></span>
+                                    <div class="col-md-3 col-12">
+                                        <div class="mb-2">
+                                            <div class="form-group input-cont">
+                                                <label class="form-label">Last Purchased Course Name <span
+                                                        class="text-danger">*</span></label>
+                                                <input name="last_course_name" type="text"
+                                                    class="form-control chk_blank" id="last_course_name">
+                                                <span class="error-msg"></span>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-3 col-12">
@@ -413,16 +416,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Migration Certificate</label>
-                                        <div class="custom-file input-cont">
-                                            <input type="file" class="custom-file-input form-control chk_pdf_file chk_doc_size chk_blank" name="migration_cert"
-                                                id="migration_cert">
-                                                <small class="form-text text-secondary">{{ __('common.file_format') }}</small>
-                                            <label class="custom-file-label">Choose
-                                                file...</label>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Migration Certificate</label>
+                                            <div class="custom-file input-cont">
+                                                <input type="file"
+                                                    class="custom-file-input form-control chk_pdf_file chk_doc_size chk_blank"
+                                                    name="migration_cert" id="migration_cert">
+                                                <small
+                                                    class="form-text text-secondary">{{ __('common.file_format') }}</small>
+                                                <label class="custom-file-label">Choose
+                                                    file...</label>
                                                 <span class="error-msg"></span>
                                             </div>
                                         </div>
@@ -460,14 +464,14 @@
         });
 
         $('#course_name').on('change', function() {
-            if(this.value != '' ){
+            if (this.value != '') {
                 $('.seat-div').removeClass('d-none');
-                var seat =  $(this).find(':selected').data('id');
+                var seat = $(this).find(':selected').data('id');
 
                 $('#remaining_seat').val(seat)
                 $('#remaining').html(seat)
 
-            }else{
+            } else {
                 $('.seat-div').addClass('d-none');
             }
         });
