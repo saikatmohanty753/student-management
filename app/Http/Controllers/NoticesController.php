@@ -53,7 +53,7 @@ class NoticesController extends Controller
         $startDate->minute = 00;
         $startDate->second = 01;
         $expDate = Carbon::parse($request->exp_date);
-        $expDate->hour   = 59;
+        $expDate->hour   = 23;
         $expDate->minute = 59;
         $expDate->second = 59;
         $notice = new Notice();

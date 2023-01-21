@@ -52,7 +52,12 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
+                                        <div
+                                        class="panel-content border-faded border-top-0 border-left-0 border-right-0 border-bottom-0 d-flex flex-row justify-content-center">
+                                        <a href="{{ url('notices/') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
+            
+            
+                                    </div>
                                     </div>
                                 </div>
                             </div>
