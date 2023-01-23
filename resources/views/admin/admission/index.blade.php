@@ -71,6 +71,7 @@
                                         <th>Gender</th>
                                         <th>Contact No</th>
                                         <th>Application Status</th>
+                                        <th>Registration Number</th>
                                         <th>View</th>
                                     </tr>
                                 </thead>
@@ -84,6 +85,7 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->gender }}</td>
                                             <td>{{ $item->mobile }}</td>
+                                            <td>{!! $item->regd_no != '' ? $item->regd_no : '<span class="badge badge-danger">Not Issued</span>' !!}</td>
                                             <td>
                                                 <span
                                                     class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>

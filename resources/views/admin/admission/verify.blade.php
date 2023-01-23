@@ -366,7 +366,7 @@
                                                 <label for="">Status</label>
                                                 <select class="form-control" name="status" id="regStatus">
                                                     <option value="">Select</option>
-                                                    <option value="2">Vrified</option>
+                                                    <option value="2">Verified</option>
                                                     <option value="3">Rejected</option>
                                                     <option value="4">Backed</option>
                                                 </select>

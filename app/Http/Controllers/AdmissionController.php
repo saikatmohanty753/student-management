@@ -379,14 +379,15 @@ class AdmissionController extends Controller
             $student->regd_no_issued = '0';
         }
         $student->save();
+
         if ($request->status == 2) {
             $user = new User();
             $user->name = $student->name;
-            $user->email = $request->email;
-            $user->mob_no = $request->mobile;
-            $user->clg_id = $request->clg_id;
+            $user->email = $student->email;
+            $user->mob_no = $student->mobile;
+            $user->clg_id = $student->clg_id;
             $user->role_id = 3;
-            $user->password = Hash::make($request['password']);
+            $user->password = Hash::make(12345678);
             $user->save();
             $user->assignRole(3);
         }
