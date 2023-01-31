@@ -16,7 +16,7 @@ class ClgNoticeController extends Controller
      */
     public function index()
     {
-        $notification =  Auth::user()->Notifications;
+         $notification =  Auth::user()->Notifications;
         $noticeIds = [];
         foreach ($notification as $key => $value) {
             $noticeIds[] = [
@@ -32,7 +32,6 @@ class ClgNoticeController extends Controller
                 $notice[] = $data;
             }
         }
-
         $OtherNotice = [];
         foreach ($noticeIds as $item) {
             $data = Notice::where('id', $item['notice_id'])->where('notice_type', '3')->first();
@@ -75,10 +74,8 @@ class ClgNoticeController extends Controller
     public function show($id, $notification_id)
     {
         Auth::user()->Notifications->where('id', $notification_id)->markAsRead();
-
-        $data = Notice::select('notices.*', 'course_fors.course_for as course', 'courses.name as couse_name')
+        $data = Notice::select('notices.*', 'course_fors.course_for as course')
             ->leftJoin('course_fors', 'notices.department_id', "=", 'course_fors.id')
-            ->leftJoin('courses', 'notices.course_id', "=", 'courses.id')
             ->where('notices.id', $id)
             ->first();
         return view('publish-notices.view', compact('data'));

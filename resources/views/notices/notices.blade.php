@@ -99,7 +99,7 @@
                                                                 ]) !!}
                                                                 {!! Form::button('<i class="fa fa-trash"></i>', [
                                                                     'type' => 'submit',
-                                                                    'class' => 'btn btn-outline-danger',
+                                                                    'class' => 'btn btn-outline-danger delNotice',
                                                                     'id' => 'deleteThis',
                                                                 ]) !!} {!! Form::close() !!}
                                                             @endcan
@@ -183,7 +183,7 @@
                                                                 ]) !!}
                                                                 {!! Form::button('<i class="fa fa-trash"></i>', [
                                                                     'type' => 'submit',
-                                                                    'class' => 'btn btn-outline-danger',
+                                                                    'class' => 'delNotice btn btn-outline-danger',
                                                                     'id' => 'deleteThis',
                                                                 ]) !!} {!! Form::close() !!}
                                                             @endcan
@@ -234,6 +234,7 @@
                             publish.prop("checked")
                             publish.prop("disabled")
                             $('.publish').html('Published');
+                            $('.delNotice').remove();
                             /* $("#course_name").append('<option value="">Select Course</option>');
                             $.each(response, function(key, value) {
                                 $("#course_name").append('<option value=' + value.id + '>' + value

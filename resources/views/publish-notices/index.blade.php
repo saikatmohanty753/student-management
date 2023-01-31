@@ -34,7 +34,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if (!empty($OtherNotice))
+                                            @if (!empty($notice))
                                                 @foreach ($notice as $key => $item)
                                                     @php
                                                         if ($item->notice_type == 1) {

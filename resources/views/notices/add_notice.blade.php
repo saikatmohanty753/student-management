@@ -37,10 +37,10 @@
                                             name="notice_type">
                                             <option value="" selected>Select Notice Type</option>
                                             <option value="1" class="admission">Admission Notice</option>
-                                            <option value="2" class="exam">Exam Notice</option>
+                                            {{-- <option value="2" class="exam">Exam Notice</option> --}}
                                             <option value="3" class="other">Other Notice</option>
                                         </select>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                         <label class="form-label ">Details<span class="text-danger">*</span></label>
                                         <textarea name="details" id="details" class="form-control chk_blank"></textarea>
                                         <span class="error-msg"></span>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -164,8 +164,8 @@
                 $('#department').removeClass('chk_blank');
                 $('#course').removeClass('chk_blank');
                 $('#semester').removeClass('chk_blank');
-                
-               
+
+
             }
         });
 
