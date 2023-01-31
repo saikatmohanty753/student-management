@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\SendPDFMail;
 
 use App\Models\AdmissionSeat;
 use App\Models\AffiliationMaster;
@@ -18,6 +19,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use Illuminate\Support\Facades\Mail as FacadesMail;
+use Illuminate\Support\Facades\Mail;
+use PDF;
+
 
 class AdmissionController extends Controller
 {
@@ -373,7 +380,7 @@ class AdmissionController extends Controller
                     $regdNo = 'UUC' . date('y') . $regdNo;
                 }
                 $student->regd_no = $regdNo;
-                $student->roll_no = date('Y').rand(1111, 9999);
+                // $student->roll_no = date('Y').rand(1111, 9999);
                 $student->regd_no_issued = $request->issued == 1 ? '1' : '0';
             }
         $student->save();
@@ -390,9 +397,48 @@ class AdmissionController extends Controller
             $user->assignRole(3);
         }
 
+        $email= $student->email;
+        $name = $student->name;
+        $reg_no = 1236;
+
+        $this->generatePDF($email,$name,$reg_no);
+
+       
+
+       
+        // $data = [
+        //     "insured_no" => 1,
+        //     "password" => 2
+        // ];
+        // //return $user->email_id;
+
+        //     Mail::Send('pdf.student_registration_card', compact('data'), function ($message) use ($user) {
+        //         $message->to('prashanta.mohanta@oasystspl.com');
+        //         $message->subject('Login credential for ESI');
+        //     });
+       
 
         return redirect()->action([AdmissionController::class, 'appliedAdmissionList'])->with('success', 'Application examined successfully.');
     }
+
+    public function generatePDF($email,$name,$reg_no){
+      
+
+        $data = ['email' => $email,'name' => $name,'reg_no' => $reg_no];
+
+            $user['to']=$data["email"];
+            $customPaper = array(0,0,567.00,883.80);
+        $pdf = PDF::loadView('pdf.student_registration_card', $data)->setPaper($customPaper, 'landscape');
+        $to_email = "prashanta.mohanta@oasystspl.com";
+        // Mail::to($to_email)->send(new SendPDFMail($pdf));
+        FacadesMail::send('pdf.test', $data, function($message)use($pdf,$user) {
+                $message->to( 'prashanta.mohanta@oasystspl.com')
+    
+                 ->attachData($pdf->output(), "Welcomecard.pdf");
+                 $message->subject('Registration Verification Successfull');
+                });
+        return response()->json(['status' => 'success', 'message' => 'Report has been sent successfully.']);
+ }
 
 
 
