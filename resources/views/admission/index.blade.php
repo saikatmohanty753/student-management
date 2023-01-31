@@ -8,7 +8,7 @@
                         @csrf
                         <div class="border rounded p-2 mb-2">
                             <h2>Personal Information
-                                <span class="badge badge-danger float-right fs-xs d-none seat-div"> Remaing Admission <span
+                                <span class="badge badge-danger float-right fs-xs d-none seat-div"> Remaining Admission <span
                                         id="remaining"></span></span>
                                 <input type="hidden" name="remaining_seat" id="remaining_seat">
                             </h2>

@@ -356,10 +356,10 @@ class AdmissionController extends Controller
 
     public function verifyStudentAdmission(Request $request)
     {
+        
         $student = StudentDetails::where('id', $request->id)->first();
         $student->remarks = $request->remarks;
         $student->status = $request->status;
-        if ($request->status == 2 && $request->issued == 1) {
             if ($student->regd_no == null) {
                 $std = StudentDetails::where('regd_no', '!=', null)->latest()->first();
                 if (!empty($std)) {
@@ -373,11 +373,9 @@ class AdmissionController extends Controller
                     $regdNo = 'UUC' . date('y') . $regdNo;
                 }
                 $student->regd_no = $regdNo;
-                $student->regd_no_issued = '1';
+                $student->roll_no = date('Y').rand(1111, 9999);
+                $student->regd_no_issued = $request->issued == 1 ? '1' : '0';
             }
-        } else {
-            $student->regd_no_issued = '0';
-        }
         $student->save();
 
         if ($request->status == 2) {
@@ -395,6 +393,8 @@ class AdmissionController extends Controller
 
         return redirect()->action([AdmissionController::class, 'appliedAdmissionList'])->with('success', 'Application examined successfully.');
     }
+
+
 
     public function admissionDetails(Request $request, $id)
     {
