@@ -17,6 +17,9 @@
             height: 71px;
             width: 69px;
         }
+        .colr{
+            color: #fff;
+        }
     </style>
     <div class="container">
         <div class="blankpage-form-field">
@@ -89,8 +92,8 @@
                 </form>
             </div>
             <div class="blankpage-footer text-center">
-                <a href="{{ route('password.request') }}"><strong>Forgot Password</strong></a> | <a
-                    href="#"><strong>Register
+                <a href="{{ route('password.request') }}" class="colr"><strong>Forgot Password</strong></a> <span class="colr">|</span> <a
+                    href="#" class="colr"><strong>Register
                         Now</strong></a>
             </div>
         </div>

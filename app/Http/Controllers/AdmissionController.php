@@ -382,6 +382,13 @@ class AdmissionController extends Controller
                 $student->regd_no = $regdNo;
                 // $student->roll_no = date('Y').rand(1111, 9999);
                 $student->regd_no_issued = $request->issued == 1 ? '1' : '0';
+                if ($request->status == 2) {
+                    $email= $student->email;
+                    $name = $student->name;
+                    $reg_no = $regdNo;
+                    $this->generatePDF($email,$name,$reg_no);
+                }
+
             }
         $student->save();
 
@@ -397,27 +404,6 @@ class AdmissionController extends Controller
             $user->assignRole(3);
         }
 
-        $email= $student->email;
-        $name = $student->name;
-        $reg_no = 1236;
-
-        $this->generatePDF($email,$name,$reg_no);
-
-       
-
-       
-        // $data = [
-        //     "insured_no" => 1,
-        //     "password" => 2
-        // ];
-        // //return $user->email_id;
-
-        //     Mail::Send('pdf.student_registration_card', compact('data'), function ($message) use ($user) {
-        //         $message->to('prashanta.mohanta@oasystspl.com');
-        //         $message->subject('Login credential for ESI');
-        //     });
-       
-
         return redirect()->action([AdmissionController::class, 'appliedAdmissionList'])->with('success', 'Application examined successfully.');
     }
 
@@ -429,12 +415,13 @@ class AdmissionController extends Controller
             $user['to']=$data["email"];
             $customPaper = array(0,0,567.00,883.80);
         $pdf = PDF::loadView('pdf.student_registration_card', $data)->setPaper($customPaper, 'landscape');
-        $to_email = "prashanta.mohanta@oasystspl.com";
+        file_put_contents('registration_card/'.$reg_no.'.pdf', $pdf->output() );
+        // $to_email = $user['to'];
         // Mail::to($to_email)->send(new SendPDFMail($pdf));
         FacadesMail::send('pdf.test', $data, function($message)use($pdf,$user) {
-                $message->to( 'prashanta.mohanta@oasystspl.com')
+                $message->to($user['to'])
     
-                 ->attachData($pdf->output(), "Welcomecard.pdf");
+                 ->attachData($pdf->output(), "Registration.pdf");
                  $message->subject('Registration Verification Successfull');
                 });
         return response()->json(['status' => 'success', 'message' => 'Report has been sent successfully.']);
