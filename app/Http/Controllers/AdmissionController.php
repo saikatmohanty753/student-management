@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\SendPDFMail;
 
 use App\Models\AdmissionSeat;
 use App\Models\AffiliationMaster;
 use App\Models\Course;
+use App\Models\CourseFor;
 use App\Models\District;
 use App\Models\Notice;
 use App\Models\Role;
@@ -18,6 +20,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use Illuminate\Support\Facades\Mail as FacadesMail;
+use Illuminate\Support\Facades\Mail;
+use PDF;
+
 
 class AdmissionController extends Controller
 {
@@ -356,7 +364,29 @@ class AdmissionController extends Controller
 
     public function verifyStudentAdmission(Request $request)
     {
-        
+        // return $request;
+        // dd($request->all());
+        $course_section = Course::where('id',$request->course_id)->first('course_for');
+        $section_name = CourseFor::where('id',$course_section->course_for)->first('course_for');
+
+        if($section_name->course_for == 'UG'){
+            $year1 = Carbon::now()->addYear(4);
+            $year = date('Y', strtotime($year1));
+        }elseif($section_name->course_for == 'PG'){
+            $year2 = Carbon::now()->addYear(2);
+            $year = date('Y', strtotime($year2));
+        }elseif($section_name->course_for == 'M.Phil'){
+            $year3 = Carbon::now()->addYear(1);
+            $year = date('Y', strtotime($year3));
+        }elseif($section_name->course_for == 'Certificate'){
+            $year4 = Carbon::now()->addYear(1);
+            $year = date('Y', strtotime($year4));
+        }
+
+        // dd($year);
+
+
+
         $student = StudentDetails::where('id', $request->id)->first();
         $student->remarks = $request->remarks;
         $student->status = $request->status;
@@ -373,8 +403,20 @@ class AdmissionController extends Controller
                     $regdNo = 'UUC' . date('y') . $regdNo;
                 }
                 $student->regd_no = $regdNo;
-                $student->roll_no = date('Y').rand(1111, 9999);
+                // $student->roll_no = date('Y').rand(1111, 9999);
                 $student->regd_no_issued = $request->issued == 1 ? '1' : '0';
+                if ($request->status == 2) {
+                    $email= $student->email;
+                    $name = $student->name;
+                    $reg_no = $regdNo;
+                    $this->generatePDF($email,$name,$reg_no);
+
+                    $student->batch_year = date('Y').'-'.$year;
+
+
+
+                }
+
             }
         $student->save();
 
@@ -385,14 +427,34 @@ class AdmissionController extends Controller
             $user->mob_no = $student->mobile;
             $user->clg_id = $student->clg_id;
             $user->role_id = 3;
+            $user->batch_year = date('Y').'-'.$year;
             $user->password = Hash::make(12345678);
             $user->save();
             $user->assignRole(3);
         }
 
-
         return redirect()->action([AdmissionController::class, 'appliedAdmissionList'])->with('success', 'Application examined successfully.');
     }
+
+    public function generatePDF($email,$name,$reg_no){
+      
+
+        $data = ['email' => $email,'name' => $name,'reg_no' => $reg_no];
+
+            $user['to']=$data["email"];
+            $customPaper = array(0,0,567.00,883.80);
+        $pdf = PDF::loadView('pdf.student_registration_card', $data)->setPaper($customPaper, 'landscape');
+        file_put_contents('registration_card/'.$reg_no.'.pdf', $pdf->output() );
+        // $to_email = $user['to'];
+        // Mail::to($to_email)->send(new SendPDFMail($pdf));
+        FacadesMail::send('pdf.test', $data, function($message)use($pdf,$user) {
+                $message->to($user['to'])
+    
+                 ->attachData($pdf->output(), "Registration.pdf");
+                 $message->subject('Registration Verification Successfull');
+                });
+        return response()->json(['status' => 'success', 'message' => 'Report has been sent successfully.']);
+ }
 
 
 

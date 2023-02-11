@@ -33,6 +33,7 @@ class CreateStudentDetailsTable extends Migration
             $table->enum('app_status', ['0', '1'])->default('0');
             $table->integer('status')->nullable();
             $table->text('remarks')->nullable();
+            $table->string('batch_year')->nullable();
             $table->timestamps();
         });
     }

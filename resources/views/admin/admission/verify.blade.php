@@ -353,6 +353,7 @@
                             <form action="{{ url('uuc-verify-admission') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $id }}">
+                                <input type="hidden" name="course_id" value="{{ $student->course_id }}">
                                 <div class="row">
                                     <div class="col-sm-12 d-flex">
                                         <div class="col-md-6">

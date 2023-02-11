@@ -55,7 +55,7 @@ class Notice extends Notification
     public function toArray($notifiable)
     {
         dd($notifiable);
-        $notice = Notice::find()
+        $notice = Notice::find();
         return [
             //
         ];
