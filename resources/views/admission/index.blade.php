@@ -491,5 +491,7 @@
                 $(this)[0].submit();
             }
         });
+
+
     </script>
 @endsection

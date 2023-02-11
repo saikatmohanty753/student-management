@@ -65,7 +65,7 @@
                 <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                     <span class="mr-2">
                         <span class="rounded-circle profile-image d-block"
-                            style="background-image:url('img/demo/avatars/avatar-d.png'); background-size: cover;"></span>
+                            style="background-image:url('/backend/img/demo/avatars/avatar-d.png'); background-size: cover;"></span>
                     </span>
                     <div class="info-card-text">
                         <a href="javascript:void(0);" class="fs-lg text-truncate text-truncate-lg text-white"
@@ -74,9 +74,9 @@
                             <i class="fal fa-angle-down d-inline-block ml-1 text-white fs-md"></i>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Send Email</a>
-                            <a class="dropdown-item" href="#">Create Appointment</a>
-                            <a class="dropdown-item" href="#">Block User</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Send Email</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Create Appointment</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Block User</a>
                         </div>
                         <span class="text-truncate text-truncate-md opacity-80">IT Director</span>
                     </div>
@@ -103,11 +103,11 @@
                         <div class="w-100">
                             <ul id="js-msgr-listfilter" class="list-unstyled m-0">
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="tracey chang online">
                                         <div class="d-table-cell align-middle status status-success status-sm ">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-d.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-d.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -120,11 +120,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="oliver kopyuv online">
                                         <div class="d-table-cell align-middle status status-success status-sm ">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-b.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-b.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -137,11 +137,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="dr john cook phd away">
                                         <div class="d-table-cell align-middle status status-warning status-sm ">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-e.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-e.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -154,11 +154,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="ali amdaney online">
                                         <div class="d-table-cell align-middle status status-success status-sm ">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-g.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-g.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -171,11 +171,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="sarah mcbrook online">
                                         <div class="d-table-cell align-middle status status-success status-sm">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-h.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-h.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -188,11 +188,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="ali amdaney offline">
                                         <div class="d-table-cell align-middle status status-sm">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-a.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-a.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -205,11 +205,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="ali amdaney busy">
                                         <div class="d-table-cell align-middle status status-danger status-sm">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-j.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-j.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -222,11 +222,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="ali amdaney offline">
                                         <div class="d-table-cell align-middle status status-sm">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-c.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-c.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -239,11 +239,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white"
+                                    <a href="javascript:void(0);" class="d-table w-100 px-2 py-2 text-dark hover-white"
                                         data-filter-tags="ali amdaney inactive">
                                         <div class="d-table-cell align-middle">
                                             <span class="profile-image-md rounded-circle d-block"
-                                                style="background-image:url('img/demo/avatars/avatar-m.png'); background-size: cover;"></span>
+                                                style="background-image:url('/backend/img/demo/avatars/avatar-m.png'); background-size: cover;"></span>
                                         </div>
                                         <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                             <div class="text-truncate text-truncate-md">
@@ -427,37 +427,37 @@
                         </div>
                     </div>
                     <div class="list" id="fh">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="header-function-fixed"></a>
                         <span class="onoffswitch-title">Fixed Header</span>
                         <span class="onoffswitch-title-desc">header is in a fixed at all times</span>
                     </div>
                     <div class="list" id="nff">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="nav-function-fixed"></a>
                         <span class="onoffswitch-title">Fixed Navigation</span>
                         <span class="onoffswitch-title-desc">left panel is fixed</span>
                     </div>
                     <div class="list" id="nfm">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="nav-function-minify"></a>
                         <span class="onoffswitch-title">Minify Navigation</span>
                         <span class="onoffswitch-title-desc">Skew nav to maximize space</span>
                     </div>
                     <div class="list" id="nfh">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="nav-function-hidden"></a>
                         <span class="onoffswitch-title">Hide Navigation</span>
                         <span class="onoffswitch-title-desc">roll mouse on edge to reveal</span>
                     </div>
                     <div class="list" id="nft">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="nav-function-top"></a>
                         <span class="onoffswitch-title">Top Navigation</span>
                         <span class="onoffswitch-title-desc">Relocate left pane to top</span>
                     </div>
                     <div class="list" id="mmb">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-main-boxed"></a>
                         <span class="onoffswitch-title">Boxed Layout</span>
                         <span class="onoffswitch-title-desc">Encapsulates to a container</span>
@@ -478,7 +478,7 @@
                             </li>
                         </ul>
                         <div class="list" id="mbgf">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                            <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                                 data-class="mod-fixed-bg"></a>
                             <span class="onoffswitch-title">Fixed Background</span>
                         </div>
@@ -491,19 +491,19 @@
                         </div>
                     </div>
                     <div class="list" id="nmp">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="nav-mobile-push"></a>
                         <span class="onoffswitch-title">Push Content</span>
                         <span class="onoffswitch-title-desc">Content pushed on menu reveal</span>
                     </div>
                     <div class="list" id="nmno">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="nav-mobile-no-overlay"></a>
                         <span class="onoffswitch-title">No Overlay</span>
                         <span class="onoffswitch-title-desc">Removes mesh on menu reveal</span>
                     </div>
                     <div class="list" id="sldo">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="nav-mobile-slide-out"></a>
                         <span class="onoffswitch-title">Off-Canvas <sup>(beta)</sup></span>
                         <span class="onoffswitch-title-desc">Content overlaps menu</span>
@@ -516,25 +516,25 @@
                         </div>
                     </div>
                     <div class="list" id="mbf">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-bigger-font"></a>
                         <span class="onoffswitch-title">Bigger Content Font</span>
                         <span class="onoffswitch-title-desc">content fonts are bigger for readability</span>
                     </div>
                     <div class="list" id="mhc">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-high-contrast"></a>
                         <span class="onoffswitch-title">High Contrast Text (WCAG 2 AA)</span>
                         <span class="onoffswitch-title-desc">4.5:1 text contrast ratio</span>
                     </div>
                     <div class="list" id="mcb">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-color-blind"></a>
                         <span class="onoffswitch-title">Daltonism <sup>(beta)</sup> </span>
                         <span class="onoffswitch-title-desc">color vision deficiency</span>
                     </div>
                     <div class="list" id="mpc">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-pace-custom"></a>
                         <span class="onoffswitch-title">Preloader Inside</span>
                         <span class="onoffswitch-title-desc">preloader will be inside content</span>
@@ -547,37 +547,37 @@
                         </div>
                     </div>
                     <div class="list" id="mcbg">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-clean-page-bg"></a>
                         <span class="onoffswitch-title">Clean Page Background</span>
                         <span class="onoffswitch-title-desc">adds more whitespace</span>
                     </div>
                     <div class="list" id="mhni">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-hide-nav-icons"></a>
                         <span class="onoffswitch-title">Hide Navigation Icons</span>
                         <span class="onoffswitch-title-desc">invisible navigation icons</span>
                     </div>
                     <div class="list" id="dan">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-disable-animation"></a>
                         <span class="onoffswitch-title">Disable CSS Animation</span>
                         <span class="onoffswitch-title-desc">Disables CSS based animations</span>
                     </div>
                     <div class="list" id="mhic">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-hide-info-card"></a>
                         <span class="onoffswitch-title">Hide Info Card</span>
                         <span class="onoffswitch-title-desc">Hides info card from left panel</span>
                     </div>
                     <div class="list" id="mlph">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-lean-subheader"></a>
                         <span class="onoffswitch-title">Lean Subheader</span>
                         <span class="onoffswitch-title-desc">distinguished page header</span>
                     </div>
                     <div class="list" id="mnl">
-                        <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
+                        <a href="javascript:void(0);" onclick="return false;" class="btn btn-switch" data-action="toggle"
                             data-class="mod-nav-link"></a>
                         <span class="onoffswitch-title">Hierarchical Navigation</span>
                         <span class="onoffswitch-title-desc">Clear breakdown of nav links</span>
@@ -621,65 +621,65 @@
                     </div>
                     <div class="expanded theme-colors pl-5 pr-3">
                         <ul class="m-0">
-                            <li><a href="#" id="myapp-0" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-0" data-action="theme-update" data-themesave
                                     data-theme="" data-toggle="tooltip" data-placement="top"
                                     title="Wisteria (base css)" data-original-title="Wisteria (base css)"></a>
                             </li>
-                            <li><a href="#" id="myapp-1" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-1" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-1.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Tapestry"
                                     data-original-title="Tapestry"></a>
                             </li>
-                            <li><a href="#" id="myapp-2" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-2" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-2.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Atlantis"
                                     data-original-title="Atlantis"></a>
                             </li>
-                            <li><a href="#" id="myapp-3" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-3" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-3.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Indigo"
                                     data-original-title="Indigo"></a></li>
-                            <li><a href="#" id="myapp-4" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-4" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-4.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Dodger Blue"
                                     data-original-title="Dodger Blue"></a>
                             </li>
-                            <li><a href="#" id="myapp-5" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-5" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-5.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Tradewind"
                                     data-original-title="Tradewind"></a></li>
-                            <li><a href="#" id="myapp-6" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-6" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-6.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Cranberry"
                                     data-original-title="Cranberry"></a></li>
-                            <li><a href="#" id="myapp-7" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-7" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-7.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Oslo Gray"
                                     data-original-title="Oslo Gray"></a></li>
-                            <li><a href="#" id="myapp-8" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-8" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-8.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Chetwode Blue"
                                     data-original-title="Chetwode Blue"></a></li>
-                            <li><a href="#" id="myapp-9" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-9" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-9.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Apricot"
                                     data-original-title="Apricot"></a>
                             </li>
-                            <li><a href="#" id="myapp-10" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-10" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-10.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Blue Smoke"
                                     data-original-title="Blue Smoke"></a>
                             </li>
-                            <li><a href="#" id="myapp-11" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-11" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-11.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Green Smoke"
                                     data-original-title="Green Smoke"></a>
                             </li>
-                            <li><a href="#" id="myapp-12" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-12" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-12.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Wild Blue Yonder"
                                     data-original-title="Wild Blue Yonder"></a></li>
-                            <li><a href="#" id="myapp-13" data-action="theme-update" data-themesave
+                            <li><a href="javascript:void(0);" id="myapp-13" data-action="theme-update" data-themesave
                                     data-theme="{{ asset('backend/css/themes/cust-theme-13.css') }}"
                                     data-toggle="tooltip" data-placement="top" title="Emerald"
                                     data-original-title="Emerald"></a>
@@ -690,11 +690,11 @@
                     <div class="pl-5 pr-3 py-3 bg-faded">
                         <div class="row no-gutters">
                             <div class="col-6 pr-1">
-                                <a href="#" class="btn btn-outline-danger fw-500 btn-block"
+                                <a href="javascript:void(0);" class="btn btn-outline-danger fw-500 btn-block"
                                     data-action="app-reset">Reset Settings</a>
                             </div>
                             <div class="col-6 pl-1">
-                                <a href="#" class="btn btn-danger fw-500 btn-block"
+                                <a href="javascript:void(0);" class="btn btn-danger fw-500 btn-block"
                                     data-action="factory-reset">Factory Reset</a>
                             </div>
                         </div>

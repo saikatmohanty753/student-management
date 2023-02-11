@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/vendors.bundle.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/app.bundle.css') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('backend/img/favicon/apple-touch-icon.png') }}">
+
     <link rel="mask-icon" href="{{ asset('backend/img/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
     <link rel="stylesheet" href="{{ asset('backend/css/miscellaneous/reactions/reactions.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/miscellaneous/fullcalendar/fullcalendar.bundle.css') }}">

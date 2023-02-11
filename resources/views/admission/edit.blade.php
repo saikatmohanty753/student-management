@@ -112,8 +112,8 @@
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label">DOB <span class="text-danger">*</span></label>
-                                            <input name="dob" type="text" class="form-control datepicker-2 chk_blank"
-                                                value="{{ $student->dob }}">
+                                            <input name="dob" type="text" class="form-control datepicker-2 chk_blank chk_date"
+                                                value="{{ Carbon\Carbon::parse($student->dob)->format('d-m-Y') }}">
                                             <span class="error-msg"></span>
                                         </div>
                                     </div>
@@ -240,7 +240,7 @@
                                                 <div class="form-group input-cont">
                                                     <label class="form-label">Pincode <span
                                                             class="text-danger">*</span></label>
-                                                    <input class="form-control chk_blank" name="present_pin_code"
+                                                    <input class="form-control chk_blank chk_zip" name="present_pin_code"
                                                         id="present_pin_code" value="{{ $address->present_pin_code }}">
                                                     <span class="error-msg"></span>
                                                 </div>
@@ -319,7 +319,7 @@
                                                 <div class="form-group input-cont">
                                                     <label class="form-label">Pincode <span
                                                             class="text-danger">*</span></label>
-                                                    <input class="form-control chk_blank" name="permanent_pin_code"
+                                                    <input class="form-control chk_blank chk_zip" name="permanent_pin_code"
                                                         id="permanent_pin_code"
                                                         value="{{ $address->permanent_pin_code }}">
                                                     <span class="error-msg"></span>
@@ -417,7 +417,7 @@
                                         <label class="form-label">Photo<span class="text-danger">*</span></label>
                                         <div class="custom-file input-cont">
                                             <input type="file"
-                                                class="custom-file-input form-control"
+                                                class="custom-file-input form-control chk_5mb_file_only"
                                                 name="profile">
                                             <label class="custom-file-label">Choose
                                                 file...</label>
@@ -435,7 +435,7 @@
                                         <label class="form-label">Aadhaar Card<span class="text-danger">*</span></label>
                                         <div class="custom-file input-cont">
                                             <input type="file"
-                                                class="custom-file-input form-control"
+                                                class="custom-file-input form-control chk_5mb_file_only"
                                                 name="aadhaar_card">
                                             <label class="custom-file-label">Choose
                                                 file...</label>
@@ -454,7 +454,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="custom-file input-cont">
                                             <input type="file"
-                                                class="custom-file-input form-control"
+                                                class="custom-file-input form-control chk_5mb_file_only"
                                                 name="hsc_cert">
                                             <label class="custom-file-label">Choose
                                                 file...</label>
@@ -472,7 +472,7 @@
                                         <label class="form-label">Migration Certificate</label>
                                         <div class="custom-file input-cont">
                                             <input type="file"
-                                                class="custom-file-input form-control"
+                                                class="custom-file-input form-control chk_5mb_file_only"
                                                 name="migration_cert">
                                             <label class="custom-file-label">Choose
                                                 file...</label>
