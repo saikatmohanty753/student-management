@@ -123,9 +123,6 @@ $(".toDate").datepicker({
     showDropdowns: true,
     orientation: "bottom left",
     todayHighlight: true,
-
-
-
 }).on('changeDate', function (selected) {
     var minDate = new Date(selected.date.valueOf());
     $('.fromDate').datepicker('setEndDate', minDate);

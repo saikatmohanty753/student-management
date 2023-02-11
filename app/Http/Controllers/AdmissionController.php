@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\SendPDFMail;
 
 use App\Models\AdmissionSeat;
@@ -366,19 +367,19 @@ class AdmissionController extends Controller
     {
         // return $request;
         // dd($request->all());
-        $course_section = Course::where('id',$request->course_id)->first('course_for');
-        $section_name = CourseFor::where('id',$course_section->course_for)->first('course_for');
+        $course_section = Course::where('id', $request->course_id)->first('course_for');
+        $section_name = CourseFor::where('id', $course_section->course_for)->first('course_for');
 
-        if($section_name->course_for == 'UG'){
+        if ($section_name->course_for == 'UG') {
             $year1 = Carbon::now()->addYear(4);
             $year = date('Y', strtotime($year1));
-        }elseif($section_name->course_for == 'PG'){
+        } elseif ($section_name->course_for == 'PG') {
             $year2 = Carbon::now()->addYear(2);
             $year = date('Y', strtotime($year2));
-        }elseif($section_name->course_for == 'M.Phil'){
+        } elseif ($section_name->course_for == 'M.Phil') {
             $year3 = Carbon::now()->addYear(1);
             $year = date('Y', strtotime($year3));
-        }elseif($section_name->course_for == 'Certificate'){
+        } elseif ($section_name->course_for == 'Certificate') {
             $year4 = Carbon::now()->addYear(1);
             $year = date('Y', strtotime($year4));
         }
@@ -390,34 +391,30 @@ class AdmissionController extends Controller
         $student = StudentDetails::where('id', $request->id)->first();
         $student->remarks = $request->remarks;
         $student->status = $request->status;
-            if ($student->regd_no == null) {
-                $std = StudentDetails::where('regd_no', '!=', null)->latest()->first();
-                if (!empty($std)) {
-                    $regdNo = $std->regd_no;
-                    $regdNo = substr($regdNo, 5);
-                    $increment = $regdNo + 1;
-                    $regdNo = str_pad($increment, 5, '0', STR_PAD_LEFT);
-                    $regdNo = 'UUC' . date('y') . $regdNo;
-                } else {
-                    $regdNo = str_pad($student->id, 5, '0', STR_PAD_LEFT);
-                    $regdNo = 'UUC' . date('y') . $regdNo;
-                }
-                $student->regd_no = $regdNo;
-                // $student->roll_no = date('Y').rand(1111, 9999);
-                $student->regd_no_issued = $request->issued == 1 ? '1' : '0';
-                if ($request->status == 2) {
-                    $email= $student->email;
-                    $name = $student->name;
-                    $reg_no = $regdNo;
-                    $this->generatePDF($email,$name,$reg_no);
-
-                    $student->batch_year = date('Y').'-'.$year;
-
-
-
-                }
-
+        if ($student->regd_no == null) {
+            $std = StudentDetails::where('regd_no', '!=', null)->latest()->first();
+            if (!empty($std)) {
+                $regdNo = $std->regd_no;
+                $regdNo = substr($regdNo, 5);
+                $increment = $regdNo + 1;
+                $regdNo = str_pad($increment, 5, '0', STR_PAD_LEFT);
+                $regdNo = 'UUC' . date('y') . $regdNo;
+            } else {
+                $regdNo = str_pad($student->id, 5, '0', STR_PAD_LEFT);
+                $regdNo = 'UUC' . date('y') . $regdNo;
             }
+            $student->regd_no = $regdNo;
+            // $student->roll_no = date('Y').rand(1111, 9999);
+            $student->regd_no_issued = $request->issued == 1 ? '1' : '0';
+            if ($request->status == 2) {
+                $email = $student->email;
+                $name = $student->name;
+                $reg_no = $regdNo;
+                $this->generatePDF($email, $name, $reg_no);
+
+                $student->batch_year = date('Y') . '-' . $year;
+            }
+        }
         $student->save();
 
         if ($request->status == 2) {
@@ -427,7 +424,7 @@ class AdmissionController extends Controller
             $user->mob_no = $student->mobile;
             $user->clg_id = $student->clg_id;
             $user->role_id = 3;
-            $user->batch_year = date('Y').'-'.$year;
+            $user->batch_year = date('Y') . '-' . $year;
             $user->password = Hash::make(12345678);
             $user->save();
             $user->assignRole(3);
@@ -436,25 +433,26 @@ class AdmissionController extends Controller
         return redirect()->action([AdmissionController::class, 'appliedAdmissionList'])->with('success', 'Application examined successfully.');
     }
 
-    public function generatePDF($email,$name,$reg_no){
-      
+    public function generatePDF($email, $name, $reg_no)
+    {
 
-        $data = ['email' => $email,'name' => $name,'reg_no' => $reg_no];
 
-            $user['to']=$data["email"];
-            $customPaper = array(0,0,567.00,883.80);
+        $data = ['email' => $email, 'name' => $name, 'reg_no' => $reg_no];
+
+        $user['to'] = $data["email"];
+        $customPaper = array(0, 0, 567.00, 883.80);
         $pdf = PDF::loadView('pdf.student_registration_card', $data)->setPaper($customPaper, 'landscape');
-        file_put_contents('registration_card/'.$reg_no.'.pdf', $pdf->output() );
+        file_put_contents('registration_card/' . $reg_no . '.pdf', $pdf->output());
         // $to_email = $user['to'];
         // Mail::to($to_email)->send(new SendPDFMail($pdf));
-        FacadesMail::send('pdf.test', $data, function($message)use($pdf,$user) {
-                $message->to($user['to'])
-    
-                 ->attachData($pdf->output(), "Registration.pdf");
-                 $message->subject('Registration Verification Successfull');
-                });
+        FacadesMail::send('pdf.test', $data, function ($message) use ($pdf, $user) {
+            $message->to($user['to'])
+
+                ->attachData($pdf->output(), "Registration.pdf");
+            $message->subject('Registration Verification Successfull');
+        });
         return response()->json(['status' => 'success', 'message' => 'Report has been sent successfully.']);
- }
+    }
 
 
 
@@ -478,7 +476,8 @@ class AdmissionController extends Controller
         return view('admission.apply_app', compact('student', 'address', 'education', 'district', 'documents'));
     }
 
-    public function checkSeatAvl($clg_id, $course_id){
+    public function checkSeatAvl($clg_id, $course_id)
+    {
         $course =  AdmissionSeat::where('clg_id', $clg_id)
             ->where('admission_year', date('Y'))
             ->where('course_id', $course_id)
