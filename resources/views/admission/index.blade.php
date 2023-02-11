@@ -54,7 +54,7 @@
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label">Email <span class="text-danger">*</span></label>
-                                            <input name="email" type="text" class="form-control chk_blank"
+                                            <input name="email" type="text" class="form-control chk_blank chk_email"
                                                 id="email">
                                             <span class="error-msg"></span>
                                         </div>
@@ -104,7 +104,7 @@
                                         <div class="form-group input-cont">
                                             <label class="form-label">DOB <span class="text-danger">*</span></label>
                                             <input name="dob" type="text" id="dob"
-                                                class="form-control datepicker-2 chk_blank">
+                                                class="form-control datepicker-2 chk_blank chk_date">
                                             <span class="error-msg"></span>
                                         </div>
                                     </div>
@@ -208,7 +208,7 @@
                                                 <div class="form-group input-cont">
                                                     <label class="form-label">Pincode <span
                                                             class="text-danger">*</span></label>
-                                                    <input class="form-control chk_blank" name="present_pin_code"
+                                                    <input class="form-control chk_blank chk_zip" name="present_pin_code"
                                                         id="present_pin_code">
                                                     <span class="error-msg"></span>
                                                 </div>
@@ -281,7 +281,7 @@
                                                 <div class="form-group input-cont">
                                                     <label class="form-label">Pincode <span
                                                             class="text-danger">*</span></label>
-                                                    <input class="form-control chk_blank" name="permanent_pin_code"
+                                                    <input class="form-control chk_blank chk_zip" name="permanent_pin_code"
                                                         id="permanent_pin_code">
                                                     <span class="error-msg"></span>
                                                 </div>
@@ -373,7 +373,7 @@
                                             <label class="form-label">Photo<span class="text-danger">*</span></label>
                                             <div class="custom-file  input-cont">
                                                 <input type="file"
-                                                    class="custom-file-input form-control chk_blank chk_pdf_file chk_doc_size"
+                                                    class="custom-file-input form-control chk_blank chk_5mb_file_only"
                                                     name="profile" id="photo">
                                                 <small
                                                     class="form-text text-secondary">{{ __('common.file_format') }}</small>
@@ -390,7 +390,7 @@
                                                     class="text-danger">*</span></label>
                                             <div class="custom-file input-cont">
                                                 <input type="file"
-                                                    class="custom-file-input form-control chk_blank chk_pdf_file chk_doc_size"
+                                                    class="custom-file-input form-control chk_blank chk_5mb_file_only"
                                                     name="aadhaar_card" id="aadhaar_card">
                                                 <small
                                                     class="form-text text-secondary">{{ __('common.file_format') }}</small>
@@ -406,7 +406,7 @@
                                                     class="text-danger">*</span></label>
                                             <div class="custom-file input-cont">
                                                 <input type="file"
-                                                    class="custom-file-input form-control chk_blank chk_pdf_file chk_doc_size"
+                                                    class="custom-file-input form-control chk_blank chk_5mb_file_only"
                                                     name="hsc_cert" id="hsc_cert">
                                                 <small
                                                     class="form-text text-secondary">{{ __('common.file_format') }}</small>
@@ -421,7 +421,7 @@
                                             <label class="form-label">Migration Certificate</label>
                                             <div class="custom-file input-cont">
                                                 <input type="file"
-                                                    class="custom-file-input form-control chk_pdf_file chk_doc_size chk_blank"
+                                                    class="custom-file-input form-control"
                                                     name="migration_cert" id="migration_cert">
                                                 <small
                                                     class="form-text text-secondary">{{ __('common.file_format') }}</small>

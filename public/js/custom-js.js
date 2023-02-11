@@ -10,8 +10,7 @@ $('.dt-table-button').dataTable({
         "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-    buttons: [
-        {
+    buttons: [{
             extend: 'colvis',
             text: 'Column Visibility',
             titleAttr: 'Col visibility',
@@ -97,3 +96,64 @@ function upload_image_view(url) {
 }
 
 $('.remove-alert').delay(5000).fadeOut('slow');
+
+
+$(".fromDate").datepicker({
+    format: 'dd-mm-yyyy',
+    autoclose: true,
+    selectYears: '100',
+    selectMonths: true,
+    singleDatePicker: true,
+    showDropdowns: true,
+    orientation: "bottom left",
+    todayHighlight: true,
+    startDate: '-0d',
+}).on('changeDate', function (selected) {
+    var minDate = new Date(selected.date.valueOf());
+    $('.toDate').datepicker('setStartDate', minDate);
+});
+
+$(".toDate").datepicker({
+    format: 'dd-mm-yyyy',
+    autoclose: true,
+    selectYears: '100',
+    selectMonths: true,
+    max: 'today',
+    singleDatePicker: true,
+    showDropdowns: true,
+    orientation: "bottom left",
+    todayHighlight: true,
+
+
+
+}).on('changeDate', function (selected) {
+    var minDate = new Date(selected.date.valueOf());
+    $('.fromDate').datepicker('setEndDate', minDate);
+});
+
+
+$(".numeric").on("input", function (evt) {
+    let self = $(this);
+    self.val(self.val().replace(/\D/g, ""));
+    if ((evt.which < 48 || evt.which > 57)) {
+        evt.preventDefault();
+    }
+});
+
+$(".decimal").on("input", function (evt) {
+    let self = $(this);
+    self.val(self.val().replace(/[^0-9\.]/g, ''));
+    if ((evt.which != 46 || self.val().indexOf('.') != -1) && (evt.which < 48 || evt.which >
+            57)) {
+        evt.preventDefault();
+    }
+});
+
+
+
+$(".alphaonly").keydown(function (event) {
+    var userGetData = event.which;
+    if (!(userGetData >= 65 && userGetData <= 120) && (userGetData != 32 && userGetData != 0)) {
+        event.preventDefault();
+    }
+});

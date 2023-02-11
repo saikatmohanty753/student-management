@@ -47,6 +47,7 @@ $.fn.scvalidateform = function(options) {
         ifscValidationMsg: 'Please enter a valid IFSC number.',
         alphabetValidationMsg: 'Only characters are allowed.',
         aadhaarnoValidationMsg: 'Please enter a valid aadhaar number.',
+        dateValidationMsg: 'Please enter a valid date.',
     }, options);
 
     /* define an array */
@@ -540,10 +541,13 @@ $.fn.scvalidateform = function(options) {
     if ($('.chk_aadhaar').length) {
         var aadhaar_pattern = /^[0-9]{12,12}$/;
         $('#' + settings.formId).find('.chk_aadhaar').each(function() {
+            console.log("hi");
             if (!aadhaar_pattern.test($.trim($(this).val()))) {
                 validation.push('false');
                 $(this).closest('.' + settings.containerClass).addClass(settings.errorClass);
                 $(this).closest('.' + settings.containerClass).find('.' + settings.errorMsgClass).html(settings.aadhaarnoValidationMsg);
+            console.log("if");
+
             } else {
                 validation.push('true');
                 if ($(this).closest('.' + settings.containerClass).hasClass(settings.errorClass)) {
@@ -552,6 +556,8 @@ $.fn.scvalidateform = function(options) {
                 } else {
                     /* do nothing */
                 }
+            console.log("else");
+
             }
         });
     };
@@ -722,6 +728,7 @@ $.fn.scvalidateform = function(options) {
         });
     };
 
+
     /* ifsc validation starts */
     if ($('.chk_ifsc').length) {
 
@@ -769,6 +776,103 @@ $.fn.scvalidateform = function(options) {
         });
     };
     /* ifsc validation ends */
+
+
+    /* date validation starts */
+    if ($('.chk_date').length) {
+
+        // regular expression for alphabet
+        // var ifsc_pattern = /^[a-zA-Z ]*$/;
+        var date_pattern = /^([0-9]{2})\-([0-9]{2})\-([0-9]{4})$/;
+
+        $('#' + settings.formId).find('.chk_date').each(function () {
+            if (!date_pattern.test($.trim($(this).val()))) {
+                validation.push('false');
+                $(this).closest('.' + settings.containerClass).addClass(settings.errorClass);
+                $(this).closest('.' + settings.containerClass).find('.' + settings.errorMsgClass).html(settings.dateValidationMsg);
+            } else {
+                validation.push('true');
+                if ($(this).closest('.' + settings.containerClass).hasClass(settings.errorClass)) {
+                    $(this).closest('.' + settings.containerClass).removeClass(settings.errorClass);
+                } else {
+                    /* do nothing */
+                }
+            }
+        });
+    };
+    /* date validation ends */
+
+
+    /* 5MB file validation */
+    if ($('.chk_5mb_file_only').length) {
+
+        var fileExtension = ['pdf', 'jpg', 'png', 'jpeg'];
+        $('#' + settings.formId).find('.chk_pdf_only').each(function () {
+
+            var ext = $(this).val().split('.').pop().toLowerCase();
+
+            if ($.trim($(this).val()) != '') {
+
+                if ($.inArray(ext, ['pdf', 'jpg', 'png', 'jpeg']) == -1) {
+                    validation.push("false");
+                    $(this)
+                        .closest("." + settings.containerClass)
+                        .addClass(settings.errorClass);
+                    $(this)
+                        .closest("." + settings.containerClass)
+                        .find("." + settings.errorMsgClass)
+                        .html(settings.chkpdfdocValidationMsg);
+                } else if ($(".chk_pdf_only").length) {
+                    // calculate image size
+                    var imgsize = $(this)[0].files[0].size / 1024;
+                    var imgsize = Math.round((imgsize / 1024) * 100) / 100;
+                    // var ext = $(this).val().split('.').pop().toLowerCase();
+
+                    //console.log("img size-" + imgsize);
+
+                    if ($.trim($(this).val()) !== "") {
+                        if (imgsize > 5) {
+                            validation.push("false");
+                            $(this)
+                                .closest("." + settings.containerClass).addClass(settings.errorClass);
+                            $(this).closest("." + settings.containerClass).find("." + settings.errorMsgClass)
+                                .html(settings.pdfsizeValidationMsg);
+                        } else {
+                            validation.push("true");
+                            if (
+                                $(this)
+                                .closest("." + settings.containerClass)
+                                .hasClass(settings.errorClass)
+                            ) {
+                                $(this)
+                                    .closest("." + settings.containerClass)
+                                    .removeClass(settings.errorClass);
+                            } else {
+                                /* do nothing */
+                            }
+                        }
+                    } else {
+                        /* do nothing */
+                    }
+                } else {
+                    validation.push("true");
+                    if ($(this).closest("." + settings.containerClass).hasClass(settings.errorClass)) {
+                        $(this).closest("." + settings.containerClass).removeClass(settings.errorClass);
+                        $(this)
+                            .closest("." + settings.containerClass).find("." + settings.errorMsgClass).html(settings.chkpdfdocValidationMsg);
+                    } else {
+                        /* do nothing */
+                    }
+                }
+            } else {
+                /* do nothing */
+            }
+
+
+        });
+    };
+    /* 5MB file validation */
+
 
 
     /*$('.chk_blank').on('change', function () {
