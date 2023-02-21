@@ -7,6 +7,19 @@ use App\Models\Credit;
 
 class CreditController extends Controller
 {
+    function __construct()
+
+    {
+
+        $this->middleware('permission:credit-list|credit-create|credit-edit|credit-delete', ['only' => ['index', 'store']]);
+
+        $this->middleware('permission:credit-create', ['only' => ['create', 'store']]);
+
+        $this->middleware('permission:credit-edit', ['only' => ['edit', 'update']]);
+
+        $this->middleware('permission:credit-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +52,7 @@ class CreditController extends Controller
         $credit = new Credit();
         $credit->credit = $request->credit;
         $credit->save();
-        return redirect('/credit');
+        return redirect('/credit')->with('success', 'Credit stored successfully..');
     }
 
     /**
@@ -73,12 +86,12 @@ class CreditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $credit = Credit::find($id);
-        $credit->credit = $request->credit;
+        $credit = Credit::find($request->hid);
+        $credit->credit = intval($request->ecredit);
         $credit->save();
-        return redirect('/credit');
+        return redirect('/credit')->with('success', 'Credit updated successfully..');
     }
 
     /**
