@@ -128,7 +128,7 @@
                     <li>
                         <a href="{{ route('papersubtype.index') }}" title="paper"
                             data-filter-tags="theme settings how it works">
-                            <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Paper_Sub_Type</span>
+                            <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Paper Sub Type</span>
                         </a>
                     </li>
 
