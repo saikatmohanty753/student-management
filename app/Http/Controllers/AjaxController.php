@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdmissionSeat;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Notice;
 use App\Models\User;
 use App\Notifications\UucNotice;
+use Carbon\Carbon;
 
 class AjaxController extends Controller
 {
@@ -32,7 +34,7 @@ class AjaxController extends Controller
         if ($check == 1) {
             Notice::where('status', 0)
                 ->where('id', $request->id)
-                ->update(['status' => 1]);
+                ->update(['status' => 1, 'published_date' => Carbon::now()]);
             $notice = Notice::find($request->id);
             $status = "Published";
             if ($notice->notice_type == 1) {
@@ -75,5 +77,14 @@ class AjaxController extends Controller
         ); */
         // return response()->json($result);
         return response()->json('success');
+    }
+
+    public function courseDetails(Request $request)
+    {
+        $course =  AdmissionSeat::where('clg_id', $request->clg_id)
+            ->join('courses', 'admission_seats.course_id', 'courses.id')
+            ->where('admission_year', date('Y'))
+            ->get(['admission_seats.total_strength as strength', 'courses.name', 'courses.main_course_code as course_code']);
+        return response()->json($course);
     }
 }

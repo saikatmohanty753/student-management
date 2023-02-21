@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\SendPDFMail;
 
 use App\Models\AdmissionSeat;
@@ -55,6 +56,7 @@ class AdmissionController extends Controller
                     'clg_id' => $value->college_name,
                     'department_id' => $crs->course_for,
                     'course_id' => $value->course,
+                    'total_strength' => $value->total_seat_no,
                     'available_seat' => $value->total_seat_no,
                     'consumption_seat' => 0,
                     'created_at' => Carbon::now()
@@ -365,9 +367,9 @@ class AdmissionController extends Controller
 
     public function verifyStudentAdmission(Request $request)
     {
-        // return $request;
-        // dd($request->all());
-        $course_section = Course::where('id', $request->course_id)->first('course_for');
+
+
+        $course_section = Course::where('id', $request->course_id)->first();
         $section_name = CourseFor::where('id', $course_section->course_for)->first('course_for');
 
         if ($section_name->course_for == 'UG') {
@@ -384,16 +386,17 @@ class AdmissionController extends Controller
             $year = date('Y', strtotime($year4));
         }
 
-        // dd($year);
-
-
 
         $student = StudentDetails::where('id', $request->id)->first();
         $student->remarks = $request->remarks;
         $student->status = $request->status;
+
+
+
+
         if ($student->regd_no == null) {
             $std = StudentDetails::where('regd_no', '!=', null)->latest()->first();
-            if (!empty($std)) {
+            if ($std) {
                 $regdNo = $std->regd_no;
                 $regdNo = substr($regdNo, 5);
                 $increment = $regdNo + 1;
@@ -415,19 +418,30 @@ class AdmissionController extends Controller
                 $student->batch_year = date('Y') . '-' . $year;
             }
         }
+
+
+        $clg_id = $student->clg_id; //1
+        $course_id = $student->course_id; //1
+        $join_year = date('Y') . '-' . $year;//2021-2025
+        $rollNo = Helpers::createRollNO($clg_id, $course_id, $join_year);
+        $student->roll_no = $rollNo;
         $student->save();
 
         if ($request->status == 2) {
-            $user = new User();
-            $user->name = $student->name;
-            $user->email = $student->email;
-            $user->mob_no = $student->mobile;
-            $user->clg_id = $student->clg_id;
-            $user->role_id = 3;
-            $user->batch_year = date('Y') . '-' . $year;
-            $user->password = Hash::make(12345678);
-            $user->save();
-            $user->assignRole(3);
+            $count = User::where('email', $student->email)->count();
+            if ($count == 0) {
+                $user = new User();
+                $user->name = $student->name;
+                $user->email = $student->email;
+                $user->mob_no = $student->mobile;
+                $user->clg_id = $student->clg_id;
+                $user->role_id = 3;
+                $user->batch_year = date('Y') . '-' . $year;
+                $user->password = Hash::make(12345678);
+                $user->save();
+                $user->assignRole(3);
+            }
+
         }
 
         return redirect()->action([AdmissionController::class, 'appliedAdmissionList'])->with('success', 'Application examined successfully.');

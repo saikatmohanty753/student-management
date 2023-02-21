@@ -20,21 +20,18 @@ class DashboardController extends Controller
             Auth::logout();
             return redirect('/login')->with('error', 'The username and password you entered did not match our records');
         }
-        if (Str::lower(Auth::user()->role->name) == 'academic-section') {
+
+        if (Auth::user()->role_id == 10) {
             return $this->academicSection();
-        } elseif (Str::lower(Auth::user()->role->name) == 'student-portal') {
+        } elseif (Auth::user()->role_id == 11) {
             return $this->adminDashboard();
-        } elseif (Str::lower(Auth::user()->role->name) == 'uuc-academic-section') {
+        } elseif (Auth::user()->role_id == 16) {
             return $this->uucAcademicSection();
-        } elseif (Str::lower(Auth::user()->role->name) == 'uuc-exam-section') {
-            return $this->uucExamSection();
-        } elseif (Str::lower(Auth::user()->role->name) == 'exam-section') {
-            return $this->examSection();
-        } elseif (Str::lower(Auth::user()->role->name) == 'college-exam-section') {
-            return $this->collegeExamSection();
-        } elseif (Str::lower(Auth::user()->role->name) == 'college-academic-section') {
+        } elseif (Auth::user()->role_id == 18) {
+            return $this->sectionOfficer();
+        } elseif (Auth::user()->role_id == 14) {
             return $this->collegeAcademicSection();
-        } elseif (Str::lower(Auth::user()->role->name) == 'student') {
+        } elseif (Auth::user()->role_id == 3) {
             return $this->studentDashboard();
         } else {
             Auth::logout();
@@ -44,13 +41,17 @@ class DashboardController extends Controller
 
     public function checkUser($id)
     {
-        $role = [3, 9, 10, 11, 14, 16, 17];
+        $role = [3, 10, 11, 14, 16, 18];
         return in_array($id, $role) == true ? 1 : 0;
     }
 
     public function adminDashboard()
     {
         return view('dashboard.admin.index');
+    }
+    public function sectionOfficer()
+    {
+        return view('dashboard.section-officer.index');
     }
     public function academicSection()
     {

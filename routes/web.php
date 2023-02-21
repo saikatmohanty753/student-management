@@ -16,6 +16,7 @@ use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ClgNoticeController;
+use App\Http\Controllers\PaperController;
 use App\Http\Livewire\Notification;
 use App\Providers\RouteServiceProvider;
 
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('colleges', CollegeController::class);
     Route::resource('students', StudentController::class);
 
+    Route::resource('paper', PaperController::class);
     Route::resource('department', DepartmentController::class);
     Route::resource('course', CourseController::class);
     Route::get('semester/{id}/{parameter}', [SemesterController::class, 'semesterList'])->name('semester.list');
@@ -77,6 +79,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('notices', NoticesController::class);
 
 
+    Route::post('course-details', [AjaxController::class, 'courseDetails']);
     Route::post('get-course', [AjaxController::class, 'getCourse']);
     Route::post('publish-notice', [AjaxController::class, 'publishNotice']);
     Route::get('notice/view/{id}', [NoticesController::class, 'show']);
