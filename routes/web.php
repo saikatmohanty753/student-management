@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SemesterController;
+use App\Http\Controllers\CreditController;
 use App\Http\Controllers\SyllabusController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NoticesController;
@@ -68,6 +69,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('course', CourseController::class);
     Route::get('semester/{id}/{parameter}', [SemesterController::class, 'semesterList'])->name('semester.list');
     Route::resource('semester',SemesterController::class);
+    Route::resource('credit',CreditController::class);
     Route::get('uuc-syllabus/{id}/{department}/{sem}', [SyllabusController::class, 'syllabus'])->name('uuc.syllabus');
     // Route::resource('uuc-syllabus',SyllabusController::class);
 
