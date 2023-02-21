@@ -81,6 +81,7 @@ class ClgNoticeController extends Controller
         return view('publish-notices.view', compact('data'));
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *

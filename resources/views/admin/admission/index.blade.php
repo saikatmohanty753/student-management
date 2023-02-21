@@ -70,8 +70,9 @@
                                         <th>Student Name</th>
                                         <th>Gender</th>
                                         <th>Contact No</th>
-                                        <th>Application Status</th>
                                         <th>Registration Number</th>
+                                        <th>Roll Number</th>
+                                        {{-- <th>Application Status</th> --}}
                                         <th>View</th>
                                     </tr>
                                 </thead>
@@ -85,11 +86,12 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->gender }}</td>
                                             <td>{{ $item->mobile }}</td>
-                                            <td>{!! $item->regd_no != '' ? $item->regd_no : '<span class="badge badge-danger">Not Issued</span>' !!}</td>
-                                            <td>
+                                            <td>{{  $item->regd_no != '' ? $item->regd_no : ''  }}</td>
+                                            <td>{{  $item->roll_no != '' ? $item->roll_no : ''  }}</td>
+                                            {{-- <td>
                                                 <span
                                                     class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
-                                            </td>
+                                            </td> --}}
                                             <td><a href="{{ url('/uuc-applicant-admission-details/'. $item->id) }}"><i class="fa-solid fa-eye"></i> View</a></td>
 
                                         </tr>

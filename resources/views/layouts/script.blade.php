@@ -62,5 +62,6 @@
  <script src="{{ asset('backend/js/formplugins/select2/select2.bundle.js')}}"></script>
  <script src="{{ asset('js/custom-js.js') }}"></script>
  <script src="{{ asset('js/form-validation-by-sc.js') }}"></script>
+ <script src="{{ asset('js/jquery-validation.js') }}"></script>
  <script src="{{ asset('backend/js/notifications/toastr/toastr.js')}}"></script>
 

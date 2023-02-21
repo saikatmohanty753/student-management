@@ -47,3 +47,7 @@
      -webkit-animation: spinner-border .75s linear infinite;
      animation: spinner-border .75s linear infinite;
  }
+
+ form .error {
+     color: #fd3995;
+ }

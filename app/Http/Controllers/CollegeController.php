@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\College;
 class CollegeController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:college-list|college-create|college-edit|college-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:college-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:college-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:college-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,7 @@ class CollegeController extends Controller
      */
     public function index()
     {
-        $college = College::all();
+         $college = College::all();
         return view('colleges.index',compact('college'));
     }
 
@@ -24,7 +32,7 @@ class CollegeController extends Controller
      */
     public function create()
     {
-     
+
     }
 
     /**

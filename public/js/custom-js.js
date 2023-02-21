@@ -156,9 +156,11 @@ $(".alphaonly").keydown(function (event) {
 });
 
 $("#is_migration").change(function () {
-    if ($(this).val() == 1) {
+    if ($(this).val() == '1') {
         $('#migration_cert').addClass('chk_blank chk_5mb_file_only');
     } else {
         $('#migration_cert').removeClass('chk_blank chk_5mb_file_only');
+        $('#migration_cert').parent().find('.error-msg').html('');
+
     }
 })

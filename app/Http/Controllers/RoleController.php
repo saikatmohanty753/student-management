@@ -60,7 +60,7 @@ class RoleController extends Controller
 
     {
 
-        $roles = Role::orderBy('id', 'ASC')->get();
+        $roles = Role::whereIn('id', [3, 9, 10, 11, 14, 18])->orderBy('id', 'ASC')->get();
 
         return view('roles.index', compact('roles'))
 
