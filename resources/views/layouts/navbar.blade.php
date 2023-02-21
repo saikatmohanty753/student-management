@@ -94,6 +94,11 @@
                         <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Paper Master</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('credit.index') }}" title="paper" data-filter-tags="theme settings how it works">
+                        <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Credit Master</span>
+                    </a>
+                </li>
 
             </ul>
         </li>
