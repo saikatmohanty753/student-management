@@ -17,6 +17,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ClgNoticeController;
 use App\Http\Controllers\PaperController;
+use App\Http\Controllers\PaperSubTypeController;
 use App\Http\Livewire\Notification;
 use App\Providers\RouteServiceProvider;
 
@@ -71,6 +72,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('semester',SemesterController::class);
     Route::post('update-credit',[CreditController::class, 'update']);
     Route::resource('credit',CreditController::class);
+    Route::resource('papersubtype',PaperSubTypeController::class);
     Route::get('uuc-syllabus/{id}/{department}/{sem}', [SyllabusController::class, 'syllabus'])->name('uuc.syllabus');
     // Route::resource('uuc-syllabus',SyllabusController::class);
 
