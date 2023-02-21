@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <form method="POST" action="" id="myForm">
+                <form method="POST" action="{{url('/credit')}}" id="myForm">
                     @csrf
                     <div class="box-body">
                         <div class="row">
