@@ -22,8 +22,7 @@
 
                     <div class="row">
                         <div class="col-md-12 text-right">
-                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
-                                style="margin-right: 8px;">Cancel</button>
+                            
                             <button type="submit" class="btn btn-info pull-right">Submit</button>
                         </div>
 

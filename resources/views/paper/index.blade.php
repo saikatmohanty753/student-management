@@ -51,13 +51,14 @@
                                 @foreach ($data as $key => $value)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td>{{ $value->name }}</td>
+                                        <td>{{ $value->paper_type }}</td>
                                         <td>
 
                                             <a class="btn btn-primary" href="javascript:void(0);" data-toggle="modal"
                                                 data-target="#exampleModal{{ $value->id }}"><i
                                                     class="fa-solid fa-pen-to-square"></i></a>
-
+                                                    @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
 
                                             </form>
                                         </td>
@@ -71,6 +72,43 @@
             </div>
         </div>
     </div>
+
+
+    @foreach ($data as $key => $val)
+<div class="modal fade" id="exampleModal{{ $val->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="{{ url('paper', $val->id) }}" method="post">
+                {{ method_field('PUT') }}
+                @csrf
+                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <label class="form-label">Paper Type<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter Paper Type" name="paper_type"
+                                    value="{{ $val->paper_type}}">
+
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger" href="{{ url()->previous() }}">Cancel</a>
+                    <button type="submit" class="btn btn-info pull-right">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
 
 @section('js')
