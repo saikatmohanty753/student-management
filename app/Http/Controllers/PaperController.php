@@ -29,7 +29,10 @@ class PaperController extends Controller
 
     public function store(Request $request)
     {
-        return $request;
+        $data = new Paper();
+        $data->paper_type = $request->paper_type;
+        $data->save();
+        return redirect('/paper');
     }
 
     public function show($id)
@@ -40,18 +43,26 @@ class PaperController extends Controller
 
     public function edit($id)
     {
-        //
+        $data = Paper::find($id);
+        return view('course_master.index', compact('credit'));
+        return redirect()->back();
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        
+        $data = Paper::find($id);
+        $data->paper_type = $request->paper_type;
+        $data->save();
+        return redirect('/paper');
     }
 
 
     public function destroy($id)
     {
-        //
+        $data = Paper::find($id);
+        $data->delete();
+        return redirect('/paper');
     }
 }
