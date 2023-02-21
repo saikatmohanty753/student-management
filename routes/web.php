@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('course', CourseController::class);
     Route::get('semester/{id}/{parameter}', [SemesterController::class, 'semesterList'])->name('semester.list');
     Route::resource('semester',SemesterController::class);
+    Route::post('update-credit',[CreditController::class, 'update']);
     Route::resource('credit',CreditController::class);
     Route::get('uuc-syllabus/{id}/{department}/{sem}', [SyllabusController::class, 'syllabus'])->name('uuc.syllabus');
     // Route::resource('uuc-syllabus',SyllabusController::class);
