@@ -128,7 +128,13 @@ class PermissionTableSeeder extends Seeder
             'admission-edit',
             'admission-delete',
 
-            
+            'credit-module',
+            'credit-list',
+            'credit-create',
+            'credit-edit',
+            'credit-delete',
+
+
 
         ];
         foreach ($permissions as $permission) {

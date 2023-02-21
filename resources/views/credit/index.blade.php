@@ -47,7 +47,9 @@
                                 <tr class="text-dark">
                                     <th style="width: 10%;">Sl. No</th>
                                     <th style="width: 50%;">Credit</th>
-                                    <th>Action</th>
+                                    @can('credit-edit')
+                                        <th>Action</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,19 +57,24 @@
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $value->credit }}</td>
+                                        @can('credit-edit')
                                         <td>
                                             <form action="{{ url('credit', $value->id) }}" method="post">
                                                 @csrf
+
                                                 <a class="btn btn-primary edit-credit" href="javascript:void(0);"
                                                     data-toggle="modal" data-target="#exampleModal"
                                                     data-id="{{ $value->id }}" data-value="{{ $value->credit }}"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
 
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </form>
+                                                @can('credit-delete')
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit"><i
+                                                            class="fa fa-trash"></i></button>
+                                                </form>
+                                            @endcan
                                         </td>
+                                        @endcan
 
 
 

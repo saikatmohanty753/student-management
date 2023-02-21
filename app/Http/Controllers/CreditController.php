@@ -7,6 +7,19 @@ use App\Models\Credit;
 
 class CreditController extends Controller
 {
+    function __construct()
+
+    {
+
+        $this->middleware('permission:credit-list|credit-create|credit-edit|credit-delete', ['only' => ['index', 'store']]);
+
+        $this->middleware('permission:credit-create', ['only' => ['create', 'store']]);
+
+        $this->middleware('permission:credit-edit', ['only' => ['edit', 'update']]);
+
+        $this->middleware('permission:credit-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
