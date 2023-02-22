@@ -63,5 +63,7 @@
  <script src="{{ asset('js/custom-js.js') }}"></script>
  <script src="{{ asset('js/form-validation-by-sc.js') }}"></script>
  <script src="{{ asset('js/jquery-validation.js') }}"></script>
+ <script src="{{ asset('js/bootstrap_multiselect.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('js/bootstrap_multiselect.css') }}" type="text/css">
  <script src="{{ asset('backend/js/notifications/toastr/toastr.js')}}"></script>
 

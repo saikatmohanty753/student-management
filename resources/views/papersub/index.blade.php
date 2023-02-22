@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Paper Type</label>
                             @if (isset($Paper))
-                                <select name="paper_type" id="" class="form-control">
+                                <select name="paper_type" id="" class="form-control select2">
                                     <option hidden value="">choose...</option>
                                     @foreach ($Paper as $s)
                                         <option value="{{ $s->id }}">{{ $s->paper_type }}</option>
@@ -44,11 +44,8 @@
 <script>
      $("#myForm").validate({
             rules: {
-                credit: {
-                    required: true,
-                    number: true,
-                    min: 1,
-                },
+                paper_type : 'required',
+                paper_sub_type: 'required'
 
             }
         });

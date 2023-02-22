@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdmissionSeat;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\CourseFor;
 use App\Models\Notice;
 use App\Models\User;
 use App\Notifications\UucNotice;

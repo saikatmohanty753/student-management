@@ -16,6 +16,7 @@ use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ClgNoticeController;
+use App\Http\Controllers\CourseStructureController;
 use App\Http\Controllers\PaperController;
 use App\Http\Controllers\PaperSubTypeController;
 use App\Http\Livewire\Notification;
@@ -107,6 +108,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('academic-notices', [ClgNoticeController::class, 'index']);
     Route::get('view-notice/{id}/{notification_id}', [ClgNoticeController::class, 'show']);
 
+    Route::resource('academic-course-structure', CourseStructureController::class);
 
 
 
