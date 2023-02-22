@@ -15,9 +15,14 @@ class PaperSubTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-         $Paper=Paper::all();
-        return view('papersub.index',compact('Paper'));
+    {    
+        $Paper=Paper::all();
+       
+         $PaperSub= PaperSubType::select('pap.*','paper_sub_types.paper_sub_type')
+         ->leftJoin("papers as pap", "paper_sub_types.paper_type_id", "=", "pap.id")
+        
+        ->get();
+        return view('papersub.index',compact('Paper','PaperSub'));
     }
 
     /**
@@ -41,8 +46,8 @@ class PaperSubTypeController extends Controller
        
       
         $paper = new PaperSubType();
-        $paper->paper_type_id = $request->Paper;
-        $paper->paper_sub_type = $request->paper_type;
+        $paper->paper_type_id = $request->paper_type;
+        $paper->paper_sub_type = $request->paper_sub_type;
 
         $paper->save();
         return redirect('/papersubtype')->with('success', 'Paper stored successfully..');
@@ -79,7 +84,12 @@ class PaperSubTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       
+        $data = PaperSubType::find($id);
+        $data->paper_type_id= $request->papertype;
+        $data->paper_sub_type= $request->papersubtype;
+        $data->save();
+        return redirect('/papersubtype');
     }
 
     /**
@@ -90,6 +100,8 @@ class PaperSubTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pap = PaperSubType::find($id);
+        $pap->delete();
+        return redirect('/papersubtype');
     }
 }
