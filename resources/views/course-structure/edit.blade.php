@@ -13,74 +13,86 @@
 
         <div class="col-xl-12">
             <div class="card">
-                <form method="post" action="{{ url('/academic-course-structure') }}" id="myForm">
+                <form method="post" action="{{ url('/academic-course-structure/' . $data->id) }}" id="myForm">
                     @csrf
-
+                    @method('PUT')
                     <div class="box-body">
                         <div class="frame-wrap">
                             <div class="d-flex p-2 bg-primary-600 text-white">Academic Course Structure</div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Year<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control year" placeholder="Session Year"
-                                        name="year">
-
+                                    <input type="text" class="form-control year chk_blank" placeholder="Session Year"
+                                        name="year" value="{{ $data->year }}">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Session Year<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control year" placeholder="Session Year"
-                                        name="session_year">
-
+                                    <input type="text" class="form-control year chk_blank" placeholder="Session Year"
+                                        name="session_year" value="{{ $data->session_year }}">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Department <span class="text-danger">*</span></label>
-                                    <select name="department" class="form-control  get-course" id="">
+                                    <select name="department" class="form-control  get-course chk_blank" id="">
                                         <option value="">Select Department</option>
                                         @foreach ($department as $item)
-                                            <option value="{{ $item->id }}" data-id="{{ $item->semester }}">
+                                            <option value="{{ $item->id }}"
+                                                {{ $data->dep_id == $item->id ? 'selected' : '' }}
+                                                data-id="{{ $item->semester }}">
                                                 {{ $item->course_for }}</option>
                                         @endforeach
                                     </select>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-12 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Course Name<span class="text-danger">*</span></label>
-                                    <select name="course" class="form-control select2" id="course">
+                                    <select name="course" class="form-control select2 chk_blank" id="course">
                                         <option value="">Select Course</option>
+                                        @foreach ($course as $item)
+                                            <option value="{{ $item->id }}"
+                                                {{ $data->course_id == $item->id ? 'selected' : '' }}>
+                                                {{ $item->name }}</option>
+                                        @endforeach
                                     </select>
-
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Semester <span class="text-danger">*</span></label>
-                                    <select name="semester" class="form-control select2" id="semester">
+                                    <select name="semester" class="form-control select2 chk_blank" id="semester">
                                         <option value="">Select Semester</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4</option>
+                                        @for ($i = 1; $i <= $sem->semester; $i++)
+                                            <option value="{{ $i }}"
+                                                {{ $data->semester == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor
                                     </select>
-
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Paper Code <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Paper Code" name="paper_code">
+                                    <input type="text" class="form-control chk_blank" placeholder="Paper Code"
+                                        name="paper_code" value="{{ $data->paper_code }}">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Subject Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Paper Code" name="subject">
+                                    <input type="text" class="form-control chk_blank" placeholder="Paper Code"
+                                        name="subject" value="{{ $data->subject }}">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                         </div>
@@ -90,45 +102,50 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Mid Sem Marks<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control sem_mark numeric"
-                                        placeholder="Enter Mid Sem Marks" name="mid_sem_mark">
+                                    <input type="text" class="form-control sem_mark numeric chk_blank"
+                                        placeholder="Enter Mid Sem Marks" name="mid_sem_mark" value="{{ $data->mid_sem_mark }}">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">End Sem Marks<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control sem_mark numeric"
-                                        placeholder="Enter Mid Sem Marks" name="end_sem_mark">
+                                    <input type="text" class="form-control sem_mark numeric chk_blank"
+                                        placeholder="Enter Mid Sem Marks" name="end_sem_mark" value="{{ $data->end_sem_mark }}">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Aggregate / Total Marks<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control total_marks" placeholder="Enter Total Marks"
-                                        name="total_marks" readonly>
+                                    <input type="text" class="form-control total_marks chk_blank"
+                                        placeholder="Enter Total Marks" name="total_marks" readonly value="{{ $data->total_marks }}">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
 
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Pass Marks<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Enter Pass Marks"
-                                        name="pass_mark">
+                                    <input type="text" class="form-control chk_blank" placeholder="Enter Pass Marks"
+                                        name="pass_mark" value="{{ $data->pass_mark }}">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Total Credit<span class="text-danger">*</span></label>
-                                    <select name="credit" class="form-control select2" id="">
+                                    <select name="credit" class="form-control select2 chk_blank" id="">
                                         <option value="">Select Credit</option>
                                         @foreach ($credit as $item)
-                                            <option value="{{ $item->credit }}">{{ $item->credit }}</option>
+                                            <option value="{{ $item->credit }}" {{ $data->credit == $item->credit ? 'selected' : '' }}>{{ $item->credit }}</option>
                                         @endforeach
 
                                     </select>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                         </div>
@@ -209,5 +226,18 @@
             $(".total_marks").val(sum);
         });
 
+
+        $("#myForm").on('submit', function(e) {
+            e.preventDefault();
+            var validation = [];
+            validation = $('#myForm').scvalidateform({
+                formId: 'myForm'
+            });
+            if ($.inArray('false', validation) >= '0') {
+                return false;
+            } else {
+                $(this)[0].submit();
+            }
+        });
     </script>
 @endsection
