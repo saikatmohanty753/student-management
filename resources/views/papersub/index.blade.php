@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Paper Type</label>
                             @if (isset($Paper))
-                                <select name="Paper" id="" class="form-control select2">
+                                <select name="paper_type" id="" class="form-control">
                                     <option hidden value="">choose...</option>
                                     @foreach ($Paper as $s)
                                         <option value="{{ $s->id }}">{{ $s->paper_type }}</option>
@@ -26,8 +26,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Paper Sub Type</label>
-                            <input type="text" class="form-control" placeholder="Enter Paper Sub Type" name="paper_type"
-                                id="paper_type">
+                            <input type="text" class="form-control" placeholder="Enter Paper Sub Type" name="paper_sub_type"
+                                id="paper_sub_type">
                         </div>
                     </div>
                     <div class="col-md-4 mt-4">
@@ -38,4 +38,19 @@
         </div>
     </div>
 
+@endsection
+
+@section('js')
+<script>
+     $("#myForm").validate({
+            rules: {
+                credit: {
+                    required: true,
+                    number: true,
+                    min: 1,
+                },
+
+            }
+        });
+</script>
 @endsection
