@@ -51,14 +51,17 @@
                                 <tr class="text-dark">
                                     <th style="width: 10%;">Sl. No</th>
                                     <th style="width: 50%;">Course</th>
+                                    <th style="width: 20%;">Course Code</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
+                           
                             <tbody>
                                 @foreach ($course as $key => $value)
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $value->name }}</td>
+                                        <td>{{ $value->main_course_code }}</td>
                                         <td>
                                     <form action="{{ url('course', $value->id) }}" method="post">
                                         @csrf
@@ -107,6 +110,7 @@
 
                                     </div>
                                 </div>
+                               
                             </div>
                          </div>
                         <div class="modal-footer">
