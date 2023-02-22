@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Paper Type</label>
                             @if (isset($Paper))
-                                <select name="Paper" id="" class="form-control">
+                                <select name="Paper" id="" class="form-control select2">
                                     <option hidden value="">choose...</option>
                                     @foreach ($Paper as $s)
                                         <option value="{{ $s->id }}">{{ $s->paper_type }}</option>
