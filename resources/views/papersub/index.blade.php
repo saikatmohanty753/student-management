@@ -71,7 +71,7 @@
 
                                                 {{-- <a class="btn btn-info" href=""><i class="fa-solid fa-eye"></i></a> --}}
 
-                                                <a class="btn btn-primary" href="javascript:void(0)"
+                                                <a class="btn btn-primary paper-sub" href="javascript:void(0)"
                                                     onclick="open_modal('{{ $value->id }}')"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
 
@@ -131,21 +131,21 @@
 
                             </div>
                         </div>
-                        <div class="modal-body">
+                        {{-- <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
 
                                         <label class="form-label">Paper Sub Type <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" placeholder="Enter Paper Sub Type"
-                                            name="papersubtype" value="{{ $s->paper_sub_type }}">
+                                            name="papersubtype" id="papersubtype" value="">
 
 
                                     </div>
                                 </div>
 
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="modal-footer">
                             <a href="{{ url('/papersubtype') }}">Cancel</a>
                             <button type="submit" class="btn btn-info pull-right">Submit</button>
@@ -179,5 +179,44 @@
         function open_modal(id) {
             $('#exampleModal').modal('show');
         }
+
+       
+        $('.paper-sub').click(function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var formData = {
+                clg_id: $(this).data('id'),
+            };
+            var type = "POST";
+            var ajaxurl = '/paper-sub';
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function(data) {
+                    if (data) {
+                        var html = '';
+                        $.each(data, function(key, val) {
+                            html += '<tr>';
+                            html += '<td>'+val.course_code+'</td>';
+                            html += '<td>'+val.name+'</td>';
+                            html += '<td>'+val.strength+'</td>';
+                            html += '</tr>';
+                        });
+                        $('.add-course').html(html);
+                        $('#course-view').modal('show');
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+   
     </script>
 @endsection
