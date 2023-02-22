@@ -79,7 +79,18 @@ $('.yearPicker').datepicker({
     todayHighlight: true,
     autoclose: true,
     endDate: 'y',
+    orientation: "bottom left",
+});
 
+$('.year').datepicker({
+    format: "yyyy",
+    viewMode: "years",
+    minViewMode: "years",
+    todayHighlight: true,
+    autoclose: true,
+    // endDate: 'y',
+    // startDate: '-y',
+    orientation: "bottom left",
 });
 $('.select2').select2();
 
@@ -163,4 +174,13 @@ $("#is_migration").change(function () {
         $('#migration_cert').parent().find('.error-msg').html('');
 
     }
+})
+
+$(document).ready(function () {
+    $(".multiselect").multiselect({
+        includeSelectAllOption: true,
+        includeSelectAllOption: true,
+        enableFiltering: true
+
+    });
 })

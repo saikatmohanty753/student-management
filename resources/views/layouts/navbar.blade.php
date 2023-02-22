@@ -125,6 +125,7 @@
                             </a>
                         </li>
                     @endcan
+
                     <li>
                         <a href="{{ route('papersubtype.index') }}" title="paper"
                             data-filter-tags="theme settings how it works">
@@ -165,6 +166,13 @@
                 </a>
             </li>
         @endcan
+        <li>
+            <a href="{{ url('/academic-course-structure') }}" title="Admission" data-filter-tags="Admission">
+                <i class="fa-solid fa-book-open-reader"></i>
+                <span class="nav-link-text" data-i18n="nav.application_admission">Academic Course Structure</span>
+            </a>
+        </li>
+
 
 
 
