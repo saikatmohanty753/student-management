@@ -22,65 +22,68 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Year<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control year" placeholder="Session Year"
+                                    <input type="text" class="form-control year chk_blank" placeholder="Session Year"
                                         name="year">
-
+                                        <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Session Year<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control year" placeholder="Session Year"
+                                    <input type="text" class="form-control year chk_blank" placeholder="Session Year"
                                         name="session_year">
-
+                                        <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Department <span class="text-danger">*</span></label>
-                                    <select name="department" class="form-control  get-course" id="">
+                                    <select name="department" class="form-control  get-course chk_blank" id="">
                                         <option value="">Select Department</option>
                                         @foreach ($department as $item)
                                             <option value="{{ $item->id }}" data-id="{{ $item->semester }}">
                                                 {{ $item->course_for }}</option>
                                         @endforeach
                                     </select>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-12 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Course Name<span class="text-danger">*</span></label>
-                                    <select name="course" class="form-control select2" id="course">
+                                    <select name="course" class="form-control select2 chk_blank" id="course">
                                         <option value="">Select Course</option>
                                     </select>
-
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Semester <span class="text-danger">*</span></label>
-                                    <select name="semester" class="form-control select2" id="semester">
+                                    <select name="semester" class="form-control select2 chk_blank" id="semester">
                                         <option value="">Select Semester</option>
                                         <option value="">1</option>
                                         <option value="">2</option>
                                         <option value="">3</option>
                                         <option value="">4</option>
                                     </select>
-
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Paper Code <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Paper Code" name="paper_code">
+                                    <input type="text" class="form-control chk_blank" placeholder="Paper Code" name="paper_code">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Subject Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Paper Code" name="subject">
+                                    <input type="text" class="form-control chk_blank" placeholder="Paper Code" name="subject">
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                         </div>
@@ -90,45 +93,50 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Mid Sem Marks<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control sem_mark numeric"
+                                    <input type="text" class="form-control sem_mark numeric chk_blank"
                                         placeholder="Enter Mid Sem Marks" name="mid_sem_mark">
+                                        <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">End Sem Marks<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control sem_mark numeric"
+                                    <input type="text" class="form-control sem_mark numeric chk_blank"
                                         placeholder="Enter Mid Sem Marks" name="end_sem_mark">
+                                        <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Aggregate / Total Marks<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control total_marks" placeholder="Enter Total Marks"
+                                    <input type="text" class="form-control total_marks chk_blank" placeholder="Enter Total Marks"
                                         name="total_marks" readonly>
+                                        <span class="error-msg"></span>
                                 </div>
                             </div>
 
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Pass Marks<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Enter Pass Marks"
+                                    <input type="text" class="form-control chk_blank" placeholder="Enter Pass Marks"
                                         name="pass_mark">
+                                        <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <div class="form-group">
+                                <div class="form-group input-cont">
                                     <label class="form-label">Total Credit<span class="text-danger">*</span></label>
-                                    <select name="credit" class="form-control select2" id="">
+                                    <select name="credit" class="form-control select2 chk_blank" id="">
                                         <option value="">Select Credit</option>
                                         @foreach ($credit as $item)
                                             <option value="{{ $item->credit }}">{{ $item->credit }}</option>
                                         @endforeach
 
                                     </select>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                         </div>
@@ -233,5 +241,32 @@
 
                     }
                 }); */
+    </script>
+
+    <script>
+        $("#myForm").on('submit', function(e) {
+            e.preventDefault();
+            // if ($('.addNewRow tr').length == 0) {
+            //     if ($('.addNewRow tr').length == 0) {
+            //         var msg = "please provide seeking  affiliation details.";
+
+            //     }
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Missing Data...',
+            //         text: msg,
+            //     })
+            //     return false;
+            // }
+            var validation = [];
+            validation = $('#myForm').scvalidateform({
+                formId: 'myForm'
+            });
+            if ($.inArray('false', validation) >= '0') {
+                return false;
+            } else {
+                $(this)[0].submit();
+            }
+        });
     </script>
 @endsection
