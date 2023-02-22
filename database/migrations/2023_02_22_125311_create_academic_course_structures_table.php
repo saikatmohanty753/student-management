@@ -25,7 +25,7 @@ class CreateAcademicCourseStructuresTable extends Migration
             $table->float('mid_sem_mark')->nullable();
             $table->float('end_sem_mark')->nullable();
             $table->float('total_marks')->nullable();
-            $table->integer('pass_mark')->nullable();
+            $table->float('pass_mark')->nullable();
             $table->integer('credit')->nullable();
             $table->integer('status')->default(1)->nullable();
             $table->timestamps();
