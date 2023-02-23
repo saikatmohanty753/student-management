@@ -71,7 +71,9 @@
 
                                                 {{-- <a class="btn btn-info" href=""><i class="fa-solid fa-eye"></i></a> --}}
 
-                                                <a class="btn btn-primary paper-sub" href="javascript:void(0)" data-id="{{$value->paper_type_id}}" data-value="{{$value->paper_sub_type}}"><i
+                                                <a class="btn btn-primary paper-sub" href="javascript:void(0)"
+                                                    data-id="{{ $value->paper_type_id }}"
+                                                    data-value="{{ $value->paper_sub_type }}"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
 
                                                 @method('DELETE')
@@ -105,7 +107,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered">
+                    {{-- <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <label>Paper Type</label>
@@ -128,12 +130,59 @@
 
 
                             </tr>
-                           
+
                         </thead>
                         <tbody class="paper-sub">
 
                         </tbody>
-                    </table>
+                    </table> --}}
+                    <form action="{{ url('papersubtype', $s->id) }}" method="post">
+                        {{ method_field('PUT') }}
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label>Paper Type</label>
+
+                                        <select name="paper_type" id="paper_type" class="form-control">
+                                            @foreach ($Paper as $s)
+                                                <option value="{{ $s->id }}">{{ $s->paper_type }}</option>
+                                            @endforeach
+
+                                        </select>
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label>Paper Sub Type</label>
+
+                                        <input type="text" name="paper_sub_type" id="paper_sub_type"
+                                            class="form-control">
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ url('/papersubtype') }}">Cancel</a>
+                            <button type="submit" class="btn btn-info pull-right">Submit</button>
+                        </div>
+                    </form>
                 </div>
 
             </div>
@@ -171,7 +220,7 @@
                 // console.log(paper);
                 $('#paper_sub_type').val(sub_paper_type);
                 $('#paper_type option[value="' + paper + '"]').prop(
-                    "selected",true).trigger("change");
+                    "selected", true).trigger("change");
 
                 $('#exampleModal').modal('show');
 
