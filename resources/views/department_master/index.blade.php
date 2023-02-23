@@ -5,7 +5,7 @@
             padding: 30px;
         }
     </style>
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-xl-12">
             <div class="card">
                 <form method="post" action="" id="myForm">
@@ -33,7 +33,7 @@
             </div>
 
         </div>
-    </div>
+    </div> --}}
     <div class="row mt-5">
 
         <div class="col-xl-12">
@@ -43,7 +43,7 @@
                         <tr class="text-dark">
                             <th>Sl. No</th>
                             <th style="width: 60%;">Department</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -51,12 +51,12 @@
                             <tr>
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $value->course_for }}</td>
-                                <td>
+                               <!-- <td>
 
                                     {{-- <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button> --}}
                                     <form action="{{ url('department', $value->id) }}" method="post">
                                         @csrf
-                                       
+
                                         {{-- <a class="btn btn-info" href=""><i class="fa-solid fa-eye"></i></a> --}}
 
                                         <a class="btn btn-outline-primary" href="{{ url('department', $value->id) }}"
@@ -68,6 +68,8 @@
                                         <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                                     </form>
                                 </td>
+                                -->
+
                             </tr>
                         @endforeach
                     </tbody>

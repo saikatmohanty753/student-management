@@ -30,24 +30,57 @@
                 <span class="nav-link-text" data-i18n="nav.application_intel">Dashboard</span>
             </a>
         </li>
-        @can('college-module')
-            <li class="">
-                <a href="{{ route('colleges.index') }}" title="Colleges" data-filter-tags="theme settings Colleges">
-                    <i class="fa-solid fa-landmark"></i>
-                    <span class="nav-link-text" data-i18n="nav.user_management_college">Colleges</span>
-                </a>
-            </li>
-        @endcan
-
-        @can('notice-module')
+        @can('master-module')
             <li>
-                <a href="{{ url('/notices') }}" title="Notices" data-filter-tags="Notice">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <span class="nav-link-text" data-i18n="nav.application_notice">Notice</span>
+                <a href="#" title="Theme Settings" data-filter-tags="theme settings">
+                    <i class="fa-solid fa-m"></i>
+                    <span class="nav-link-text" data-i18n="nav.theme_settings">Masters</span>
                 </a>
+                <ul>
+                    <li>
+                        <a href="{{ url('/department') }}" title="How it works"
+                            data-filter-tags="theme settings how it works">
+                            <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Department Master</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('course.index') }}" title="course" data-filter-tags="theme settings how it works">
+
+                            <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Course Master</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('semester.index') }}" title="How it works"
+                            data-filter-tags="theme settings how it works">
+                            <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Semester</span>
+                        </a>
+                    </li>
+                    @can('paper-module')
+                        <li>
+                            <a href="{{ route('paper.index') }}" title="paper" data-filter-tags="theme settings how it works">
+                                <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Paper Type</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('credit-module')
+                        <li>
+                            <a href="{{ route('credit.index') }}" title="paper" data-filter-tags="theme settings how it works">
+                                <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Credit Master</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    <li>
+                        <a href="{{ route('papersubtype.index') }}" title="paper"
+                            data-filter-tags="theme settings how it works">
+                            <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Paper Sub Type</span>
+                        </a>
+                    </li>
+
+
+                </ul>
             </li>
         @endcan
-
         @can('user-module')
             <li>
                 <a href="#" title="Theme Settings" data-filter-tags="theme settings">
@@ -74,7 +107,8 @@
                         </a>
                     </li> --}}
                     <li>
-                        <a href="{{ route('students.index') }}" title="students" data-filter-tags="theme settings students">
+                        <a href="{{ route('students.index') }}" title="students"
+                            data-filter-tags="theme settings students">
                             <span class="nav-link-text" data-i18n="nav.user_management_students">Students</span>
                         </a>
                     </li>
@@ -82,9 +116,28 @@
                 </ul>
             </li>
         @endcan
+        @can('college-module')
+            <li class="">
+                <a href="{{ route('colleges.index') }}" title="Colleges" data-filter-tags="theme settings Colleges">
+                    <i class="fa-solid fa-landmark"></i>
+                    <span class="nav-link-text" data-i18n="nav.user_management_college">Colleges</span>
+                </a>
+            </li>
+        @endcan
+
+        @can('notice-module')
+            <li>
+                <a href="{{ url('/notices') }}" title="Notices" data-filter-tags="Notice">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span class="nav-link-text" data-i18n="nav.application_notice">Notice</span>
+                </a>
+            </li>
+        @endcan
+
+        
 
 
-        @can('master-module')
+        {{-- @can('master-module')
             <li>
                 <a href="#" title="Theme Settings" data-filter-tags="theme settings">
                     <i class="fa-solid fa-m"></i>
@@ -136,7 +189,7 @@
 
                 </ul>
             </li>
-        @endcan
+        @endcan --}}
 
         @can('college-notice-module')
             <li>
@@ -169,7 +222,7 @@
         <li>
             <a href="{{ url('/academic-course-structure') }}" title="Admission" data-filter-tags="Admission">
                 <i class="fa-solid fa-book-open-reader"></i>
-                <span class="nav-link-text" data-i18n="nav.application_admission">Academic Course Structure</span>
+                <span class="nav-link-text" data-i18n="nav.application_admission">Course Structure</span>
             </a>
         </li>
 

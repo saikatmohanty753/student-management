@@ -18,7 +18,7 @@ class PaperSubTypeController extends Controller
     {    
         $Paper=Paper::all();
        
-         $PaperSub= PaperSubType::select('pap.*','paper_sub_types.paper_sub_type')
+         $PaperSub= PaperSubType::select('pap.*','paper_sub_types.*')
          ->leftJoin("papers as pap", "paper_sub_types.paper_type_id", "=", "pap.id")
         
         ->get();
@@ -72,7 +72,7 @@ class PaperSubTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -86,8 +86,8 @@ class PaperSubTypeController extends Controller
     {
        
         $data = PaperSubType::find($id);
-        $data->paper_type_id= $request->papertype;
-        $data->paper_sub_type= $request->papersubtype;
+        $data->paper_type_id= $request->paper_type;
+        $data->paper_sub_type= $request->paper_sub_type;
         $data->save();
         return redirect('/papersubtype');
     }

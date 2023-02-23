@@ -17,7 +17,7 @@
                                     <th style="width: 25%;">No</th>
                                     <th style="width: 25%;">Course Name</th>
                                     <th style="width: 25%;">Semesters </th>
-                                    <th style="width: 25%;">Action</th>
+                                    {{-- <th style="width: 25%;">Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,7 +26,7 @@
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $item->course_for }}</td>
                                         <td>{{ $item->semester }}</td>
-                                        <td><a href="{{ route('semester.list',['id' => $item->id, 'parameter' => $item->course_for]) }}" class="btn btn-outline-info">View Semester</a></td>
+                                        {{-- <td><a href="{{ route('semester.list',['id' => $item->id, 'parameter' => $item->course_for]) }}" class="btn btn-outline-info">View Semester</a></td> --}}
                                     </tr>
                                 @endforeach
 
