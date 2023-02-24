@@ -95,12 +95,5 @@ class AjaxController extends Controller
         return response()->json($course);
     }
 
-    public function papersub(Request $request)
-    {
-        $paper =  AdmissionSeat::where('clg_id', $request->clg_id)
-            ->join('courses', 'admission_seats.course_id', 'courses.id')
-            ->where('admission_year', date('Y'))
-            ->get(['admission_seats.total_strength as strength', 'courses.name', 'courses.main_course_code as course_code']);
-        return response()->json($course);
-    }
+    
 }

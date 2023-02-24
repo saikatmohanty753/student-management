@@ -292,18 +292,7 @@
     <script>
         $("#myForm").on('submit', function(e) {
             e.preventDefault();
-            // if ($('.addNewRow tr').length == 0) {
-            //     if ($('.addNewRow tr').length == 0) {
-            //         var msg = "please provide seeking  affiliation details.";
-
-            //     }
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Missing Data...',
-            //         text: msg,
-            //     })
-            //     return false;
-            // }
+            
             var validation = [];
             validation = $('#myForm').scvalidateform({
                 formId: 'myForm'

@@ -6,7 +6,7 @@
             <h5 class="card-title mb-0">Add Paper Sub Type</h5>
 
         </div>
-        
+
         <div class="card-body">
             <form method="POST" action="{{ url('/papersubtype') }}" id="myForm">
                 @csrf
@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Paper Sub Type</label>
                             <input type="text" class="form-control" placeholder="Enter Paper Sub Type"
-                                name="paper_sub_type" id="paper_sub_type">
+                                name="paper_sub_type" id="">
                         </div>
                     </div>
                     <div class="col-md-4 mt-4">
@@ -39,7 +39,7 @@
         </div>
     </div>
 
- 
+
     <div class="row mt-5">
 
         <div class="col-xl-12">
@@ -72,7 +72,8 @@
                                                 {{-- <a class="btn btn-info" href=""><i class="fa-solid fa-eye"></i></a> --}}
 
                                                 <a class="btn btn-primary paper-sub" href="javascript:void(0)"
-                                                    onclick="open_modal('{{ $value->id }}')"><i
+                                                    data-id="{{ $value->paper_type_id }}"
+                                                    data-value="{{ $value->paper_sub_type }}"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
 
                                                 @method('DELETE')
@@ -95,14 +96,46 @@
 
 
     {{-- @foreach ($PaperSub as $key => $val) --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title text-center">Paper Update</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                    </button>
                 </div>
-               
+                <div class="modal-body">
+                    {{-- <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <label>Paper Type</label>
+
+                                <select name="paper_type" id="paper_type" class="form-control">
+                                    @foreach ($Paper as $s)
+                                        <option value="{{ $s->id }}">{{ $s->paper_type }}</option>
+                                    @endforeach
+
+                                </select>
+
+
+                            </tr>
+                            <tr>
+                                <label>Paper Sub Type</label>
+
+                                <input type="text" name="paper_sub_type" id="paper_sub_type" class="form-control">
+
+                                </select>
+
+
+                            </tr>
+
+                        </thead>
+                        <tbody class="paper-sub">
+
+                        </tbody>
+                    </table> --}}
                     <form action="{{ url('papersubtype', $s->id) }}" method="post">
                         {{ method_field('PUT') }}
                         @csrf
@@ -111,47 +144,47 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
 
-                                        <label class="form-label">Paper Type <span class="text-danger">*</span></label>
+                                        <label>Paper Type</label>
 
-                                        <select name="papertype" id="" class="form-control">
-
-                                           
-                                            @foreach ($PaperSub as $s)
-                                            {{-- <option value="{{ $val->id }}">{{ $val->paper_type }}</option> --}}
-                                            <option value="{{ $s->id }}"
-                                                {{ $s->id == $s->paper_type ? 'selected' : '' }}>{{ $s->paper_type }}
-                                            </option>
+                                        <select name="paper_type" id="paper_type" class="form-control">
+                                            @foreach ($Paper as $s)
+                                                <option value="{{ $s->id }}">{{ $s->paper_type }}</option>
                                             @endforeach
+
                                         </select>
 
 
 
                                     </div>
+
                                 </div>
 
                             </div>
                         </div>
-                        {{-- <div class="modal-body">
+                        <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
 
-                                        <label class="form-label">Paper Sub Type <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" placeholder="Enter Paper Sub Type"
-                                            name="papersubtype" id="papersubtype" value="">
+                                        <label>Paper Sub Type</label>
+
+                                        <input type="text" name="paper_sub_type" id="paper_sub_type"
+                                            class="form-control">
+
 
 
                                     </div>
                                 </div>
 
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="modal-footer">
-                            <a href="{{ url('/papersubtype') }}">Cancel</a>
+                            <a  class="btn btn-danger" href="{{ url('/papersubtype') }}">Cancel</a>
                             <button type="submit" class="btn btn-info pull-right">Submit</button>
                         </div>
                     </form>
-                
+                </div>
+
             </div>
         </div>
     </div>
@@ -162,7 +195,7 @@
     <script>
         $("#myForm").validate({
             rules: {
-                paper_type : 'required',
+                paper_type: 'required',
                 paper_sub_type: 'required'
 
             }
@@ -171,49 +204,29 @@
 
 
 
-       
 
-        function open_modal(id) {
-            $('#exampleModal').modal('show');
-        }
 
-       
-        $('.paper-sub').click(function(e) {
-            e.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+        // function open_modal(id) {
+        //     $('#exampleModal').modal('show');
+        // }
+
+        $(document).ready(function() {
+            //alert(1);
+
+            $('.paper-sub').on('click', function() {
+
+                let paper = $(this).data('id');
+                let sub_paper_type = $(this).data('value');
+                // console.log(paper);
+                $('#paper_sub_type').val(sub_paper_type);
+                $('#paper_type option[value="' + paper + '"]').prop(
+                    "selected", true).trigger("change");
+
+                $('#exampleModal').modal('show');
+
+
             });
-            var formData = {
-                clg_id: $(this).data('id'),
-            };
-            var type = "POST";
-            var ajaxurl = '/paper-sub';
-            $.ajax({
-                type: type,
-                url: ajaxurl,
-                data: formData,
-                dataType: 'json',
-                success: function(data) {
-                    if (data) {
-                        var html = '';
-                        $.each(data, function(key, val) {
-                            html += '<tr>';
-                            html += '<td>'+val.course_code+'</td>';
-                            html += '<td>'+val.name+'</td>';
-                            html += '<td>'+val.strength+'</td>';
-                            html += '</tr>';
-                        });
-                        $('.add-course').html(html);
-                        $('#course-view').modal('show');
-                    }
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-            });
+
         });
-   
     </script>
 @endsection

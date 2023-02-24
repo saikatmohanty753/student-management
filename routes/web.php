@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::post('/get-paper-subtype', [AjaxController::class, 'paperSubtype']);
     Route::post('course-details', [AjaxController::class, 'courseDetails']);
-    Route::post('paper-sub', [AjaxController::class, 'papersub']);
+    
     Route::post('get-course', [AjaxController::class, 'getCourse']);
     Route::post('publish-notice', [AjaxController::class, 'publishNotice']);
     Route::get('notice/view/{id}', [NoticesController::class, 'show']);
