@@ -37,8 +37,9 @@
                                             name="notice_type">
                                             <option value="" selected>Select Notice Type</option>
                                             <option value="1" class="admission">Admission Notice</option>
-                                            {{-- <option value="2" class="exam">Exam Notice</option> --}}
-                                            <option value="3" class="other">Other Notice</option>
+                                            <option value="2" class="exam">College Notice</option>
+                                            <option value="3" class="student">Student Notice</option>
+                                            <option value="4" class="other">Event Notice</option>
                                         </select>
 
                                     </div>

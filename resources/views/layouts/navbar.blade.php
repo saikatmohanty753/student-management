@@ -61,6 +61,12 @@
                                 <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Paper Type</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('papersubtype.index') }}" title="paper"
+                                data-filter-tags="theme settings how it works">
+                                <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Paper Sub Type</span>
+                            </a>
+                        </li>
                     @endcan
                     @can('credit-module')
                         <li>
@@ -70,12 +76,7 @@
                         </li>
                     @endcan
 
-                    <li>
-                        <a href="{{ route('papersubtype.index') }}" title="paper"
-                            data-filter-tags="theme settings how it works">
-                            <span class="nav-link-text" data-i18n="nav.theme_settings_how_it_works">Paper Sub Type</span>
-                        </a>
-                    </li>
+
 
 
                 </ul>
