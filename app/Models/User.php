@@ -100,4 +100,9 @@ class User extends Authenticatable
         ]);
 
     }
+
+    public function userdetails()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
 }

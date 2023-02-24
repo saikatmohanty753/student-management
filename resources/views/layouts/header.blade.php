@@ -90,7 +90,7 @@
                                 <li class="unread">
                                     <div class="d-flex align-items-center show-child-on-hover">
                                         @php
-                                            $url = url('view-notice/' . $notification['data']['notice_id']. '/'. $notification->id);
+                                            $url = url('view-notice/' . $notification['data']['notice_id'] . '/' . $notification->id);
                                         @endphp
                                         <a href="{{ $url }}">
                                             <span class="d-flex flex-column flex-1">
@@ -111,7 +111,7 @@
                                 <li>
                                     <div class="d-flex align-items-center show-child-on-hover">
                                         @php
-                                            $url = url('view-notice/' . $notification['data']['notice_id']. '/'. $notification->id);
+                                            $url = url('view-notice/' . $notification['data']['notice_id'] . '/' . $notification->id);
                                         @endphp
                                         <a href="{{ $url }}">
                                             <span class="d-flex flex-column flex-1">
@@ -163,6 +163,15 @@
                 <a href="javascript:void(0);" class="dropdown-item" data-action="app-reset">
                     <span data-i18n="drpdwn.reset_layout">Reset Layout</span>
                 </a>
+                <a href="{{url('profiledetails/'.Auth::id())}}" class="dropdown-item">
+                    <span data-i18n="drpdwn.reset_layout">Profile Details</span>
+                </a>
+                
+                
+                <a href="javascript:void(0);" class="dropdown-item" data-toggle="modal"
+                data-target="#change-password">
+                <span data-i18n="drpdwn.settings">Change Password</span>
+            </a>
                 <a href="javascript:void(0);" class="dropdown-item" data-toggle="modal"
                     data-target=".js-modal-settings">
                     <span data-i18n="drpdwn.settings">Settings</span>
@@ -186,3 +195,72 @@
     </div>
 </header>
 <!-- END Page Header -->
+
+@if (count($errors->changePassword) > 0)
+<script>
+    $(document).ready(function() {
+        $('#change-password').modal('show');
+    });
+</script>
+@endif
+
+ <!-- change password modal -->
+ <div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-muted">
+                    Reset your password
+                </h4>
+            </div>
+            <form action="{{ url('/changepassword') }}" method="post" autocomplete="off">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label" for="simpleinput">Old password <sup class="text-danger">
+                                *</sup></label>
+                        <input type="password"
+                            class="form-control text-muted @if ($errors->changePassword->has('old_password')) is-invalid @endif"
+                            name="old_password" autocomplete="new-password">
+
+                        @if ($errors->changePassword->has('old_password'))
+                            <span
+                                class="text-danger text-muted">{{ $errors->changePassword->first('old_password') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="simpleinput">New password <sup class="text-danger">
+                                *</sup></label>
+                        <input type="password"
+                            class="form-control @if ($errors->changePassword->has('password')) is-invalid @endif"
+                            name="password">
+                        @if ($errors->changePassword->has('password'))
+                            <span
+                                class="text-danger text-muted">{{ $errors->changePassword->first('password') }}</span>
+                        @else
+                            <span class="text-muted">Use 8 or more characters with a mix of uppercase lowercase
+                                letters, numbers & symbols</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="simpleinput">Confirm password <sup class="text-danger">
+                                *</sup></label>
+                        <input type="text"
+                            class="form-control @if ($errors->changePassword->has('password')) is-invalid @endif"
+                            name="password_confirmation">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-themed">Change
+                            Password</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End change password modal -->
+
