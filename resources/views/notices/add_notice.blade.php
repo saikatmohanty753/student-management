@@ -172,6 +172,8 @@
             } else if (this.value == 2) {
 
                 $('.department').removeClass('d-none');
+                $('.fee-payment').addClass('d-none');
+                $('.publish-date').removeClass('d-none');
                 $('.course').removeClass('d-none');
                 $('.semester').removeClass('d-none');
 
@@ -180,13 +182,29 @@
                 $('#semester').addClass('chk_blank');
 
 
-            } else {
-                $('.department').addClass('d-none');
-                $('.course').addClass('d-none');
-                $('.semester').addClass('d-none');
-                $('#department').removeClass('chk_blank');
-                $('#course').removeClass('chk_blank');
-                $('#semester').removeClass('chk_blank');
+            } else if (this.value == 3) {
+
+$('.department').removeClass('d-none');
+$('.fee-payment').addClass('d-none');
+$('.publish-date').removeClass('d-none');
+$('.course').removeClass('d-none');
+$('.semester').removeClass('d-none');
+
+$('#department').addClass('chk_blank');
+$('#course').addClass('chk_blank');
+$('#semester').addClass('chk_blank');
+
+
+}else {
+    $('.department').removeClass('d-none');
+$('.fee-payment').addClass('d-none');
+$('.publish-date').removeClass('d-none');
+$('.course').removeClass('d-none');
+$('.semester').removeClass('d-none');
+
+$('#department').addClass('chk_blank');
+$('#course').addClass('chk_blank');
+$('#semester').addClass('chk_blank');
 
 
             }

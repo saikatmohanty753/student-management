@@ -374,7 +374,3 @@ public function profiledetails($id){
 }
 
 }
-// $PaperSub= PaperSubType::select('pap.*','paper_sub_types.*')
-//          ->leftJoin("papers as pap", "paper_sub_types.paper_type_id", "=", "pap.id")
-        
-//         ->get();

@@ -11,6 +11,7 @@
                                 Create New User</a>
                         @endcan
                     </div> --}}
+                   
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -66,7 +67,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-center">Course View</h4>
+                    <h4 class="modal-title text-center" id="modalTitle">Course View</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fal fa-times"></i></span>
                     </button>
@@ -130,4 +131,6 @@
             });
         });
     </script>
+
+
 @endsection

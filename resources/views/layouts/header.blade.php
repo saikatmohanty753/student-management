@@ -238,8 +238,8 @@
                             <span
                                 class="text-danger text-muted">{{ $errors->changePassword->first('password') }}</span>
                         @else
-                            <span class="text-muted">Use 8 or more characters with a mix of uppercase lowercase
-                                letters, numbers & symbols</span>
+                            {{-- <span class="text-muted">Use 8 or more characters with a mix of uppercase lowercase
+                                letters, numbers & symbols</span> --}}
                         @endif
                     </div>
                     <div class="form-group">
