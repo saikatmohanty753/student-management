@@ -425,7 +425,7 @@ class AdmissionController extends Controller
 
         $clg_id = $student->clg_id; //1
         $course_id = $student->course_id; //1
-        $join_year = date('Y') . '-' . $year;//2021-2025
+        $join_year = date('Y') . '-' . $year; //2021-2025
         $rollNo = Helpers::createRollNO($clg_id, $course_id, $join_year);
         $student->roll_no = $rollNo;
         $student->save();
@@ -444,7 +444,6 @@ class AdmissionController extends Controller
                 $user->save();
                 $user->assignRole(3);
             }
-
         }
 
         return redirect()->action([AdmissionController::class, 'appliedAdmissionList'])->with('success', 'Application examined successfully.');
@@ -502,5 +501,31 @@ class AdmissionController extends Controller
         return $course->available_seat;
     }
 
-    
+
+    public function newAdmission()
+    {
+        $notification =  Auth::user()->Notifications;
+        $noticeIds = [];
+        foreach ($notification as $key => $value) {
+            if ($value['data']['notice_type'] == 'Admission Notice') {
+                $noticeIds[] = [
+                    'notice_id' => $value['data']['notice_id'],
+                    'notification_id' => $value->id
+                ];
+            }
+        }
+        $notice = [];
+        foreach ($noticeIds as $value) {
+            $data = Notice::where('id', $value['notice_id'])
+                ->where('notice_type', '1')
+                ->where('exp_date', '>=', Carbon::now())
+                ->first();
+            if ($data) {
+                $data['notification_id'] = $value['notification_id'];
+                $notice[] = $data;
+            }
+        }
+        // return $notice;
+        return view('admission.new-admission', compact('notice'));
+    }
 }

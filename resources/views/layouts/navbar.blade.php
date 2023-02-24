@@ -205,10 +205,25 @@
 
         @can('admission-module')
             <li>
-                <a href="{{ url('/uuc-admission') }}" title="Admission" data-filter-tags="Admission">
-                    <i class="fa-solid fa-book-open-reader"></i>
-                    <span class="nav-link-text" data-i18n="nav.application_admission">Admissions</span>
+                <a href="#" title="Theme Settings" data-filter-tags="theme settings">
+                    <i class="fal fa-cog"></i>
+                    <span class="nav-link-text" data-i18n="nav.user_management">Admissions</span>
                 </a>
+                <ul>
+                    <li>
+                        <a href="{{ url('/new-admission') }}" title="Admission" data-filter-tags="Admission">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                            <span class="nav-link-text" data-i18n="nav.application_admission">New Admission</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/uuc-admission') }}" title="Admission" data-filter-tags="Admission">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                            <span class="nav-link-text" data-i18n="nav.application_admission">Admission List</span>
+                        </a>
+                    </li>
+
+                </ul>
             </li>
         @endcan
 
