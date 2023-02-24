@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\Notice;
+use App\Models\PaperSubType;
 use App\Models\User;
 use App\Notifications\UucNotice;
 use Carbon\Carbon;
 
 class AjaxController extends Controller
 {
+    public function paperSubtype(Request $request)
+    {
+        $data = PaperSubType::where('paper_type_id', $request->paper_type)->get();
+        return response()->json($data);
+    }
     public function getCourse(Request $request)
     {
         $course = Course::where('course_for', $request->dep_id)->get();

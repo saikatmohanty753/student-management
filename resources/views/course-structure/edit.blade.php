@@ -95,6 +95,37 @@
                                     <span class="error-msg"></span>
                                 </div>
                             </div>
+                            <div class="col-md-4 mt-2">
+                                <div class="form-group input-cont">
+                                    <label class="form-label">Paper Type<span class="text-danger">*</span></label>
+                                    <select name="paper_type" class="form-control select2 chk_blank paper_type"
+                                        id="paper_type">
+                                        <option value="">Select Paper Type</option>
+                                        @foreach ($paper_type as $value)
+                                            <option value="{{ $value->id }}"
+                                                {{ $data->paper_type_id == $value->id ? 'selected' : '' }}>
+                                                {{ $value->paper_type }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="error-msg"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <div class="form-group input-cont">
+                                    <label class="form-label">Paper Sub Type<span class="text-danger">*</span></label>
+                                    <select name="paper_sub_type" class="form-control select2 chk_blank paper_sub_type"
+                                        id="paper_sub_type">
+                                        <option value="">Select Paper Sub Type</option>
+
+                                        @foreach ($paper_sub_type as $item)
+                                            <option value="{{ $item->id }}" {{ $item->id == $data->paper_sub_type_id ? 'selected' : ''}}>
+                                                {{ $item->paper_sub_type }}</option>
+                                        @endforeach
+
+                                    </select>
+                                    <span class="error-msg"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="frame-wrap mt-4">
                             <div class="d-flex p-2 bg-primary-600 text-white">Mark Structure</div>
@@ -105,7 +136,8 @@
                                 <div class="form-group input-cont">
                                     <label class="form-label">Mid Sem Marks<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control sem_mark numeric chk_blank"
-                                        placeholder="Enter Mid Sem Marks" name="mid_sem_mark" value="{{ $data->mid_sem_mark }}">
+                                        placeholder="Enter Mid Sem Marks" name="mid_sem_mark"
+                                        value="{{ $data->mid_sem_mark }}">
                                     <span class="error-msg"></span>
                                 </div>
                             </div>
@@ -113,7 +145,8 @@
                                 <div class="form-group input-cont">
                                     <label class="form-label">End Sem Marks<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control sem_mark numeric chk_blank"
-                                        placeholder="Enter Mid Sem Marks" name="end_sem_mark" value="{{ $data->end_sem_mark }}">
+                                        placeholder="Enter Mid Sem Marks" name="end_sem_mark"
+                                        value="{{ $data->end_sem_mark }}">
                                     <span class="error-msg"></span>
                                 </div>
                             </div>
@@ -122,7 +155,8 @@
                                     <label class="form-label">Aggregate / Total Marks<span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control total_marks chk_blank"
-                                        placeholder="Enter Total Marks" name="total_marks" readonly value="{{ $data->total_marks }}">
+                                        placeholder="Enter Total Marks" name="total_marks" readonly
+                                        value="{{ $data->total_marks }}">
                                     <span class="error-msg"></span>
                                 </div>
                             </div>
@@ -141,7 +175,9 @@
                                     <select name="credit" class="form-control select2 chk_blank" id="">
                                         <option value="">Select Credit</option>
                                         @foreach ($credit as $item)
-                                            <option value="{{ $item->credit }}" {{ $data->credit == $item->credit ? 'selected' : '' }}>{{ $item->credit }}</option>
+                                            <option value="{{ $item->credit }}"
+                                                {{ $data->credit == $item->credit ? 'selected' : '' }}>{{ $item->credit }}
+                                            </option>
                                         @endforeach
 
                                     </select>
@@ -211,6 +247,40 @@
 
                     }
 
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        $('.paper_type').change(function(e) {
+            e.preventDefault();
+            let course = $(this);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var formData = {
+                paper_type: $(this).val(),
+            };
+            var type = "POST";
+            var ajaxurl = '/get-paper-subtype';
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function(data) {
+                    if (data) {
+                        var html = '<option>Select Paper Sub Type</option>';
+                        $.each(data, function(key, val) {
+                            html += '<option value="' + val.id + '">' + val.paper_sub_type +
+                                '</option>';
+                        });
+                        $('.paper_sub_type').html(html);
+                    }
                 },
                 error: function(data) {
                     console.log(data);

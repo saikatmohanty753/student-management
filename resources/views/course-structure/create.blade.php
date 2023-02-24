@@ -26,7 +26,7 @@
                                     <label class="form-label">Year<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control year chk_blank" placeholder="Session Year"
                                         name="year">
-                                        <span class="error-msg"></span>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -34,7 +34,7 @@
                                     <label class="form-label">Session Year<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control year chk_blank" placeholder="Session Year"
                                         name="session_year">
-                                        <span class="error-msg"></span>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -64,10 +64,7 @@
                                     <label class="form-label">Semester <span class="text-danger">*</span></label>
                                     <select name="semester" class="form-control select2 chk_blank" id="semester">
                                         <option value="">Select Semester</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4</option>
+
                                     </select>
                                     <span class="error-msg"></span>
                                 </div>
@@ -75,17 +72,42 @@
                             <div class="col-md-4 mt-2">
                                 <div class="form-group input-cont">
                                     <label class="form-label">Paper Code <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control chk_blank" placeholder="Paper Code" name="paper_code">
+                                    <input type="text" class="form-control chk_blank" placeholder="Paper Code"
+                                        name="paper_code">
                                     <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
                                 <div class="form-group input-cont">
                                     <label class="form-label">Subject Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control chk_blank" placeholder="Paper Code" name="subject">
+                                    <input type="text" class="form-control chk_blank" placeholder="Paper Code"
+                                        name="subject">
                                     <span class="error-msg"></span>
                                 </div>
                             </div>
+                            <div class="col-md-4 mt-2">
+                                <div class="form-group input-cont">
+                                    <label class="form-label">Paper Type<span class="text-danger">*</span></label>
+                                    <select name="paper_type" class="form-control select2 chk_blank paper_type" id="paper_type">
+                                        <option value="">Select Paper Type</option>
+                                        @foreach ($paper_type as $value)
+                                            <option value="{{ $value->id }}">{{ $value->paper_type }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="error-msg"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <div class="form-group input-cont">
+                                    <label class="form-label">Paper Sub Type<span class="text-danger">*</span></label>
+                                    <select name="paper_sub_type" class="form-control select2 chk_blank paper_sub_type" id="paper_sub_type">
+                                        <option value="">Select Paper Sub Type</option>
+
+                                    </select>
+                                    <span class="error-msg"></span>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="frame-wrap mt-4">
                             <div class="d-flex p-2 bg-primary-600 text-white">Mark Structure</div>
@@ -97,7 +119,7 @@
                                     <label class="form-label">Mid Sem Marks<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control sem_mark numeric chk_blank"
                                         placeholder="Enter Mid Sem Marks" name="mid_sem_mark">
-                                        <span class="error-msg"></span>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -105,16 +127,16 @@
                                     <label class="form-label">End Sem Marks<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control sem_mark numeric chk_blank"
                                         placeholder="Enter Mid Sem Marks" name="end_sem_mark">
-                                        <span class="error-msg"></span>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group input-cont">
                                     <label class="form-label">Aggregate / Total Marks<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control total_marks chk_blank" placeholder="Enter Total Marks"
-                                        name="total_marks" readonly>
-                                        <span class="error-msg"></span>
+                                    <input type="text" class="form-control total_marks chk_blank"
+                                        placeholder="Enter Total Marks" name="total_marks" readonly>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
 
@@ -123,7 +145,7 @@
                                     <label class="form-label">Pass Marks<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control chk_blank" placeholder="Enter Pass Marks"
                                         name="pass_mark">
-                                        <span class="error-msg"></span>
+                                    <span class="error-msg"></span>
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
@@ -196,7 +218,7 @@
                         console.log("hi");
                         var html1 = '<option>Select Semester</option>';
                         for (let i = 1; i <= sem; i++) {
-                            html1 += '<option value="' + sem + '"> sem-' + i + '</option>';
+                            html1 += '<option value="' + i + '"> sem-' + i + '</option>';
                         }
                         $('#semester').html(html1);
 
@@ -208,14 +230,38 @@
                 }
             });
         });
-
-        /* $('.mid_sem_mark numeric').keyup(function() {
-            let val = $(this).val();
-
+        $('.paper_type').change(function(e) {
+            e.preventDefault();
+            let course = $(this);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var formData = {
+                paper_type: $(this).val(),
+            };
+            var type = "POST";
+            var ajaxurl = '/get-paper-subtype';
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+                success: function(data) {
+                    if (data) {
+                        var html = '<option>Select Paper Sub Type</option>';
+                        $.each(data, function(key, val) {
+                            html += '<option value="' + val.id + '">' + val.paper_sub_type + '</option>';
+                        });
+                        $('.paper_sub_type').html(html);
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
         });
-        $('.end_sem_mark').keyup(function() {
-            let val = $(this).val();
-        }); */
 
         $(document).keyup(".sem_mark", function() {
             var sum = 0;
