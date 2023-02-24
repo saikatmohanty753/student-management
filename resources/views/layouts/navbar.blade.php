@@ -134,7 +134,7 @@
             </li>
         @endcan
 
-        
+
 
 
         {{-- @can('master-module')
@@ -223,6 +223,12 @@
             <a href="{{ url('/academic-course-structure') }}" title="Admission" data-filter-tags="Admission">
                 <i class="fa-solid fa-book-open-reader"></i>
                 <span class="nav-link-text" data-i18n="nav.application_admission">Course Structure</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('/maped-course') }}" title="Admission" data-filter-tags="Admission">
+                <i class="fa-solid fa-book-open-reader"></i>
+                <span class="nav-link-text" data-i18n="nav.application_admission">Maped Course</span>
             </a>
         </li>
 

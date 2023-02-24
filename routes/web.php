@@ -85,6 +85,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('notices', NoticesController::class);
 
 
+    Route::post('/get-paper-subtype', [AjaxController::class, 'paperSubtype']);
     Route::post('course-details', [AjaxController::class, 'courseDetails']);
     
     Route::post('get-course', [AjaxController::class, 'getCourse']);
@@ -112,6 +113,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('view-notice/{id}/{notification_id}', [ClgNoticeController::class, 'show']);
 
     Route::resource('academic-course-structure', CourseStructureController::class);
+    Route::get('maped-course', [CourseStructureController::class, 'mapedCourse']);
+    Route::get('filter-course', [CourseStructureController::class, 'filterCourse']);
 
     Route::post('change-password', [ClgNoticeController::class, 'index']);
 

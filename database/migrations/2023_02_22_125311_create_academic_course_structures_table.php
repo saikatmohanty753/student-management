@@ -22,6 +22,8 @@ class CreateAcademicCourseStructuresTable extends Migration
             $table->integer('semester')->nullable();
             $table->string('paper_code')->nullable();
             $table->string('subject')->nullable();
+            $table->integer('paper_type_id')->nullable();
+            $table->integer('paper_sub_type_id')->nullable();
             $table->float('mid_sem_mark')->nullable();
             $table->float('end_sem_mark')->nullable();
             $table->float('total_marks')->nullable();
