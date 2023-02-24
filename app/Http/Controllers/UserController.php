@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -297,4 +299,78 @@ class UserController extends Controller
         $user->delete();
         return redirect()->action([UserController::class, 'createClgUser'], ['id' => $clgId]);
     }
+
+
+
+    // public function changepassword(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'old_password' => 'required',
+    //         'password' => 'required|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
+    //     ], [
+    //         'password.required' => 'Use 8 or more characters with a mix of uppercase lowercase letters, numbers & symbols',
+    //         'password.regex' => 'Use 8 or more characters with a mix of uppercase lowercase letters, numbers & symbols',
+    //     ])->validateWithBag('changePassword');
+
+    //     if ($validator->fails()) {
+    //         return redirect('/dashboard')
+    //             ->withErrors($validator)
+    //             ->withInput();
+    //     }
+
+    //     if (Hash::check($request->old_password, $user->password)) {
+
+    //         $user=User::all();
+            
+    //         $user->password= Hash::make($request->password);
+    //         // $user->password_changed_at= Carbon::now();
+    //         $user->update();
+    //         // session()->forget('sesdata');
+    //         // session()->flush();
+    //         // auth::logout();
+           
+    //         return redirect('/dashboard')->with('success', 'Password has been changed...');
+    //     }else {
+    
+    //         return back()->with('password-error', 'Old password does not match...');
+    //     }
+           
+            
+    // }
+
+    public function changepassword(Request $request)
+{
+    Validator::make($request->all(), [
+                'old_password' => 'required',
+                'password' => 'required|min:8|confirmed',
+            ], 
+            /* [
+                'password.required' => 'Use 8 or more characters with a mix of uppercase lowercase letters, numbers & symbols',
+                'password.regex' => 'Use 8 or more characters with a mix of uppercase lowercase letters, numbers & symbols',
+            ] */
+            )->validateWithBag('changePassword');
+
+    $user = Auth::user();
+
+    if (!Hash::check($request->old_password, $user->password)) {
+        return redirect()->back()->withErrors(['old_password' => 'The current password is incorrect.']);
+    }
+
+    $user->password = Hash::make($request->password);
+    $user->save();
+
+    return redirect()->route('home')->with('success', 'Your password has been updated.');
+}
+
+public function profiledetails($id){
+
+       $user = User::where('id',$id)->get();
+    //    $role= User::select('rol.*','users.*')
+    //      ->leftJoin("roles as rol", "users.role_id", "=", "rol.id")
+        
+    //     ->get();
+
+    return view('users.userdetails',compact('user'));
+}
+
 }

@@ -54,6 +54,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('dashboard', [DashboardController::class, 'dashboard']);
+    Route::post('changepassword', [UserController::class, 'changepassword']);
+    Route::get('profiledetails/{id}', [UserController::class, 'profiledetails']);
     Route::resource('users', UserController::class);
     Route::get('create-user/{id}', [UserController::class, 'createClgUser']);
     Route::get('edit-user/{id}', [UserController::class, 'editClgUser'])->name('college-users.edit');
@@ -114,6 +116,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('academic-course-structure', CourseStructureController::class);
     Route::get('maped-course', [CourseStructureController::class, 'mapedCourse']);
     Route::get('filter-course', [CourseStructureController::class, 'filterCourse']);
+
+    Route::post('change-password', [ClgNoticeController::class, 'index']);
 
 
 

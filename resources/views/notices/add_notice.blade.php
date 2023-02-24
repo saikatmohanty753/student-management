@@ -61,6 +61,16 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-12">
+                                    <div class="form-group input-cont fee-payment d-none">
+                                        <label class="form-label">Last Date Of Fee Payment<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control chk_blank"
+                                        placeholder="Enter Last Date Of Fee Payment" name="fee_payment" id="fee_payment">
+                                        <span class="error-msg"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-12">
                                     <div class="form-group input-cont course d-none">
                                         <label class="form-label">Course<span class="text-danger">*</span></label>
                                         <select class="form-select form-control  select2" name="course[]" id="course">
@@ -108,6 +118,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row mb-2">
+                                <div class="col-md-12">
+                                    <div class="form-group input-cont publish-date">
+                                        <label class="form-label">Publish Date<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control chk_blank"
+                                            placeholder="Enter Publish Date" name="publish_date" id="publish_date">
+                                            <span class="error-msg"></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row mb-2 d-flex align-items-center justify-content-center">
                                 <div class="col-md-12">
                                     <div class="form-group input-cont">
@@ -140,6 +160,8 @@
             // console.log(this.value);
             if (this.value == 1) {
                 $('.department').removeClass('d-none');
+                $('.fee-payment').removeClass('d-none');
+                $('.publish-date').removeClass('d-none');
                 $('.course').addClass('d-none');
                 $('.semester').addClass('d-none');
                 $('#department').addClass('chk_blank');
@@ -150,6 +172,8 @@
             } else if (this.value == 2) {
 
                 $('.department').removeClass('d-none');
+                $('.fee-payment').addClass('d-none');
+                $('.publish-date').removeClass('d-none');
                 $('.course').removeClass('d-none');
                 $('.semester').removeClass('d-none');
 
@@ -158,13 +182,29 @@
                 $('#semester').addClass('chk_blank');
 
 
-            } else {
-                $('.department').addClass('d-none');
-                $('.course').addClass('d-none');
-                $('.semester').addClass('d-none');
-                $('#department').removeClass('chk_blank');
-                $('#course').removeClass('chk_blank');
-                $('#semester').removeClass('chk_blank');
+            } else if (this.value == 3) {
+
+$('.department').removeClass('d-none');
+$('.fee-payment').addClass('d-none');
+$('.publish-date').removeClass('d-none');
+$('.course').removeClass('d-none');
+$('.semester').removeClass('d-none');
+
+$('#department').addClass('chk_blank');
+$('#course').addClass('chk_blank');
+$('#semester').addClass('chk_blank');
+
+
+}else {
+    $('.department').removeClass('d-none');
+$('.fee-payment').addClass('d-none');
+$('.publish-date').removeClass('d-none');
+$('.course').removeClass('d-none');
+$('.semester').removeClass('d-none');
+
+$('#department').addClass('chk_blank');
+$('#course').addClass('chk_blank');
+$('#semester').addClass('chk_blank');
 
 
             }
