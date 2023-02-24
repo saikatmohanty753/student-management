@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a href="{{ url('/papersubtype') }}">Cancel</a>
+                            <a  class="btn btn-danger" href="{{ url('/papersubtype') }}">Cancel</a>
                             <button type="submit" class="btn btn-info pull-right">Submit</button>
                         </div>
                     </form>
