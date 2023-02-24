@@ -85,11 +85,12 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::post('/get-paper-subtype', [AjaxController::class, 'paperSubtype']);
     Route::post('course-details', [AjaxController::class, 'courseDetails']);
-    
+
     Route::post('get-course', [AjaxController::class, 'getCourse']);
     Route::post('publish-notice', [AjaxController::class, 'publishNotice']);
     Route::get('notice/view/{id}', [NoticesController::class, 'show']);
 
+    Route::get('/new-admission', [AdmissionController::class, 'newAdmission']);
     Route::get('uuc-admission/{id}/{dep}/{depId}', [AdmissionController::class, 'index']);
     Route::post('student-admission', [AdmissionController::class, 'store']);
     Route::post('student-admission/apply', [AdmissionController::class, 'apply']);
