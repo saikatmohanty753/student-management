@@ -1,6 +1,61 @@
 @extends('layouts.app')
 @section('content')
     <div class="row">
+        <div class="col-md-12">
+            <div id="panel-5" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Filter <span class="fw-300"><i>Course Details</i></span>
+                    </h2>
+                    <select name="" id="session" class="float-right">
+                        @for ($i = date('Y') - 4; $i <= date('Y') + 1; $i++)
+                            <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}
+                            </option>
+                        @endfor
+                    </select>
+
+
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="single-placeholder">
+                                        Department
+                                    </label>
+                                    <select name="" id="dep" class="form-control select2 get-course">
+                                        <option value="">Choose Department</option>
+                                        @foreach ($department as $item)
+                                            <option value="{{ $item->id }}" data-id="{{ $item->semester }}">
+                                                {{ $item->course_for }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="single-placeholder">
+                                        Course
+                                    </label>
+                                    <select name="" id="course" class="form-control select2">
+                                        <option value="">Choose Course</option>
+                                        @foreach ($course as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">

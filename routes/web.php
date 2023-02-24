@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::post('change-password', [ClgNoticeController::class, 'index']);
 
-
+    Route::get('depcou', [AdmissionController::class, 'depcou']);
 
 
 

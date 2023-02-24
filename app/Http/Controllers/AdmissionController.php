@@ -344,7 +344,10 @@ class AdmissionController extends Controller
     {
         $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
         $application = StudentDetails::where('clg_id', $clgId)->get();
-        return view('admission.list', compact('application'));
+
+        $department = CourseFor::all();
+        $course = Course::all();
+        return view('admission.list', compact('application','department','course'));
     }
 
     public function appliedAdmissionList(Request $request)
@@ -498,4 +501,6 @@ class AdmissionController extends Controller
             ->first();
         return $course->available_seat;
     }
+
+    
 }
