@@ -5,7 +5,7 @@
             padding: 30px;
         }
     </style>
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-xl-12">
             <div class="card">
                 <form method="POST" action="" id="myForm">
@@ -35,7 +35,7 @@
             </div>
 
         </div>
-    </div>
+    </div> --}}
     <div class="row mt-5">
 
         <div class="col-xl-12">
@@ -55,7 +55,7 @@
                                     {{-- <th>Action</th> --}}
                                 </tr>
                             </thead>
-                           
+
                             <tbody>
                                 @foreach ($course as $key => $value)
                                     <tr>
@@ -112,7 +112,7 @@
 
                                     </div>
                                 </div>
-                               
+
                             </div>
                          </div>
                         <div class="modal-footer">

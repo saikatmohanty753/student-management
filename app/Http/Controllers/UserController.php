@@ -47,9 +47,9 @@ class UserController extends Controller
     public function create()
 
     {
-        $ids = [10,16];
-        $roles = Role::whereIn('id',$ids)->get();
-    
+        $ids = [10, 16, 18];
+        $roles = Role::whereIn('id', $ids)->get();
+
         return view('users.create', compact('roles'));
     }
 
@@ -136,9 +136,9 @@ class UserController extends Controller
     {
 
         $user = User::find($id);
-        $ids = [10,16];
-        $roles = Role::whereIn('id',$ids)->get();
-       
+        $ids = [10, 16, 18];
+        $roles = Role::whereIn('id', $ids)->get();
+
         return view('users.edit', compact('user', 'roles'));
     }
 
@@ -213,18 +213,18 @@ class UserController extends Controller
     public function createClgUser($id)
     {
 
-       $data = DB::table('users')
-       ->select('users.*','colleges.name as clg_name','roles.name as role_name')
+        $data = DB::table('users')
+            ->select('users.*', 'colleges.name as clg_name', 'roles.name as role_name')
 
-        ->leftJoin('colleges','users.clg_user_id', '=', 'colleges.id')
-        ->where('clg_user_id', $id)
-        ->leftJoin('roles','users.role_id','=','roles.id')
-        ->get();
+            ->leftJoin('colleges', 'users.clg_user_id', '=', 'colleges.id')
+            ->where('clg_user_id', $id)
+            ->leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->get();
 
-    //  $clguser = User::where('clg_user_id', $id)->get();
+        //  $clguser = User::where('clg_user_id', $id)->get();
 
         $roles = Role::whereIn('id', [13, 14])->get();
-        return view('colleges.create_user', compact('roles', 'id','data'));
+        return view('colleges.create_user', compact('roles', 'id', 'data'));
     }
 
     public function storeClgUser(Request $request)
@@ -261,12 +261,11 @@ class UserController extends Controller
     {
         $roles = Role::whereIn('id', [13, 14])->get();
         $user = User::find($id);
-       return view('colleges.edit_user', compact('roles', 'user'));
-
+        return view('colleges.edit_user', compact('roles', 'user'));
     }
     public function updateClgUser(Request $request)
     {
-        
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $request->hid,
@@ -275,8 +274,8 @@ class UserController extends Controller
             'mob_no' =>  'required',
 
         ]);
-    
-        
+
+
 
         $user = User::find($request->hid);
         $user->name = $request->name;
@@ -285,12 +284,10 @@ class UserController extends Controller
         $user->role_id = $request->role;
         if (!empty($input['password'])) {
             $user->password = Hash::make($request['password']);
-
         }
         $user->save();
         $user->assignRole($request->input('role'));
         return redirect()->action([UserController::class, 'createClgUser'], ['id' => $user->clg_user_id])->with('success', 'User updated Successfully');
-
     }
 
     public function deleteClgUser($id)
@@ -346,10 +343,12 @@ class UserController extends Controller
     Validator::make($request->all(), [
                 'old_password' => 'required',
                 'password' => 'required|min:8|confirmed',
-            ], [
+            ], 
+            /* [
                 'password.required' => 'Use 8 or more characters with a mix of uppercase lowercase letters, numbers & symbols',
                 'password.regex' => 'Use 8 or more characters with a mix of uppercase lowercase letters, numbers & symbols',
-            ])->validateWithBag('changePassword');
+            ] */
+            )->validateWithBag('changePassword');
 
     $user = Auth::user();
 

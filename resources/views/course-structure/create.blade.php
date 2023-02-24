@@ -221,9 +221,7 @@
                             html1 += '<option value="' + i + '"> sem-' + i + '</option>';
                         }
                         $('#semester').html(html1);
-
                     }
-
                 },
                 error: function(data) {
                     console.log(data);
@@ -292,7 +290,7 @@
     <script>
         $("#myForm").on('submit', function(e) {
             e.preventDefault();
-            
+
             var validation = [];
             validation = $('#myForm').scvalidateform({
                 formId: 'myForm'
