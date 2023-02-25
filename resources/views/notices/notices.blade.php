@@ -87,6 +87,13 @@
                                                             class="btn  waves-effect waves-themed btn-outline-primary">
                                                             <i class="fa-solid fa-eye"></i></a>
 
+                                                        <a class="btn btn-outline-primary verified-status"
+                                                            href="javascript:void(0);" data-id="{{ $item->id }}"><i
+                                                                class="fa-solid fa-pen-to-square"></i></a>
+
+
+
+
                                                         @if ($item->status == 0)
                                                             @can('notice-delete')
                                                                 {!! Form::open([
@@ -311,6 +318,65 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center"> Update</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="{{ url('status') }}" method="post">
+                            {{-- {{ method_field('PUT') }} --}}
+                            @csrf
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                       
+
+                                        <input type="hidden" id="id_get" value="" name="id">
+                                        <label for="status">Status</label>
+                                        <select name="verified">
+                                            <option label="status">
+                                                <option value="1">Verified</option>
+                                                <option value="0">Not Verified</option>
+                                            </option>
+                                            
+                                        </select>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-danger" href="{{ url('/notices') }}">Cancel</a>
+                                <button type="submit" class="btn btn-info pull-right">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     @endsection
     @section('js')
         <script>
@@ -348,6 +414,23 @@
                     });
                 }
 
+
+            });
+
+            $(document).ready(function() {
+                //alert(1);
+
+                $('.verified-status').on('click', function() {
+                let id = $(this).data('id');
+
+                  
+                    $('#id_get').val(id);
+
+
+                    $('#exampleModal').modal('show');
+
+
+                });
 
             });
         </script>

@@ -80,10 +80,13 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     // Route::resource('uuc-syllabus',SyllabusController::class);
 
     Route::get('notices', [NoticesController::class, 'index']);
+    // Route::get('status/{', [NoticesController::class, 'status']);
     Route::get('add-notices', [NoticesController::class, 'create']);
     Route::post('uuc-create-notice', [NoticesController::class, 'store']);
     Route::resource('notices', NoticesController::class);
-
+    Route::post('status', [NoticesController::class, 'status']);
+    // Route::get('verified/{id}', [NoticesController::class, 'verified']);
+    // Route::match(['get', 'post', 'put'], 'status', 'NoticesController');
 
     Route::post('/get-paper-subtype', [AjaxController::class, 'paperSubtype']);
     Route::post('course-details', [AjaxController::class, 'courseDetails']);
