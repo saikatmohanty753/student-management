@@ -33,8 +33,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Notice Type<span class="text-danger">*</span></label>
-                                        <select class="form-select form-control notice-type select2"
-                                            name="notice_type">
+                                        <select class="form-select form-control notice-type select2" name="notice_type">
                                             <option value="" selected>Select Notice Type</option>
                                             <option value="1" class="admission">Admission Notice</option>
                                             <option value="2" class="exam">College Notice</option>
@@ -62,9 +61,11 @@
                             <div class="row mb-2">
                                 <div class="col-md-12">
                                     <div class="form-group input-cont fee-payment d-none">
-                                        <label class="form-label">Last Date Of Fee Payment<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control chk_blank"
-                                        placeholder="Enter Last Date Of Fee Payment" name="fee_payment" id="fee_payment">
+                                        <label class="form-label">Last Date Of Fee Payment<span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control chk_blank datepicker-1"
+                                            placeholder="Enter Last Date Of Fee Payment" name="fee_payment"
+                                            id="fee_payment">
                                         <span class="error-msg"></span>
                                     </div>
                                 </div>
@@ -104,7 +105,7 @@
                                         <label class="form-label">Start date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank fromDate"
                                             placeholder="Enter Start Date" name="start_date" id="start_date">
-                                            <span class="error-msg"></span>
+                                        <span class="error-msg"></span>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +115,7 @@
                                         <label class="form-label">Expiry date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank toDate"
                                             placeholder="Enter End Date" name="exp_date" id="exp_date">
-                                            <span class="error-msg"></span>
+                                        <span class="error-msg"></span>
                                     </div>
                                 </div>
                             </div>
@@ -122,9 +123,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group input-cont publish-date">
                                         <label class="form-label">Publish Date<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control chk_blank"
-                                            placeholder="Enter Publish Date" name="publish_date" id="publish_date">
-                                            <span class="error-msg"></span>
+                                        <input type="text" class="form-control chk_blank datepicker-1"
+                                            placeholder="Enter Publish Date" name="publish_date" id="publish-date">
+                                        <span class="error-msg"></span>
                                     </div>
                                 </div>
                             </div>
@@ -167,44 +168,21 @@
                 $('#department').addClass('chk_blank');
                 $('#course_name').removeClass('chk_blank');
                 $('#semester').removeClass('chk_blank');
+                // $('#publish-date').addClass('chk_blank');
 
 
-            } else if (this.value == 2) {
-
-                $('.department').removeClass('d-none');
+            } else {
+                $('.department').addClass('d-none');
                 $('.fee-payment').addClass('d-none');
                 $('.publish-date').removeClass('d-none');
-                $('.course').removeClass('d-none');
-                $('.semester').removeClass('d-none');
+                // $('.course').removeClass('d-none');
+                // $('.semester').removeClass('d-none');
 
-                $('#department').addClass('chk_blank');
-                $('#course').addClass('chk_blank');
-                $('#semester').addClass('chk_blank');
+                $('#department').removeClass('chk_blank');
+                $('#course').removeClass('chk_blank');
+                $('#fee_payment').removeClass('chk_blank');
 
-
-            } else if (this.value == 3) {
-
-$('.department').removeClass('d-none');
-$('.fee-payment').addClass('d-none');
-$('.publish-date').removeClass('d-none');
-$('.course').removeClass('d-none');
-$('.semester').removeClass('d-none');
-
-$('#department').addClass('chk_blank');
-$('#course').addClass('chk_blank');
-$('#semester').addClass('chk_blank');
-
-
-}else {
-    $('.department').removeClass('d-none');
-$('.fee-payment').addClass('d-none');
-$('.publish-date').removeClass('d-none');
-$('.course').removeClass('d-none');
-$('.semester').removeClass('d-none');
-
-$('#department').addClass('chk_blank');
-$('#course').addClass('chk_blank');
-$('#semester').addClass('chk_blank');
+                // $('#semester').addClass('chk_blank');
 
 
             }
