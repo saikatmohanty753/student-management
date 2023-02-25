@@ -26,9 +26,11 @@ class NoticesController extends Controller
     }
     public function index()
     {
-        $notice = Notice::where('notice_type', '1')->get();
-        $otherNotice = Notice::where('notice_type', '3')->get();
-        return view('notices.notices', compact('notice', 'otherNotice'));
+        $notice = Notice::where([['notice_sub_type', '1'], ['notice_type', 1]])->get();
+        $clgNotice = Notice::where([['notice_sub_type', '2'], ['notice_type', 1]])->get();
+        $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->get();
+        $eventNotice = Notice::where([['notice_sub_type', '4'], ['notice_type', 1]])->get();
+        return view('notices.notices', compact('notice', 'clgNotice', 'studentNotice', 'eventNotice'));
     }
 
     public function create()
@@ -40,6 +42,7 @@ class NoticesController extends Controller
 
     public function store(Request $request)
     {
+        // return $request;
         $this->validate($request, [
             'notice_type' => 'required',
             'start_date' => 'required',
@@ -56,14 +59,26 @@ class NoticesController extends Controller
         $expDate->hour   = 23;
         $expDate->minute = 59;
         $expDate->second = 59;
+        $fee_payment = Carbon::parse($request->fee_payment);
+        $fee_payment->hour   = 23;
+        $fee_payment->minute = 59;
+        $fee_payment->second = 59;
+        $publish_date = Carbon::parse($request->publish_date);
+        $publish_date->hour   = 00;
+        $publish_date->minute = 00;
+        $publish_date->second = 01;
         $notice = new Notice();
-        $notice->notice_type = $request->notice_type;
+        $notice->notice_type = 1;
+        $notice->notice_sub_type = $request->notice_type;
         $notice->department_id = $request->department;
         $notice->course_id = $request->course != '' ? implode(',', $request->course) : '';
         $notice->semester = $request->semester;
         $notice->start_date = $startDate;
         $notice->exp_date = $expDate;
         $notice->details = $request->details;
+        $notice->published_date = $publish_date;
+        $notice->payment_last_date = $fee_payment;
+        $notice->session = Carbon::parse($request->exp_date)->format('Y');
         $notice->save();
         return redirect()->action([NoticesController::class, 'index'])->with('success', 'Notification Created Successfully');
     }
