@@ -11,7 +11,7 @@
                                 Create New User</a>
                         @endcan
                     </div> --}}
-                   
+
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -28,7 +28,7 @@
                                     <th>Course</th>
                                     {{-- <th>Status</th> --}}
                                     @can('college-edit')
-                                    <th>Create User</th>
+                                        <th>Create User</th>
                                     @endcan
                                 </tr>
                             </thead>
@@ -44,14 +44,15 @@
                                         <td>{{ $clg->district->district_name }}</td>
                                         <td>
                                             <a class="btn btn-outline-primary view-course" href="javascript:void(0);"
-                                                data-id="{{ $clg->id }}"><i class="fa-solid fa-eye"></i></a>
+                                                data-id="{{ $clg->id }}" data-value="{{ $clg->name }}"><i
+                                                    class="fa-solid fa-eye"></i></a>
                                         </td>
                                         @can('college-edit')
-                                        <td>
-                                            <a class="btn btn-outline-success"
-                                                href="{{ url('create-user/' . $clg->id) }}"><i
-                                                    class="fa-solid fa-user-pen"></i> </a>
-                                        </td>
+                                            <td>
+                                                <a class="btn btn-outline-success"
+                                                    href="{{ url('create-user/' . $clg->id) }}"><i
+                                                        class="fa-solid fa-user-pen"></i> </a>
+                                            </td>
                                         @endcan
                                     </tr>
                                 @endforeach
@@ -67,10 +68,27 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-center" id="modalTitle">Course View</h4>
+                    <h4 class="modal-title text-center"></h4>
+                    
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fal fa-times"></i></span>
                     </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <label>College Name</label>
+
+                                <input type="text" name="modalTitle" id="modalTitle" class="form-control" readonly>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="modal-body">
                     <table class="table table-bordered">
@@ -86,6 +104,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                
 
             </div>
         </div>
@@ -116,9 +136,9 @@
                         var html = '';
                         $.each(data, function(key, val) {
                             html += '<tr>';
-                            html += '<td>'+val.course_code+'</td>';
-                            html += '<td>'+val.name+'</td>';
-                            html += '<td>'+val.strength+'</td>';
+                            html += '<td>' + val.course_code + '</td>';
+                            html += '<td>' + val.name + '</td>';
+                            html += '<td>' + val.strength + '</td>';
                             html += '</tr>';
                         });
                         $('.add-course').html(html);
@@ -131,6 +151,24 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            
+
+            $('.view-course').on('click', function() {
+        
+                let course = $(this).data('value');
+                
+
+                // console.log(paper);
+                $('#modalTitle').val(course);
+               
 
 
+
+
+            });
+
+        });
+    </script>
 @endsection

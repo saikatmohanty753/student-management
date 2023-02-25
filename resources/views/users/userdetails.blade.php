@@ -5,7 +5,7 @@
     {{-- @php
 dd($role);
 @endphp --}}
-    @foreach ($user as $key => $value)
+   
         <div class="row">
 
             <div class="col-lg-12 margin-tb">
@@ -25,46 +25,44 @@ dd($role);
             </div>
 
         </div>
-
-
+       <br><br>
         <div class="row">
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-
-                <div class="form-group">
-
-                    <strong>Name:</strong>
-                    {{ $value->name }}
-
-
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="card-title mb-0">User Details</h5>
+                        <div class="card-actions float-right">
+    
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="text-fade table table-bordered display no-footer datatable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Name:</th>
+                                        <th style="width: 25%;">Email:</th>
+                                        <th style="width: 25%;">Roles: </th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user as $key => $value)
+                                        <tr>
+                                            <td>{{ $value->name }}</td>
+                                            <td>{{ $value->email }}</td>
+                                            <td>{{ $value->userdetails->name }}</td>
+                                           
+                                        </tr>
+                                    @endforeach
+    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-
-                <div class="form-group">
-
-                    <strong>Email:</strong>
-                      {{ $value->email}}
-
-
-                </div>
-
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-
-                <div class="form-group">
-
-                    <strong>Roles:</strong>
-                    {{ $value->userdetails->name}}
-
-
-                </div>
-
-            </div>
-
         </div>
-    @endforeach
+   
 @endsection
