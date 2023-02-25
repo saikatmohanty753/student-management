@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Livewire\Notification as LivewireNotification;
 use App\Models\Notice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,7 @@ class ClgNoticeController extends Controller
         }
         $notice = [];
         foreach ($noticeIds as $value) {
-            $data = Notice::where('id', $value['notice_id'])->where('notice_type', '1')->first();
+            $data = Notice::where('id', $value['notice_id'])->where('exp_date', '>=', Carbon::now())->where('notice_type', '1')->first();
             if ($data) {
                 $data['notification_id'] = $value['notification_id'];
                 $notice[] = $data;

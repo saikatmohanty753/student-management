@@ -58,32 +58,49 @@ class UucNotice extends Notification
     {
         $notice = Notice::find($notifiable->notice_id);
 
-        if ($notice->notice_type == 1) {
+        if ($notice->notice_sub_type == 1) {
             $data = [
-                'notice_type' => 'Admission Notice',
                 'notice_id' => $notifiable->notice_id,
+                'notice_type_id' => '1',
+                'notice_type' => 'Academic Notice',
+                'notice_sub_type_id' => '1',
+                'notice_sub_type' => 'Admission Notice',
                 'details' => $notice->details,
+                'session' => $notice->session,
                 'department' => $notice->department->course_for,
                 'department_id' => $notice->department_id,
                 'start_date' => $notice->start_date,
                 'end_date' => $notice->exp_date,
             ];
-        } elseif($notice->notice_type == 2) {
+        } elseif($notice->notice_sub_type == 2) {
             $data = [
-                'notice_type' => 'Exam Notice',
                 'notice_id' => $notifiable->notice_id,
+                'notice_type_id' => '1',
+                'notice_type' => 'Academic Notice',
+                'notice_sub_type_id' => '2',
+                'notice_sub_type' => 'College Notice',
                 'details' => $notice->details,
-                'department' => $notice->department->course_for,
-                'department' => $notice->department->course_for,
-                'department_id' => $notice->department_id,
-                'course' => $notice->course_id,
+                'start_date' => $notice->start_date,
+                'end_date' => $notice->exp_date,
+            ];
+        } elseif ($notice->notice_sub_type == 3) {
+            $data = [
+                'notice_id' => $notifiable->notice_id,
+                'notice_type_id' => '1',
+                'notice_type' => 'Academic Notice',
+                'notice_sub_type_id' => '3',
+                'notice_sub_type' => 'Student Notice',
+                'details' => $notice->details,
                 'start_date' => $notice->start_date,
                 'end_date' => $notice->exp_date,
             ];
         }else{
             $data = [
-                'notice_type' => 'Other Notice',
                 'notice_id' => $notifiable->notice_id,
+                'notice_type_id' => '1',
+                'notice_type' => 'Academic Notice',
+                'notice_sub_type_id' => '4',
+                'notice_sub_type' => 'Event Notice',
                 'details' => $notice->details,
                 'start_date' => $notice->start_date,
                 'end_date' => $notice->exp_date,
