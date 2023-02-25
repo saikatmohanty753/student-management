@@ -44,23 +44,29 @@ class AjaxController extends Controller
                 ->update(['status' => 1, 'published_date' => Carbon::now()]);
             $notice = Notice::find($request->id);
             $status = "Published";
-            if ($notice->notice_type == 1) {
+            if ($notice->notice_sub_type == 1) {
                 //academic
-                $users = User::whereIn('role_id', [14, 16])->get();
+                $users = User::whereIn('role_id', [14])->get();
                 foreach ($users as $key => $user) {
                     $user->notice_id = $request->id;
                     $user->notify(new UucNotice());
                 }
-            } elseif ($notice->notice_type == 2) {
+            } elseif ($notice->notice_sub_type == 2) {
                 //exam
 
-                $users = User::whereIn('role_id', [13, 17])->get();
+                $users = User::whereIn('role_id', [13, 14])->get();
                 foreach ($users as $key => $user) {
                     $user->notice_id = $request->id;
                     $user->notify(new UucNotice());
                 }
-            } elseif ($notice->notice_type == 3) {
-                $users = User::whereIn('role_id', [3, 13, 14, 16, 17])->get();
+            } elseif ($notice->notice_sub_type == 3) {
+                $users = User::whereIn('role_id', [3])->get();
+                foreach ($users as $key => $user) {
+                    $user->notice_id = $request->id;
+                    $user->notify(new UucNotice());
+                }
+            } elseif ($notice->notice_sub_type == 4) {
+                $users = User::whereIn('role_id', [3, 13, 14])->get();
                 foreach ($users as $key => $user) {
                     $user->notice_id = $request->id;
                     $user->notify(new UucNotice());
@@ -94,6 +100,4 @@ class AjaxController extends Controller
             ->get(['admission_seats.total_strength as strength', 'courses.name', 'courses.main_course_code as course_code']);
         return response()->json($course);
     }
-
-    
 }

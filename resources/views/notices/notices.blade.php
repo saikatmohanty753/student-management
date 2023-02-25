@@ -46,7 +46,7 @@
                                                 <th>End date</th>
                                                 <th>Details</th>
                                                 <th>Is Verified</th>
-                                                <th>Status</th>
+                                                <th>Is Published</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -64,22 +64,34 @@
                                                     <td>{{ Carbon\Carbon::parse($item->exp_date)->format('d-m-Y') }}</td>
                                                     <td>{{ Str::limit($item->details, 40) }}</td>
                                                     <td>
-                                                        {{ $item->is_verified == 0 ? 'Not Verified' : 'Verified' }}
+                                                        {!! $item->is_verified == 0
+                                                            ? '<span class="badge badge-warning">Not Verified</span>'
+                                                            : '<span class="badge badge-success">Verified</span>' !!}
                                                     </td>
-                                                    <td>
-                                                        {{ $item->status == 1 ? 'Published' : 'Not Published' }}
-                                                        {{-- @can('notice-edit')
-                                                            <div class="custom-control custom-switch">
-                                                                <input type="checkbox" class="custom-control-input publish"
-                                                                    id="customSwitch{{ $key }}"
-                                                                    {{ $item->is_verified == 1 ? 'checked disabled' : '' }}
-                                                                    data-id="{{ $item->id }}">
-                                                                <label class="custom-control-label publish"
-                                                                    for="customSwitch{{ $key }}"></label>
-                                                            </div>
+                                                    <td class="ispublish">
+                                                        {{-- {{ $item->status == 1 ? 'Published' : 'Not Published' }} --}}
+
+                                                        @if ($item->is_verified == 1)
+                                                            @can('notice-edit')
+                                                                @if ($item->status == 0)
+                                                                    <div class="custom-control custom-switch">
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input publish"
+                                                                            id="customSwitch{{ $key }}"
+                                                                            {{ $item->status == 1 ? 'checked disabled' : '' }}
+                                                                            data-id="{{ $item->id }}">
+                                                                        <label class="custom-control-label publish"
+                                                                            for="customSwitch{{ $key }}"></label>
+                                                                    </div>
+                                                                @else
+                                                                    {!! $item->noticeStatus() !!}
+                                                                @endif
+                                                            @endcan
                                                         @else
                                                             {!! $item->noticeStatus() !!}
-                                                        @endcan --}}
+                                                        @endif
+
+
                                                     </td>
 
 
@@ -334,9 +346,10 @@
                         data: postData,
                         processData: false,
                         success: function(response) {
-                            publish.prop("checked")
+                            /* publish.prop("checked")
                             publish.prop("disabled")
-                            $('.publish').html('Published');
+                            $('.publish').html('Published'); */
+                            $('.ispublish').html('<span class="badge badge-success">Published</span>');
                             $('.delNotice').remove();
                             /* $("#course_name").append('<option value="">Select Course</option>');
                             $.each(response, function(key, value) {

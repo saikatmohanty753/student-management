@@ -89,8 +89,7 @@
                                         <td>{{ $item->gender }}</td>
                                         <td>{{ $item->mobile }}</td>
                                         <td>
-                                            <span
-                                                class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
+                                            <span class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                         </td>
                                         <td>
                                             @if ($item->status != 4)
