@@ -79,11 +79,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
 
-                                <label>College Name</label>
+                               
 
-                                <input type="text" name="modalTitle" id="modalTitle" class="form-control" readonly>
-
-
+                                  <label for="name-input">Course View of:</label>
+                                  <input type="text" name="modalTitle" id="modalTitle" class="form-control" readonly>
+                                  
 
                             </div>
                         </div>
@@ -100,10 +100,12 @@
                             </tr>
                         </thead>
                         <tbody class="add-course">
+                            <div id="no-data-message"></div>
 
                         </tbody>
                     </table>
                 </div>
+               
 
                 
 
@@ -151,7 +153,7 @@
             });
         });
     </script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             
 
@@ -170,5 +172,49 @@
             });
 
         });
+    </script> --}}
+
+    <script>
+
+$(document).ready(function() {
+            
+
+            $('.view-course').on('click', function() {
+        
+        //         var tableRows = document.querySelectorAll(".add-course tbody tr");
+        
+        // var numRows = tableRows.length;
+        
+        // var noDataMessage = document.getElementById("no-data-message");
+        
+        // if (numRows === 0) {
+        //   noDataMessage.textContent = "No record found.";
+        //   noDataMessage.style.display = "block";
+        // } else {
+        //   noDataMessage.style.display = "none";
+        // }
+
+        let course = $(this).data('value');
+                
+
+                // console.log(paper);
+                $('#modalTitle').val(course);
+
+
+            });
+
+        });
+       
+
+
     </script>
+    <style>
+        #no-data-message {
+  font-size: 24px;
+  font-weight: bold;
+  color: red;
+  text-align: center;
+  margin: 50px;
+}
+    </style>
 @endsection
