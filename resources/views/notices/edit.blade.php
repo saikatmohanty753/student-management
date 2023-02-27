@@ -4,7 +4,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Create Notice</h5>
+                    <h5 class="card-title mb-0">Edit  Notice</h5>
                     <div class="card-actions float-right">
 
                     </div>

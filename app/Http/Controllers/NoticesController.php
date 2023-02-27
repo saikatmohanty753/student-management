@@ -31,8 +31,8 @@ class NoticesController extends Controller
         $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->get();
         $eventNotice = Notice::where([['notice_sub_type', '4'], ['notice_type', 1]])->get();
 
-       
-        
+
+
         return view('notices.notices', compact('notice', 'clgNotice', 'studentNotice', 'eventNotice'));
     }
 
@@ -111,7 +111,9 @@ class NoticesController extends Controller
      */
     public function edit($id)
     {
-        
+        $course = Course::all();
+        $dept = CourseFor::all();
+        return view('notices.edit', compact('course', 'dept'));
     }
 
     /**
@@ -123,13 +125,13 @@ class NoticesController extends Controller
      */
     public function update(Request $request)
     {
-       
+
 
     }
 
     public function status(Request $request)
     {
-       
+
         $status = Notice::find($request->id);
         $status->is_verified=$request->verified;
         $status->save();
@@ -161,6 +163,6 @@ class NoticesController extends Controller
 
     }
 
-   
-   
+
+
 }
