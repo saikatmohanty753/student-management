@@ -112,7 +112,7 @@
 
                                                         @can('notice-edit')
                                                             @if ($item->is_verified == 0)
-                                                                <a class="btn btn-outline-primary"
+                                                                <a class="btn btn-outline-primary" data-id={{ $item->department_id }}
                                                                     href="{{ route('notices.edit', $item->id) }}"><i
                                                                         class="fa-solid fa-pen-to-square"></i></a>
                                                             @endif
