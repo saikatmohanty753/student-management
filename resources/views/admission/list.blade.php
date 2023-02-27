@@ -81,13 +81,17 @@
                             </thead>
                             <tbody>
                                 @foreach ($application as $key => $item)
+                                @php
+                                    $std = json_decode($item->personal_information);
+                                    
+                                @endphp
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $item->department->course_for }}</td>
                                         <td>{{ $item->course->name }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->gender }}</td>
-                                        <td>{{ $item->mobile }}</td>
+                                        <td>{{ $std ? $std->name : '' }}</td>
+                                        <td>{{ $std ? $std->gender : '' }}</td>
+                                        <td>{{ $std ? $std->mobile : '' }}</td>
                                         <td>
                                             <span class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                         </td>

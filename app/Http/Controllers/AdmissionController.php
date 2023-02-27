@@ -100,14 +100,11 @@ class AdmissionController extends Controller
      */
     public function store(Request $request)
     {
-
-        // return $request;
         $clgId = Auth::user()->clg_user_id;
         if ($this->checkSeatAvl($clgId, $request->course) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
         }
         $course = Course::find($request->course);
-
         $student = new StudentApplication();
         $student->academic_year = date('Y');
         $student->admission_date = Carbon::now();
@@ -234,6 +231,7 @@ class AdmissionController extends Controller
         $student->documents = json_encode($documents);
         $student->qualification_details = json_encode($qualification_details);
         $student->save();
+        // return $student;
         return redirect()->action([AdmissionController::class, 'show'], ['id' => $student->id])->with('success', 'Application saved in draft.');
     }
 
@@ -387,12 +385,12 @@ class AdmissionController extends Controller
     }
     public function apply(Request $request)
     {
-
-        $application = StudentDetails::find($request->id);
-        $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
+        $application = StudentApplication::find($request->id);
+        $clgId = Auth::user()->clg_user_id;
         if ($this->checkSeatAvl($clgId, $application->course_id) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
         }
+
         $application->status = 1;
         $application->app_status = 2;
         $application->save();
@@ -411,8 +409,8 @@ class AdmissionController extends Controller
     }
     public function admissionList(Request $request)
     {
-        $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
-        $application = StudentDetails::where('clg_id', $clgId)->get();
+        $clgId = Auth::user()->clg_user_id;
+        $application = StudentApplication::where('clg_id', $clgId)->where('status', 1)->get();
 
         $department = CourseFor::all();
         $course = Course::all();
