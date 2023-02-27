@@ -409,7 +409,7 @@
                             </div>
                         </div>
 
-                        <div class="border rounded p-2 mb-2">
+                        {{-- <div class="border rounded p-2 mb-2">
                                 <h2>Qualification Details</h2>
                                 <hr>
                                 <div class="row">
@@ -450,20 +450,20 @@
                                                 </tr>
                                                 <tr>
                                                     <th><input type="text" name="intermediate" class="form-control"
-                                                            placeholder="Intermediate + 2"><span
+                                                            placeholder="Intermediate + 2" value="{{ $qualification_details->intermediate->course}}"><span
                                                             class="help-block">(Intermediate + 2)</span></th>
                                                     <th> <input type="text" name="intermediate_board"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->intermediate->board }}"> </th>
                                                     <th> <input type="text" name="intermediate_passing_year"
-                                                            class="form-control yearPicker"> </th>
+                                                            class="form-control yearPicker" value="{{ $qualification_details->intermediate->passing_year }}"> </th>
                                                     <th> <input type="text" name="intermediate_division"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->intermediate->division }}"> </th>
                                                     <th> <input type="text" name="intermediate_mark"
-                                                            id="intermediate_mark" class="form-control"> </th>
+                                                            id="intermediate_mark" class="form-control" value="{{ $qualification_details->intermediate->mark }}"> </th>
                                                     <th> <input type="text" name="intermediate_total_mark"
-                                                            id="intermediate_total_mark" class="form-control"> </th>
+                                                            id="intermediate_total_mark" class="form-control" value="{{ $qualification_details->intermediate->total }}"> </th>
                                                     <th> <input type="text" name="intermediate_percentage"
-                                                            id="intermediate_percentage" class="form-control"> </th>
+                                                            id="intermediate_percentage" class="form-control" value="{{ $qualification_details->intermediate->percentage }}"> </th>
                                                 </tr>
                                                 <tr>
                                                     <th><input type="text" class="form-control" name="graduate"
@@ -471,51 +471,167 @@
                                                             class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
                                                             B.A.)</span></th>
                                                     <th> <input type="text" name="graduate_board"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->graduate->board }}"> </th>
                                                     <th> <input type="text" name="graduate_passing_year"
-                                                            class="form-control yearPicker"> </th>
+                                                            class="form-control yearPicker" value="{{ $qualification_details->graduate->passing_year }}"> </th>
                                                     <th> <input type="text" name="graduate_division"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->graduate->division }}"> </th>
                                                     <th> <input type="text" name="graduate_mark" id="graduate_mark"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->graduate->mark }}"> </th>
                                                     <th> <input type="text" name="graduate_total_mark"
-                                                            id="graduate_total_mark" class="form-control"> </th>
+                                                            id="graduate_total_mark" class="form-control" value="{{ $qualification_details->graduate->total }}"> </th>
                                                     <th> <input type="text" name="graduate_percentage"
-                                                            id="graduate_percentage" class="form-control"> </th>
+                                                            id="graduate_percentage" class="form-control" value="{{ $qualification_details->graduate->percentage }}"> </th>
                                                 </tr>
                                                 <tr>
                                                     <th><input type="text" class="form-control" name="post_graduate"
                                                             placeholder="M. Mus / MVA"><span class="help-block">(M. Mus /
                                                             MVA)</span></th>
                                                     <th> <input type="text" name="post_graduate_board"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->postGraduate->board }}"> </th>
                                                     <th> <input type="text" name="post_graduate_passing_year"
-                                                            class="form-control yearPicker"> </th>
+                                                            class="form-control yearPicker" value="{{ $qualification_details->postGraduate->passing_year }}"> </th>
                                                     <th> <input type="text" name="post_graduate_division"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->postGraduate->division }}"> </th>
                                                     <th> <input type="text" name="post_graduate_mark"
-                                                            id="post_graduate_mark" class="form-control"> </th>
+                                                            id="post_graduate_mark" class="form-control" value="{{ $qualification_details->postGraduate->mark }}"> </th>
                                                     <th> <input type="text" name="post_graduate_total_mark"
-                                                            id="post_graduate_total_mark" class="form-control"> </th>
+                                                            id="post_graduate_total_mark" class="form-control" value="{{ $qualification_details->postGraduate->total }}"> </th>
                                                     <th> <input type="text" name="post_graduate_percentage"
-                                                            id="post_graduate_percentage" class="form-control"> </th>
+                                                            id="post_graduate_percentage" class="form-control" value="{{ $qualification_details->postGraduate->percentage }}"> </th>
                                                 </tr>
                                                 <tr>
                                                     <th><input type="text" class="form-control" name="other_graduate"
                                                             placeholder="Any other Qualification"><span
                                                             class="help-block">(Any other Qualification)</span></th>
                                                     <th> <input type="text" name="other_graduate_board"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->other->board }}"> </th>
                                                     <th> <input type="text" name="other_graduate_passing_year"
-                                                            class="form-control yearPicker"> </th>
+                                                            class="form-control yearPicker" value="{{ $qualification_details->other->passing_year }}"> </th>
                                                     <th> <input type="text" name="other_graduate_division"
-                                                            class="form-control"> </th>
+                                                            class="form-control" value="{{ $qualification_details->other->division }}"> </th>
                                                     <th> <input type="text" name="other_graduate_mark"
-                                                            id="other_graduate_mark" class="form-control"> </th>
+                                                            id="other_graduate_mark" class="form-control" value="{{ $qualification_details->other->mark }}"> </th>
                                                     <th> <input type="text" name="other_graduate_total_mark"
-                                                            id="other_graduate_total_mark" class="form-control"> </th>
+                                                            id="other_graduate_total_mark" class="form-control" value="{{ $qualification_details->other->total }}"> </th>
                                                     <th> <input type="text" name="other_graduate_percentage"
-                                                            id="other_graduate_percentage" class="form-control"> </th>
+                                                            id="other_graduate_percentage" class="form-control" value="{{ $qualification_details->other->percentage }}"> </th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div> --}}
+
+                        <div class="border rounded p-2 mb-4">
+                            <div class="border rounded p-2 mb-2">
+                                <h2>Qualification Details</h2>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th width="20%">Name of the Examinations
+                                                        Passed</th>
+                                                    <th width="20%">University/
+                                                        Council / Board</th>
+                                                    <th>Year of Passing</th>
+                                                    <th>Divn. and Distn.</th>
+                                                    <th>Marks secured</th>
+                                                    <th>Maximum marks</th>
+                                                    <th>% of Marks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th><input type="text" name="hsc" class="form-control"
+                                                            placeholder="H.S.C. or equivalent" value="{{ $qualification_details->hsc->course}}">
+                                                        <span class="help-block">(H.S.C. or equivalent)</span>
+                                                    </th>
+                                                    <th> <input type="text" class="form-control" name="board" value="{{ $qualification_details->hsc->board }}">
+
+                                                    </th>
+                                                    <th> <input type="text" name="hsc_passing_year"
+                                                            class="form-control yearPicker" value="{{ $qualification_details->hsc->passing_year }}"> </th>
+                                                    <th> <input type="text" name="division" class="form-control" value="{{ $qualification_details->hsc->division }}">
+                                                    </th>
+                                                    <th> <input type="text" name="hsc_mark" id="hsc_mark"
+                                                            class="form-control" value="{{ $qualification_details->hsc->mark }}"> </th>
+                                                    <th> <input type="text" name="total_mark" id="hsc_total_mark"
+                                                            class="form-control" value="{{ $qualification_details->hsc->total }}"> </th>
+                                                    <th> <input type="text" name="percentage" id="hsc_percentage"
+                                                            class="form-control" value="{{ $qualification_details->hsc->percentage }}"> </th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" name="intermediate" class="form-control"
+                                                            placeholder="Intermediate + 2" value="{{ $qualification_details->intermediate->course}}"><span
+                                                            class="help-block">(Intermediate + 2)</span></th>
+                                                    <th> <input type="text" name="intermediate_board"
+                                                            class="form-control" value="{{ $qualification_details->intermediate->board }}"> </th>
+                                                    <th> <input type="text" name="intermediate_passing_year"
+                                                            class="form-control yearPicker" value="{{ $qualification_details->intermediate->passing_year }}"> </th>
+                                                    <th> <input type="text" name="intermediate_division"
+                                                            class="form-control" value="{{ $qualification_details->intermediate->division }}"> </th>
+                                                    <th> <input type="text" name="intermediate_mark"
+                                                            id="intermediate_mark" class="form-control" value="{{ $qualification_details->intermediate->mark }}"> </th>
+                                                    <th> <input type="text" name="intermediate_total_mark"
+                                                            id="intermediate_total_mark" class="form-control" value="{{ $qualification_details->intermediate->total }}"> </th>
+                                                    <th> <input type="text" name="intermediate_percentage"
+                                                            id="intermediate_percentage" class="form-control" value="{{ $qualification_details->intermediate->percentage }}"> </th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" name="graduate"
+                                                            placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A."><span
+                                                            class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
+                                                            B.A.)</span></th>
+                                                    <th> <input type="text" name="graduate_board"
+                                                            class="form-control" value="{{ $qualification_details->graduate->board }}"> </th>
+                                                    <th> <input type="text" name="graduate_passing_year"
+                                                            class="form-control yearPicker" value="{{ $qualification_details->graduate->passing_year }}"> </th>
+                                                    <th> <input type="text" name="graduate_division"
+                                                            class="form-control" value="{{ $qualification_details->graduate->division }}"> </th>
+                                                    <th> <input type="text" name="graduate_mark" id="graduate_mark"
+                                                            class="form-control" value="{{ $qualification_details->graduate->mark }}"> </th>
+                                                    <th> <input type="text" name="graduate_total_mark"
+                                                            id="graduate_total_mark" class="form-control" value="{{ $qualification_details->graduate->total }}"> </th>
+                                                    <th> <input type="text" name="graduate_percentage"
+                                                            id="graduate_percentage" class="form-control" value="{{ $qualification_details->graduate->percentage }}"> </th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" name="post_graduate"
+                                                            placeholder="M. Mus / MVA"><span class="help-block">(M. Mus /
+                                                            MVA)</span></th>
+                                                    <th> <input type="text" name="post_graduate_board"
+                                                            class="form-control" value="{{ $qualification_details->postGraduate->board }}"> </th>
+                                                    <th> <input type="text" name="post_graduate_passing_year"
+                                                            class="form-control yearPicker" value="{{ $qualification_details->postGraduate->passing_year }}"> </th>
+                                                    <th> <input type="text" name="post_graduate_division"
+                                                            class="form-control" value="{{ $qualification_details->postGraduate->division }}"> </th>
+                                                    <th> <input type="text" name="post_graduate_mark"
+                                                            id="post_graduate_mark" class="form-control" value="{{ $qualification_details->postGraduate->mark }}"> </th>
+                                                    <th> <input type="text" name="post_graduate_total_mark"
+                                                            id="post_graduate_total_mark" class="form-control" value="{{ $qualification_details->postGraduate->total }}"> </th>
+                                                    <th> <input type="text" name="post_graduate_percentage"
+                                                            id="post_graduate_percentage" class="form-control" value="{{ $qualification_details->postGraduate->percentage }}"> </th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" name="other_graduate"
+                                                            placeholder="Any other Qualification"><span
+                                                            class="help-block">(Any other Qualification)</span></th>
+                                                    <th> <input type="text" name="other_graduate_board"
+                                                            class="form-control" value="{{ $qualification_details->other->board }}"> </th>
+                                                    <th> <input type="text" name="other_graduate_passing_year"
+                                                            class="form-control yearPicker" value="{{ $qualification_details->other->passing_year }}"> </th>
+                                                    <th> <input type="text" name="other_graduate_division"
+                                                            class="form-control" value="{{ $qualification_details->other->division }}"> </th>
+                                                    <th> <input type="text" name="other_graduate_mark"
+                                                            id="other_graduate_mark" class="form-control" value="{{ $qualification_details->other->mark }}"> </th>
+                                                    <th> <input type="text" name="other_graduate_total_mark"
+                                                            id="other_graduate_total_mark" class="form-control" value="{{ $qualification_details->other->total }}"> </th>
+                                                    <th> <input type="text" name="other_graduate_percentage"
+                                                            id="other_graduate_percentage" class="form-control" value="{{ $qualification_details->other->percentage }}"> </th>
                                                 </tr>
                                             </tbody>
                                         </table>
