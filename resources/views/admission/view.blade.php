@@ -39,29 +39,29 @@
                                                 <tr>
 
                                                     <td>
-                                                        <strong>Course Name: {{ $student->course->name }}</strong>
+                                                        <strong>Course Name: {{ $std_app->course->name }}</strong>
                                                     </td>
                                                     <td>
-                                                        Name <strong>: {{$student->name}}</strong>
+                                                        Name <strong>: {{$personal_information->name}}</strong>
                                                     </td>
 
                                                 </tr>
                                                 <tr>
 
                                                     <td>
-                                                        Father's Name<strong>: {{$student->father_name}}</strong>
+                                                        Father's Name<strong>: {{$personal_information->father_name}}</strong>
                                                     </td>
 
                                                     <td>
-                                                        Caste Category<strong>: {{$student->cast}}</strong>
+                                                        Caste Category<strong>: {{$personal_information->cast}}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        If Specially Abled<strong>:{{ $student->specially_abled == 1 ? 'Yes' : 'No' }}</strong>
+                                                        If Specially Abled<strong>:{{ $personal_information->specially_abled == 1 ? 'Yes' : 'No' }}</strong>
                                                     </td>
                                                     <td>
-                                                        Mobile No<strong>: {{$student->mobile}}</strong>
+                                                        Mobile No<strong>: {{$personal_information->mobile}}</strong>
                                                     </td>
                                                 </tr>
 
@@ -75,23 +75,23 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        Email <strong>: {{$student->email}}</strong>
+                                                        Email <strong>: {{$personal_information->email}}</strong>
                                                     </td>
                                                     <td>
-                                                        Mother's name <strong>: {{$student->mother_name}}</strong>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        DOB <strong>: {{$student->dob}}</strong>
-                                                    </td>
-                                                    <td>
-                                                        Gender <strong>: {{$student->gender}}</strong>
+                                                        Mother's name <strong>: {{$personal_information->mother_name}}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Aadhar No <strong>: {{$student->aadhaar_no}}</strong>
+                                                        DOB <strong>: {{$personal_information->dob}}</strong>
+                                                    </td>
+                                                    <td>
+                                                        Gender <strong>: {{$personal_information->gender}}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Aadhar No <strong>: {{$personal_information->aadhaar_no}}</strong>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -117,96 +117,24 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        State <strong>: {{$address->present_state}}</strong>
+                                                        State <strong>: {{$present_address->present_state}}</strong>
                                                     </td>
                                                     <td>
-                                                        District <strong>: {{ $address->presentDistrict->district_name }}</strong>
+                                                        District <strong>: {{ $present_address->district }}</strong>
                                                     </td>
                                                     <td>
-                                                        Pincode<strong>: {{$address->present_pin_code}}</strong>
+                                                        Pincode<strong>: {{$present_address->present_pin_code}}</strong>
                                                     </td>
                                                     <td>
 
-                                                        Present Address<strong>: {{$address->present_address}}</strong>
-                                                    </td>
-                                                </tr>
-
-                                                {{-- <tr>
-                                                    <td>
-                                                        Net:
-                                                    </td>
-                                                    <td>
-                                                        21
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Currency:
-                                                    </td>
-                                                    <td>
-                                                        USD
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        P.O. #
-                                                    </td>
-                                                    <td>
-                                                        1/3-147
-                                                    </td>
-                                                </tr> --}}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                {{-- <div class="col-sm-4 d-flex">
-                                    <div class="table-responsive">
-                                        <table class="table table-clean table-sm align-self-end">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        Course Name:
-                                                    </td>
-                                                    <td>
-                                                        Culture of sadsa
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>Due Date:</strong>
-                                                    </td>
-                                                    <td>
-                                                        05/25/2019
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Net:
-                                                    </td>
-                                                    <td>
-                                                        21
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Currency:
-                                                    </td>
-                                                    <td>
-                                                        USD
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        P.O. #
-                                                    </td>
-                                                    <td>
-                                                        1/3-147
+                                                        Present Address<strong>: {{$present_address->present_address}}</strong>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                </div> --}}
+                                </div>
+
 
                             </div>
                         </div>
@@ -226,17 +154,17 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        State <strong>: {{$address->permanent_state}}</strong>
+                                                        State <strong>: {{$permanent_address->permanent_state}}</strong>
                                                     </td>
                                                     <td>
-                                                        District <strong>: {{ $address->permanentDistrict->district_name }}</strong>
+                                                        District <strong>: {{ $present_address->district }}</strong>
                                                     </td>
                                                     <td>
-                                                        <strong>Pincode<strong>: {{$address->permanent_pin_code}}</strong>
+                                                        <strong>Pincode<strong>: {{$permanent_address->permanent_pin_code}}</strong>
                                                     </td>
                                                     <td>
 
-                                                        Permanent Address <strong>: {{$address->permanent_address}}</strong>
+                                                        Permanent Address <strong>: {{$permanent_address->permanent_address}}</strong>
                                                     </td>
                                                 </tr>
 
@@ -265,19 +193,19 @@
                                                 <tr>
                                                     <td>
                                                         Last Attended College Name
-                                                        <strong>: {{$education->clg_name}}</strong>
+                                                        <strong>: {{$prv_clg_info->clg_name}}</strong>
                                                     </td>
                                                     <td>
                                                         Year of Passing Last Exam
-                                                        <strong>: {{$education->year_of_passing}}</strong>
+                                                        <strong>: {{$prv_clg_info->year_of_passing}}</strong>
                                                     </td>
                                                     <td>
                                                         Last Pursued Course Name
-                                                        <strong>: {{$education->course_name}}</strong>
+                                                        <strong>: {{$prv_clg_info->course_name}}</strong>
                                                     </td>
                                                     <td>
                                                         Migration Certificate is availiable
-                                                        <strong>: {{ $education->is_migration_cert == 0 ? 'No' : 'Yes' }}</strong>
+                                                        <strong>: {{ $prv_clg_info->is_migration_cert == 0 ? 'No' : 'Yes' }}</strong>
                                                     </td>
                                                 </tr>
 
@@ -307,8 +235,8 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        Photo <strong>:  <strong>:<a href="javascript:void(0)" onclick="upload_image_view('{{ asset($documents->photo) }}')">
-                                                            {{ !empty($documents->photo) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
+                                                        Photo <strong>:  <strong>:<a href="javascript:void(0)" onclick="upload_image_view('{{ asset($documents->profile) }}')">
+                                                            {{ !empty($documents->profile) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
                                                     </td>
                                                     <td>
                                                         Aadhaar Card <strong>: <strong>:<a href="javascript:void(0)" onclick="upload_image_view('{{ asset($documents->aadhaar_card) }}')">
@@ -336,10 +264,10 @@
 
                         <form action="{{ url('student-admission/apply') }}" method="post">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $id }}">
+                            <input type="hidden" name="id" value="{{ $std_app->id }}">
                             <div
                                 class="panel-content border-faded border-top-0 border-left-0 border-right-0 border-bottom-0 d-flex flex-row justify-content-center">
-                                <a href="{{ url('student-admission/edit/' . $student->id) }}" class="btn  waves-effect waves-themed btn-outline-primary"
+                                <a href="{{ url('student-admission/edit/' . $std_app->id) }}" class="btn  waves-effect waves-themed btn-outline-primary"
                                     type="submit">Edit
                                 </a>
                                 <button class="btn btn-outline-success waves-effect waves-themed ml-4" type="submit">Submit

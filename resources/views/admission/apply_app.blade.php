@@ -223,6 +223,49 @@
 
                             </div>
                         </div>
+                        <div
+                            class="panel-content d-flex py-2 mt-2 border-faded border-left-0 border-right-0 text-muted bg-success-500">
+                            <h6 class="text-light">
+                                College Information
+                            </h6>
+                        </div>
+                        <div class="panel-tag border-left-0">
+                            <div class="row">
+
+                                <div class="col-sm-12 d-flex">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-clean table-sm align-self-end">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Last Attended College Name
+                                                        <strong>: {{ $education->clg_name }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        Year of Passing Last Exam
+                                                        <strong>: {{ $education->year_of_passing }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        Last Pursued Course Name
+                                                        <strong>: {{ $education->course_name }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        Migration Certificate is availiable
+                                                        <strong>:
+                                                            {{ $education->is_migration_cert == 0 ? 'No' : 'Yes' }}</strong>
+                                                    </td>
+                                                </tr>
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 
                         <div
                             class="panel-content d-flex py-2 mt-2 border-faded border-left-0 border-right-0 text-muted bg-success-500">
@@ -267,7 +310,7 @@
                                         </table>
                                     </div>
                                 </div>
-                               
+
 
                             </div>
                         </div>
@@ -277,7 +320,7 @@
 
 
                     </div>
-                       
+
 
 
                     </div>

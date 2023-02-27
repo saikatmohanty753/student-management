@@ -142,9 +142,9 @@
                                 <div class="col-md-3 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
-                                            <label class="form-label">Aadhar No <span class="text-danger">*</span></label>
+                                            <label class="form-label">Aadhaar No <span class="text-danger">*</span></label>
                                             <input name="aadhar_no" type="text"
-                                                class="form-control chk_blank chk_aadhaar" id="aadhar">
+                                                class="form-control chk_blank chk_aadhaar" id="aadhaar">
                                             <span class="error-msg"></span>
                                         </div>
                                     </div>
@@ -281,8 +281,8 @@
                                                 <div class="form-group input-cont">
                                                     <label class="form-label">Pincode <span
                                                             class="text-danger">*</span></label>
-                                                    <input class="form-control chk_blank chk_zip" name="permanent_pin_code"
-                                                        id="permanent_pin_code">
+                                                    <input class="form-control chk_blank chk_zip"
+                                                        name="permanent_pin_code" id="permanent_pin_code">
                                                     <span class="error-msg"></span>
                                                 </div>
 
@@ -364,6 +364,122 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="border rounded p-2 mb-2">
+                                <h2>Qualification Details</h2>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th width="20%">Name of the Examinations
+                                                        Passed</th>
+                                                    <th width="20%">University/
+                                                        Council / Board</th>
+                                                    <th>Year of Passing</th>
+                                                    <th>Divn. and Distn.</th>
+                                                    <th>Marks secured</th>
+                                                    <th>Maximum marks</th>
+                                                    <th>% of Marks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th><input type="text" name="hsc" class="form-control"
+                                                            placeholder="H.S.C. or equivalent">
+                                                        <span class="help-block">(H.S.C. or equivalent)</span>
+                                                    </th>
+                                                    <th> <input type="text" class="form-control" name="hsc_board">
+
+                                                    </th>
+                                                    <th> <input type="text" name="hsc_passing_year"
+                                                            class="form-control yearPicker"> </th>
+                                                    <th> <input type="text" name="hsc_division" class="form-control">
+                                                    </th>
+                                                    <th> <input type="text" name="hsc_mark" id="hsc_mark"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="hsc_total_mark" id="hsc_total_mark"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="hsc_percentage" id="hsc_percentage"
+                                                            class="form-control"> </th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" name="intermediate" class="form-control"
+                                                            placeholder="Intermediate + 2"><span
+                                                            class="help-block">(Intermediate + 2)</span></th>
+                                                    <th> <input type="text" name="intermediate_board"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="intermediate_passing_year"
+                                                            class="form-control yearPicker"> </th>
+                                                    <th> <input type="text" name="intermediate_division"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="intermediate_mark"
+                                                            id="intermediate_mark" class="form-control"> </th>
+                                                    <th> <input type="text" name="intermediate_total_mark"
+                                                            id="intermediate_total_mark" class="form-control"> </th>
+                                                    <th> <input type="text" name="intermediate_percentage"
+                                                            id="intermediate_percentage" class="form-control"> </th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" name="graduate"
+                                                            placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A."><span
+                                                            class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
+                                                            B.A.)</span></th>
+                                                    <th> <input type="text" name="graduate_board"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="graduate_passing_year"
+                                                            class="form-control yearPicker"> </th>
+                                                    <th> <input type="text" name="graduate_division"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="graduate_mark" id="graduate_mark"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="graduate_total_mark"
+                                                            id="graduate_total_mark" class="form-control"> </th>
+                                                    <th> <input type="text" name="graduate_percentage"
+                                                            id="graduate_percentage" class="form-control"> </th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" name="post_graduate"
+                                                            placeholder="M. Mus / MVA"><span class="help-block">(M. Mus /
+                                                            MVA)</span></th>
+                                                    <th> <input type="text" name="post_graduate_board"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="post_graduate_passing_year"
+                                                            class="form-control yearPicker"> </th>
+                                                    <th> <input type="text" name="post_graduate_division"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="post_graduate_mark"
+                                                            id="post_graduate_mark" class="form-control"> </th>
+                                                    <th> <input type="text" name="post_graduate_total_mark"
+                                                            id="post_graduate_total_mark" class="form-control"> </th>
+                                                    <th> <input type="text" name="post_graduate_percentage"
+                                                            id="post_graduate_percentage" class="form-control"> </th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input type="text" class="form-control" name="other_graduate"
+                                                            placeholder="Any other Qualification"><span
+                                                            class="help-block">(Any other Qualification)</span></th>
+                                                    <th> <input type="text" name="other_graduate_board"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="other_graduate_passing_year"
+                                                            class="form-control yearPicker"> </th>
+                                                    <th> <input type="text" name="other_graduate_division"
+                                                            class="form-control"> </th>
+                                                    <th> <input type="text" name="other_graduate_mark"
+                                                            id="other_graduate_mark" class="form-control"> </th>
+                                                    <th> <input type="text" name="other_graduate_total_mark"
+                                                            id="other_graduate_total_mark" class="form-control"> </th>
+                                                    <th> <input type="text" name="other_graduate_percentage"
+                                                            id="other_graduate_percentage" class="form-control"> </th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div class="border rounded p-2 mb-4">
                                 <h2>Document</h2>
                                 <hr>
@@ -420,8 +536,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Migration Certificate</label>
                                             <div class="custom-file input-cont">
-                                                <input type="file"
-                                                    class="custom-file-input form-control"
+                                                <input type="file" class="custom-file-input form-control"
                                                     name="migration_cert" id="migration_cert">
                                                 <small
                                                     class="form-text text-secondary">{{ __('common.file_format') }}</small>
@@ -492,6 +607,47 @@
             }
         });
 
+        $('#hsc_total_mark, #hsc_mark').keyup(function() {
+            var total_marks = parseFloat($('#hsc_total_mark').val());
+            var obt_marks = parseFloat($('#hsc_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#hsc_percentage').val(prs_mark);
+            }
+        });
+        $('#intermediate_total_mark, #intermediate_mark').keyup(function() {
+            var total_marks = parseFloat($('#intermediate_total_mark').val());
+            var obt_marks = parseFloat($('#intermediate_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#intermediate_percentage').val(prs_mark);
+            }
+        });
+        $('#graduate_total_mark, #graduate_mark').keyup(function() {
+            var total_marks = parseFloat($('#graduate_total_mark').val());
+            var obt_marks = parseFloat($('#graduate_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#graduate_percentage').val(prs_mark);
+            }
+        });
+        $('#post_graduate_total_mark, #post_graduate_mark').keyup(function() {
+            var total_marks = parseFloat($('#post_graduate_total_mark').val());
+            var obt_marks = parseFloat($('#post_graduate_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#post_graduate_percentage').val(prs_mark);
+            }
+        });
+        $('#other_graduate_total_mark, #other_graduate_mark').keyup(function() {
+            var total_marks = parseFloat($('#other_graduate_total_mark').val());
+            var obt_marks = parseFloat($('#other_graduate_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#other_graduate_percentage').val(prs_mark);
 
+            }
+
+        });
     </script>
 @endsection
