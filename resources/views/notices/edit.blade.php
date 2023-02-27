@@ -27,18 +27,22 @@
 
                             </div>
                         @endif
-                        <form method="post" action="{{ url('uuc-create-notice') }}" id="formData">
+                        {{-- @php
+                            dd($notice);
+                        @endphp --}}
+                        <form method="post" action="{{ url('/notices/'. $notice->id) }}" id="formData">
                             @csrf
+                            @method('PUT')
                             <div class="row mb-2">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Notice Type<span class="text-danger">*</span></label>
-                                        <select class="form-select form-control notice-type select2" name="notice_type">
-                                            <option value="" selected>Select Notice Type</option>
-                                            <option value="1" class="admission">Admission Notice</option>
-                                            <option value="2" class="exam">College Notice</option>
-                                            <option value="3" class="student">Student Notice</option>
-                                            <option value="4" class="other">Event Notice</option>
+                                        <select class="form-select form-control notice-type select2" name="notice_type" id="notice_type">
+                                            <option value="">Select Notice Type</option>
+                                            <option value="1"{{ $notice->notice_sub_type == 1 ? 'selected' : '' }} class="admission">Admission Notice</option>
+                                            <option value="2" {{ $notice->notice_sub_type == 2 ? 'selected' : '' }}  class="exam">College Notice</option>
+                                            <option value="3" {{ $notice->notice_sub_type == 3 ? 'selected' : '' }}  class="student">Student Notice</option>
+                                            <option value="4" {{ $notice->notice_sub_type == 4 ? 'selected' : '' }} class="other">Event Notice</option>
                                         </select>
 
                                     </div>
@@ -46,13 +50,15 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <div class="form-group input-cont department d-none">
+                                    <div class="form-group input-cont department {{ $notice->notice_sub_type == 1? '' : 'd-none'}}">
                                         <label class="form-label">Department<span class="text-danger">*</span></label>
-                                        <select class="form-select form-control select2" name="department" id="department">
+                                        <select class="form-select form-control select2 {{ $notice->notice_sub_type == 1 ? 'chk_blank' : ''}}" name="department" id="department">
                                             <option value="">Select Department</option>
                                             @foreach ($dept as $item)
-                                                <option value="{{ $item->id }}">{{ $item->course_for }}</option>
-                                            @endforeach
+                                            <option value="{{ $item->id }}"
+                                                {{ $notice->department_id == $item->id ? 'selected' : '' }} >
+                                                {{ $item->course_for }}</option>
+                                        @endforeach
                                         </select>
                                         <span class="error-msg"></span>
                                     </div>
@@ -63,7 +69,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group input-cont course d-none">
                                         <label class="form-label">Course<span class="text-danger">*</span></label>
-                                        <select class="form-select form-control  select2" name="course[]" id="course">
+                                        <select class="form-select form-control  select2" name="course" id="course">
                                             <option value="">Select Course</option>
                                             @foreach ($course as $key => $value)
                                                 <option value="{{ $value->id }}">{{ $value->name }}
@@ -93,7 +99,7 @@
                                     <div class="form-group input-cont start_date">
                                         <label class="form-label">Start date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank fromDate"
-                                            placeholder="Enter Start Date" name="start_date" id="start_date">
+                                            placeholder="Enter Start Date" name="start_date" id="start_date" value="{{ $notice->start_date }}">
                                         <span class="error-msg"></span>
                                     </div>
                                 </div>
@@ -103,7 +109,7 @@
                                     <div class="form-group input-cont end_date ">
                                         <label class="form-label">Expiry date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank toDate"
-                                            placeholder="Enter End Date" name="exp_date" id="exp_date">
+                                            placeholder="Enter End Date" name="exp_date" id="exp_date" value="{{ $notice->exp_date }}">
                                         <span class="error-msg"></span>
                                     </div>
                                 </div>
@@ -115,7 +121,7 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank datepicker-1"
                                             placeholder="Enter Last Date Of Fee Payment" name="fee_payment"
-                                            id="fee_payment">
+                                            id="fee_payment" value="{{$notice->payment_last_date}}">
                                         <span class="error-msg"></span>
                                     </div>
                                 </div>
@@ -134,7 +140,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group input-cont">
                                         <label class="form-label ">Details<span class="text-danger">*</span></label>
-                                        <textarea name="details" id="details" class="form-control chk_blank"></textarea>
+                                        <textarea name="details" id="details" class="form-control chk_blank">{{$notice->details}}</textarea>
                                         <span class="error-msg"></span>
 
                                     </div>
@@ -143,7 +149,7 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-12 text-center mb-4">
-                                    <a href="{{ url('/notices') }}" class="btn btn-danger"
+                                    <a href="{{ url()->previous() }}" class="btn btn-danger"
                                         style="margin-right: 8px;">Cancel</a>
                                     <button type="submit" class="btn btn-info pull-right">Submit</button>
                                 </div>
@@ -236,5 +242,24 @@
                 $(this)[0].submit();
             }
         });
+
+
+
+        $(document).ready(function() {
+            
+  $("#department").show();
+
+  $(".notice-type").on("change", function() {
+    if (this.value == 1) {
+        $("#department").show();
+
+    }else{
+        $("#department").hide();
+    }
+});
+});
+
+       
+      
     </script>
 @endsection

@@ -28,7 +28,7 @@ class NoticesController extends Controller
     {
         $notice = Notice::where([['notice_sub_type', '1'], ['notice_type', 1]])->get();
         $clgNotice = Notice::where([['notice_sub_type', '2'], ['notice_type', 1]])->get();
-        $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->get();
+         $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->get();
         $eventNotice = Notice::where([['notice_sub_type', '4'], ['notice_type', 1]])->get();
 
 
@@ -113,7 +113,8 @@ class NoticesController extends Controller
     {
         $course = Course::all();
         $dept = CourseFor::all();
-        return view('notices.edit', compact('course', 'dept'));
+        $notice=Notice::find($id);
+        return view('notices.edit', compact('course', 'dept','notice'));
     }
 
     /**
@@ -123,9 +124,34 @@ class NoticesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
+        //  return $request;
+        $startDate = Carbon::parse($request->start_date);
+        $startDate->hour   = 00;
+        $startDate->minute = 00;
+        $startDate->second = 01;
+        
+        $expDate = Carbon::parse($request->exp_date);
+        $expDate->hour   = 23;
+        $expDate->minute = 59;
+        $expDate->second = 59;
+        $fee_payment = Carbon::parse($request->fee_payment);
+        $fee_payment->hour   = 23;
+        $fee_payment->minute = 59;
+        $fee_payment->second = 59;
+        $notice = Notice::find($id);
+        $notice->notice_type = 1;
+        $notice->notice_sub_type = $request->notice_type;
+        $notice->department_id = $request->notice_type == 1 ? $request->department : '';
+        $notice->start_date = $startDate;
+        $notice->exp_date = $expDate;
+        $notice->details = $request->details;
+        $notice->payment_last_date = $request->fee_payment != '' ? $fee_payment : '';
+        $notice->session = Carbon::parse($request->exp_date)->format('Y');
+        $notice->save();
 
+        return redirect()->action([NoticesController::class, 'index'])->with('success', 'Notice Updated Successfully');
 
     }
 
