@@ -245,19 +245,19 @@
 
 
 
-        $(document).ready(function() {
+//         $(document).ready(function() {
             
-  $("#department").show();
+//   $("#department").show();
 
-  $(".notice-type").on("change", function() {
-    if (this.value == 1) {
-        $("#department").show();
+//   $(".notice-type").on("change", function() {
+//     if (this.value == 1) {
+//         $("#department").show();
 
-    }else{
-        $("#department").hide();
-    }
-});
-});
+//     }else{
+//         $("#department").hide();
+//     }
+// });
+// });
 
        
       
