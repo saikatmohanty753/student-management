@@ -30,6 +30,9 @@ class NoticesController extends Controller
         $clgNotice = Notice::where([['notice_sub_type', '2'], ['notice_type', 1]])->get();
         $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->get();
         $eventNotice = Notice::where([['notice_sub_type', '4'], ['notice_type', 1]])->get();
+
+       
+        
         return view('notices.notices', compact('notice', 'clgNotice', 'studentNotice', 'eventNotice'));
     }
 
@@ -108,7 +111,7 @@ class NoticesController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -118,10 +121,25 @@ class NoticesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+       
+
     }
+
+    public function status(Request $request)
+    {
+       
+        $status = Notice::find($request->id);
+        $status->is_verified=$request->verified;
+        $status->save();
+        return redirect()->back();
+    }
+
+    // public function verified($id){
+    //     return $verified=Notice::find($id);
+    //     return view('notices.notices', compact('verified'));
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -142,4 +160,7 @@ class NoticesController extends Controller
         }
 
     }
+
+   
+   
 }
