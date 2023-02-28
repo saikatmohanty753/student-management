@@ -398,9 +398,9 @@
                                                     <th> <input type="text" name="hsc_division" class="form-control">
                                                     </th>
                                                     <th> <input type="text" name="hsc_mark" id="hsc_mark"
-                                                            class="form-control"> </th>
+                                                            class="form-control numeric"> </th>
                                                     <th> <input type="text" name="hsc_total_mark" id="hsc_total_mark"
-                                                            class="form-control"> </th>
+                                                            class="form-control numeric"> </th>
                                                     <th> <input type="text" name="hsc_percentage" id="hsc_percentage"
                                                             class="form-control"> </th>
                                                 </tr>
@@ -415,9 +415,9 @@
                                                     <th> <input type="text" name="intermediate_division"
                                                             class="form-control"> </th>
                                                     <th> <input type="text" name="intermediate_mark"
-                                                            id="intermediate_mark" class="form-control"> </th>
+                                                            id="intermediate_mark" class="form-control numeric"> </th>
                                                     <th> <input type="text" name="intermediate_total_mark"
-                                                            id="intermediate_total_mark" class="form-control"> </th>
+                                                            id="intermediate_total_mark" class="form-control numeric"> </th>
                                                     <th> <input type="text" name="intermediate_percentage"
                                                             id="intermediate_percentage" class="form-control"> </th>
                                                 </tr>
@@ -433,9 +433,9 @@
                                                     <th> <input type="text" name="graduate_division"
                                                             class="form-control"> </th>
                                                     <th> <input type="text" name="graduate_mark" id="graduate_mark"
-                                                            class="form-control"> </th>
+                                                            class="form-control numeric"> </th>
                                                     <th> <input type="text" name="graduate_total_mark"
-                                                            id="graduate_total_mark" class="form-control"> </th>
+                                                            id="graduate_total_mark" class="form-control numeric"> </th>
                                                     <th> <input type="text" name="graduate_percentage"
                                                             id="graduate_percentage" class="form-control"> </th>
                                                 </tr>
@@ -450,9 +450,9 @@
                                                     <th> <input type="text" name="post_graduate_division"
                                                             class="form-control"> </th>
                                                     <th> <input type="text" name="post_graduate_mark"
-                                                            id="post_graduate_mark" class="form-control"> </th>
+                                                            id="post_graduate_mark" class="form-control numeric"> </th>
                                                     <th> <input type="text" name="post_graduate_total_mark"
-                                                            id="post_graduate_total_mark" class="form-control"> </th>
+                                                            id="post_graduate_total_mark" class="form-control numeric"> </th>
                                                     <th> <input type="text" name="post_graduate_percentage"
                                                             id="post_graduate_percentage" class="form-control"> </th>
                                                 </tr>
@@ -467,9 +467,9 @@
                                                     <th> <input type="text" name="other_graduate_division"
                                                             class="form-control"> </th>
                                                     <th> <input type="text" name="other_graduate_mark"
-                                                            id="other_graduate_mark" class="form-control"> </th>
+                                                            id="other_graduate_mark" class="form-control numeric"> </th>
                                                     <th> <input type="text" name="other_graduate_total_mark"
-                                                            id="other_graduate_total_mark" class="form-control"> </th>
+                                                            id="other_graduate_total_mark" class="form-control numeric"> </th>
                                                     <th> <input type="text" name="other_graduate_percentage"
                                                             id="other_graduate_percentage" class="form-control"> </th>
                                                 </tr>

@@ -229,9 +229,36 @@
 
         @can('verify-admission-module')
             <li>
+                <a href="#" title="Theme Settings" data-filter-tags="theme settings">
+                    <i class="fal fa-cog"></i>
+                    <span class="nav-link-text" data-i18n="nav.user_management">Admissions</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ url('/applied-admission-list/ug') }}" title="Admission" data-filter-tags="Admission">
+
+                            <span class="nav-link-text" data-i18n="nav.application_admission">UG</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/applied-admission-list/pg') }}" title="Admission" data-filter-tags="Admission">
+
+                            <span class="nav-link-text" data-i18n="nav.application_admission">PG</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/applied-admission-list/certificate') }}" title="Admission" data-filter-tags="Admission">
+
+                            <span class="nav-link-text" data-i18n="nav.application_admission">Certificate</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
                 <a href="{{ url('/applied-admission-list') }}" title="Admission" data-filter-tags="Admission">
                     <i class="fa-solid fa-book-open-reader"></i>
-                    <span class="nav-link-text" data-i18n="nav.application_admission">Verify Admissions</span>
+                    <span class="nav-link-text" data-i18n="nav.application_admission">Admissions-Old</span>
                 </a>
             </li>
         @endcan

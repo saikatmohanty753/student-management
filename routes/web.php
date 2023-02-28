@@ -108,6 +108,10 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('uuc-admission', [AdmissionController::class, 'admissionList']);
     Route::post('draft-student-admission', [AdmissionController::class, 'update']);
 
+    Route::get('applied-admission-list/{dep}', [AdmissionController::class, 'collegeList']);
+    Route::get('applied-admission-list/{dep}/{clg_id}', [AdmissionController::class, 'courseList']);
+    Route::get('applied-admission-list/{dep}/{clg_id}/{course}', [AdmissionController::class, 'applyApplication']);
+
     Route::get('applied-admission-list', [AdmissionController::class, 'appliedAdmissionList']);
     Route::get('uuc-verify-admission/{id}', [AdmissionController::class, 'verifyAdmission']);
     Route::post('uuc-verify-admission', [AdmissionController::class, 'verifyStudentAdmission']);

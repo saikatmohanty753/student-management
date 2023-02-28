@@ -84,7 +84,7 @@
                                 @foreach ($application as $key => $item)
                                 @php
                                     $std = json_decode($item->personal_information);
-                                    
+
                                 @endphp
                                     <tr>
                                         <td>{{ ++$key }}</td>
