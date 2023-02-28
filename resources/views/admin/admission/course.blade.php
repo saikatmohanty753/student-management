@@ -12,7 +12,7 @@
                             <thead>
                                 <tr>
                                     <th>Sl. No.</th>
-                                    <th>College Name</th>
+                                    {{-- <th>College Name</th> --}}
                                     <th>Course Name</th>
                                     <th>View</th>
                                 </tr>
@@ -21,7 +21,7 @@
                                 @foreach ($course as $key => $item)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td>{{ $clg_name }}</td>
+                                        {{-- <td>{{ $clg_name }}</td> --}}
                                         <td>{{ $item->name }}</td>
                                         <td><a href="{{ url('/applied-admission-list/'.$dep.'/'.$clg_id.'/'.$item->id) }}" class="btn btn-info btn-sm">View</a></td>
                                     </tr>

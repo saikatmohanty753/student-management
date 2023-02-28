@@ -715,12 +715,14 @@ class AdmissionController extends Controller
     }
 
     public function collegeList($dep){
-        $student_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1]])->groupBy('clg_id')->get(['clg_id']);
+        $dep_id = $this->depId($dep);
+        $student_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['department_id', $dep_id]])->groupBy('clg_id')->get(['clg_id']);
         $college = College::where('status', 1)->whereIn('id', $student_app)->get(['id', 'name']);
         return view('admin.admission.colleges', compact('college', 'dep'));
     }
     public function courseList($dep, $clg_id){
-        $app_course = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['clg_id', $clg_id]])->groupBy('course_id')->get(['course_id']);
+        $dep_id = $this->depId($dep);
+        $app_course = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['clg_id', $clg_id], ['department_id', $dep_id]])->groupBy('course_id')->get(['course_id']);
         $course = Course::whereIn('id', $app_course)->get(['id', 'name']);
         $clg = College::find($clg_id);
         $clg_name = $clg->name;
@@ -729,16 +731,20 @@ class AdmissionController extends Controller
 
     public function applyApplication($dep, $clg_id, $course_id)
     {
+        $dep_id = $this->depId($dep);
+        $application = StudentApplication::where([['academic_year', date('Y')], ['clg_id', $clg_id], ['department_id', $dep_id], ['course_id', $course_id], ['status', 1]])->get();
+        return view('admin.admission.apply-application', compact('application'));
+    }
+    public function depId($dep){
         if ($dep == 'ug') {
             $dep_id = 1;
-        }elseif($dep == 'pg'){
+        } elseif ($dep == 'pg') {
             $dep_id = 2;
         } elseif ($dep == 'mphill') {
             $dep_id = 3;
         } elseif ($dep == 'certificate') {
             $dep_id = 4;
         }
-        $application = StudentApplication::where([['academic_year', date('Y')], ['clg_id', $clg_id], ['department_id', $dep_id], ['course_id', $course_id], ['status', 1]])->get();
-        return view('admin.admission.apply-application', compact('application'));
+        return $dep_id;
     }
 }
