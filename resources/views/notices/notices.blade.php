@@ -106,7 +106,7 @@
                                                                 <a class="btn btn-outline-primary verified-status"
                                                                     href="javascript:void(0);"
                                                                     data-id="{{ $item->id }}"><i
-                                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                                        class="fas fa-check-circle"></i></a>
                                                             @endif
                                                         @endif
 
@@ -218,7 +218,7 @@
                                                                 <a class="btn btn-outline-primary verified-status"
                                                                     href="javascript:void(0);"
                                                                     data-id="{{ $item->id }}"><i
-                                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                                        class="fas fa-check-circle"></i></a>
                                                             @endif
                                                         @endif
 
@@ -330,7 +330,7 @@
                                                                 <a class="btn btn-outline-primary verified-status"
                                                                     href="javascript:void(0);"
                                                                     data-id="{{ $item->id }}"><i
-                                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                                        class="fas fa-check-circle"></i></a>
                                                             @endif
                                                         @endif
 
@@ -442,7 +442,7 @@
                                                                 <a class="btn btn-outline-primary verified-status"
                                                                     href="javascript:void(0);"
                                                                     data-id="{{ $item->id }}"><i
-                                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                                        class="fas fa-check-circle"></i></a>
                                                             @endif
                                                         @endif
 

@@ -95,4 +95,12 @@ class StudentController extends Controller
         return view('colleges.student', compact('students'));
 
     }
+
+    public function studentview($id){
+
+        // $students = StudentDetails::where('clg_id', Auth::user()->clg_user_id)->get();
+        $students=StudentDetails::where('id',$id)->get();
+
+        return view('colleges.view',compact('students'));
+    }
 }

@@ -16,6 +16,7 @@
                                     <th>Department</th>
                                     <th>Course</th>
                                     <th>Regd. No</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,6 +27,9 @@
                                         <td>{{ $item->department->course_for }}</td>
                                         <td>{{ $item->course->name }}</td>
                                         <td>{{ $item->regd_no }}</td>
+                                        <td><a href="{{ url('student-view/' . $item->id) }}"
+                                            class="btn  waves-effect waves-themed btn-outline-primary">
+                                            <i class="fa-solid fa-eye"></i></a></td>
 
                                     </tr>
                                 @endforeach
