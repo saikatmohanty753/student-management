@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\StudentDetails;
 use App\Models\College;
+use Illuminate\Support\Facades\Auth;
+
 class StudentController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class StudentController extends Controller
     public function index()
     {
         $student = DB::table("roles")->where("");
-       return view('student.index');
+        return view('student.index');
     }
 
     /**
@@ -87,18 +89,10 @@ class StudentController extends Controller
     }
 
     // $user = auth()->user();
-public function studentdetails(){
-    if ($user) {
-        $student = $user->students()->where('clg_id', $college_id)->first();
-    
-        if ($student) {
-            $student_name = $student->name;
-        } 
-
-       
-return view('student.studentdetails');
+    public function clgStudents()
+    {
+        $students = StudentDetails::where('clg_id', Auth::user()->clg_user_id)->get();
+        return view('colleges.student', compact('students'));
 
     }
-}
-
 }
