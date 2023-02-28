@@ -7,6 +7,7 @@ use App\Http\Controllers\SendPDFMail;
 
 use App\Models\AdmissionSeat;
 use App\Models\AffiliationMaster;
+use App\Models\College;
 use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\District;
@@ -295,64 +296,68 @@ class AdmissionController extends Controller
     public function update(Request $request)
     {
 
-        $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
+        $clgId = Auth::user()->clg_user_id;
         if ($this->checkSeatAvl($clgId, $request->course) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
         }
 
         $id = $request->hid;
-        $student = StudentDetails::find($id);
+        $course = Course::find($request->course);
+        $student = StudentApplication::find($id);
+        $student->academic_year = date('Y');
+        $student->admission_date = Carbon::now();
+        $student->clg_id = Carbon::now();
+        $student->clg_id = $clgId;
+        $student->department_id = $course->course_for;
         $student->course_id = $request->course;
-        $student->name = $request->name;
-        $student->email = $request->email;
-        $student->mobile = $request->mobile;
-        $student->mother_name = $request->mother_name;
-        $student->father_name = $request->father_name;
-        $student->gender = $request->gender;
-        $student->dob = Carbon::parse($request->dob);
-        $student->cast = $request->cast_category;
-        $student->specially_abled = $request->specially_abled;
-        $student->aadhaar_no = $request->aadhar_no;
         $student->app_status = 1;
-        $student->save();
 
-        $std_id = $student->id;
-        $address = StudentAddress::find($id);
-        $address->student_id = $std_id;
-        $address->present_state = $request->present_state;
-        $address->present_district_id = $request->present_district;
-        $address->present_pin_code = $request->present_pin_code;
-        $address->present_address = $request->present_address;
-        $address->permanent_state = $request->permanent_state;
-        $address->permanent_district_id = $request->permanent_district;
-        $address->permanent_pin_code = $request->permanent_pin_code;
-        $address->permanent_address = $request->permanent_address;
-        $address->save();
+        $student_details = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'mother_name' => $request->mother_name,
+            'father_name' => $request->father_name,
+            'gender' => $request->gender,
+            'dob' => Carbon::parse($request->dob),
+            'cast' => $request->cast_category,
+            'specially_abled' => $request->specially_abled,
+            'aadhaar_no' => $request->aadhaar_no,
+        ];
+        $present_address = [
+            'present_state' => $request->present_state,
+            'present_district_id' => $request->present_district,
+            'present_pin_code' => $request->present_pin_code,
+            'present_address' => $request->present_address,
 
-        $education = StudentEducationDetails::find($id);
-        $education->student_id = $std_id;
-        $education->clg_name = $request->last_collage_name;
-        $education->year_of_passing = $request->last_passing_year;
-        $education->course_name = $request->last_course_name;
-        $education->is_migration_cert = $request->is_migration;
-        $education->save();
+        ];
+        $permanent_address = [
+            'permanent_state' => $request->permanent_state,
+            'permanent_district_id' => $request->permanent_district,
+            'permanent_pin_code' => $request->permanent_pin_code,
+            'permanent_address' => $request->permanent_address,
+        ];
+        $prv_clg_info = [
+            'clg_name' => $request->last_collage_name,
+            'year_of_passing' => $request->last_passing_year,
+            'course_name' => $request->last_course_name,
+            'is_migration_cert' => $request->is_migration,
+        ];
 
-        $documents = StudentDocuments::find($id);
-        $documents->student_id = $std_id;
+        $documents = [];
         if ($request->file('profile')) {
             $file = $request->file('profile');
             $filename = time() . uniqid(rand()) . $file->getClientOriginalName();
             $file->move(public_path('/student-documents/profile'), $filename);
             $profile = '/student-documents/profile/' . $filename;
-            $documents->photo = $profile;
+            $documents['profile'] = $profile ? $profile : '';
         }
-
         if ($request->file('aadhaar_card')) {
             $file = $request->file('aadhaar_card');
             $filename = time() . uniqid(rand()) . $file->getClientOriginalName();
             $file->move(public_path('/student-documents/aadhaar_card'), $filename);
             $aadhaar_card = '/student-documents/aadhaar_card/' . $filename;
-            $documents->aadhaar_card = $aadhaar_card;
+            $documents['aadhaar_card'] = $aadhaar_card ? $aadhaar_card : '';
         }
 
         if ($request->file('hsc_cert')) {
@@ -360,16 +365,70 @@ class AdmissionController extends Controller
             $filename = time() . uniqid(rand()) . $file->getClientOriginalName();
             $file->move(public_path('/student-documents/hsc_cert'), $filename);
             $hsc_cert = '/student-documents/hsc_cert/' . $filename;
-            $documents->hsc_cert = $hsc_cert;
+            $documents['hsc_cert'] = $hsc_cert ? $hsc_cert : '';
         }
         if ($request->file('migration_cert')) {
             $file = $request->file('migration_cert');
             $filename = time() . uniqid(rand()) . $file->getClientOriginalName();
             $file->move(public_path('/student-documents/migration_cert'), $filename);
             $migration_cert = '/student-documents/migration_cert/' . $filename;
-            $documents->migration_cert = $migration_cert;
+            $documents['migration_cert'] = $migration_cert ? $migration_cert : '';
         }
-        $documents->save();
+        $qualification_details = [
+            'hsc' => [
+                'course' => $request->hsc,
+                'board' => $request->hsc_board,
+                'passing_year' => $request->hsc_passing_year,
+                'division' => $request->hsc_division,
+                'mark' => $request->hsc_mark,
+                'total' => $request->hsc_total_mark,
+                'percentage' => $request->hsc_percentage,
+            ],
+            'intermediate' => [
+                'course' => $request->intermediate,
+                'board' => $request->intermediate_board,
+                'passing_year' => $request->intermediate_passing_year,
+                'division' => $request->intermediate_division,
+                'mark' => $request->intermediate_mark,
+                'total' => $request->intermediate_total_mark,
+                'percentage' => $request->intermediate_percentage,
+            ],
+            'graduate' => [
+                'course' => $request->graduate,
+                'board' => $request->graduate_board,
+                'passing_year' => $request->graduate_passing_year,
+                'division' => $request->graduate_division,
+                'mark' => $request->graduate_mark,
+                'total' => $request->graduate_total_mark,
+                'percentage' => $request->graduate_percentage,
+            ],
+            'postGraduate' => [
+                'course' => $request->post_graduate,
+                'board' => $request->post_graduate_board,
+                'passing_year' => $request->post_graduate_passing_year,
+                'division' => $request->post_graduate_division,
+                'mark' => $request->post_graduate_mark,
+                'total' => $request->post_graduate_total_mark,
+                'percentage' => $request->post_graduate_percentage,
+            ],
+            'other' => [
+                'course' => $request->other_graduate,
+                'board' => $request->other_graduate_board,
+                'passing_year' => $request->other_graduate_passing_year,
+                'division' => $request->other_graduate_division,
+                'mark' => $request->other_graduate_mark,
+                'total' => $request->other_graduate_total_mark,
+                'percentage' => $request->other_graduate_percentage,
+            ],
+        ];
+        $student->personal_information = json_encode($student_details);
+        $student->present_address = json_encode($present_address);
+        $student->permanent_address = json_encode($permanent_address);
+        // $student->permanent_address = json_encode($permanent_address);
+        $student->prv_clg_info = json_encode($prv_clg_info);
+        $student->documents = json_encode($documents);
+        $student->qualification_details = json_encode($qualification_details);
+        $student->save();
         return redirect()->action([AdmissionController::class, 'show'], ['id' => $std_id])->with('success', 'Application saved in draft.');
     }
 
@@ -410,7 +469,7 @@ class AdmissionController extends Controller
     public function admissionList(Request $request)
     {
         $clgId = Auth::user()->clg_user_id;
-        $application = StudentApplication::where('clg_id', $clgId)->where('status', 1)->get();
+        $application = StudentApplication::where('clg_id', $clgId)->get();
 
         $department = CourseFor::all();
         $course = Course::all();
@@ -424,6 +483,7 @@ class AdmissionController extends Controller
         $rejected_application = StudentApplication::where('status', 3)->get();
         return view('admin.admission.index', compact('application', 'verified_application', 'rejected_application'));
     }
+
 
     public function verifyAdmission(Request $request, $id)
     {
@@ -652,5 +712,33 @@ class AdmissionController extends Controller
         }
         // return $notice;
         return view('admission.new-admission', compact('notice'));
+    }
+
+    public function collegeList($dep){
+        $student_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1]])->groupBy('clg_id')->get(['clg_id']);
+        $college = College::where('status', 1)->whereIn('id', $student_app)->get(['id', 'name']);
+        return view('admin.admission.colleges', compact('college', 'dep'));
+    }
+    public function courseList($dep, $clg_id){
+        $app_course = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['clg_id', $clg_id]])->groupBy('course_id')->get(['course_id']);
+        $course = Course::whereIn('id', $app_course)->get(['id', 'name']);
+        $clg = College::find($clg_id);
+        $clg_name = $clg->name;
+        return view('admin.admission.course', compact('course', 'dep', 'clg_id', 'clg_name'));
+    }
+
+    public function applyApplication($dep, $clg_id, $course_id)
+    {
+        if ($dep == 'ug') {
+            $dep_id = 1;
+        }elseif($dep == 'pg'){
+            $dep_id = 2;
+        } elseif ($dep == 'mphill') {
+            $dep_id = 3;
+        } elseif ($dep == 'certificate') {
+            $dep_id = 4;
+        }
+        $application = StudentApplication::where([['academic_year', date('Y')], ['clg_id', $clg_id], ['department_id', $dep_id], ['course_id', $course_id], ['status', 1]])->get();
+        return view('admin.admission.apply-application', compact('application'));
     }
 }
