@@ -668,13 +668,31 @@ class AdmissionController extends Controller
     }
     public function appliedApplication($id)
     {
-
         $district = District::get();
-        $documents = StudentDocuments::where('id', $id)->first();
-        $student  = StudentDetails::where('id', $id)->first();
-        $education = StudentEducationDetails::where('id', $id)->first();
-        $address = StudentAddress::where('id', $id)->first();
-        return view('admission.apply_app', compact('student', 'address', 'education', 'district', 'documents'));
+        $std_app = StudentApplication::find($id);
+        $personal_information = json_decode($std_app->personal_information);
+        $present_address = json_decode($std_app->present_address);
+        $present_address->district = $std_app->presentDis();
+        $permanent_address = json_decode($std_app->permanent_address);
+        $permanent_address->district = $std_app->presentDis();
+        $prv_clg_info = json_decode($std_app->prv_clg_info);
+        $documents = json_decode($std_app->documents);
+        $qualification_details = json_decode($std_app->qualification_details);
+
+        $course =  DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+            ->where('clg_id', Auth::user()->clg_user_id)
+            ->where('admission_year', date('Y'))
+            ->join('courses', 'admission_seats.course_id', 'courses.id')
+            ->where('courses.course_for', $std_app->department_id)
+            ->get();
+
+            $student = StudentDetails::where('id', $id)->first();
+        // $district = District::get();
+        // $documents = StudentDocuments::where('id', $id)->first();
+        // $student  = StudentDetails::where('id', $id)->first();
+        // $education = StudentEducationDetails::where('id', $id)->first();
+        // $address = StudentAddress::where('id', $id)->first();
+        return view('admission.apply_app', compact('std_app', 'present_address', 'personal_information', 'permanent_address', 'course', 'district', 'prv_clg_info', 'qualification_details', 'documents','student'));
     }
 
     public function checkSeatAvl($clg_id, $course_id)

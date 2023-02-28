@@ -47,4 +47,5 @@ class College extends Model
     public static function allCollege(){
         return College::all();
     }
+   
 }
