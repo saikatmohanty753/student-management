@@ -38,59 +38,65 @@
                                                     </td>
                                                 </tr> --}}
                                                 <tr>
+
                                                     <td>
-                                                        Course Name <strong>: {{ $student->course->name }}</strong>
+                                                        <strong>Course Name: {{ $std_app->course->name }}</strong>
                                                     </td>
                                                     <td>
-                                                        Name <strong>: {{ $student->name }}</strong>
+                                                        Name <strong>: {{ $personal_information->name }}</strong>
                                                     </td>
+
                                                 </tr>
                                                 <tr>
+
                                                     <td>
-                                                        Email <strong>: {{ $student->email }}</strong>
+                                                        Father's Name<strong>:
+                                                            {{ $personal_information->father_name }}</strong>
                                                     </td>
+
                                                     <td>
-                                                        Caste Category<strong>: {{ $student->cast }}</strong>
+                                                        Caste Category<strong>: {{ $personal_information->cast }}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         If Specially
-                                                        Abled<strong>:{{ $student->specially_abled == 1 ? 'Yes' : 'No' }}</strong>
+                                                        Abled<strong>:{{ $personal_information->specially_abled == 1 ? 'Yes' : 'No' }}</strong>
                                                     </td>
                                                     <td>
-                                                        Mobile No<strong>: {{ $student->mobile }}</strong>
+                                                        Mobile No<strong>: {{ $personal_information->mobile }}</strong>
                                                     </td>
                                                 </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 d-flex">
+                                <div class="col-sm-6 d-flex">
                                     <div class="table-responsive">
                                         <table class="table table-clean table-sm align-self-end">
                                             <tbody>
                                                 <tr>
-
                                                     <td>
-                                                        Father's Name<strong>: {{ $student->father_name }}</strong>
-                                                    </td>
-
-                                                    <td>
-                                                        Mother's name <strong>: {{ $student->mother_name }}</strong>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        DOB <strong>: {{ $student->dob }}</strong>
+                                                        Email <strong>: {{ $personal_information->email }}</strong>
                                                     </td>
                                                     <td>
-                                                        Gender <strong>: {{ $student->gender }}</strong>
+                                                        Mother's name <strong>:
+                                                            {{ $personal_information->mother_name }}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Aadhar No <strong>: {{ $student->aadhaar_no }}</strong>
+                                                        DOB <strong>: {{ $personal_information->dob }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        Gender <strong>: {{ $personal_information->gender }}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Aadhar No <strong>:
+                                                            {{ $personal_information->aadhaar_no }}</strong>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -116,26 +122,25 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        State <strong>: {{ $address->present_state }}</strong>
+                                                        State <strong>: {{ $present_address->present_state }}</strong>
                                                     </td>
                                                     <td>
-                                                        District <strong>:
-                                                            {{ $address->presentDistrict->district_name }}</strong>
+                                                        District <strong>: {{ $present_address->district }}</strong>
                                                     </td>
                                                     <td>
-                                                        Pincode<strong>: {{ $address->present_pin_code }}</strong>
+                                                        Pincode<strong>: {{ $present_address->present_pin_code }}</strong>
                                                     </td>
                                                     <td>
 
-                                                        Present Address<strong>: {{ $address->present_address }}</strong>
+                                                        Present Address<strong>:
+                                                            {{ $present_address->present_address }}</strong>
                                                     </td>
                                                 </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+
 
                             </div>
                         </div>
@@ -155,20 +160,19 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        State <strong>: {{ $address->permanent_state }}</strong>
+                                                        State <strong>: {{ $permanent_address->permanent_state }}</strong>
                                                     </td>
                                                     <td>
-                                                        District <strong>:
-                                                            {{ $address->permanentDistrict->district_name }}</strong>
+                                                        District <strong>: {{ $present_address->district }}</strong>
                                                     </td>
                                                     <td>
                                                         <strong>Pincode<strong>:
-                                                                {{ $address->permanent_pin_code }}</strong>
+                                                                {{ $permanent_address->permanent_pin_code }}</strong>
                                                     </td>
                                                     <td>
 
                                                         Permanent Address <strong>:
-                                                            {{ $address->permanent_address }}</strong>
+                                                            {{ $permanent_address->permanent_address }}</strong>
                                                     </td>
                                                 </tr>
 
@@ -197,20 +201,20 @@
                                                 <tr>
                                                     <td>
                                                         Last Attended College Name
-                                                        <strong>: {{ $education->clg_name }}</strong>
+                                                        <strong>: {{ $prv_clg_info->clg_name }}</strong>
                                                     </td>
                                                     <td>
                                                         Year of Passing Last Exam
-                                                        <strong>: {{ $education->year_of_passing }}</strong>
+                                                        <strong>: {{ $prv_clg_info->year_of_passing }}</strong>
                                                     </td>
                                                     <td>
                                                         Last Pursued Course Name
-                                                        <strong>: {{ $education->course_name }}</strong>
+                                                        <strong>: {{ $prv_clg_info->course_name }}</strong>
                                                     </td>
                                                     <td>
                                                         Migration Certificate is availiable
                                                         <strong>:
-                                                            {{ $education->is_migration_cert == 0 ? 'No' : 'Yes' }}</strong>
+                                                            {{ $prv_clg_info->is_migration_cert == 0 ? 'No' : 'Yes' }}</strong>
                                                     </td>
                                                 </tr>
 
@@ -223,10 +227,12 @@
 
                             </div>
                         </div>
+
                         <div
                             class="panel-content d-flex py-2 mt-2 border-faded border-left-0 border-right-0 text-muted bg-success-500">
                             <h6 class="text-light">
-                                College Information
+                                Qualification Details
+
                             </h6>
                         </div>
                         <div class="panel-tag border-left-0">
@@ -238,34 +244,229 @@
                                         <table class="table table-clean table-sm align-self-end">
                                             <tbody>
                                                 <tr>
+                                                    <th>
+                                                        Name of the Examinations
+                                                        Passed
+                                                        
+                                                    </th>
+                                                    <th>
+                                                        University/
+                                                        Council / Board
+                                                        
+                                                    </th>
+                                                    <th>
+                                                        Year of Passing
+                                                        
+                                                    </th>
+                                                    <th>
+                                                        Divn. and Distn.
+                                                        
+                                                    </th>
+                                                    <th>
+                                                        Marks secured
+                                                        
+                                                    </th>
+                                                    <th>
+                                                        Maximum marks
+                                                        
+                                                    </th>
+                                                    <th>
+                                                        % of Marks
+                                                        
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
                                                     <td>
-                                                        Last Attended College Name
-                                                        <strong>: {{ $education->clg_name }}</strong>
+                                                      
+                                                        <strong> {{ $qualification_details->hsc->course }}</strong>
                                                     </td>
                                                     <td>
-                                                        Year of Passing Last Exam
-                                                        <strong>: {{ $education->year_of_passing }}</strong>
+                                                       
+                                                        <strong> {{ $qualification_details->hsc->board }}</strong>
                                                     </td>
                                                     <td>
-                                                        Last Pursued Course Name
-                                                        <strong>: {{ $education->course_name }}</strong>
+                                                        
+                                                        <strong> {{ $qualification_details->hsc->passing_year }}</strong>
                                                     </td>
                                                     <td>
-                                                        Migration Certificate is availiable
-                                                        <strong>:
-                                                            {{ $education->is_migration_cert == 0 ? 'No' : 'Yes' }}</strong>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->hsc->division }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong>
+                                                            {{ $qualification_details->hsc->mark }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->intermediate->total }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->hsc->percentage }}</strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                      
+                                                        <strong> {{ $qualification_details->intermediate->course }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong> {{ $qualification_details->intermediate->board }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong> {{ $qualification_details->intermediate->passing_year }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->intermediate->division }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong>
+                                                            {{ $qualification_details->intermediate->mark }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->intermediate->total }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->intermediate->percentage }}</strong>
                                                     </td>
                                                 </tr>
 
 
+                                                <tr>
+                                                    <td>
+                                                      
+                                                        <strong> {{ $qualification_details->intermediate->course }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong> {{ $qualification_details->graduate->board }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong> {{ $qualification_details->graduate->passing_year }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->graduate->division }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong>
+                                                            {{ $qualification_details->graduate->mark }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->graduate->total }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->graduate->percentage }}</strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                      
+                                                        <strong>{{ $qualification_details->postGraduate->course }} </strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong> {{ $qualification_details->postGraduate->board }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong> {{ $qualification_details->postGraduate->passing_year }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->postGraduate->division }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong>
+                                                            {{ $qualification_details->postGraduate->mark }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->postGraduate->total }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{ $qualification_details->postGraduate->percentage }}</strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                      
+                                                        <strong>{{ $qualification_details->other->course }} </strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong> {{$qualification_details->other->board }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong> {{$qualification_details->other->passing_year }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{$qualification_details->other->division }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        <strong>
+                                                            {{$qualification_details->other->mark }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{$qualification_details->other->total }}</strong>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                        <strong>
+                                                            {{$qualification_details->other->percentage }}</strong>
+                                                    </td>
+                                                </tr>
 
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                               
 
                             </div>
                         </div>
+
+
+
+
+
+
+
 
                         <div
                             class="panel-content d-flex py-2 mt-2 border-faded border-left-0 border-right-0 text-muted bg-success-500">
@@ -284,8 +485,8 @@
                                                 <tr>
                                                     <td>
                                                         Photo <strong>: <strong>:<a href="javascript:void(0)"
-                                                                    onclick="upload_image_view('{{ asset($documents->photo) }}')">
-                                                                    {{ !empty($documents->photo) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
+                                                                    onclick="upload_image_view('{{ asset($documents->profile) }}')">
+                                                                    {{ !empty($documents->profile) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
                                                     </td>
                                                     <td>
                                                         Aadhaar Card <strong>: <strong>:<a href="javascript:void(0)"
@@ -311,16 +512,11 @@
                                     </div>
                                 </div>
 
-
                             </div>
                         </div>
 
-                        <div class="panel-content border-faded border-top-0 border-left-0 border-right-0 border-bottom-0 d-flex flex-row justify-content-center">
-                        <a href="{{ url('uuc-admission') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
 
-
-                    </div>
-
+                      
 
 
                     </div>
