@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\StudentDetails;
+use App\Models\College;
 class StudentController extends Controller
 {
     /**
@@ -83,4 +85,19 @@ class StudentController extends Controller
     {
         //
     }
+
+    // $user = auth()->user();
+
+    if ($user) {
+        $student = $user->students()->where('college_id', $college_id)->first();
+    
+        if ($student) {
+            $student_name = $student->name;
+        } 
+
+       
+return view('student.studentdetails','student');
+
+    }
+
 }

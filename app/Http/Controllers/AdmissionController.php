@@ -588,13 +588,13 @@ class AdmissionController extends Controller
             ->where('courses.course_for', $std_app->department_id)
             ->get();
 
-       
+            $student = StudentDetails::where('id', $id)->first();
         // $district = District::get();
         // $documents = StudentDocuments::where('id', $id)->first();
         // $student  = StudentDetails::where('id', $id)->first();
         // $education = StudentEducationDetails::where('id', $id)->first();
         // $address = StudentAddress::where('id', $id)->first();
-        return view('admission.apply_app', compact('std_app', 'present_address', 'personal_information', 'permanent_address', 'course', 'district', 'prv_clg_info', 'qualification_details', 'documents'));
+        return view('admission.apply_app', compact('std_app', 'present_address', 'personal_information', 'permanent_address', 'course', 'district', 'prv_clg_info', 'qualification_details', 'documents','student'));
     }
 
     public function checkSeatAvl($clg_id, $course_id)

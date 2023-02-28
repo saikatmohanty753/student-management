@@ -124,6 +124,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::get('depcou', [AdmissionController::class, 'depcou']);
 
+    Route::get('student-details-college', [StudentController::class, 'studentdetails']);
+
 
 
 

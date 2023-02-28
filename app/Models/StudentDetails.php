@@ -60,4 +60,7 @@ class StudentDetails extends Model
         }
 
     }
+
+    
+
 }

@@ -236,6 +236,12 @@
             </li>
         @endcan
         <li>
+            <a href="{{ url('/student-details-college') }}" title="Student Details" data-filter-tags="Admission">
+                <i class="fa-solid fa-book-open-reader"></i>
+                <span class="nav-link-text" data-i18n="nav.application_admission">Student Details</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ url('/academic-course-structure') }}" title="Admission" data-filter-tags="Admission">
                 <i class="fa-solid fa-book-open-reader"></i>
                 <span class="nav-link-text" data-i18n="nav.application_admission">Course Structure</span>
