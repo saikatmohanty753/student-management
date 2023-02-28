@@ -87,17 +87,18 @@ class StudentController extends Controller
     }
 
     // $user = auth()->user();
-
+public function studentdetails(){
     if ($user) {
-        $student = $user->students()->where('college_id', $college_id)->first();
+        $student = $user->students()->where('clg_id', $college_id)->first();
     
         if ($student) {
             $student_name = $student->name;
         } 
 
        
-return view('student.studentdetails','student');
+return view('student.studentdetails');
 
     }
+}
 
 }
