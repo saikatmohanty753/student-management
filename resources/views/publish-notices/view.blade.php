@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @if ($data->notice_type == 1)
+    @if ($data->notice_sub_type == 1)
         <div class="card-body">
             <div class="alert alert-primary">
                 <div class="d-flex flex-start w-100">
@@ -26,9 +26,7 @@
                 </div>
             </div>
         </div>
-    @elseif($data->notice_type == 2)
-
-    @elseif($data->notice_type == 3)
+    @elseif($data->notice_sub_type == 2 || $data->notice_sub_type == 4)
         <div class="card-body">
             <div class="alert alert-primary">
                 <div class="d-flex flex-start w-100">

@@ -30,9 +30,6 @@ class NoticesController extends Controller
         $clgNotice = Notice::where([['notice_sub_type', '2'], ['notice_type', 1]])->get();
          $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->get();
         $eventNotice = Notice::where([['notice_sub_type', '4'], ['notice_type', 1]])->get();
-
-
-
         return view('notices.notices', compact('notice', 'clgNotice', 'studentNotice', 'eventNotice'));
     }
 
@@ -131,7 +128,7 @@ class NoticesController extends Controller
         $startDate->hour   = 00;
         $startDate->minute = 00;
         $startDate->second = 01;
-        
+
         $expDate = Carbon::parse($request->exp_date);
         $expDate->hour   = 23;
         $expDate->minute = 59;

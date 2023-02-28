@@ -14,9 +14,9 @@
 
                         <ul class="nav nav-tabs nav-tabs-clean" role="tablist">
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab-academic-notice"
-                                    role="tab" aria-selected="true">Academic Notices </a></li>
+                                    role="tab" aria-selected="true">Notices </a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-other-notices"
-                                    role="tab" aria-selected="false">Other Notices</a></li>
+                                    role="tab" aria-selected="false">Event Notices</a></li>
 
                         </ul>
                         <div class="tab-content p-3">
@@ -29,31 +29,18 @@
                                             <tr class="text-dark">
                                                 <th style="width: 10%;">Sl. No</th>
                                                 <th>Notice Type</th>
-                                                <th>Department</th>
+                                                <th>Published Date</th>
                                                 <th>Details</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @if (!empty($notice))
                                                 @foreach ($notice as $key => $item)
-                                                    @php
-                                                        if ($item->notice_type == 1) {
-                                                            $notice_type = 'Admission Notice';
-                                                            $color = 'badge-primary';
-                                                        } elseif ($item->notice_type == 2) {
-                                                            $notice_type = 'Exam Notice';
-                                                            $color = 'badge-success';
-                                                        } else {
-                                                            $notice_type = 'Other Notice';
-                                                            $color = 'badge-info';
-                                                        }
-                                                    @endphp
                                                     <tr>
                                                         <td>{{ ++$key }}</td>
-                                                        <td><span
-                                                                class="badge {{ $color }}">{{ $notice_type }}</span>
+                                                        <td><span class="badge badge-primary">College Notice</span>
                                                         </td>
-                                                        <td>{{ $item->department_id != '' ? $item->department->course_for : '' }}
+                                                        <td>{{ \Carbon\Carbon::parse($item->published_date)->format('d-m-Y') }}
                                                         </td>
                                                         <td><a href="{{ url('view-notice/' . $item->id . '/' . $item->notification_id) }}"
                                                                 class="btn  waves-effect waves-themed btn-outline-primary">
@@ -85,25 +72,11 @@
 
                                             @if (!empty($OtherNotice))
                                                 @foreach ($OtherNotice as $key => $item)
-                                                    @php
-                                                        if ($item->notice_type == 1) {
-                                                            $notice_type = 'Admission Notice';
-                                                            $color = 'badge-primary';
-                                                        } elseif ($item->notice_type == 2) {
-                                                            $notice_type = 'Exam Notice';
-                                                            $color = 'badge-success';
-                                                        } else {
-                                                            $notice_type = 'Other Notice';
-                                                            $color = 'badge-info';
-                                                        }
-                                                    @endphp
                                                     <tr>
                                                         <td>{{ ++$key }}</td>
-                                                        <td><span
-                                                                class="badge {{ $color }}">{{ $notice_type }}</span>
+                                                        <td><span class="badge badge-primary">Event Notice</span>
                                                         </td>
-                                                        <td>
-                                                            {{ Str::limit($item->details, 30) }}
+                                                        <td>{{ \Carbon\Carbon::parse($item->published_date)->format('d-m-Y') }}
                                                         </td>
                                                         <td><a href="{{ url('view-notice/' . $item->id . '/' . $item->notification_id) }}"
                                                                 class="btn  waves-effect waves-themed btn-outline-primary">

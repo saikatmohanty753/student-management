@@ -40,25 +40,32 @@
                                 <tbody>
                                     @foreach ($application as $key => $item)
                                         <tr>
+                                             @php
+                                                $std = json_decode($item->personal_information);
+                                            @endphp
+
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $item->collegeName() }}</td>
                                             <td>{{ $item->department->course_for }}</td>
                                             <td>{{ $item->course->name }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->gender }}</td>
-                                            <td>{{ $item->mobile }}</td>
+                                            <td>{{ $std ? $std->name : '' }}</td>
+                                            <td>{{ $std ? $std->gender : '' }}</td>
+                                            <td>{{ $std ? $std->mobile : '' }}</td>
                                             <td>
                                                 <span
                                                     class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                             </td>
-                                            <td><a href="{{ url('/uuc-verify-admission/'. $item->id) }}" class="btn btn-outline-success waves-effect waves-themed"><i class="fa-solid fa-eye"></i></a></td>
+                                            <td><a href="{{ url('/uuc-verify-admission/' . $item->id) }}"
+                                                    class="btn btn-outline-success waves-effect waves-themed"><i
+                                                        class="fa-solid fa-eye"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="verified-application" role="tabpanel" aria-labelledby="verified-application">
+                    <div class="tab-pane fade" id="verified-application" role="tabpanel"
+                        aria-labelledby="verified-application">
                         <div class="table-responsive">
                             <table class="text-fade table table-bordered display no-footer dt-table">
                                 <thead>
@@ -70,8 +77,8 @@
                                         <th>Student Name</th>
                                         <th>Gender</th>
                                         <th>Contact No</th>
-                                        <th>Registration Number</th>
-                                        <th>Roll Number</th>
+                                        {{-- <th>Registration Number</th>
+                                        <th>Roll Number</th> --}}
                                         {{-- <th>Application Status</th> --}}
                                         <th>View</th>
                                     </tr>
@@ -79,20 +86,26 @@
                                 <tbody>
                                     @foreach ($verified_application as $key => $item)
                                         <tr>
+
+                                            @php
+                                                $std = json_decode($item->personal_information);
+                                            @endphp
+
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $item->collegeName() }}</td>
                                             <td>{{ $item->department->course_for }}</td>
                                             <td>{{ $item->course->name }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->gender }}</td>
-                                            <td>{{ $item->mobile }}</td>
-                                            <td>{{  $item->regd_no != '' ? $item->regd_no : ''  }}</td>
-                                            <td>{{  $item->roll_no != '' ? $item->roll_no : ''  }}</td>
+                                            <td>{{ $std ? $std->name : '' }}</td>
+                                            <td>{{ $std ? $std->gender : '' }}</td>
+                                            <td>{{ $std ? $std->mobile : '' }}</td>
+                                            {{-- <td>{{ $item->regd_no != '' ? $item->regd_no : '' }}</td>
+                                            <td>{{ $item->roll_no != '' ? $item->roll_no : '' }}</td> --}}
                                             {{-- <td>
                                                 <span
                                                     class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                             </td> --}}
-                                            <td><a href="{{ url('/uuc-applicant-admission-details/'. $item->id) }}"><i class="fa-solid fa-eye"></i> View</a></td>
+                                            <td><a href="{{ url('/uuc-applicant-admission-details/' . $item->id) }}"><i
+                                                        class="fa-solid fa-eye"></i> View</a></td>
 
                                         </tr>
                                     @endforeach
@@ -101,7 +114,8 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane fade" id="rejected-application" role="tabpanel" aria-labelledby="rejected-application">
+                    <div class="tab-pane fade" id="rejected-application" role="tabpanel"
+                        aria-labelledby="rejected-application">
                         <div class="table-responsive">
                             <table class="text-fade table table-bordered display no-footer dt-table">
                                 <thead>
@@ -120,18 +134,23 @@
                                 <tbody>
                                     @foreach ($rejected_application as $key => $item)
                                         <tr>
+                                            @php
+                                                $std = json_decode($item->personal_information);
+                                            @endphp
+
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $item->collegeName() }}</td>
                                             <td>{{ $item->department->course_for }}</td>
                                             <td>{{ $item->course->name }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->gender }}</td>
-                                            <td>{{ $item->mobile }}</td>
+                                            <td>{{ $std ? $std->name : '' }}</td>
+                                            <td>{{ $std ? $std->gender : '' }}</td>
+                                            <td>{{ $std ? $std->mobile : '' }}</td>
                                             <td>
                                                 <span
                                                     class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                             </td>
-                                            <td><a href="{{ url('/uuc-applicant-admission-details/'. $item->id) }}"><i class="fa-solid fa-eye"></i> View</a></td>
+                                            <td><a href="{{ url('/uuc-applicant-admission-details/' . $item->id) }}"><i
+                                                        class="fa-solid fa-eye"></i> View</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

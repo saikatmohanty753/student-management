@@ -27,6 +27,7 @@ class CreateStudentApplicationsTable extends Migration
             $table->text('qualification_details')->nullable();
             $table->text('documents')->nullable();
             $table->enum('app_status', ['0', '1'])->default('0');
+            $table->integer('status')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
         });

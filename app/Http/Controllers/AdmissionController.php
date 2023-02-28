@@ -100,14 +100,11 @@ class AdmissionController extends Controller
      */
     public function store(Request $request)
     {
-
-        // return $request;
         $clgId = Auth::user()->clg_user_id;
         if ($this->checkSeatAvl($clgId, $request->course) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
         }
         $course = Course::find($request->course);
-
         $student = new StudentApplication();
         $student->academic_year = date('Y');
         $student->admission_date = Carbon::now();
@@ -234,6 +231,7 @@ class AdmissionController extends Controller
         $student->documents = json_encode($documents);
         $student->qualification_details = json_encode($qualification_details);
         $student->save();
+        // return $student;
         return redirect()->action([AdmissionController::class, 'show'], ['id' => $student->id])->with('success', 'Application saved in draft.');
     }
 
@@ -387,12 +385,12 @@ class AdmissionController extends Controller
     }
     public function apply(Request $request)
     {
-
-        $application = StudentDetails::find($request->id);
-        $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
+        $application = StudentApplication::find($request->id);
+        $clgId = Auth::user()->clg_user_id;
         if ($this->checkSeatAvl($clgId, $application->course_id) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
         }
+
         $application->status = 1;
         $application->app_status = 2;
         $application->save();
@@ -411,8 +409,8 @@ class AdmissionController extends Controller
     }
     public function admissionList(Request $request)
     {
-        $clgId = Auth::user()->clg_user_id == '' ? '000' : Auth::user()->clg_user_id;
-        $application = StudentDetails::where('clg_id', $clgId)->get();
+        $clgId = Auth::user()->clg_user_id;
+        $application = StudentApplication::where('clg_id', $clgId)->where('status', 1)->get();
 
         $department = CourseFor::all();
         $course = Course::all();
@@ -421,20 +419,40 @@ class AdmissionController extends Controller
 
     public function appliedAdmissionList(Request $request)
     {
-        $application = StudentDetails::where('status', 1)->get();
-        $verified_application = StudentDetails::where('status', 2)->get();
-        $rejected_application = StudentDetails::where('status', 3)->get();
+        $application = StudentApplication::where('status', 1)->get();
+        $verified_application = StudentApplication::where('status', 2)->get();
+        $rejected_application = StudentApplication::where('status', 3)->get();
         return view('admin.admission.index', compact('application', 'verified_application', 'rejected_application'));
     }
 
     public function verifyAdmission(Request $request, $id)
     {
-        $student = StudentDetails::where('id', $id)->first();
+        /*  $student = StudentDetails::where('id', $id)->first();
         $education = StudentEducationDetails::where('id', $id)->first();
         $address = StudentAddress::where('id', $id)->first();
         $documents = StudentDocuments::where('id', $id)->first();
 
-        return view('admin.admission.verify', compact('id', 'student', 'address', 'education', 'documents'));
+        return view('admin.admission.verify', compact('id', 'student', 'address', 'education', 'documents')); */
+
+        $std_app = StudentApplication::find($id);
+        $personal_information = json_decode($std_app->personal_information);
+        $present_address = json_decode($std_app->present_address);
+        $present_address->district = $std_app->presentDis();
+        $permanent_address = json_decode($std_app->permanent_address);
+        $permanent_address->district = $std_app->presentDis();
+        $prv_clg_info = json_decode($std_app->prv_clg_info);
+        $documents = json_decode($std_app->documents);
+        $qualification_details = json_decode($std_app->qualification_details);
+        // return $app->course;
+        return view('admin.admission.verify', compact(
+            'std_app',
+            'personal_information',
+            'present_address',
+            'permanent_address',
+            'prv_clg_info',
+            'documents',
+            'qualification_details'
+        ));
     }
 
     public function verifyStudentAdmission(Request $request)

@@ -143,7 +143,7 @@
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label">Aadhaar No <span class="text-danger">*</span></label>
-                                            <input name="aadhar_no" type="text"
+                                            <input name="aadhaar_no" type="text"
                                                 class="form-control chk_blank chk_aadhaar" id="aadhaar">
                                             <span class="error-msg"></span>
                                         </div>
@@ -592,7 +592,7 @@
         });
     </script>
     <script>
-        $("#formData").on('submit', function(e) {
+        $("#formData1").on('submit', function(e) {
 
             e.preventDefault();
             var validation = [];

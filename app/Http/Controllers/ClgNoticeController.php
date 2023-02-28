@@ -17,31 +17,35 @@ class ClgNoticeController extends Controller
      */
     public function index()
     {
+
         $notification =  Auth::user()->Notifications;
         $noticeIds = [];
         foreach ($notification as $key => $value) {
-            $noticeIds[] = [
-                'notice_id' => $value['data']['notice_id'],
-                'notification_id' => $value->id
-            ];
+            if ($value['data']['notice_type_id'] == 1) {
+                if ($value['data']['notice_sub_type_id'] == 2 || $value['data']['notice_sub_type_id'] == 4) {
+                    $noticeIds[] = [
+                        'notice_id' => $value['data']['notice_id'],
+                        'notification_id' => $value->id
+                    ];
+                }
+            }
         }
         $notice = [];
-        foreach ($noticeIds as $value) {
-            $data = Notice::where('id', $value['notice_id'])->where('exp_date', '>=', Carbon::now())->where('notice_type', '1')->first();
+        foreach ($noticeIds as $item) {
+            $data = Notice::where('id', $item['notice_id'])->first();
             if ($data) {
-                $data['notification_id'] = $value['notification_id'];
+                $data['notification_id'] = $item['notification_id'];
                 $notice[] = $data;
             }
         }
         $OtherNotice = [];
         foreach ($noticeIds as $item) {
-            $data = Notice::where('id', $item['notice_id'])->where('notice_type', '3')->first();
+            $data = Notice::where('id', $item['notice_id'])->where([['notice_type', '1'], ['notice_sub_type', 4]])->first();
             if ($data) {
                 $data['notification_id'] = $item['notification_id'];
                 $OtherNotice[] = $data;
             }
         }
-
         return view('publish-notices.index', compact('notice', 'OtherNotice'));
     }
 
