@@ -255,17 +255,17 @@
 
                 </ul>
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ url('/applied-admission-list') }}" title="Admission" data-filter-tags="Admission">
                     <i class="fa-solid fa-book-open-reader"></i>
                     <span class="nav-link-text" data-i18n="nav.application_admission">Admissions-Old</span>
                 </a>
-            </li>
+            </li> --}}
         @endcan
         <li>
-            <a href="{{ url('/student-details-college') }}" title="Student Details" data-filter-tags="Admission">
+            <a href="{{ url('/college-students') }}" title="Student Details" data-filter-tags="Admission">
                 <i class="fa-solid fa-book-open-reader"></i>
-                <span class="nav-link-text" data-i18n="nav.application_admission">Student Details</span>
+                <span class="nav-link-text" data-i18n="nav.application_admission">Students</span>
             </a>
         </li>
         <li>

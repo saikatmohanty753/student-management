@@ -4,7 +4,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Course wise admission application of <b>{{ $clg_name }}</b></h5>
+                    <h5 class="card-title mb-0">College List</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -12,18 +12,21 @@
                             <thead>
                                 <tr>
                                     <th>Sl. No.</th>
-                                    {{-- <th>College Name</th> --}}
-                                    <th>Course Name</th>
-                                    <th>View</th>
+                                    <th>Student Name</th>
+                                    <th>Department</th>
+                                    <th>Course</th>
+                                    <th>Regd. No</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($course as $key => $item)
+                                @foreach ($students as $key => $item)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        {{-- <td>{{ $clg_name }}</td> --}}
                                         <td>{{ $item->name }}</td>
-                                        <td><a href="{{ url('/applied-admission-list/'.$dep.'/'.$clg_id.'/'.$item->id) }}" class="btn btn-info btn-sm">View</a></td>
+                                        <td>{{ $item->department->course_for }}</td>
+                                        <td>{{ $item->course->name }}</td>
+                                        <td>{{ $item->regd_no }}</td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
