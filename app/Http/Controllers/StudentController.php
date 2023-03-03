@@ -91,6 +91,7 @@ class StudentController extends Controller
     // $user = auth()->user();
     public function clgStudents()
     {
+        
         $students = StudentDetails::where('clg_id', Auth::user()->clg_user_id)->get();
         return view('colleges.student', compact('students'));
 
@@ -103,4 +104,73 @@ class StudentController extends Controller
 
         return view('colleges.view',compact('students'));
     }
+
+    public function departmentview(){
+
+        
+        $departmentview=StudentDetails::select('department_id')
+    ->where('clg_id', Auth::user()->clg_user_id)
+    ->distinct()
+    ->get();
+
+
+        return view('colleges.department',compact('departmentview'));
+    }
+
+    
+
+    public function courseview($department_id){
+
+        
+ 
+
+     $courseview = StudentDetails::where([['clg_id', Auth::user()->clg_user_id],['department_id', $department_id]])->groupby('course_id')->distinct()->get(['course_id','department_id','batch_year']);
+
+
+        return view('colleges.course',compact('courseview'));
+    }
+
+    public function studentincourseview($department_id,$course_id){
+        //  $currunt_year = date("Y");
+        
+         $studentincourseview = StudentDetails::select('name','id','batch_year')
+    ->where('clg_id', Auth::user()->clg_user_id)
+    ->where('department_id', $department_id)
+    ->where('course_id', $course_id)
+    // ->where('batch_year','like','%'.$currunt_year.'%')
+    // ->distinct()
+    ->get();
+
+        $course_id =$course_id;
+        $department_id =$department_id;
+
+        return view('colleges.studentincourse',compact('studentincourseview','course_id','department_id'));
+    }
+    public function filterstudent(Request $res){
+        // return $res;
+        $from = date('Y', strtotime($res->filterstudent));
+        $to = date('Y', strtotime($res->studentinbatchyear));
+        $search_year=$from.'-'.$to;
+
+
+ $results = StudentDetails::
+    where('clg_id', Auth::user()->clg_user_id)
+    ->where('department_id', $res->deprt_id)
+    ->where('course_id', $res->course_id)
+    ->where('batch_year','like','%'.$search_year.'%')
+    // ->distinct()
+    ->get();
+
+// $results = StudentDetails::where('batch_year', 'LIKE', $search_year)->get(['results']);
+
+
+return view('colleges.filterstudent',compact('results'));
+        
+               
+
+        
+    }
+
+
+
 }

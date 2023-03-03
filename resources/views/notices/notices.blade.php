@@ -545,7 +545,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <a class="btn btn-danger" href="{{ url('/notices') }}">Cancel</a>
+                                <a class="btn btn-danger" href="#" data-dismiss="modal">Cancel</a>
                                 <button type="submit" class="btn btn-info pull-right">Submit</button>
                             </div>
                         </form>

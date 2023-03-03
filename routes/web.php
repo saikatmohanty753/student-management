@@ -132,6 +132,14 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::get('student-view/{id}', [StudentController::class, 'studentview']);
 
+    Route::get('department-view', [StudentController::class, 'departmentview']);
+
+    Route::get('course-view/{department_id}', [StudentController::class, 'courseview']);
+
+    Route::get('student-view/{department_id}/{course_id}', [StudentController::class, 'studentincourseview']);
+
+    Route::post('filterstudent', [StudentController::class, 'filterstudent']);
+
 
 
 
