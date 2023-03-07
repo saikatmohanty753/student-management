@@ -69,7 +69,10 @@ class AdmissionController extends Controller
 
     public function index($id, $dep, $depId)
     {
-        $count = Notice::whereDate('start_date', '>=', Carbon::now())->whereDate('exp_date', '>', Carbon::now())->where('id', $id)->count();
+        $count = Notice::whereDate('start_date', '<=', Carbon::now())
+            ->whereDate('exp_date', '>', Carbon::now())
+            ->where('id', $id)
+            ->count();
         if ($count == 0) {
             return redirect()->intended('dashboard')->with('error', 'Now the admission process has been stopped.');
         }
@@ -643,7 +646,7 @@ class AdmissionController extends Controller
         file_put_contents('registration_card/' . $reg_no . '.pdf', $pdf->output());
         // $to_email = $user['to'];
         // Mail::to($to_email)->send(new SendPDFMail($pdf));
-       /*  if ($issued == 1) {
+        /*  if ($issued == 1) {
             FacadesMail::send('pdf.test', $data, function ($message) use ($pdf, $user) {
                 $message->to($user['to'])
 
@@ -686,13 +689,13 @@ class AdmissionController extends Controller
             ->where('courses.course_for', $std_app->department_id)
             ->get();
 
-            $student = StudentDetails::where('id', $id)->first();
+        $student = StudentDetails::where('id', $id)->first();
         // $district = District::get();
         // $documents = StudentDocuments::where('id', $id)->first();
         // $student  = StudentDetails::where('id', $id)->first();
         // $education = StudentEducationDetails::where('id', $id)->first();
         // $address = StudentAddress::where('id', $id)->first();
-        return view('admission.apply_app', compact('std_app', 'present_address', 'personal_information', 'permanent_address', 'course', 'district', 'prv_clg_info', 'qualification_details', 'documents','student'));
+        return view('admission.apply_app', compact('std_app', 'present_address', 'personal_information', 'permanent_address', 'course', 'district', 'prv_clg_info', 'qualification_details', 'documents', 'student'));
     }
 
     public function checkSeatAvl($clg_id, $course_id)
@@ -732,13 +735,15 @@ class AdmissionController extends Controller
         return view('admission.new-admission', compact('notice'));
     }
 
-    public function collegeList($dep){
+    public function collegeList($dep)
+    {
         $dep_id = $this->depId($dep);
         $student_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['department_id', $dep_id]])->groupBy('clg_id')->get(['clg_id']);
         $college = College::where('status', 1)->whereIn('id', $student_app)->get(['id', 'name']);
         return view('admin.admission.colleges', compact('college', 'dep'));
     }
-    public function courseList($dep, $clg_id){
+    public function courseList($dep, $clg_id)
+    {
         $dep_id = $this->depId($dep);
         $app_course = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['clg_id', $clg_id], ['department_id', $dep_id]])->groupBy('course_id')->get(['course_id']);
         $course = Course::whereIn('id', $app_course)->get(['id', 'name']);
@@ -753,7 +758,8 @@ class AdmissionController extends Controller
         $application = StudentApplication::where([['academic_year', date('Y')], ['clg_id', $clg_id], ['department_id', $dep_id], ['course_id', $course_id], ['status', 1]])->get();
         return view('admin.admission.apply-application', compact('application'));
     }
-    public function depId($dep){
+    public function depId($dep)
+    {
         if ($dep == 'ug') {
             $dep_id = 1;
         } elseif ($dep == 'pg') {
