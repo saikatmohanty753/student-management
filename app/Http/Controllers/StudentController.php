@@ -6,6 +6,7 @@ use App\Models\StudentDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class StudentController extends Controller
 {
