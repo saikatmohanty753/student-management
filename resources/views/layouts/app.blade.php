@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('backend/css/miscellaneous/jqvmap/jqvmap.bundle.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" media="screen, print" href="{{ asset('backend/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css')}}">
     <link rel="stylesheet" href="{{ asset('backend/css/formplugins/select2/select2.bundle.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/datagrid/datatables/datatables.bundle.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/notifications/sweetalert2/sweetalert2.bundle.css') }}">

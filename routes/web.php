@@ -19,6 +19,7 @@ use App\Http\Controllers\ClgNoticeController;
 use App\Http\Controllers\CourseStructureController;
 use App\Http\Controllers\PaperController;
 use App\Http\Controllers\PaperSubTypeController;
+use App\Http\Controllers\UucStudentController;
 use App\Http\Livewire\Notification;
 use App\Providers\RouteServiceProvider;
 
@@ -121,6 +122,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('view-notice/{id}/{notification_id}', [ClgNoticeController::class, 'show']);
 
     Route::resource('academic-course-structure', CourseStructureController::class);
+
     Route::get('maped-course', [CourseStructureController::class, 'mapedCourse']);
     Route::get('filter-course', [CourseStructureController::class, 'filterCourse']);
 
@@ -142,6 +144,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::post('/daterange/filterstudent', [StudentController::class,'filterstudent'])->name('daterange.filterstudent');
 
+    Route::resource('uuc-students', UucStudentController::class);
+    Route::get('uuc-student', [UucStudentController::class, 'uucStudent']);
 
 
 

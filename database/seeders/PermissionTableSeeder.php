@@ -134,6 +134,30 @@ class PermissionTableSeeder extends Seeder
             'credit-edit',
             'credit-delete',
 
+            'uuc-student-module',
+            'uuc-student-list',
+            'uuc-student-create',
+            'uuc-student-edit',
+            'uuc-student-delete',
+
+            'student-module',
+            'student-list',
+            'student-create',
+            'student-edit',
+            'student-delete',
+
+            'course-maped-module',
+            'course-maped-list',
+            'course-maped-create',
+            'course-maped-edit',
+            'course-maped-delete',
+
+            'course-structure-module',
+            'course-structure-list',
+            'course-structure-create',
+            'course-structure-edit',
+            'course-structure-delete',
+
 
 
         ];
