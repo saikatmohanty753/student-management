@@ -19,7 +19,7 @@ class ClgNoticeController extends Controller
     {
 
         
-        
+       
         $noticeIds = [];
         foreach ($notification as $key => $value) {
             if ($value['data']['notice_type_id'] == 1) {
