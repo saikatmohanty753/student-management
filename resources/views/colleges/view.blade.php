@@ -23,7 +23,7 @@ dd($students);
                                     <th>Mobile No.</th>
                                     <th>Mother Name</th>
                                     <th>Father Name</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,7 +38,7 @@ dd($students);
                                         <td>{{ $item->mobile }}</td>
                                         <td>{{ $item->mother_name }}</td>
                                         <td>{{ $item->father_name }}</td>
-                                        
+
 
                                     </tr>
                                 @endforeach
@@ -97,26 +97,26 @@ dd($students);
                         </tr>
                         <tr>
                             <td>
-                                
+
                                 Email:<strong>{{ $item->email }}</strong>
                             </td>
                             <td>
                                 Mobile No.:<strong>{{ $item->mobile }}</strong>
                             </td>
-                            
+
                         </tr>
                         <tr>
                             <td>
-                                
+
                                 Roll No:<strong>{{ $item->roll_no }}</strong>
                             </td>
 
                             <td>
-                                
+
                                 Remark:<strong>{{ $item->remarks }}</strong>
                             </td>
-                            
-                           
+
+
                         </tr>
 
                     </tbody>
@@ -142,29 +142,29 @@ dd($students);
                             <td>
                                 DOB: <strong>{{ $item->dob }}</strong>
                             </td>
-                            
+
                         </tr>
                         <tr>
                             <td>
                                Caste: <strong>{{ $item->cast }}</strong>
                             </td>
-                            
+
                             <td>
                                 Aadhar Card No: <strong>{{ $item->aadhaar_no }}</strong>
                              </td>
-                             
-                             
+
+
                         </tr>
 
                         <tr>
                             <td>
                                Batch Year: <strong>{{ $item->batch_year }}</strong>
                             </td>
-                             
+
                         </tr>
                     </tbody>
                 </table>
-                
+
             </div>
         </div>
 
@@ -172,7 +172,7 @@ dd($students);
     <a btn btn-secondary href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
 </div>
         {{-- </div> --}}
-        
+
 
 @endforeach
 @endsection

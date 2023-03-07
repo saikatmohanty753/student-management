@@ -1,87 +1,60 @@
 @extends('layouts.app')
 @section('content')
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-
-    <!DOCTYPE html>
-    <html>
-
-    <head>
-        <title>Filter Students by Date Range</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </head>
-
-    <body>
-        <div class="container-fluid px-md-5 my-4">
-            <div class="card">
-                <div class="card-header bg-white">
-                    <h5 class="card-title mb-0">Filter Students by Batch Year</h5>
-                </div>
-                <div class="card-body">
-                    <form action="" method="POST" id="filter-form">
-                        @csrf
-                        <input type="hidden" id="course_id" name="course_id" value="{{ $course_id }}">
-                        <input type="hidden" id="deprt_id" name="deprt_id" value="{{ $department_id }}">
-                        <div class="form-group row">
-                            <label for="from_date" class="col-sm-4 col-form-label">Start Date:</label>
-                            <div class="col-sm-8">
-                                <input type="date" class="form-control" id="from_date" name="from_date">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="to_date" class="col-sm-4 col-form-label">End Date:</label>
-                            <div class="col-sm-8">
-                                <input type="date" class="form-control" id="to_date" name="to_date">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="d-grid gap-2">
-                                <button type="button" name="filter" id="filter" class="btn btn-info btn-sm" class="fa-solid fa-filter">Filter</button>
-                                <button type="button" class="btn btn-secondary" onclick="location.reload()">
-                                    <i class="fa-solid fa-sync"></i> Reset
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <div class="container-fluid px-md-5 my-4">
+        <div class="card">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0">Filter Students by Batch Year</h5>
             </div>
-            <div class="card mt-4">
-                <div class="card-header bg-white">
-                    <h5 class="card-title mb-0">Students</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered m-0">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+            <div class="card-body">
+                <form action="" method="POST" id="filter-form">
+                    @csrf
+                    <input type="hidden" id="course_id" name="course_id" value="{{ $course_id }}">
+                    <input type="hidden" id="deprt_id" name="deprt_id" value="{{ $department_id }}">
+                    <div class="form-group row">
+                        <label for="from_date" class="col-sm-2 col-form-label">Start Date:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control year" id="from_date" name="from_date">
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="to_date" class="col-sm-2 col-form-label">End Date:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control year" id="to_date" name="to_date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-grid gap-2">
+                            <button type="button" name="filter" id="filter" class="btn btn-info btn-sm"
+                                class="fa-solid fa-filter">Filter</button>
+                            <button type="button" class="btn btn-secondary" onclick="location.reload()">
+                                <i class="fa-solid fa-sync"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card mt-4">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0">Students</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered m-0 data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </body>
-    
-
-    </html>
-
-
-
-
-
-
-
-
-
+    </div>
+@endsection
+@section('js')
     <script>
         $(document).ready(function() {
             var date = new Date();
