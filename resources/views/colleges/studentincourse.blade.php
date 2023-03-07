@@ -40,13 +40,17 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered m-0 data-table">
+                    <table id="studentTable" class="table table-bordered m-0 data-table">
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Action</th>
+
+
                             </tr>
                         </thead>
                         <tbody>
+
                         </tbody>
                     </table>
                 </div>
@@ -55,7 +59,7 @@
     </div>
 @endsection
 @section('js')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             var date = new Date();
 
@@ -87,11 +91,9 @@
                     },
                     dataType: "json",
                     success: function(data) {
-                        //  alert(data);
-                        // console.log(data.batch_year);
+
 
                         var output = '';
-                        // $('#total_records').text(data.length);
                         for (var count = 0; count < data.length; count++) {
                             output += '<tr>';
                             output += '<td>' + data[count].name + '</td>';
@@ -118,6 +120,70 @@
                 fetch_data();
             });
 
+
+        });
+
+
+
+       
+    </script> --}}
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            function fetch_data(from_date = '', to_date = '') {
+                var _token = $('input[name="_token"]').val();
+                var department = $('#deprt_id').val();
+                var course = $('#course_id').val();
+                var table = $('.data-table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: {
+                        url: "{{ route('daterange.filterstudent') }}",
+                        data: {
+                            from_date: from_date,
+                            to_date: to_date,
+                            department_id: department,
+                            course_id: course,
+                            _token: _token
+                        },
+                        type: "POST",
+                        dataType: "json"
+                    },
+                    columns: [{
+                            data: 'name'
+                        },
+                        {
+                            data: null,
+                            render: function(data, type, row) {
+                                return '<a href="{{ url('studentdetails-view/') }}/' + data.id + '" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</a>';
+
+                            }
+                        }
+                    ]
+                    
+                });
+            }
+
+            fetch_data();
+
+            $('#filter').click(function() {
+                var from_date = $('#from_date').val();
+                var to_date = $('#to_date').val();
+                if (from_date != '' && to_date != '') {
+                    $('.data-table').DataTable().destroy();
+                    fetch_data(from_date, to_date);
+                } else {
+                    alert('Both Date is required');
+                }
+            });
+
+            $('#refresh').click(function() {
+                $('#from_date').val('');
+                $('#to_date').val('');
+                fetch_data();
+            });
 
         });
     </script>

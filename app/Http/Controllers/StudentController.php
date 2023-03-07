@@ -144,6 +144,7 @@ class StudentController extends Controller
 
     public function filterStudent(Request $request)
     {
+        // return $request;
         if ($request->ajax()) {
             $departmentId = $request->department_id;
             $courseId = $request->course_id;
@@ -154,20 +155,22 @@ class StudentController extends Controller
                 /* $from = date('Y', strtotime($fromDate));
                 $to = date('Y', strtotime($toDate)); */
                 $search_year = $fromDate . '-' . $toDate;
-                $data = StudentDetails::select('name')
+                $data = StudentDetails::select('name','id')
                     ->where('clg_id', Auth::user()->clg_user_id)
                     ->where('department_id', $departmentId)
                     ->where('course_id', $courseId)
                     ->where('batch_year', 'like', '%' . $search_year . '%')
                     ->get();
             } else {
-                $data = StudentDetails::select('name')
+                $data = StudentDetails::select('name','id')
                     ->where('clg_id', Auth::user()->clg_user_id)
                     ->where('department_id', $departmentId)
                     ->where('course_id', $courseId)
                     ->get();
             }
-            return response()->json($data);
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->make();
         }
     }
 }
