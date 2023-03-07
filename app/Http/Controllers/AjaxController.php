@@ -100,15 +100,4 @@ class AjaxController extends Controller
             ->get(['admission_seats.total_strength as strength', 'courses.name', 'courses.main_course_code as course_code']);
         return response()->json($course);
     }
-
-//     public function getstudentname(request $res){
-//         $res->all();
-//       //dd($res->all());
-//       $studentname = StudentDetails::select('id', 'name')
-//       ->where('name', $res->id)
-//       ->get();
-       
-
-//       return response()->json($studentname);
-//   }
 }

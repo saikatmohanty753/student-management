@@ -128,7 +128,20 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::get('depcou', [AdmissionController::class, 'depcou']);
 
-    Route::get('college-students', [StudentController::class, 'clgStudents']);
+    // Route::get('college-students', [StudentController::class, 'clgStudents']);
+
+    Route::get('student-view/{id}', [StudentController::class, 'studentview']);
+
+    Route::get('college-students', [StudentController::class, 'departmentview']);
+
+    Route::get('course-view/{department_id}', [StudentController::class, 'courseview']);
+
+    Route::get('student-view/{department_id}/{course_id}', [StudentController::class, 'studentincourseview']);
+
+    // Route::post('filterstudent', [StudentController::class, 'filterstudent']);
+
+    Route::post('/daterange/filterstudent', [StudentController::class,'filterstudent'])->name('daterange.filterstudent');
+
 
 
 

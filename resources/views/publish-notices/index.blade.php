@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('content')
+
+{{-- @php
+    dd($notice);
+@endphp --}}
     <div class="row mt-5">
 
         <div class="col-xl-12">

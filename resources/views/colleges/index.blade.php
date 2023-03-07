@@ -11,10 +11,20 @@
                                 Create New User</a>
                         @endcan
                     </div> --}}
+                    <style>
+                        #no-data-message {
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+                    </style>
 
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div>
                         <table class="table table-bordered dt-table">
                             <thead>
                                 <tr>
@@ -46,6 +56,7 @@
                                             <a class="btn btn-outline-primary view-course" href="javascript:void(0);"
                                                 data-id="{{ $clg->id }}" data-value="{{ $clg->name }}"><i
                                                     class="fa-solid fa-eye"></i></a>
+
                                         </td>
                                         @can('college-edit')
                                             <td>
@@ -69,7 +80,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title text-center"></h4>
-                    
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fal fa-times"></i></span>
                     </button>
@@ -79,11 +90,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
 
-                               
 
-                                  <label for="name-input">Course View of:</label>
-                                  <input type="text" name="modalTitle" id="modalTitle" class="form-control" readonly>
-                                  
+
+                                <label for="name-input">Course View of:</label>
+                                <input type="text" name="modalTitle" id="modalTitle" class="form-control" readonly>
+
 
                             </div>
                         </div>
@@ -105,9 +116,9 @@
                         </tbody>
                     </table>
                 </div>
-               
 
-                
+
+
 
             </div>
         </div>
@@ -115,6 +126,28 @@
 @endsection
 
 @section('js')
+    <script>
+        $(document).ready(function() {
+
+
+            $('.view-course').on('click', function() {
+
+
+
+                let course = $(this).data('value');
+                // alert(course);
+
+                // console.log(course);
+                $('#modalTitle').val(course);
+                $('#course-view').modal('show');
+
+
+
+
+            });
+
+        });
+    </script>
     <script>
         $('.view-course').click(function(e) {
             e.preventDefault();
@@ -125,6 +158,7 @@
             });
             var formData = {
                 clg_id: $(this).data('id'),
+
             };
             var type = "POST";
             var ajaxurl = '/course-details';
@@ -134,7 +168,7 @@
                 data: formData,
                 dataType: 'json',
                 success: function(data) {
-                    if (data) {
+                    if (data.length>0) {
                         var html = '';
                         $.each(data, function(key, val) {
                             html += '<tr>';
@@ -145,76 +179,16 @@
                         });
                         $('.add-course').html(html);
                         $('#course-view').modal('show');
+                    }else{
+                        $('.add-course').html('<div id="no-data-message">No data available</div>');
                     }
                 },
                 error: function(data) {
                     console.log(data);
                 }
             });
+            
         });
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            
-
-            $('.view-course').on('click', function() {
-        
-                let course = $(this).data('value');
-                
-
-                // console.log(paper);
-                $('#modalTitle').val(course);
-               
-
-
-
-
-            });
-
-        });
-    </script> --}}
-
-    <script>
-
-$(document).ready(function() {
-            
-
-            $('.view-course').on('click', function() {
-        
-        //         var tableRows = document.querySelectorAll(".add-course tbody tr");
-        
-        // var numRows = tableRows.length;
-        
-        // var noDataMessage = document.getElementById("no-data-message");
-        
-        // if (numRows === 0) {
-        //   noDataMessage.textContent = "No record found.";
-        //   noDataMessage.style.display = "block";
-        // } else {
-        //   noDataMessage.style.display = "none";
-        // }
-
-        let course = $(this).data('value');
-                
-
-                // console.log(paper);
-                $('#modalTitle').val(course);
-
-
-            });
-
-        });
-       
-
-
-    </script>
-    <style>
-        #no-data-message {
-  font-size: 24px;
-  font-weight: bold;
-  color: red;
-  text-align: center;
-  margin: 50px;
-}
-    </style>
+    
 @endsection
