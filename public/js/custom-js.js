@@ -41,6 +41,10 @@ var controls = {
     leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
     rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
 }
+$('.app-datepicker').datepicker({
+    autoclose: true,
+    todayHighlight: true,
+});
 $('.datepicker-1').datepicker({
     selectYears: '100',
     selectMonths: true,

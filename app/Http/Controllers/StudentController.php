@@ -132,8 +132,8 @@ class StudentController extends Controller
             ->where('clg_id', Auth::user()->clg_user_id)
             ->where('department_id', $department_id)
             ->where('course_id', $course_id)
-        // ->where('batch_year','like','%'.$currunt_year.'%')
-        // ->distinct()
+            // ->where('batch_year','like','%'.$currunt_year.'%')
+            // ->distinct()
             ->get();
 
         $course_id = $course_id;
@@ -144,34 +144,31 @@ class StudentController extends Controller
 
 
     public function filterStudent(Request $request)
-{
-    if ($request->ajax()) {
-        $departmentId = $request->department_id;
-        $courseId = $request->course_id;
-        $fromDate = $request->from_date;
-        $toDate = $request->to_date;
+    {
+        if ($request->ajax()) {
+            $departmentId = $request->department_id;
+            $courseId = $request->course_id;
+            $fromDate = $request->from_date;
+            $toDate = $request->to_date;
 
-        if (!empty($fromDate) && !empty($toDate)) {
-                $from = date('Y', strtotime($fromDate));
-        $to = date('Y', strtotime($toDate));
-        $search_year = $from . '-' . $to;
-            $data = StudentDetails::select('name')
-                ->where('clg_id', Auth::user()->clg_user_id)
-                ->where('department_id', $departmentId)
-                ->where('course_id', $courseId)
-                ->where('batch_year', 'like', '%' . $search_year . '%')
-                ->get();
-        } else {
-            $data = StudentDetails::select('name')
-                ->where('clg_id', Auth::user()->clg_user_id)
-                ->where('department_id', $departmentId)
-                ->where('course_id', $courseId)
-                ->get();
+            if (!empty($fromDate) && !empty($toDate)) {
+                /* $from = date('Y', strtotime($fromDate));
+                $to = date('Y', strtotime($toDate)); */
+                $search_year = $fromDate . '-' . $toDate;
+                $data = StudentDetails::select('name')
+                    ->where('clg_id', Auth::user()->clg_user_id)
+                    ->where('department_id', $departmentId)
+                    ->where('course_id', $courseId)
+                    ->where('batch_year', 'like', '%' . $search_year . '%')
+                    ->get();
+            } else {
+                $data = StudentDetails::select('name')
+                    ->where('clg_id', Auth::user()->clg_user_id)
+                    ->where('department_id', $departmentId)
+                    ->where('course_id', $courseId)
+                    ->get();
+            }
+            return response()->json($data);
         }
-        return response()->json($data);
-
     }
-
-
-}
 }
