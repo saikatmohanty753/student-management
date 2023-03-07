@@ -130,7 +130,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     // Route::get('college-students', [StudentController::class, 'clgStudents']);
 
-    Route::get('student-view/{id}', [StudentController::class, 'studentview']);
+    Route::get('studentdetails-view/{id}', [StudentController::class, 'studentview']);
 
     Route::get('college-students', [StudentController::class, 'departmentview']);
 
