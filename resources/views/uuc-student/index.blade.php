@@ -91,15 +91,15 @@
                         <table class="table table-bordered m-0 uuc-student">
                             <thead>
                                 <tr>
-                                    {{-- <th>Sl. No</th> --}}
+                                    <th>Sl. No</th>
                                     <th>Student Name</th>
+                                    <th>Regd. No</th>
                                     <th>Admission Year</th>
                                     <th>Session</th>
                                     <th>College Name</th>
                                     <th>Department</th>
                                     <th>Course</th>
-                                    {{-- <th>Regd. No.</th>
-                                    <th>Roll. No.</th> --}}
+                                    <th>Action</th>
 
                                 </tr>
                             </thead>
@@ -190,32 +190,48 @@
                 },
                 columns: [
                     {
+                        data: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
                         data: 'name',
                         name: 'name'
                     },
                     {
-                        data: 'batch_year',
-                        name: 'batch_year'
+                        data: 'regd_no',
+                        name: 'regd_no'
+                    },
+                    {
+                        data: 'admission_year',
+                        name: 'admission_year'
                     },
                     {
                         data: 'batch_year',
                         name: 'batch_year'
                     },
                     {
-                        data: 'dep_name',
-                        name: 'dep_name'
+                        data: 'clg_name',
+                        name: 'clg_name'
                     },
                     {
                         data: 'course_name',
                         name: 'course_name'
                     },
                     {
-                        data: 'clg_name',
-                        name: 'clg_name'
+                        data: 'dep_name',
+                        name: 'dep_name'
+                    },
+                    {
+                        data: 'view',
+                        name: 'view'
                     },
                 ]
             });
 
+            $('#session').change(function() {
+                table.draw();
+            });
             $('#dep').change(function() {
                 table.draw();
             });

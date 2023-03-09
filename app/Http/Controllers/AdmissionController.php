@@ -566,6 +566,7 @@ class AdmissionController extends Controller
             $student->specially_abled = $info->specially_abled;
             $student->aadhaar_no = $info->aadhaar_no;
             $student->regd_no_issued = $request->issued == 1 ? '1' : '0';
+            $student->admission_year = date('Y');
             $student->batch_year = date('Y') . '-' . $year;
             $student->save();
 
