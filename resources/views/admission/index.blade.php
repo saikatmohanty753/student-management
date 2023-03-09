@@ -728,7 +728,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Migration Certificate</label>
                                             <div class="custom-file input-cont">
-                                                <input type="file" class="custom-file-input form-control"
+                                                <input type="file" class="custom-file-input form-control chk_blank"
                                                     name="migration_cert" id="migration_cert">
                                                 <small
                                                     class="form-text text-secondary">{{ __('common.file_format') }}</small>
