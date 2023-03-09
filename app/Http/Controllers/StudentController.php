@@ -107,7 +107,6 @@ class StudentController extends Controller
 
     public function departmentview()
     {
-
         $departmentview = StudentDetails::select('department_id')
             ->where('clg_id', Auth::user()->clg_user_id)
             ->distinct()

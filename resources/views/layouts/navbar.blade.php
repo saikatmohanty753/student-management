@@ -235,19 +235,22 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="{{ url('/applied-admission-list/ug') }}" title="Admission" data-filter-tags="Admission">
+                        <a href="{{ url('/applied-admission-list/ug') }}" title="Admission"
+                            data-filter-tags="Admission">
 
                             <span class="nav-link-text" data-i18n="nav.application_admission">UG</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/applied-admission-list/pg') }}" title="Admission" data-filter-tags="Admission">
+                        <a href="{{ url('/applied-admission-list/pg') }}" title="Admission"
+                            data-filter-tags="Admission">
 
                             <span class="nav-link-text" data-i18n="nav.application_admission">PG</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/applied-admission-list/certificate') }}" title="Admission" data-filter-tags="Admission">
+                        <a href="{{ url('/applied-admission-list/certificate') }}" title="Admission"
+                            data-filter-tags="Admission">
 
                             <span class="nav-link-text" data-i18n="nav.application_admission">Certificate</span>
                         </a>
@@ -262,24 +265,39 @@
                 </a>
             </li> --}}
         @endcan
-        <li>
-            <a href="{{ url('/college-students') }}" title="Student Details" data-filter-tags="Admission">
-                <i class="fa-solid fa-book-open-reader"></i>
-                <span class="nav-link-text" data-i18n="nav.application_admission">Students</span>
-            </a>
-        </li>
+        @can('uuc-student-module')
+            <li>
+                <a href="{{ url('/uuc-students') }}" title="Student Details" data-filter-tags="Admission">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span class="nav-link-text" data-i18n="nav.application_admission">UUC Students</span>
+                </a>
+            </li>
+        @endcan
+        @can('student-module')
+            <li>
+                <a href="{{ url('/college-students') }}" title="Student Details" data-filter-tags="Admission">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span class="nav-link-text" data-i18n="nav.application_admission">Students</span>
+                </a>
+            </li>
+        @endcan
+        @can('course-structure-module')
         <li>
             <a href="{{ url('/academic-course-structure') }}" title="Admission" data-filter-tags="Admission">
                 <i class="fa-solid fa-book-open-reader"></i>
                 <span class="nav-link-text" data-i18n="nav.application_admission">Course Structure</span>
             </a>
         </li>
+        @endcan
+        @can('course-maped-module')
         <li>
             <a href="{{ url('/maped-course') }}" title="Admission" data-filter-tags="Admission">
                 <i class="fa-solid fa-book-open-reader"></i>
                 <span class="nav-link-text" data-i18n="nav.application_admission">Maped Course</span>
             </a>
         </li>
+        @endcan
+
 
 
 
