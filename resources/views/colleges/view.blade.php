@@ -51,7 +51,9 @@ dd($students);
     </div> --}}
 
 
-
+{{-- @php
+dd($students);
+@endphp --}}
 
 
     <div
@@ -169,7 +171,8 @@ dd($students);
         </div>
 
     </div>
-    <a btn btn-secondary href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+    <a href="{{ url('student-view/' . $item->department_id . '/' . $item->course_id) }}" class="btn btn-secondary">Back</a>
+
 </div>
         {{-- </div> --}}
 
