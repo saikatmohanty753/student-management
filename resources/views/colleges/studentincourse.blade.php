@@ -151,8 +151,10 @@
                         type: "POST",
                         dataType: "json"
                     },
-                    columns: [{
+                    columns: [
+                        {
                             data: 'name'
+                            
                         },
                         {
                             data: null,
