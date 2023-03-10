@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        {{-- <h4>Student Profile of {{ $collegeName }}</h4> --}}
+        <h4>Student Profile of {{ $collegeName }}</h4>
+       
        
     </div>
 
