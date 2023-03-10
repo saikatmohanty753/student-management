@@ -647,14 +647,14 @@ class AdmissionController extends Controller
         file_put_contents('registration_card/' . $reg_no . '.pdf', $pdf->output());
         // $to_email = $user['to'];
         // Mail::to($to_email)->send(new SendPDFMail($pdf));
-        /*  if ($issued == 1) {
+         if ($issued == 1) {
             FacadesMail::send('pdf.test', $data, function ($message) use ($pdf, $user) {
                 $message->to($user['to'])
 
                     ->attachData($pdf->output(), "Registration.pdf");
                 $message->subject('UUC Registration Card');
             });
-        } */
+        }
 
         return response()->json(['status' => 'success', 'message' => 'Report has been sent successfully.']);
     }

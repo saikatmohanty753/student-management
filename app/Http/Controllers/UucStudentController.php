@@ -46,10 +46,13 @@ class UucStudentController extends Controller
                         $instance->where('sd.department_id', $request->get('dep'));
                     }
                     if ($request->get('course') != '') {
-                        $instance->where('cs.course_id', $request->get('course'));
+                        $instance->where('sd.course_id', $request->get('course'));
                     }
                     if ($request->get('sem') != '') {
-                        $instance->where('cs.semester', $request->get('sem'));
+                        $instance->where('sd.semester', $request->get('sem'));
+                    }
+                    if ($request->get('clg') != '') {
+                        $instance->where('sd.clg_id', $request->get('clg'));
                     }
                 })
                 ->rawColumns(['view'])

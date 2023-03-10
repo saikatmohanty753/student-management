@@ -592,7 +592,7 @@
         });
     </script>
     <script>
-        $("#formData1").on('submit', function(e) {
+        $("#formData").on('submit', function(e) {
 
             e.preventDefault();
             var validation = [];
