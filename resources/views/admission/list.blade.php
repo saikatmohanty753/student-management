@@ -6,7 +6,7 @@
                 <div class="panel-hdr">
                     <h2>
                         Filter <span class="fw-300"><i>Course Details</i></span>
-                        
+
                     </h2>
                     <select name="" id="session" class="float-right">
                         @for ($i = date('Y') - 4; $i <= date('Y') + 1; $i++)
@@ -67,7 +67,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="text-fade table table-bordered display no-footer datatable">
+                        <table class="text-fade table table-bordered display no-footer dt-table">
                             <thead>
                                 <tr>
                                     <th>No</th>

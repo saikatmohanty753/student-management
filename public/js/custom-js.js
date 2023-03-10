@@ -74,6 +74,8 @@ $('.datepicker-2').datepicker({
     // startDate: '-0d',
     todayBtn: "linked",
     clearBtn: true,
+    orientation: "bottom left",
+
 });
 
 $('.yearPicker').datepicker({

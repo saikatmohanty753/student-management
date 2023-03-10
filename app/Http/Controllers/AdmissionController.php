@@ -346,8 +346,13 @@ class AdmissionController extends Controller
             'course_name' => $request->last_course_name,
             'is_migration_cert' => $request->is_migration,
         ];
-
-        $documents = [];
+        $doc = json_decode($student->documents);
+        $documents = [
+            'profile' => $doc->profile,
+            'aadhaar_card' => $doc->aadhaar_card,
+            'hsc_cert' => $doc->hsc_cert,
+            'migration_cert' => $doc->migration_cert,
+        ];
         if ($request->file('profile')) {
             $file = $request->file('profile');
             $filename = time() . uniqid(rand()) . $file->getClientOriginalName();
@@ -377,15 +382,17 @@ class AdmissionController extends Controller
             $migration_cert = '/student-documents/migration_cert/' . $filename;
             $documents['migration_cert'] = $migration_cert ? $migration_cert : '';
         }
+        // return $documents;
+        // return $request;
         $qualification_details = [
             'hsc' => [
                 'course' => $request->hsc,
-                'board' => $request->hsc_board,
+                'board' => $request->board,
                 'passing_year' => $request->hsc_passing_year,
-                'division' => $request->hsc_division,
+                'division' => $request->division,
                 'mark' => $request->hsc_mark,
-                'total' => $request->hsc_total_mark,
-                'percentage' => $request->hsc_percentage,
+                'total' => $request->total_mark,
+                'percentage' => $request->percentage,
             ],
             'intermediate' => [
                 'course' => $request->intermediate,
@@ -432,7 +439,7 @@ class AdmissionController extends Controller
         $student->documents = json_encode($documents);
         $student->qualification_details = json_encode($qualification_details);
         $student->save();
-        return redirect()->action([AdmissionController::class, 'show'], ['id' => $std_id])->with('success', 'Application saved in draft.');
+        return redirect()->action([AdmissionController::class, 'show'], ['id' => $student->id])->with('success', 'Application saved in draft.');
     }
 
     /**
@@ -596,6 +603,16 @@ class AdmissionController extends Controller
                 $user->password = Hash::make(12345678);
                 $user->save();
                 $user->assignRole(3);
+                $data = [
+                    "name" => $user->name,
+                    "user_name" => $user->email,
+                    "password" => 12345678
+                ];
+
+                Mail::send('mail.credential', compact('data'), function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('Login credential for UUC');
+                });
             }
 
             $std_id = $student->id;
@@ -647,15 +664,13 @@ class AdmissionController extends Controller
         file_put_contents('registration_card/' . $reg_no . '.pdf', $pdf->output());
         // $to_email = $user['to'];
         // Mail::to($to_email)->send(new SendPDFMail($pdf));
-         if ($issued == 1) {
+        if ($issued == 1) {
             FacadesMail::send('pdf.test', $data, function ($message) use ($pdf, $user) {
                 $message->to($user['to'])
-
                     ->attachData($pdf->output(), "Registration.pdf");
                 $message->subject('UUC Registration Card');
             });
         }
-
         return response()->json(['status' => 'success', 'message' => 'Report has been sent successfully.']);
     }
 

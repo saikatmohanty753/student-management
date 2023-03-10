@@ -246,65 +246,65 @@
                                                     <th>
                                                         Name of the Examinations
                                                         Passed
-                                                        
+
                                                     </th>
                                                     <th>
                                                         University/
                                                         Council / Board
-                                                        
+
                                                     </th>
                                                     <th>
                                                         Year of Passing
-                                                        
+
                                                     </th>
                                                     <th>
                                                         Divn. and Distn.
-                                                        
+
                                                     </th>
                                                     <th>
                                                         Marks secured
-                                                        
+
                                                     </th>
                                                     <th>
                                                         Maximum marks
-                                                        
+
                                                     </th>
                                                     <th>
                                                         % of Marks
-                                                        
+
                                                     </th>
                                                 </tr>
 
                                                 <tr>
                                                     <td>
-                                                      
+
                                                         <strong> {{ $qualification_details->hsc->course }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong> {{ $qualification_details->hsc->board }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong> {{ $qualification_details->hsc->passing_year }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->hsc->division }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong>
                                                             {{ $qualification_details->hsc->mark }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
-                                                            {{ $qualification_details->intermediate->total }}</strong>
+                                                            {{ $qualification_details->hsc->total }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->hsc->percentage }}</strong>
                                                     </td>
@@ -312,34 +312,34 @@
 
                                                 <tr>
                                                     <td>
-                                                      
+
                                                         <strong> {{ $qualification_details->intermediate->course }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong> {{ $qualification_details->intermediate->board }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong> {{ $qualification_details->intermediate->passing_year }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->intermediate->division }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong>
                                                             {{ $qualification_details->intermediate->mark }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->intermediate->total }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->intermediate->percentage }}</strong>
                                                     </td>
@@ -348,34 +348,34 @@
 
                                                 <tr>
                                                     <td>
-                                                      
-                                                        <strong> {{ $qualification_details->intermediate->course }}</strong>
+
+                                                        <strong> {{ $qualification_details->graduate->course }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong> {{ $qualification_details->graduate->board }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong> {{ $qualification_details->graduate->passing_year }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->graduate->division }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong>
                                                             {{ $qualification_details->graduate->mark }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->graduate->total }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->graduate->percentage }}</strong>
                                                     </td>
@@ -383,34 +383,34 @@
 
                                                 <tr>
                                                     <td>
-                                                      
+
                                                         <strong>{{ $qualification_details->postGraduate->course }} </strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong> {{ $qualification_details->postGraduate->board }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong> {{ $qualification_details->postGraduate->passing_year }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->postGraduate->division }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong>
                                                             {{ $qualification_details->postGraduate->mark }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->postGraduate->total }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{ $qualification_details->postGraduate->percentage }}</strong>
                                                     </td>
@@ -418,34 +418,34 @@
 
                                                 <tr>
                                                     <td>
-                                                      
+
                                                         <strong>{{ $qualification_details->other->course }} </strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong> {{$qualification_details->other->board }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong> {{$qualification_details->other->passing_year }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{$qualification_details->other->division }}</strong>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <strong>
                                                             {{$qualification_details->other->mark }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{$qualification_details->other->total }}</strong>
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <strong>
                                                             {{$qualification_details->other->percentage }}</strong>
                                                     </td>
@@ -455,7 +455,7 @@
                                         </table>
                                     </div>
                                 </div>
-                               
+
 
                             </div>
                         </div>
