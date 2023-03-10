@@ -6,6 +6,7 @@ use App\Models\College;
 use App\Models\CollegeAffiliation;
 use App\Models\Course;
 use App\Models\RenewalAffiliation;
+use App\Models\StudentDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -71,7 +72,14 @@ class DashboardController extends Controller
     }
     public function studentDashboard()
     {
-        return view('dashboard.student.index');
+        $collegeName = College::select('name')
+            ->where('id', Auth::user()->clg_id)
+            ->pluck('name')
+            ->first();
+        $std_id = Auth::user()->student_id;
+        $student = StudentDetails::find($std_id);
+
+        return view('dashboard.student.index', compact('student', 'collegeName'));
     }
     public function collegeAcademicSection()
     {
