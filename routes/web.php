@@ -147,6 +147,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('uuc-students', UucStudentController::class);
     Route::get('uuc-student', [UucStudentController::class, 'uucStudent']);
 
+    Route::get('dashboard/{id}', [AdmissionController::class, 'student']);
+
 
 
 
