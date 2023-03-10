@@ -228,10 +228,18 @@
         @endcan
 
         @can('verify-admission-module')
+            @php
+                $student_app = App\Helpers\Helpers::application();
+            @endphp
             <li>
                 <a href="#" title="Theme Settings" data-filter-tags="theme settings">
                     <i class="fal fa-cog"></i>
                     <span class="nav-link-text" data-i18n="nav.user_management">Admissions</span>
+                    @if ($student_app['all_app'] > 0)
+                        <span
+                            class="dl-ref bg-danger-500 hidden-nav-function-minify hidden-nav-function-top">{{ $student_app['all_app'] }}</span>
+                    @endif
+
                 </a>
                 <ul>
                     <li>
@@ -239,6 +247,10 @@
                             data-filter-tags="Admission">
 
                             <span class="nav-link-text" data-i18n="nav.application_admission">UG</span>
+                            @if ($student_app['ug'] > 0)
+                                <span
+                                    class="dl-ref bg-danger-500 hidden-nav-function-minify hidden-nav-function-top">{{ $student_app['ug'] }}</span>
+                            @endif
                         </a>
                     </li>
                     <li>
@@ -246,6 +258,10 @@
                             data-filter-tags="Admission">
 
                             <span class="nav-link-text" data-i18n="nav.application_admission">PG</span>
+                            @if ($student_app['pg'] > 0)
+                                <span
+                                    class="dl-ref bg-danger-500 hidden-nav-function-minify hidden-nav-function-top">{{ $student_app['pg'] }}</span>
+                            @endif
                         </a>
                     </li>
                     <li>
@@ -253,6 +269,10 @@
                             data-filter-tags="Admission">
 
                             <span class="nav-link-text" data-i18n="nav.application_admission">Certificate</span>
+                            @if ($student_app['certificate'] > 0)
+                                <span
+                                    class="dl-ref bg-danger-500 hidden-nav-function-minify hidden-nav-function-top">{{ $student_app['certificate'] }}</span>
+                            @endif
                         </a>
                     </li>
 
@@ -282,20 +302,20 @@
             </li>
         @endcan
         @can('course-structure-module')
-        <li>
-            <a href="{{ url('/academic-course-structure') }}" title="Admission" data-filter-tags="Admission">
-                <i class="fa-solid fa-book-open-reader"></i>
-                <span class="nav-link-text" data-i18n="nav.application_admission">Course Structure</span>
-            </a>
-        </li>
+            <li>
+                <a href="{{ url('/academic-course-structure') }}" title="Admission" data-filter-tags="Admission">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span class="nav-link-text" data-i18n="nav.application_admission">Course Structure</span>
+                </a>
+            </li>
         @endcan
         @can('course-maped-module')
-        <li>
-            <a href="{{ url('/maped-course') }}" title="Admission" data-filter-tags="Admission">
-                <i class="fa-solid fa-book-open-reader"></i>
-                <span class="nav-link-text" data-i18n="nav.application_admission">Maped Course</span>
-            </a>
-        </li>
+            <li>
+                <a href="{{ url('/maped-course') }}" title="Admission" data-filter-tags="Admission">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span class="nav-link-text" data-i18n="nav.application_admission">Maped Course</span>
+                </a>
+            </li>
         @endcan
 
 

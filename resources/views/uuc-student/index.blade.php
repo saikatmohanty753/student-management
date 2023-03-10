@@ -99,7 +99,7 @@
                                     <th>College Name</th>
                                     <th>Department</th>
                                     <th>Course</th>
-                                    <th>Action</th>
+                                    {{-- <th>Action</th> --}}
 
                                 </tr>
                             </thead>
@@ -113,14 +113,14 @@
 @section('js')
     <script>
         /* $('#range-picker').daterangepicker({
-                locale: {
-                    format: 'M/DD hh:mm A'
-                },
-                opens: 'left'
-            }, function(start, end, label) {
-                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format(
-                    'YYYY-MM-DD'));
-            }); */
+                    locale: {
+                        format: 'M/DD hh:mm A'
+                    },
+                    opens: 'left'
+                }, function(start, end, label) {
+                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format(
+                        'YYYY-MM-DD'));
+                }); */
 
         $('.get-course').change(function(e) {
             e.preventDefault();
@@ -188,8 +188,7 @@
                     },
 
                 },
-                columns: [
-                    {
+                columns: [{
                         data: 'DT_RowIndex',
                         orderable: false,
                         searchable: false
@@ -215,17 +214,18 @@
                         name: 'clg_name'
                     },
                     {
-                        data: 'course_name',
-                        name: 'course_name'
-                    },
-                    {
                         data: 'dep_name',
                         name: 'dep_name'
                     },
                     {
+                        data: 'course_name',
+                        name: 'course_name'
+                    },
+
+                    /* {
                         data: 'view',
                         name: 'view'
-                    },
+                    }, */
                 ]
             });
 
@@ -233,6 +233,9 @@
                 table.draw();
             });
             $('#dep').change(function() {
+                table.draw();
+            });
+            $('#clg').change(function() {
                 table.draw();
             });
             $('#semester').change(function() {
