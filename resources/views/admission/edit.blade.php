@@ -546,9 +546,13 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th><input type="text" name="hsc" class="form-control"
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                        <input type="text" name="hsc" class="form-control chk_blank"
                                                             placeholder="H.S.C. or equivalent" value="{{ $qualification_details->hsc->course}}">
                                                         <span class="help-block">(H.S.C. or equivalent)</span>
+                                                        <span class="error-msg"></span>
+                                                    </div>
                                                     </th>
                                                     <th> <input type="text" class="form-control" name="board" value="{{ $qualification_details->hsc->board }}">
 
