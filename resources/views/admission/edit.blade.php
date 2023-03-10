@@ -587,7 +587,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><input type="text" class="form-control" name="graduate"
-                                                            placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A."><span
+                                                            placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A." value="{{ $qualification_details->graduate->course }}"><span
                                                             class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
                                                             B.A.)</span></th>
                                                     <th> <input type="text" name="graduate_board"
@@ -605,7 +605,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><input type="text" class="form-control" name="post_graduate"
-                                                            placeholder="M. Mus / MVA"><span class="help-block">(M. Mus /
+                                                            placeholder="M. Mus / MVA" value="{{ $qualification_details->postGraduate->course }}"><span class="help-block">(M. Mus /
                                                             MVA)</span></th>
                                                     <th> <input type="text" name="post_graduate_board"
                                                             class="form-control" value="{{ $qualification_details->postGraduate->board }}"> </th>
@@ -622,7 +622,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><input type="text" class="form-control" name="other_graduate"
-                                                            placeholder="Any other Qualification"><span
+                                                            placeholder="Any other Qualification" value="{{ $qualification_details->other->course }}"><span
                                                             class="help-block">(Any other Qualification)</span></th>
                                                     <th> <input type="text" name="other_graduate_board"
                                                             class="form-control" value="{{ $qualification_details->other->board }}"> </th>

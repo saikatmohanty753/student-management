@@ -233,6 +233,9 @@
                 ]
             });
 
+            $('#session').change(function() {
+                table.draw();
+            });
             $('#dep').change(function() {
                 table.draw();
             });
@@ -240,6 +243,7 @@
                 table.draw();
             });
             $('#course').change(function() {
+                console.log($('#course').val());
                 table.draw();
             });
 
