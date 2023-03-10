@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudentDetails;
+use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use DataTables;
 
 class StudentController extends Controller
 {
@@ -131,8 +131,8 @@ class StudentController extends Controller
             ->where('clg_id', Auth::user()->clg_user_id)
             ->where('department_id', $department_id)
             ->where('course_id', $course_id)
-            // ->where('batch_year','like','%'.$currunt_year.'%')
-            // ->distinct()
+        // ->where('batch_year','like','%'.$currunt_year.'%')
+        // ->distinct()
             ->get();
 
         $course_id = $course_id;
@@ -140,7 +140,6 @@ class StudentController extends Controller
 
         return view('colleges.studentincourse', compact('studentincourseview', 'course_id', 'department_id'));
     }
-
 
     public function filterStudent(Request $request)
     {
@@ -155,22 +154,26 @@ class StudentController extends Controller
                 /* $from = date('Y', strtotime($fromDate));
                 $to = date('Y', strtotime($toDate)); */
                 $search_year = $fromDate . '-' . $toDate;
-                $data = StudentDetails::select('name','id')
+                $data = StudentDetails::select('student_details.*', 'cf.course_for as dep_name', 'courses.name as course_name')
                     ->where('clg_id', Auth::user()->clg_user_id)
                     ->where('department_id', $departmentId)
                     ->where('course_id', $courseId)
                     ->where('batch_year', 'like', '%' . $search_year . '%')
+                    ->join('course_fors as cf', 'student_details.department_id', '=', 'cf.id')
+                    ->join('courses', 'student_details.course_id', '=', 'courses.id')
                     ->get();
             } else {
-                $data = StudentDetails::select('name','id')
+                $data = StudentDetails::select('student_details.*', 'cf.course_for as dep_name', 'courses.name as course_name')
                     ->where('clg_id', Auth::user()->clg_user_id)
                     ->where('department_id', $departmentId)
                     ->where('course_id', $courseId)
+                    ->join('course_fors as cf', 'student_details.department_id', '=', 'cf.id')
+                    ->join('courses', 'student_details.course_id', '=', 'courses.id')
                     ->get();
             }
             return DataTables::of($data)
-            ->addIndexColumn()
-            ->make();
+                ->addIndexColumn()
+                ->make();
         }
     }
 }

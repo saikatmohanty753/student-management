@@ -44,6 +44,10 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Department</th>
+                                <th>Course</th>
+                                <th>Regd. No</th>
+                                <th>Roll No</th>
                                 <th>Action</th>
 
 
@@ -151,20 +155,48 @@
                         type: "POST",
                         dataType: "json"
                     },
-                    columns: [
-                        {
+                    columns: [{
                             data: 'name'
-                            
+
+                        },
+                        {
+                            data: 'dep_name'
+
+
+
+
+
+                        },
+                        {
+                            data: 'course_name'
+
+
+                        },
+                        {
+                            data: 'regd_no'
+
+                        },
+                        {
+                            data: 'roll_no'
+
                         },
                         {
                             data: null,
                             render: function(data, type, row) {
-                                return '<a href="{{ url('studentdetails-view/') }}/' + data.id + '" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</a>';
+
+
+                                return '<a href="{{ url('studentdetails-view/') }}/' + data.id +
+                                    '" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</a>';
+
+
+
+
 
                             }
+
                         }
                     ]
-                    
+
                 });
             }
 
