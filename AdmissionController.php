@@ -498,4 +498,6 @@ class AdmissionController extends Controller
             ->first();
         return $course->available_seat;
     }
+
+   
 }

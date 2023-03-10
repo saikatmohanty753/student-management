@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helpers;
-use App\Http\Controllers\SendPDFMail;
-
 use App\Models\AdmissionSeat;
-use App\Models\AffiliationMaster;
 use App\Models\College;
 use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\District;
 use App\Models\Notice;
-use App\Models\Role;
 use App\Models\StudentAddress;
 use App\Models\StudentApplication;
 use App\Models\StudentDetails;
@@ -24,12 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Support\Facades\Mail as FacadesMail;
-use Illuminate\Support\Facades\Mail;
 use PDF;
-
 
 class AdmissionController extends Controller
 {
@@ -40,7 +31,7 @@ class AdmissionController extends Controller
      */
     public function AdmissionSeat()
     {
-        $course =  DB::table('affiliation_masters')->select('affiliation_masters.*', DB::raw('SUM(seat_no) as total_seat_no'))
+        $course = DB::table('affiliation_masters')->select('affiliation_masters.*', DB::raw('SUM(seat_no) as total_seat_no'))
             ->groupBy('affiliation_masters.course')
             ->groupBy('affiliation_masters.college_name')
             ->get();
@@ -61,7 +52,7 @@ class AdmissionController extends Controller
                     'total_strength' => $value->total_seat_no,
                     'available_seat' => $value->total_seat_no,
                     'consumption_seat' => 0,
-                    'created_at' => Carbon::now()
+                    'created_at' => Carbon::now(),
                 ]);
             }
         }
@@ -76,7 +67,7 @@ class AdmissionController extends Controller
         if ($count == 0) {
             return redirect()->intended('dashboard')->with('error', 'Now the admission process has been stopped.');
         }
-        $course =  DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+        $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
             ->where('clg_id', Auth::user()->clg_user_id)
             ->where('admission_year', date('Y'))
             ->join('courses', 'admission_seats.course_id', 'courses.id')
@@ -280,7 +271,7 @@ class AdmissionController extends Controller
         $documents = json_decode($std_app->documents);
         $qualification_details = json_decode($std_app->qualification_details);
 
-        $course =  DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+        $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
             ->where('clg_id', Auth::user()->clg_user_id)
             ->where('admission_year', date('Y'))
             ->join('courses', 'admission_seats.course_id', 'courses.id')
@@ -457,7 +448,7 @@ class AdmissionController extends Controller
         $application->app_status = 2;
         $application->save();
 
-        $course =  AdmissionSeat::where('clg_id', $application->clg_id)
+        $course = AdmissionSeat::where('clg_id', $application->clg_id)
             ->where('admission_year', date('Y'))
             ->where('course_id', $application->course_id)
             ->first();
@@ -486,7 +477,6 @@ class AdmissionController extends Controller
         $rejected_application = StudentApplication::where('status', 3)->get();
         return view('admin.admission.index', compact('application', 'verified_application', 'rejected_application'));
     }
-
 
     public function verifyAdmission(Request $request, $id)
     {
@@ -549,7 +539,6 @@ class AdmissionController extends Controller
             $clg_info = json_decode($std_app->prv_clg_info);
             $qualification = json_decode($std_app->qualification_details);
             $documents = json_decode($std_app->documents);
-
 
             $student = new StudentDetails();
             $student->clg_id = $std_app->clg_id;
@@ -638,7 +627,6 @@ class AdmissionController extends Controller
     public function generatePDF($email, $name, $reg_no, $issued)
     {
 
-
         $data = ['email' => $email, 'name' => $name, 'reg_no' => $reg_no];
 
         $user['to'] = $data["email"];
@@ -647,7 +635,7 @@ class AdmissionController extends Controller
         file_put_contents('registration_card/' . $reg_no . '.pdf', $pdf->output());
         // $to_email = $user['to'];
         // Mail::to($to_email)->send(new SendPDFMail($pdf));
-         if ($issued == 1) {
+        if ($issued == 1) {
             FacadesMail::send('pdf.test', $data, function ($message) use ($pdf, $user) {
                 $message->to($user['to'])
 
@@ -658,8 +646,6 @@ class AdmissionController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Report has been sent successfully.']);
     }
-
-
 
     public function admissionDetails(Request $request, $id)
     {
@@ -683,7 +669,7 @@ class AdmissionController extends Controller
         $documents = json_decode($std_app->documents);
         $qualification_details = json_decode($std_app->qualification_details);
 
-        $course =  DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+        $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
             ->where('clg_id', Auth::user()->clg_user_id)
             ->where('admission_year', date('Y'))
             ->join('courses', 'admission_seats.course_id', 'courses.id')
@@ -701,23 +687,22 @@ class AdmissionController extends Controller
 
     public function checkSeatAvl($clg_id, $course_id)
     {
-        $course =  AdmissionSeat::where('clg_id', $clg_id)
+        $course = AdmissionSeat::where('clg_id', $clg_id)
             ->where('admission_year', date('Y'))
             ->where('course_id', $course_id)
             ->first();
         return $course->available_seat;
     }
 
-
     public function newAdmission()
     {
-        $notification =  Auth::user()->Notifications;
+        $notification = Auth::user()->Notifications;
         $noticeIds = [];
         foreach ($notification as $key => $value) {
             if ($value['data']['notice_type_id'] == 1 && $value['data']['notice_sub_type_id'] == 1) {
                 $noticeIds[] = [
                     'notice_id' => $value['data']['notice_id'],
-                    'notification_id' => $value->id
+                    'notification_id' => $value->id,
                 ];
             }
         }
@@ -771,5 +756,24 @@ class AdmissionController extends Controller
             $dep_id = 4;
         }
         return $dep_id;
+    }
+
+    // public function student()
+    // {
+    //     $student = User::select('col.name as college')
+    //     ->leftjoin('colleges as col','users.clg_id','=','col.id')
+    //     ->get();
+    //     return view('dashboard.student.index',compact('student'));
+    // }
+
+    public function student($id)
+    {
+        $collegeName = College::select('name')
+            ->where('id', Auth::user()->clg_id)
+            ->pluck('name')
+            ->first();
+        $student=StudentDetails::find($id);
+        
+        return view('dashboard.student.index', compact('student','collegeName'));
     }
 }
