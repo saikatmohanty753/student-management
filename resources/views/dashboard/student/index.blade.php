@@ -1,21 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <style>
-        .profile {
-            max-width: 40%;
-            min-width: 40%;
 
-        }
-
-        .std-details {
-            background: #d0d0d0;
-        }
-
-        .details {
-            border-bottom: 2px solid #ececec;
-            /* padding: 5px; */
-        }
-    </style>
     <div class="row">
 
         <div class="col-xl-12">
@@ -24,9 +9,21 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card" class="student">
-                                <div class="text-center mt-2">
+                                {{-- <div class="text-center mt-2">
                                     <img src="{{ asset('backend/img/profile.png') }}"
                                         class="rounded-circle shadow-2 img-thumbnail profile" alt="profile">
+                                        <i class="fal fa-home"></i>
+                                </div> --}}
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                        <label for="imageUpload"></label>
+                                    </div>
+                                    <div class="avatar-preview">
+                                        <div id="imagePreview"
+                                            style="background-image: url('{{ asset('backend/img/profile.png') }}');">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="mb-0 fw-700 text-center mt-1 color-info-700">
@@ -123,7 +120,8 @@
                                         <table class="table table-clean table-sm align-self-end">
                                             <tbody>
                                                 <tr>
-                                                    <td>Department : {{ $student->department->course_for }}</td>
+                                                    <td class="htext">Department : {{ $student->department->course_for }}
+                                                    </td>
                                                     {{-- <td>{{ $student->department->course_for }}</td> --}}
                                                 </tr>
 
@@ -136,7 +134,7 @@
                                         <table class="table table-clean table-sm align-self-end">
                                             <tbody>
                                                 <tr>
-                                                    <td>Course : {{ $student->course->name }}</td>
+                                                    <td class="htext">Course : {{ $student->course->name }}</td>
                                                 </tr>
 
                                             </tbody>
@@ -148,17 +146,19 @@
                                 <div class="col-sm-12">
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
-                                            <thead>
+                                            <thead class="bg-info-500">
                                                 <tr>
-                                                    <td style="width: 50%" class="text-center">Registration Number</td>
-                                                    <td style="width: 50%" class="text-center">Roll Number</td>
+                                                    <th style="width: 50%" class="text-center">Registration Number</th>
+                                                    <th style="width: 50%" class="text-center">Roll Number</th>
                                                     {{-- <td>{{ $student->department->course_for }}</td> --}}
                                                 </tr>
 
                                             </thead>
                                             <tbody>
-                                                <td style="width: 50%" class="text-center">{{ $student->regd_no ? $student->regd_no : 'Not Issued' }}</td>
-                                                <td style="width: 50%" class="text-center">{{ $student->roll_no ? $student->roll_no : 'Not Issued'}}</td>
+                                                <td style="width: 50%" class="text-center">
+                                                    {{ $student->regd_no ? $student->regd_no : 'Not Issued' }}</td>
+                                                <td style="width: 50%" class="text-center">
+                                                    {{ $student->roll_no ? $student->roll_no : 'Not Issued' }}</td>
                                             </tbody>
                                         </table>
                                     </div>
@@ -192,4 +192,23 @@
     </div>
 @endsection
 @section('js')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imageUpload").change(function() {
+            alert('hi');
+
+
+            readURL(this);
+        });
+    </script>
 @endsection

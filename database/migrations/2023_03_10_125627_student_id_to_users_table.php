@@ -16,6 +16,9 @@ class StudentIdToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
            $table->integer('student_id')->nullable();
         });
+        Schema::table('student_details', function (Blueprint $table) {
+           $table->text('profile_picture')->nullable();
+        });
     }
 
     /**
