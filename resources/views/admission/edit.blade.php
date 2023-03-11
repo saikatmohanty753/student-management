@@ -17,8 +17,10 @@
                         @csrf
                         <input type="hidden" name="hid" value="{{ $std_app->id }}">
                         <div class="border rounded p-2 mb-2">
-                            <h2>Personal Information <span class="badge badge-danger float-right fs-xs d-none seat-div"> Remaing Admission  <span id="remaining"></span></span>
-                                <input type="hidden" name="remaining_seat" id="remaining_seat"></h2>
+                            <h2>Personal Information <span class="badge badge-danger float-right fs-xs d-none seat-div">
+                                    Remaing Admission <span id="remaining"></span></span>
+                                <input type="hidden" name="remaining_seat" id="remaining_seat">
+                            </h2>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6 col-12" style="display:none;">
@@ -35,7 +37,9 @@
                                                 <option value="">Select Course</option>
                                                 @foreach ($course as $item)
                                                     <option value="{{ $item->course_id }}"
-                                                        data-id="{{ $item->available_seat }}" {{ $item->course_id == $std_app->course_id ? 'selected' : '' }}>{{ $item->name }}
+                                                        data-id="{{ $item->available_seat }}"
+                                                        {{ $item->course_id == $std_app->course_id ? 'selected' : '' }}>
+                                                        {{ $item->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -94,13 +98,16 @@
                                                     class="text-danger">*</span></label>
                                             {{-- <input name="father_name" type="text" class="form-control" value="{{$personal_information->gender}}"> --}}
                                             <select class="custom-select form-control chk_blank" name="gender">
-                                                <option value="Male"{{ 'Male' == $personal_information->gender ? 'selected' : '' }}>
+                                                <option
+                                                    value="Male"{{ 'Male' == $personal_information->gender ? 'selected' : '' }}>
                                                     Male
                                                 </option>
-                                                <option value="Female"{{ 'Female' == $personal_information->gender ? 'selected' : '' }}>
+                                                <option
+                                                    value="Female"{{ 'Female' == $personal_information->gender ? 'selected' : '' }}>
                                                     Female
                                                 </option>
-                                                <option value="Other"{{ 'Other' == $personal_information->gender ? 'selected' : '' }}>
+                                                <option
+                                                    value="Other"{{ 'Other' == $personal_information->gender ? 'selected' : '' }}>
                                                     Other
                                                 </option>
                                             </select>
@@ -112,7 +119,8 @@
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label">DOB <span class="text-danger">*</span></label>
-                                            <input name="dob" type="text" class="form-control datepicker-2 chk_blank chk_date"
+                                            <input name="dob" type="text"
+                                                class="form-control datepicker-2 chk_blank chk_date"
                                                 value="{{ Carbon\Carbon::parse($personal_information->dob)->format('d-m-Y') }}">
                                             <span class="error-msg"></span>
                                         </div>
@@ -125,13 +133,21 @@
                                                     class="text-danger">*</span></label>
                                             <select class="custom-select form-control chk_blank" id="cast_category"
                                                 name="cast_category">
-                                                <option value="GEN"{{ 'GEN' == $personal_information->cast ? 'selected' : '' }}>GEN
+                                                <option
+                                                    value="GEN"{{ 'GEN' == $personal_information->cast ? 'selected' : '' }}>
+                                                    GEN
                                                 </option>
-                                                <option value="ST"{{ 'ST' == $personal_information->cast ? 'selected' : '' }}>ST
+                                                <option
+                                                    value="ST"{{ 'ST' == $personal_information->cast ? 'selected' : '' }}>
+                                                    ST
                                                 </option>
-                                                <option value="SC"{{ 'SC' == $personal_information->cast ? 'selected' : '' }}>SC
+                                                <option
+                                                    value="SC"{{ 'SC' == $personal_information->cast ? 'selected' : '' }}>
+                                                    SC
                                                 </option>
-                                                <option value="OBC"{{ 'OBC' == $personal_information->cast ? 'selected' : '' }}>OBC
+                                                <option
+                                                    value="OBC"{{ 'OBC' == $personal_information->cast ? 'selected' : '' }}>
+                                                    OBC
                                                 </option>
                                             </select>
                                             <span class="error-msg"></span>
@@ -159,7 +175,8 @@
                                 <div class="col-md-3 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
-                                            <label class="form-label">Aadhaar No <span class="text-danger">*</span></label>
+                                            <label class="form-label">Aadhaar No <span
+                                                    class="text-danger">*</span></label>
                                             <input name="aadhaar_no" type="text"
                                                 class="form-control chk_blank chk_aadhaar "
                                                 value="{{ $personal_information->aadhaar_no }}">
@@ -172,7 +189,8 @@
                                         <div class="form-group input-cont">
                                             <label class="form-label">Mobile No <span class="text-danger">*</span></label>
                                             <input name="mobile" type="text"
-                                                class="form-control chk_blank chk_mobile" value="{{ $personal_information->mobile }}">
+                                                class="form-control chk_blank chk_mobile"
+                                                value="{{ $personal_information->mobile }}">
                                             <span class="error-msg"></span>
                                         </div>
                                     </div>
@@ -241,7 +259,8 @@
                                                     <label class="form-label">Pincode <span
                                                             class="text-danger">*</span></label>
                                                     <input class="form-control chk_blank chk_zip" name="present_pin_code"
-                                                        id="present_pin_code" value="{{ $present_address->present_pin_code }}">
+                                                        id="present_pin_code"
+                                                        value="{{ $present_address->present_pin_code }}">
                                                     <span class="error-msg"></span>
                                                 </div>
                                             </div>
@@ -319,8 +338,8 @@
                                                 <div class="form-group input-cont">
                                                     <label class="form-label">Pincode <span
                                                             class="text-danger">*</span></label>
-                                                    <input class="form-control chk_blank chk_zip" name="permanent_pin_code"
-                                                        id="permanent_pin_code"
+                                                    <input class="form-control chk_blank chk_zip"
+                                                        name="permanent_pin_code" id="permanent_pin_code"
                                                         value="{{ $permanent_address->permanent_pin_code }}">
                                                     <span class="error-msg"></span>
                                                 </div>
@@ -548,94 +567,305 @@
                                                 <tr>
                                                     <th>
                                                         <div class="form-group input-cont">
-                                                        <input type="text" name="hsc" class="form-control chk_blank"
-                                                            placeholder="H.S.C. or equivalent" value="{{ $qualification_details->hsc->course}}">
-                                                        <span class="help-block">(H.S.C. or equivalent)</span>
-                                                        <span class="error-msg"></span>
-                                                    </div>
+                                                            <input type="text" name="hsc"
+                                                                class="form-control chk_blank"
+                                                                placeholder="H.S.C. or equivalent"
+                                                                value="{{ $qualification_details->hsc->course }}">
+                                                            <span class="help-block">(H.S.C. or equivalent)</span>
+                                                            <span class="error-msg"></span>
+                                                        </div>
                                                     </th>
-                                                    <th> <input type="text" class="form-control" name="board" value="{{ $qualification_details->hsc->board }}">
-
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" class="form-control chk_blank"
+                                                                name="board"
+                                                                value="{{ $qualification_details->hsc->board }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
                                                     </th>
-                                                    <th> <input type="text" name="hsc_passing_year"
-                                                            class="form-control yearPicker" value="{{ $qualification_details->hsc->passing_year }}"> </th>
-                                                    <th> <input type="text" name="division" class="form-control" value="{{ $qualification_details->hsc->division }}">
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_passing_year"
+                                                                class="form-control yearPicker chk_blank"
+                                                                value="{{ $qualification_details->hsc->passing_year }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
                                                     </th>
-                                                    <th> <input type="text" name="hsc_mark" id="hsc_mark"
-                                                            class="form-control" value="{{ $qualification_details->hsc->mark }}"> </th>
-                                                    <th> <input type="text" name="total_mark" id="hsc_total_mark"
-                                                            class="form-control" value="{{ $qualification_details->hsc->total }}"> </th>
-                                                    <th> <input type="text" name="percentage" id="hsc_percentage"
-                                                            class="form-control" value="{{ $qualification_details->hsc->percentage }}"> </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="division"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->hsc->division }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_mark" id="hsc_mark"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->hsc->mark }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="total_mark" id="hsc_total_mark"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->hsc->total }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="percentage" id="hsc_percentage"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->hsc->percentage }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
                                                 </tr>
                                                 <tr>
-                                                    <th><input type="text" name="intermediate" class="form-control"
-                                                            placeholder="Intermediate + 2" value="{{ $qualification_details->intermediate->course}}"><span
-                                                            class="help-block">(Intermediate + 2)</span></th>
-                                                    <th> <input type="text" name="intermediate_board"
-                                                            class="form-control" value="{{ $qualification_details->intermediate->board }}"> </th>
-                                                    <th> <input type="text" name="intermediate_passing_year"
-                                                            class="form-control yearPicker" value="{{ $qualification_details->intermediate->passing_year }}"> </th>
-                                                    <th> <input type="text" name="intermediate_division"
-                                                            class="form-control" value="{{ $qualification_details->intermediate->division }}"> </th>
-                                                    <th> <input type="text" name="intermediate_mark"
-                                                            id="intermediate_mark" class="form-control" value="{{ $qualification_details->intermediate->mark }}"> </th>
-                                                    <th> <input type="text" name="intermediate_total_mark"
-                                                            id="intermediate_total_mark" class="form-control" value="{{ $qualification_details->intermediate->total }}"> </th>
-                                                    <th> <input type="text" name="intermediate_percentage"
-                                                            id="intermediate_percentage" class="form-control" value="{{ $qualification_details->intermediate->percentage }}"> </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate"
+                                                                class="form-control chk_blank"
+                                                                placeholder="Intermediate + 2"
+                                                                value="{{ $qualification_details->intermediate->course }}"><span
+                                                                class="help-block">(Intermediate + 2)</span>
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_board"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->intermediate->board }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_passing_year"
+                                                                class="form-control yearPicker chk_blank"
+                                                                value="{{ $qualification_details->intermediate->passing_year }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_division"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->intermediate->division }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_mark"
+                                                                id="intermediate_mark" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->intermediate->mark }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_total_mark"
+                                                                id="intermediate_total_mark"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->intermediate->total }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_percentage"
+                                                                id="intermediate_percentage"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->intermediate->percentage }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
                                                 </tr>
                                                 <tr>
-                                                    <th><input type="text" class="form-control" name="graduate"
-                                                            placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A." value="{{ $qualification_details->graduate->course }}"><span
-                                                            class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
-                                                            B.A.)</span></th>
-                                                    <th> <input type="text" name="graduate_board"
-                                                            class="form-control" value="{{ $qualification_details->graduate->board }}"> </th>
-                                                    <th> <input type="text" name="graduate_passing_year"
-                                                            class="form-control yearPicker" value="{{ $qualification_details->graduate->passing_year }}"> </th>
-                                                    <th> <input type="text" name="graduate_division"
-                                                            class="form-control" value="{{ $qualification_details->graduate->division }}"> </th>
-                                                    <th> <input type="text" name="graduate_mark" id="graduate_mark"
-                                                            class="form-control" value="{{ $qualification_details->graduate->mark }}"> </th>
-                                                    <th> <input type="text" name="graduate_total_mark"
-                                                            id="graduate_total_mark" class="form-control" value="{{ $qualification_details->graduate->total }}"> </th>
-                                                    <th> <input type="text" name="graduate_percentage"
-                                                            id="graduate_percentage" class="form-control" value="{{ $qualification_details->graduate->percentage }}"> </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" class="form-control chk_blank"
+                                                                name="graduate"
+                                                                placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A."
+                                                                value="{{ $qualification_details->graduate->course }}"><span
+                                                                class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
+                                                                B.A.)</span>
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_board"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->graduate->board }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_passing_year"
+                                                                class="form-control yearPicker chk_blank"
+                                                                value="{{ $qualification_details->graduate->passing_year }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_division"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->graduate->division }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_mark" id="graduate_mark"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->graduate->mark }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_total_mark"
+                                                                id="graduate_total_mark" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->graduate->total }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_percentage"
+                                                                id="graduate_percentage" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->graduate->percentage }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
                                                 </tr>
                                                 <tr>
-                                                    <th><input type="text" class="form-control" name="post_graduate"
-                                                            placeholder="M. Mus / MVA" value="{{ $qualification_details->postGraduate->course }}"><span class="help-block">(M. Mus /
-                                                            MVA)</span></th>
-                                                    <th> <input type="text" name="post_graduate_board"
-                                                            class="form-control" value="{{ $qualification_details->postGraduate->board }}"> </th>
-                                                    <th> <input type="text" name="post_graduate_passing_year"
-                                                            class="form-control yearPicker" value="{{ $qualification_details->postGraduate->passing_year }}"> </th>
-                                                    <th> <input type="text" name="post_graduate_division"
-                                                            class="form-control" value="{{ $qualification_details->postGraduate->division }}"> </th>
-                                                    <th> <input type="text" name="post_graduate_mark"
-                                                            id="post_graduate_mark" class="form-control" value="{{ $qualification_details->postGraduate->mark }}"> </th>
-                                                    <th> <input type="text" name="post_graduate_total_mark"
-                                                            id="post_graduate_total_mark" class="form-control" value="{{ $qualification_details->postGraduate->total }}"> </th>
-                                                    <th> <input type="text" name="post_graduate_percentage"
-                                                            id="post_graduate_percentage" class="form-control" value="{{ $qualification_details->postGraduate->percentage }}"> </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" class="form-control chk_blank"
+                                                                name="post_graduate" placeholder="M. Mus / MVA"
+                                                                value="{{ $qualification_details->postGraduate->course }}"><span
+                                                                class="help-block">(M. Mus /
+                                                                MVA)</span>
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="post_graduate_board"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->postGraduate->board }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="post_graduate_passing_year"
+                                                                class="form-control yearPicker chk_blank"
+                                                                value="{{ $qualification_details->postGraduate->passing_year }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="post_graduate_division"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->postGraduate->division }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="post_graduate_mark"
+                                                                id="post_graduate_mark" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->postGraduate->mark }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="post_graduate_total_mark"
+                                                                id="post_graduate_total_mark" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->postGraduate->total }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="post_graduate_percentage"
+                                                                id="post_graduate_percentage" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->postGraduate->percentage }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
                                                 </tr>
                                                 <tr>
-                                                    <th><input type="text" class="form-control" name="other_graduate"
-                                                            placeholder="Any other Qualification" value="{{ $qualification_details->other->course }}"><span
-                                                            class="help-block">(Any other Qualification)</span></th>
-                                                    <th> <input type="text" name="other_graduate_board"
-                                                            class="form-control" value="{{ $qualification_details->other->board }}"> </th>
-                                                    <th> <input type="text" name="other_graduate_passing_year"
-                                                            class="form-control yearPicker" value="{{ $qualification_details->other->passing_year }}"> </th>
-                                                    <th> <input type="text" name="other_graduate_division"
-                                                            class="form-control" value="{{ $qualification_details->other->division }}"> </th>
-                                                    <th> <input type="text" name="other_graduate_mark"
-                                                            id="other_graduate_mark" class="form-control" value="{{ $qualification_details->other->mark }}"> </th>
-                                                    <th> <input type="text" name="other_graduate_total_mark"
-                                                            id="other_graduate_total_mark" class="form-control" value="{{ $qualification_details->other->total }}"> </th>
-                                                    <th> <input type="text" name="other_graduate_percentage"
-                                                            id="other_graduate_percentage" class="form-control" value="{{ $qualification_details->other->percentage }}"> </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" class="form-control chk_blank"
+                                                                name="other_graduate"
+                                                                placeholder="Any other Qualification"
+                                                                value="{{ $qualification_details->other->course }}"><span
+                                                                class="help-block">(Any other Qualification)</span>
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="other_graduate_board"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->other->board }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="other_graduate_passing_year"
+                                                                class="form-control yearPicker chk_blank"
+                                                                value="{{ $qualification_details->other->passing_year }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="other_graduate_division"
+                                                                class="form-control chk_blank"
+                                                                value="{{ $qualification_details->other->division }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="other_graduate_mark"
+                                                                id="other_graduate_mark" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->other->mark }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="other_graduate_total_mark"
+                                                                id="other_graduate_total_mark" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->other->total }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="other_graduate_percentage"
+                                                                id="other_graduate_percentage" class="form-control chk_blank"
+                                                                value="{{ $qualification_details->other->percentage }}">
+                                                                <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -644,94 +874,101 @@
                                 </div>
                             </div>
 
-                        <div class="border rounded p-2 mb-4">
-                            <h2>Document</h2>
-                            <hr>
-                            <div class="row mb-2">
-                                <div class="col-md-3 col-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Photo<span class="text-danger">*</span></label>
-                                        <div class="custom-file input-cont">
-                                            <input type="file"
-                                                class="custom-file-input form-control chk_5mb_file_only"
-                                                name="profile">
-                                            <label class="custom-file-label">Choose
-                                                file...</label>
-                                            <small class="form-text text-secondary">{{ __('common.file_format') }}</small>
-                                            <span onclick="upload_image_view('{{ asset($documents->profile) }}');"
-                                                class="badge badge-primary mt-4" style="cursor: pointer;"
-                                                id="pdf-file">View Upload
-                                                File</span>
-                                            <span class="error-msg"></span>
+                            <div class="border rounded p-2 mb-4">
+                                <h2>Document</h2>
+                                <hr>
+                                <div class="row mb-2">
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Photo<span class="text-danger">*</span></label>
+                                            <div class="custom-file input-cont">
+                                                <input type="file"
+                                                    class="custom-file-input form-control chk_5mb_file_only chk_blank"
+                                                    name="profile">
+                                                <label class="custom-file-label">Choose
+                                                    file...</label>
+                                                <small
+                                                    class="form-text text-secondary">{{ __('common.file_format') }}</small>
+                                                <span onclick="upload_image_view('{{ asset($documents->profile) }}');"
+                                                    class="badge badge-primary mt-4" style="cursor: pointer;"
+                                                    id="pdf-file">View Upload
+                                                    File</span>
+                                                <span class="error-msg"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Aadhaar Card<span class="text-danger">*</span></label>
-                                        <div class="custom-file input-cont">
-                                            <input type="file"
-                                                class="custom-file-input form-control chk_5mb_file_only"
-                                                name="aadhaar_card">
-                                            <label class="custom-file-label">Choose
-                                                file...</label>
-                                            <small class="form-text text-secondary">{{ __('common.file_format') }}</small>
-                                            <span onclick="upload_image_view('{{ asset($documents->aadhaar_card) }}');"
-                                                class="badge badge-primary mt-4" style="cursor: pointer;"
-                                                id="pdf-file">View Upload
-                                                File</span>
-                                            <span class="error-msg"></span>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Aadhaar Card<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="custom-file input-cont">
+                                                <input type="file"
+                                                    class="custom-file-input form-control chk_5mb_file_only chk_blank"
+                                                    name="aadhaar_card">
+                                                <label class="custom-file-label">Choose
+                                                    file...</label>
+                                                <small
+                                                    class="form-text text-secondary">{{ __('common.file_format') }}</small>
+                                                <span
+                                                    onclick="upload_image_view('{{ asset($documents->aadhaar_card) }}');"
+                                                    class="badge badge-primary mt-4" style="cursor: pointer;"
+                                                    id="pdf-file">View Upload
+                                                    File</span>
+                                                <span class="error-msg"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-12">
-                                    <div class="form-group">
-                                        <label class="form-label">HSC Certificate <span
-                                                class="text-danger">*</span></label>
-                                        <div class="custom-file input-cont">
-                                            <input type="file"
-                                                class="custom-file-input form-control chk_5mb_file_only"
-                                                name="hsc_cert">
-                                            <label class="custom-file-label">Choose
-                                                file...</label>
-                                            <small class="form-text text-secondary">{{ __('common.file_format') }}</small>
-                                            <span onclick="upload_image_view('{{ asset($documents->hsc_cert) }}');"
-                                                class="badge badge-primary mt-4" style="cursor: pointer;"
-                                                id="pdf-file">View Upload
-                                                File</span>
-                                            <span class="error-msg"></span>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label">HSC Certificate <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="custom-file input-cont">
+                                                <input type="file"
+                                                    class="custom-file-input form-control chk_5mb_file_only chk_blank"
+                                                    name="hsc_cert">
+                                                <label class="custom-file-label">Choose
+                                                    file...</label>
+                                                <small
+                                                    class="form-text text-secondary">{{ __('common.file_format') }}</small>
+                                                <span onclick="upload_image_view('{{ asset($documents->hsc_cert) }}');"
+                                                    class="badge badge-primary mt-4" style="cursor: pointer;"
+                                                    id="pdf-file">View Upload
+                                                    File</span>
+                                                <span class="error-msg"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Migration Certificate</label>
-                                        <div class="custom-file input-cont">
-                                            <input type="file"
-                                                class="custom-file-input form-control chk_5mb_file_only"
-                                                name="migration_cert">
-                                            <label class="custom-file-label">Choose
-                                                file...</label>
-                                            <small class="form-text text-secondary">{{ __('common.file_format') }}</small>
-                                            <span onclick="upload_image_view('{{ asset($documents->migration_cert) }}');"
-                                                class="badge badge-primary mt-4" style="cursor: pointer;"
-                                                id="pdf-file">View Upload
-                                                File</span>
-                                            <span class="error-msg"></span>
-                                        </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Migration Certificate</label>
+                                            <div class="custom-file input-cont">
+                                                <input type="file"
+                                                    class="custom-file-input form-control chk_5mb_file_only chk_blank"
+                                                    name="migration_cert">
+                                                <label class="custom-file-label">Choose
+                                                    file...</label>
+                                                <small
+                                                    class="form-text text-secondary">{{ __('common.file_format') }}</small>
+                                                <span
+                                                    onclick="upload_image_view('{{ asset($documents->migration_cert) }}');"
+                                                    class="badge badge-primary mt-4" style="cursor: pointer;"
+                                                    id="pdf-file">View Upload
+                                                    File</span>
+                                                <span class="error-msg"></span>
+                                            </div>
 
+                                        </div>
                                     </div>
+
                                 </div>
+                            </div>
+
+
+                            <div class="col-12 text-center mt-50">
+                                <button type="submit"
+                                    class="btn btn-info me-1 waves-effect waves-float waves-light">Preview</button>
 
                             </div>
-                        </div>
-
-
-                        <div class="col-12 text-center mt-50">
-                            <button type="submit"
-                                class="btn btn-info me-1 waves-effect waves-float waves-light">Preview</button>
-
-                        </div>
                     </form>
                 </div>
 
@@ -793,14 +1030,14 @@
         });
 
         $('#course_name').on('change', function() {
-            if(this.value != '' ){
+            if (this.value != '') {
                 $('.seat-div').removeClass('d-none');
-                var seat =  $(this).find(':selected').data('id');
+                var seat = $(this).find(':selected').data('id');
 
                 $('#remaining_seat').val(seat)
                 $('#remaining').html(seat)
 
-            }else{
+            } else {
                 $('.seat-div').addClass('d-none');
             }
         });

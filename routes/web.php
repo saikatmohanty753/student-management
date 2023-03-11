@@ -22,6 +22,7 @@ use App\Http\Controllers\PaperSubTypeController;
 use App\Http\Controllers\UucStudentController;
 use App\Http\Livewire\Notification;
 use App\Providers\RouteServiceProvider;
+use App\Http\Controllers\Mail;
 
 /*
 |--------------------------------------------------------------------------
