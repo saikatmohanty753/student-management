@@ -1041,5 +1041,47 @@
                 $('.seat-div').addClass('d-none');
             }
         });
+        
+            $('#hsc_total_mark, #hsc_mark').keyup(function() {
+            var total_marks = parseFloat($('#hsc_total_mark').val());
+            var obt_marks = parseFloat($('#hsc_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#hsc_percentage').val(prs_mark);
+            }
+        });
+        $('#intermediate_total_mark, #intermediate_mark').keyup(function() {
+            var total_marks = parseFloat($('#intermediate_total_mark').val());
+            var obt_marks = parseFloat($('#intermediate_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#intermediate_percentage').val(prs_mark);
+            }
+        });
+        $('#graduate_total_mark, #graduate_mark').keyup(function() {
+            var total_marks = parseFloat($('#graduate_total_mark').val());
+            var obt_marks = parseFloat($('#graduate_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#graduate_percentage').val(prs_mark);
+            }
+        });
+        $('#post_graduate_total_mark, #post_graduate_mark').keyup(function() {
+            var total_marks = parseFloat($('#post_graduate_total_mark').val());
+            var obt_marks = parseFloat($('#post_graduate_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#post_graduate_percentage').val(prs_mark);
+            }
+        });
+        $('#other_graduate_total_mark, #other_graduate_mark').keyup(function() {
+            var total_marks = parseFloat($('#other_graduate_total_mark').val());
+            var obt_marks = parseFloat($('#other_graduate_mark').val());
+            var prs_mark = parseFloat((obt_marks * 100) / total_marks).toFixed(2);
+            if (total_marks && obt_marks) {
+                $('#other_graduate_percentage').val(prs_mark);
+
+            }
+        });
     </script>
 @endsection

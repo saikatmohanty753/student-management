@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="row">
 
         <div class="col-xl-12">
@@ -205,7 +204,7 @@
             }
         }
         $("#imageUpload").change(function() {
-            alert('hi');
+            // alert('hi');
 
 
             readURL(this);
