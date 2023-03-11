@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-    @elseif($data->notice_sub_type == 2 || $data->notice_sub_type == 4)
+    @elseif($data->notice_sub_type == 2 || $data->notice_sub_type == 4 || $data->notice_sub_type == 3)
         <div class="card-body">
             <div class="alert alert-primary">
                 <div class="d-flex flex-start w-100">

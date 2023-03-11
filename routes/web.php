@@ -74,10 +74,10 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('department', DepartmentController::class);
     Route::resource('course', CourseController::class);
     Route::get('semester/{id}/{parameter}', [SemesterController::class, 'semesterList'])->name('semester.list');
-    Route::resource('semester',SemesterController::class);
-    Route::post('update-credit',[CreditController::class, 'update']);
-    Route::resource('credit',CreditController::class);
-    Route::resource('papersubtype',PaperSubTypeController::class);
+    Route::resource('semester', SemesterController::class);
+    Route::post('update-credit', [CreditController::class, 'update']);
+    Route::resource('credit', CreditController::class);
+    Route::resource('papersubtype', PaperSubTypeController::class);
     Route::get('uuc-syllabus/{id}/{department}/{sem}', [SyllabusController::class, 'syllabus'])->name('uuc.syllabus');
     // Route::resource('uuc-syllabus',SyllabusController::class);
 
@@ -143,19 +143,12 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     // Route::post('filterstudent', [StudentController::class, 'filterstudent']);
 
-    Route::post('/daterange/filterstudent', [StudentController::class,'filterstudent'])->name('daterange.filterstudent');
+    Route::post('/daterange/filterstudent', [StudentController::class, 'filterstudent'])->name('daterange.filterstudent');
 
     Route::resource('uuc-students', UucStudentController::class);
     Route::get('uuc-student', [UucStudentController::class, 'uucStudent']);
 
     Route::get('dashboard/{id}', [AdmissionController::class, 'student']);
 
-
-
-
-
-
+    Route::post('/update-profile-image', [AjaxController::class, 'updateProfileImage']);
 });
-
-
-

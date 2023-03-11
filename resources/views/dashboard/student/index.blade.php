@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="row">
 
         <div class="col-xl-12">
@@ -20,9 +19,17 @@
                                         <label for="imageUpload"></label>
                                     </div>
                                     <div class="avatar-preview">
+                                        @if ($student->profile_picture == '')
+                                            <div id="imagePreview"
+                                                style="background-image: url('{{ asset('backend/img/profile.png') }}');">
+                                            </div>
+                                        @else
                                         <div id="imagePreview"
-                                            style="background-image: url('{{ asset('backend/img/profile.png') }}');">
-                                        </div>
+                                                style="background-image: url('{{ $student->profile_picture }}');">
+                                            </div>
+                                        @endif
+
+
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -37,6 +44,12 @@
                                                 <div class="fs-xs">
                                                     <a href="javascript:void(0)" class="text-muted">Session :
                                                         {{ $student->batch_year }}</a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)" class="text-muted">DOB :
+                                                        {{ Carbon\Carbon::parse($student->dob)->format('d-M-Y') }}</a>
                                                 </div>
                                             </li>
                                             <li class="list-group-item py-2 px-2">
@@ -205,10 +218,36 @@
             }
         }
         $("#imageUpload").change(function() {
-            alert('hi');
+            // event.preventDefault();
+            var x = this;
+            console.log('hi');
+            var form_data = new FormData();
+            form_data.append("photo", this.files[0]);
+            console.log(form_data);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/update-profile-image',
+                method: 'POST',
+                data: form_data,
+                dataType: 'JSON',
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    readURL(x);
+                },
+                error: function(response) {
+                    $('.error').remove();
+                    $.each(response.responseJSON.errors, function(k, v) {
+                        $('[name=\"image\"]').after('<p class="error">' + v[0] + '</p>');
+                    });
+                }
+            });
 
-
-            readURL(this);
         });
     </script>
 @endsection
