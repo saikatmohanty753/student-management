@@ -1,76 +1,192 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <h4>Student Profile of {{ $collegeName }}</h4>
-       
-       
-    </div>
+    <style>
+        .profile {
+            max-width: 40%;
+            min-width: 40%;
 
+        }
+
+        .std-details {
+            background: #d0d0d0;
+        }
+
+        .details {
+            border-bottom: 2px solid #ececec;
+            /* padding: 5px; */
+        }
+    </style>
     <div class="row">
-        <div class="col-md-3">
-            <br><br><br>
-            <div class="card" class="student">
-                <img src="{{ asset('backend/img/demo/authors/jovanni.png') }}" alt="profile Pic" height="200" width="200">
+
+        <div class="col-xl-12">
+            <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $student->name }}</h5>
-                </div>
-                <div class="card-body">
-                    <p><strong>Department:</strong> {{ $student->department->course_for }}</p>
-                    <p><strong>Course:</strong> {{ $student->course->name }}</p>
-                    <p><strong>Father's Name:</strong> {{ $student->father_name }}</p>
-                    <p><strong>Mother's Name:</strong> {{ $student->mother_name }}</p>
-                    <p><strong>Gender:</strong> {{ $student->gender }}</p>
-                    <p><strong>Date of Birth:</strong> {{ $student->dob }}</p>
-                    <p><strong>Aadhaar Card Number:</strong> {{ $student->aadhaar_no }}</p>
-                    <p><strong>Mobile Number:</strong> {{ $student->mobile }}</p>
-                    <p><strong>Caste:</strong> {{ $student->cast }}</p>
-                </div>
-            </div>
-        </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card" class="student">
+                                <div class="text-center mt-2">
+                                    <img src="{{ asset('backend/img/profile.png') }}"
+                                        class="rounded-circle shadow-2 img-thumbnail profile" alt="profile">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="mb-0 fw-700 text-center mt-1 color-info-700">
+                                        {{ $student->name }}
+                                        <small class="text-muted mb-0 fw-400"> <span
+                                                class="color-primary-700">{{ $student->email }}</span> </small>
+                                    </h5>
+                                    <div class="std-details mt-2">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)" class="text-muted">Session :
+                                                        {{ $student->batch_year }}</a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)" class="text-muted">Email :
+                                                        {{ $student->email }}</a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)" class="text-muted">Mobile Number :
+                                                        {{ $student->mobile }}</a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)" class="text-muted">Aadhaar Number :
+                                                        {{ $student->aadhaar_no }}</a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)" class="text-muted">Gender :
+                                                        {{ $student->gender }}</a>
+                                                </div>
+                                            </li>
+                                            {{-- <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)"
+                                                        class="text-muted">Department : {{ $student->department->course_for }}</a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)"
+                                                        class="text-muted">Course : {{ $student->course->name }}</a>
+                                                </div>
+                                            </li> --}}
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)" class="text-muted">Father's Name :
+                                                        {{ $student->father_name }}</a>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2 px-2">
+                                                <div class="fs-xs">
+                                                    <a href="javascript:void(0)" class="text-muted">Mother's Name :
+                                                        {{ $student->mother_name }}</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        {{-- <p class="details"><strong>Email :</strong> {{ $student->email }}</p>
+                                        <p class="details"><strong>Department:</strong>
+                                            {{ $student->department->course_for }}</p>
+                                        <p class="details"><strong>Course:</strong> {{ $student->course->name }}</p>
+                                        <p class="details"><strong>Father's Name:</strong> {{ $student->father_name }}</p>
+                                        <p class="details"><strong>Mother's Name:</strong> {{ $student->mother_name }}</p>
+                                        <p class="details"><strong>Gender:</strong> {{ $student->gender }}</p>
+                                        <p class="details"><strong>Date of Birth:</strong> {{ $student->dob }}</p>
+                                        <p class="details"><strong>Aadhaar Card Number:</strong> {{ $student->aadhaar_no }}
+                                        </p>
+                                        <p class="details"><strong>Mobile Number:</strong> {{ $student->mobile }}</p>
+                                        <p class="details"><strong>Caste:</strong> {{ $student->cast }}</p> --}}
+                                    </div>
 
-        <div class="col-md-9">
-            <br><br><br><br><br><br>
-            <div class="card" class="wid">
-                <div class="card-body">
-                    <table class="table border-0">
-                        <tbody>
-                            <tr>
-                                <th>Department:</th>
-                                <th>Course:</th>
-                                <th>College:</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $student->department->course_for }}</td>
-                                <td>{{ $student->course->name }}</td>
-                                <td>{{ $collegeName }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-md-8">
 
+                            <div class="text-center">
+                                <h2 class="keep-print-font fw-500 mb-4 text-primary pt-2 flex-1 position-relative">
+                                    {{ $student->collegeName($student->clg_id) }}
+                                </h2>
+                            </div>
 
+                            <div class="row">
+                                <div class="col-sm-6 d-flex">
+                                    <div class="table-responsive">
+                                        <table class="table table-clean table-sm align-self-end">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Department : {{ $student->department->course_for }}</td>
+                                                    {{-- <td>{{ $student->department->course_for }}</td> --}}
+                                                </tr>
 
-            </div>
-            {{-- <br><br><br><br><br><br><br><br><br> --}}
-            <div class="card" class="wid">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 d-flex">
+                                    <div class="table-responsive">
+                                        <table class="table table-clean table-sm align-self-end">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Course : {{ $student->course->name }}</td>
+                                                </tr>
 
-                <div class="card-header bg-info">
-                    <h5 class="card-title">Message to Parent</h5>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="subject">Subject:</label>
-                        <input type="text" class="form-control" id="subject" name="subject">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <td style="width: 50%" class="text-center">Registration Number</td>
+                                                    <td style="width: 50%" class="text-center">Roll Number</td>
+                                                    {{-- <td>{{ $student->department->course_for }}</td> --}}
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                <td style="width: 50%" class="text-center">{{ $student->regd_no ? $student->regd_no : 'Not Issued' }}</td>
+                                                <td style="width: 50%" class="text-center">{{ $student->roll_no ? $student->roll_no : 'Not Issued'}}</td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- <div class="card" class="wid">
+                                <div class="card-body">
+                                    <table class="table border-0">
+                                        <tbody>
+                                            <tr>
+                                                <th>Department:</th>
+                                                <th>Course:</th>
+                                                <th>College:</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ $student->department->course_for }}</td>
+                                                <td>{{ $student->course->name }}</td>
+                                                <td>{{ $student->collegeName($student->clg_id) }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> --}}
+
+                        </div>
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="message">Message:</label>
-                        <textarea class="form-control" id="message" name="message" rows="5"></textarea>
-                    </div> --}}
                 </div>
-                <button type="submit" class="btn btn-primary">Send</button>
-
-
             </div>
         </div>
     </div>

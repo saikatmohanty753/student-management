@@ -587,6 +587,7 @@ class AdmissionController extends Controller
                 $user->email = $student->email;
                 $user->mob_no = $student->mobile;
                 $user->clg_id = $student->clg_id;
+                $user->student_id = $student->id;
                 $user->role_id = 3;
                 $user->batch_year = date('Y') . '-' . $year;
                 $user->password = Hash::make(12345678);
@@ -781,14 +782,14 @@ class AdmissionController extends Controller
     //     return view('dashboard.student.index',compact('student'));
     // }
 
-    public function student($id)
+   /*  public function student($id)
     {
         $collegeName = College::select('name')
             ->where('id', Auth::user()->clg_id)
             ->pluck('name')
             ->first();
         $student=StudentDetails::find($id);
-        
+
         return view('dashboard.student.index', compact('student','collegeName'));
-    }
+    } */
 }
