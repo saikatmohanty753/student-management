@@ -571,8 +571,10 @@
                                                                 class="form-control chk_blank"
                                                                 placeholder="H.S.C. or equivalent"
                                                                 value="{{ $qualification_details->hsc->course }}">
-                                                            <span class="help-block">(H.S.C. or equivalent)</span>
-                                                            <span class="error-msg"></span>
+                                                                <p class="help-block">(H.S.C. or equivalent)</p>
+                                                                <span class="error-msg"></span>
+                                                            
+                                                            
                                                         </div>
                                                     </th>
                                                     <th>
@@ -630,8 +632,8 @@
                                                             <input type="text" name="intermediate"
                                                                 class="form-control chk_blank"
                                                                 placeholder="Intermediate + 2"
-                                                                value="{{ $qualification_details->intermediate->course }}"><span
-                                                                class="help-block">(Intermediate + 2)</span>
+                                                                value="{{ $qualification_details->intermediate->course }}"><p
+                                                                class="help-block">(Intermediate + 2)</p>
                                                             <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -692,9 +694,9 @@
                                                             <input type="text" class="form-control chk_blank"
                                                                 name="graduate"
                                                                 placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A."
-                                                                value="{{ $qualification_details->graduate->course }}"><span
+                                                                value="{{ $qualification_details->graduate->course }}"><p
                                                                 class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
-                                                                B.A.)</span>
+                                                                B.A.)</p>
                                                             <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -752,9 +754,9 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" class="form-control chk_blank"
                                                                 name="post_graduate" placeholder="M. Mus / MVA"
-                                                                value="{{ $qualification_details->postGraduate->course }}"><span
+                                                                value="{{ $qualification_details->postGraduate->course }}"><p
                                                                 class="help-block">(M. Mus /
-                                                                MVA)</span>
+                                                                MVA)</p>
                                                                 <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -813,8 +815,8 @@
                                                             <input type="text" class="form-control chk_blank"
                                                                 name="other_graduate"
                                                                 placeholder="Any other Qualification"
-                                                                value="{{ $qualification_details->other->course }}"><span
-                                                                class="help-block">(Any other Qualification)</span>
+                                                                value="{{ $qualification_details->other->course }}"><p
+                                                                class="help-block">(Any other Qualification)</p>
                                                                 <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -883,7 +885,7 @@
                                             <label class="form-label">Photo<span class="text-danger">*</span></label>
                                             <div class="custom-file input-cont">
                                                 <input type="file"
-                                                    class="custom-file-input form-control chk_5mb_file_only chk_blank"
+                                                    class="custom-file-input form-control chk_5mb_file_only"
                                                     name="profile">
                                                 <label class="custom-file-label">Choose
                                                     file...</label>
@@ -903,7 +905,7 @@
                                                     class="text-danger">*</span></label>
                                             <div class="custom-file input-cont">
                                                 <input type="file"
-                                                    class="custom-file-input form-control chk_5mb_file_only chk_blank"
+                                                    class="custom-file-input form-control chk_5mb_file_only"
                                                     name="aadhaar_card">
                                                 <label class="custom-file-label">Choose
                                                     file...</label>
@@ -924,7 +926,7 @@
                                                     class="text-danger">*</span></label>
                                             <div class="custom-file input-cont">
                                                 <input type="file"
-                                                    class="custom-file-input form-control chk_5mb_file_only chk_blank"
+                                                    class="custom-file-input form-control chk_5mb_file_only"
                                                     name="hsc_cert">
                                                 <label class="custom-file-label">Choose
                                                     file...</label>
@@ -943,7 +945,7 @@
                                             <label class="form-label">Migration Certificate</label>
                                             <div class="custom-file input-cont">
                                                 <input type="file"
-                                                    class="custom-file-input form-control chk_5mb_file_only chk_blank"
+                                                    class="custom-file-input form-control chk_5mb_file_only"
                                                     name="migration_cert">
                                                 <label class="custom-file-label">Choose
                                                     file...</label>
