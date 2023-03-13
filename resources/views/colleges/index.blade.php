@@ -127,7 +127,7 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
+        // $(document).ready(function() {
 
 
             $('.view-course').on('click', function() {
@@ -146,7 +146,7 @@
 
             });
 
-        });
+        // });
     </script>
     <script>
         $('.view-course').click(function(e) {
@@ -168,7 +168,7 @@
                 data: formData,
                 dataType: 'json',
                 success: function(data) {
-                    // if (data.length>0) {
+                    if (data.length>0) {
                         var html = '';
                         $.each(data, function(key, val) {
                             html += '<tr>';
@@ -179,9 +179,10 @@
                         });
                         $('.add-course').html(html);
                         $('#course-view').modal('show');
-                    // }else{
-                    //     $('.add-course').html('<div id="no-data-message">No data available</div>');
-                    // }
+                    }else{
+                        $('.add-course').html('<div id="no-data-message">No data available</div>');
+                        $('#course-view').modal('show');
+                    }
                 },
                 error: function(data) {
                     console.log(data);
