@@ -23,7 +23,7 @@ class ClgNoticeController extends Controller
         $noticeIds = [];
         foreach ($notification as $key => $value) {
             if ($value['data']['notice_type_id'] == 1) {
-                if ($value['data']['notice_sub_type_id'] == 2 || $value['data']['notice_sub_type_id'] == 4) {
+                if ($value['data']['notice_sub_type_id'] == 2 || $value['data']['notice_sub_type_id'] == 4 ||$value['data']['notice_sub_type_id'] == 3) {
                     $noticeIds[] = [
                         'notice_id' => $value['data']['notice_id'],
                         'notification_id' => $value->id
@@ -47,7 +47,18 @@ class ClgNoticeController extends Controller
                 $OtherNotice[] = $data;
             }
         }
-        return view('publish-notices.index', compact('notice', 'OtherNotice'));
+        $studentNotice = [];
+        if (Auth::user()->role_id == 3) {
+            foreach ($noticeIds as $item) {
+                $data = Notice::where('id', $item['notice_id'])->where([['notice_type', '1'], ['notice_sub_type', 3]])->first();
+                if ($data) {
+                    $data['notification_id'] = $item['notification_id'];
+                    $studentNotice[] = $data;
+                }
+            }
+        }
+        // return $studentNotice;
+        return view('publish-notices.index', compact('notice', 'OtherNotice', 'studentNotice'));
     }
 
     /**

@@ -8,10 +8,12 @@ use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\Notice;
 use App\Models\PaperSubType;
+use App\Models\StudentDetails;
 use App\Models\User;
 use App\Notifications\UucNotice;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 class AjaxController extends Controller
 {
     public function paperSubtype(Request $request)
@@ -99,5 +101,25 @@ class AjaxController extends Controller
             ->where('admission_year', date('Y'))
             ->get(['admission_seats.total_strength as strength', 'courses.name', 'courses.main_course_code as course_code']);
         return response()->json($course);
+    }
+
+    public function updateProfileImage(Request $request){
+        if ($request->file('photo')) {
+            $file = $request->file('photo');
+            $filename = time() . uniqid(rand()) . $file->getClientOriginalName();
+            $file->move(public_path('/student-documents/profile-photo'), $filename);
+            $profile = 'student-documents/profile-photo/' . $filename;
+            $student_id = Auth::user()->student_id;
+            $data = StudentDetails::find($student_id);
+
+            if ($data->profile_picture) {
+                unlink($data->profile_picture);
+            }
+
+            $data->profile_picture = $profile;
+            $data->save();
+        }
+
+        return response()->json('success',200);
     }
 }
