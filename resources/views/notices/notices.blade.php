@@ -595,11 +595,11 @@
 
             });
 
-            // $(document).ready(function() {
+           
 
 
                 $('.verified-status').on('click', function() {
-                    // alert("hi");
+                    
                     let id = $(this).data('id');
 
 
@@ -609,6 +609,6 @@
                     $('#exampleModal').modal('show');
                 });
 
-            // });
+           
         </script>
     @endsection

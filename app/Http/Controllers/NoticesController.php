@@ -123,7 +123,7 @@ class NoticesController extends Controller
      */
     public function update(Request $request,$id)
     {
-        //  return $request;
+        //  return $request->notice_type;
         $startDate = Carbon::parse($request->start_date);
         $startDate->hour   = 00;
         $startDate->minute = 00;
@@ -154,7 +154,8 @@ class NoticesController extends Controller
 
     public function status(Request $request)
     {
-
+       
+        
         $status = Notice::find($request->id);
         $status->is_verified=$request->verified;
         $status->save();
