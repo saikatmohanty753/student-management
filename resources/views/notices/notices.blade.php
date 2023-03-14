@@ -530,7 +530,7 @@
 
                                 </div>
                             </div>
-                            <div class="modal-body">
+                            {{-- <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -543,7 +543,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="modal-footer">
                                 <a class="btn btn-danger" href="#" data-dismiss="modal">Cancel</a>
                                 <button type="submit" class="btn btn-info pull-right">Submit</button>
@@ -595,10 +595,11 @@
 
             });
 
-            $(document).ready(function() {
-                //alert(1);
+           
+
 
                 $('.verified-status').on('click', function() {
+                    
                     let id = $(this).data('id');
 
 
@@ -606,10 +607,8 @@
 
 
                     $('#exampleModal').modal('show');
-
-
                 });
 
-            });
+           
         </script>
     @endsection

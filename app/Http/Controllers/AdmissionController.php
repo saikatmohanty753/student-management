@@ -526,7 +526,7 @@ class AdmissionController extends Controller
 
     public function verifyStudentAdmission(Request $request)
     {
-
+      
         if ($request->status == 2) {
             $course_section = Course::where('id', $request->course_id)->first();
             $section_name = CourseFor::where('id', $course_section->course_for)->first('course_for');

@@ -127,7 +127,7 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
+        // $(document).ready(function() {
 
 
             $('.view-course').on('click', function() {
@@ -139,14 +139,14 @@
 
                 // console.log(course);
                 $('#modalTitle').val(course);
-                $('#course-view').modal('show');
+                // $('#course-view').modal('show');
 
 
 
 
             });
 
-        });
+        // });
     </script>
     <script>
         $('.view-course').click(function(e) {
@@ -181,6 +181,7 @@
                         $('#course-view').modal('show');
                     }else{
                         $('.add-course').html('<div id="no-data-message">No data available</div>');
+                        $('#course-view').modal('show');
                     }
                 },
                 error: function(data) {

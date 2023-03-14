@@ -392,9 +392,12 @@
                                                             <input type="text" name="hsc"
                                                                 class="form-control chk_blank"
                                                                 placeholder="H.S.C. or equivalent">
-                                                            <span class="error-msg"></span>
+                                                                <p class="help-block">(H.S.C. or equivalent)</p>
+                                                                <span class="error-msg"></span>
+                                                                
                                                         </div>
-                                                        <span class="help-block">(H.S.C. or equivalent)</span>
+                                                        
+                                                        
 
                                                     </th>
                                                     <th>
@@ -447,10 +450,11 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="intermediate"
                                                                 class="form-control chk_blank"
-                                                                placeholder="Intermediate + 2"><span
-                                                                class="help-block">(Intermediate + 2)</span>
-                                                            <span class="error-msg"></span>
+                                                                placeholder="Intermediate + 2"><p
+                                                                class="help-block">(Intermediate + 2)</p><span class="error-msg"></span>
+                                                            
                                                         </div>
+                                                        
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
@@ -504,10 +508,11 @@
                                                             <input type="text" class="form-control chk_blank"
                                                                 name="graduate"
                                                                 placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A.">
+                                                                <p class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
+                                                                    B.A.)</p>
                                                             <span class="error-msg"></span>
                                                         </div>
-                                                        <span class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
-                                                            B.A.)</span>
+                                                        
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
@@ -557,11 +562,13 @@
                                                     <th>
                                                         <div class="form-group input-cont">
                                                             <input type="text" class="form-control chk_blank"
-                                                                name="post_graduate" placeholder="M. Mus / MVA"><span
-                                                                class="error-msg"></span><span class="help-block">(M. Mus
-                                                                /
-                                                                MVA)</span>
+                                                                name="post_graduate" placeholder="M. Mus / MVA">
+                                                                <p class="help-block">(M. Mus
+                                                                    /
+                                                                    MVA)</p><span
+                                                                class="error-msg"></span>
                                                         </div>
+                                                        
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
