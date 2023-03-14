@@ -313,7 +313,8 @@
                                                 <tr>
                                                     <td>
 
-                                                        <strong> {{ $qualification_details->intermediate->course }}</strong>
+                                                        <strong>
+                                                            {{ $qualification_details->intermediate->course }}</strong>
                                                     </td>
                                                     <td>
 
@@ -321,7 +322,8 @@
                                                     </td>
                                                     <td>
 
-                                                        <strong> {{ $qualification_details->intermediate->passing_year }}</strong>
+                                                        <strong>
+                                                            {{ $qualification_details->intermediate->passing_year }}</strong>
                                                     </td>
                                                     <td>
 
@@ -357,7 +359,8 @@
                                                     </td>
                                                     <td>
 
-                                                        <strong> {{ $qualification_details->graduate->passing_year }}</strong>
+                                                        <strong>
+                                                            {{ $qualification_details->graduate->passing_year }}</strong>
                                                     </td>
                                                     <td>
 
@@ -384,7 +387,8 @@
                                                 <tr>
                                                     <td>
 
-                                                        <strong>{{ $qualification_details->postGraduate->course }} </strong>
+                                                        <strong>{{ $qualification_details->postGraduate->course }}
+                                                        </strong>
                                                     </td>
                                                     <td>
 
@@ -392,7 +396,8 @@
                                                     </td>
                                                     <td>
 
-                                                        <strong> {{ $qualification_details->postGraduate->passing_year }}</strong>
+                                                        <strong>
+                                                            {{ $qualification_details->postGraduate->passing_year }}</strong>
                                                     </td>
                                                     <td>
 
@@ -423,31 +428,31 @@
                                                     </td>
                                                     <td>
 
-                                                        <strong> {{$qualification_details->other->board }}</strong>
+                                                        <strong> {{ $qualification_details->other->board }}</strong>
                                                     </td>
                                                     <td>
 
-                                                        <strong> {{$qualification_details->other->passing_year }}</strong>
-                                                    </td>
-                                                    <td>
-
-                                                        <strong>
-                                                            {{$qualification_details->other->division }}</strong>
+                                                        <strong> {{ $qualification_details->other->passing_year }}</strong>
                                                     </td>
                                                     <td>
 
                                                         <strong>
-                                                            {{$qualification_details->other->mark }}</strong>
+                                                            {{ $qualification_details->other->division }}</strong>
                                                     </td>
                                                     <td>
 
                                                         <strong>
-                                                            {{$qualification_details->other->total }}</strong>
+                                                            {{ $qualification_details->other->mark }}</strong>
                                                     </td>
                                                     <td>
 
                                                         <strong>
-                                                            {{$qualification_details->other->percentage }}</strong>
+                                                            {{ $qualification_details->other->total }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong>
+                                                            {{ $qualification_details->other->percentage }}</strong>
                                                     </td>
                                                 </tr>
 
@@ -500,9 +505,14 @@
                                                     </td>
                                                     <td>
                                                         Migration Certificate
-                                                        <strong>:<a href="javascript:void(0)"
-                                                                onclick="upload_image_view('{{ asset($documents->migration_cert) }}')">
-                                                                {{ !empty($documents->migration_cert) ? 'View Upload File' : 'Not Uploaded' }}</a></strong>
+                                                        <strong>:
+                                                            @if (!empty($documents->migration_cert))
+                                                                <a href="javascript:void(0)"
+                                                                    onclick="upload_image_view('{{ asset($documents->migration_cert) }}')"></a>
+                                                            @else
+                                                            Not Uploaded
+                                                            @endif
+                                                        </strong>
                                                     </td>
                                                 </tr>
 

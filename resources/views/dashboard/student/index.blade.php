@@ -24,7 +24,7 @@
                                                 style="background-image: url('{{ asset('backend/img/profile.png') }}');">
                                             </div>
                                         @else
-                                        <div id="imagePreview"
+                                            <div id="imagePreview"
                                                 style="background-image: url('{{ $student->profile_picture }}');">
                                             </div>
                                         @endif
@@ -169,11 +169,41 @@
                                             </thead>
                                             <tbody>
                                                 <td style="width: 50%" class="text-center">
-                                                    {{ $student->regd_no ? $student->regd_no : 'Not Issued' }}</td>
+                                                    @if ($student->regd_no)
+                                                        {{ $student->regd_no }}
+                                                        <span
+                                                            onclick="upload_image_view('{{ asset('registration_card/' . $student->regd_no . '.pdf') }}');"
+                                                            class="badge badge-primary" style="cursor: pointer;"
+                                                            id="pdf-file">View Registration Card</span>
+                                                    @else
+                                                        Not Issued
+                                                    @endif
+                                                </td>
                                                 <td style="width: 50%" class="text-center">
                                                     {{ $student->roll_no ? $student->roll_no : 'Not Issued' }}</td>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="upload_image_view" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center">
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row" id="view_upload_image">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

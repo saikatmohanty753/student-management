@@ -149,6 +149,8 @@ class AdmissionController extends Controller
             $file->move(public_path('/student-documents/profile'), $filename);
             $profile = '/student-documents/profile/' . $filename;
             $documents['profile'] = $profile ? $profile : '';
+        }else{
+            $documents['profile'] = '';
         }
         if ($request->file('aadhaar_card')) {
             $file = $request->file('aadhaar_card');
@@ -156,6 +158,8 @@ class AdmissionController extends Controller
             $file->move(public_path('/student-documents/aadhaar_card'), $filename);
             $aadhaar_card = '/student-documents/aadhaar_card/' . $filename;
             $documents['aadhaar_card'] = $aadhaar_card ? $aadhaar_card : '';
+        }else{
+            $documents['aadhaar_card'] = '';
         }
 
         if ($request->file('hsc_cert')) {
@@ -164,6 +168,8 @@ class AdmissionController extends Controller
             $file->move(public_path('/student-documents/hsc_cert'), $filename);
             $hsc_cert = '/student-documents/hsc_cert/' . $filename;
             $documents['hsc_cert'] = $hsc_cert ? $hsc_cert : '';
+        } else {
+            $documents['hsc_cert'] = '';
         }
         if ($request->file('migration_cert')) {
             $file = $request->file('migration_cert');
@@ -171,6 +177,8 @@ class AdmissionController extends Controller
             $file->move(public_path('/student-documents/migration_cert'), $filename);
             $migration_cert = '/student-documents/migration_cert/' . $filename;
             $documents['migration_cert'] = $migration_cert ? $migration_cert : '';
+        } else {
+            $documents['migration_cert'] = '';
         }
         $qualification_details = [
             'hsc' => [

@@ -10,6 +10,7 @@ use App\Models\StudentDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use PDF;
 
 class DashboardController extends Controller
 {
@@ -72,6 +73,33 @@ class DashboardController extends Controller
     }
     public function studentDashboard()
     {
+        $data = ['email' => '', 'name' => '', 'reg_no' => ''];
+
+        // $customPaper = array(0, 0, 567.00, 883.80);
+        $pdf = PDF::loadView('pdf.student_registration_card', $data);
+        $pdf->setPaper('L');
+        $pdf->output();
+        $canvas = $pdf->getDomPDF()->getCanvas();
+        $height = $canvas->get_height();
+        $width = $canvas->get_width();
+        $canvas->set_opacity(.2, "Multiply");
+        $canvas->set_opacity(.2);
+        $canvas->page_text(
+            $width / 35,
+            $height / 2,
+            'Utkal University of Culture',
+            null,
+            47,
+            array(0, 0, 0),
+            1.5,
+            1.5,
+            -20
+        );
+        
+        file_put_contents('registration_card/UUC2300010.pdf', $pdf->output());
+
+        // return $pdf->download('registration_card/UUC2300010.pdf');
+
         $collegeName = College::select('name')
             ->where('id', Auth::user()->clg_id)
             ->pluck('name')
