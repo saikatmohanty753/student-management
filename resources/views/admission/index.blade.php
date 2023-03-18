@@ -379,6 +379,8 @@
                                                     <th width="20%">University/
                                                         Council / Board</th>
                                                     <th>Year of Passing</th>
+                                                    <th>Month</th>
+                                                    <th>Roll No</th>
                                                     <th>Divn. and Distn.</th>
                                                     <th>Marks secured</th>
                                                     <th>Maximum marks</th>
@@ -392,12 +394,12 @@
                                                             <input type="text" name="hsc"
                                                                 class="form-control chk_blank"
                                                                 placeholder="H.S.C. or equivalent">
-                                                                <p class="help-block">(H.S.C. or equivalent)</p>
-                                                                <span class="error-msg"></span>
-                                                                
+                                                            <p class="help-block">(H.S.C. or equivalent)</p>
+                                                            <span class="error-msg"></span>
+
                                                         </div>
-                                                        
-                                                        
+
+
 
                                                     </th>
                                                     <th>
@@ -412,6 +414,36 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="hsc_passing_year"
                                                                 class="form-control yearPicker chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="hsc_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_roll"
+                                                                class="form-control chk_blank">
                                                             <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -450,11 +482,12 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="intermediate"
                                                                 class="form-control chk_blank"
-                                                                placeholder="Intermediate + 2"><p
-                                                                class="help-block">(Intermediate + 2)</p><span class="error-msg"></span>
-                                                            
+                                                                placeholder="Intermediate + 2">
+                                                            <p class="help-block">(Intermediate + 2)</p><span
+                                                                class="error-msg"></span>
+
                                                         </div>
-                                                        
+
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
@@ -467,6 +500,36 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="intermediate_passing_year"
                                                                 class="form-control yearPicker chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="intermediate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_roll"
+                                                                class="form-control chk_blank">
                                                             <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -508,11 +571,11 @@
                                                             <input type="text" class="form-control chk_blank"
                                                                 name="graduate"
                                                                 placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A.">
-                                                                <p class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
-                                                                    B.A.)</p>
+                                                            <p class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
+                                                                B.A.)</p>
                                                             <span class="error-msg"></span>
                                                         </div>
-                                                        
+
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
@@ -525,6 +588,36 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="graduate_passing_year"
                                                                 class="form-control yearPicker chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="graduate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_roll"
+                                                                class="form-control chk_blank">
                                                             <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -563,12 +656,11 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" class="form-control chk_blank"
                                                                 name="post_graduate" placeholder="M. Mus / MVA">
-                                                                <p class="help-block">(M. Mus
-                                                                    /
-                                                                    MVA)</p><span
-                                                                class="error-msg"></span>
+                                                            <p class="help-block">(M. Mus
+                                                                /
+                                                                MVA)</p><span class="error-msg"></span>
                                                         </div>
-                                                        
+
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
@@ -582,6 +674,36 @@
                                                             <input type="text" name="post_graduate_passing_year"
                                                                 class="form-control yearPicker chk_blank">
                                                             <span class="error-msg">
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="post_graduate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="post_graduate_roll"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
                                                         </div>
                                                     </th>
                                                     <th>
@@ -638,6 +760,36 @@
                                                             <input type="text" name="other_graduate_passing_year"
                                                                 class="form-control yearPicker chk_blank">
                                                             <span class="error-msg">
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="other_graduate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="other_graduate_roll"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
                                                         </div>
                                                     </th>
                                                     <th>
@@ -848,6 +1000,18 @@
 
             }
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize datepicker
+            $(".monthPicker").datepicker({
+                changeMonth: true,
+                changeYear: false,
+                showButtonPanel: true,
+                dateFormat: 'MM'
+            });
         });
     </script>
 @endsection

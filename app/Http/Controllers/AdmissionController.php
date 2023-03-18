@@ -96,6 +96,7 @@ class AdmissionController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $clgId = Auth::user()->clg_user_id;
         if ($this->checkSeatAvl($clgId, $request->course) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
@@ -149,7 +150,7 @@ class AdmissionController extends Controller
             $file->move(public_path('/student-documents/profile'), $filename);
             $profile = '/student-documents/profile/' . $filename;
             $documents['profile'] = $profile ? $profile : '';
-        }else{
+        } else {
             $documents['profile'] = '';
         }
         if ($request->file('aadhaar_card')) {
@@ -158,7 +159,7 @@ class AdmissionController extends Controller
             $file->move(public_path('/student-documents/aadhaar_card'), $filename);
             $aadhaar_card = '/student-documents/aadhaar_card/' . $filename;
             $documents['aadhaar_card'] = $aadhaar_card ? $aadhaar_card : '';
-        }else{
+        } else {
             $documents['aadhaar_card'] = '';
         }
 
@@ -185,6 +186,8 @@ class AdmissionController extends Controller
                 'course' => $request->hsc,
                 'board' => $request->hsc_board,
                 'passing_year' => $request->hsc_passing_year,
+                'month' => $request->hsc_passing_month,
+                'roll' => $request->hsc_roll,
                 'division' => $request->hsc_division,
                 'mark' => $request->hsc_mark,
                 'total' => $request->hsc_total_mark,
@@ -194,6 +197,8 @@ class AdmissionController extends Controller
                 'course' => $request->intermediate,
                 'board' => $request->intermediate_board,
                 'passing_year' => $request->intermediate_passing_year,
+                'month' => $request->intermediate_passing_month,
+                'roll' => $request->intermediate_roll,
                 'division' => $request->intermediate_division,
                 'mark' => $request->intermediate_mark,
                 'total' => $request->intermediate_total_mark,
@@ -203,6 +208,8 @@ class AdmissionController extends Controller
                 'course' => $request->graduate,
                 'board' => $request->graduate_board,
                 'passing_year' => $request->graduate_passing_year,
+                'month' => $request->graduate_passing_month,
+                'roll' => $request->graduate_roll,
                 'division' => $request->graduate_division,
                 'mark' => $request->graduate_mark,
                 'total' => $request->graduate_total_mark,
@@ -212,6 +219,8 @@ class AdmissionController extends Controller
                 'course' => $request->post_graduate,
                 'board' => $request->post_graduate_board,
                 'passing_year' => $request->post_graduate_passing_year,
+                'month' => $request->post_graduate_passing_month,
+                'roll' => $request->post_graduate_roll,
                 'division' => $request->post_graduate_division,
                 'mark' => $request->post_graduate_mark,
                 'total' => $request->post_graduate_total_mark,
@@ -221,6 +230,8 @@ class AdmissionController extends Controller
                 'course' => $request->other_graduate,
                 'board' => $request->other_graduate_board,
                 'passing_year' => $request->other_graduate_passing_year,
+                'month' => $request->other_graduate_passing_month,
+                'roll' => $request->other_graduate_roll,
                 'division' => $request->other_graduate_division,
                 'mark' => $request->other_graduate_mark,
                 'total' => $request->other_graduate_total_mark,
@@ -237,6 +248,9 @@ class AdmissionController extends Controller
         $student->save();
         // return $student;
         return redirect()->action([AdmissionController::class, 'show'], ['id' => $student->id])->with('success', 'Application saved in draft.');
+
+        
+
     }
 
     /**
@@ -387,17 +401,21 @@ class AdmissionController extends Controller
         $qualification_details = [
             'hsc' => [
                 'course' => $request->hsc,
-                'board' => $request->board,
+                'board' => $request->hsc_board,
                 'passing_year' => $request->hsc_passing_year,
-                'division' => $request->division,
+                'month' => $request->hsc_passing_month,
+                'roll' => $request->hsc_roll,
+                'division' => $request->hsc_division,
                 'mark' => $request->hsc_mark,
-                'total' => $request->total_mark,
-                'percentage' => $request->percentage,
+                'total' => $request->hsc_total_mark,
+                'percentage' => $request->hsc_percentage,
             ],
             'intermediate' => [
                 'course' => $request->intermediate,
                 'board' => $request->intermediate_board,
                 'passing_year' => $request->intermediate_passing_year,
+                'month' => $request->intermediate_passing_month,
+                'roll' => $request->intermediate_roll,
                 'division' => $request->intermediate_division,
                 'mark' => $request->intermediate_mark,
                 'total' => $request->intermediate_total_mark,
@@ -407,6 +425,8 @@ class AdmissionController extends Controller
                 'course' => $request->graduate,
                 'board' => $request->graduate_board,
                 'passing_year' => $request->graduate_passing_year,
+                'month' => $request->graduate_passing_month,
+                'roll' => $request->graduate_roll,
                 'division' => $request->graduate_division,
                 'mark' => $request->graduate_mark,
                 'total' => $request->graduate_total_mark,
@@ -416,6 +436,8 @@ class AdmissionController extends Controller
                 'course' => $request->post_graduate,
                 'board' => $request->post_graduate_board,
                 'passing_year' => $request->post_graduate_passing_year,
+                'month' => $request->post_graduate_passing_month,
+                'roll' => $request->post_graduate_roll,
                 'division' => $request->post_graduate_division,
                 'mark' => $request->post_graduate_mark,
                 'total' => $request->post_graduate_total_mark,
@@ -425,6 +447,8 @@ class AdmissionController extends Controller
                 'course' => $request->other_graduate,
                 'board' => $request->other_graduate_board,
                 'passing_year' => $request->other_graduate_passing_year,
+                'month' => $request->other_graduate_passing_month,
+                'roll' => $request->other_graduate_roll,
                 'division' => $request->other_graduate_division,
                 'mark' => $request->other_graduate_mark,
                 'total' => $request->other_graduate_total_mark,
@@ -526,7 +550,7 @@ class AdmissionController extends Controller
 
     public function verifyStudentAdmission(Request $request)
     {
-      
+
         if ($request->status == 2) {
             $course_section = Course::where('id', $request->course_id)->first();
             $section_name = CourseFor::where('id', $course_section->course_for)->first('course_for');
@@ -605,7 +629,7 @@ class AdmissionController extends Controller
                 $data = [
                     "name" => $user->name,
                     "user_name" => $user->email,
-                    "password" => 12345678
+                    "password" => 12345678,
                 ];
 
                 Mail::send('mail.credential', compact('data'), function ($message) use ($user) {
@@ -791,14 +815,14 @@ class AdmissionController extends Controller
     //     return view('dashboard.student.index',compact('student'));
     // }
 
-   /*  public function student($id)
-    {
-        $collegeName = College::select('name')
-            ->where('id', Auth::user()->clg_id)
-            ->pluck('name')
-            ->first();
-        $student=StudentDetails::find($id);
+    /*  public function student($id)
+{
+$collegeName = College::select('name')
+->where('id', Auth::user()->clg_id)
+->pluck('name')
+->first();
+$student=StudentDetails::find($id);
 
-        return view('dashboard.student.index', compact('student','collegeName'));
-    } */
+return view('dashboard.student.index', compact('student','collegeName'));
+} */
 }

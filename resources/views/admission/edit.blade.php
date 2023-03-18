@@ -557,6 +557,8 @@
                                                     <th width="20%">University/
                                                         Council / Board</th>
                                                     <th>Year of Passing</th>
+                                                    <th>Month</th>
+                                                    <th>Roll No</th>
                                                     <th>Divn. and Distn.</th>
                                                     <th>Marks secured</th>
                                                     <th>Maximum marks</th>
@@ -590,6 +592,36 @@
                                                             <input type="text" name="hsc_passing_year"
                                                                 class="form-control yearPicker chk_blank"
                                                                 value="{{ $qualification_details->hsc->passing_year }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="hsc_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January" {{ $qualification_details->hsc->month == 'January' ? 'selected' : '' }}>January</option>
+                                                                <option value="February" {{ $qualification_details->hsc->month == 'February' ? 'selected' : '' }}>February</option>
+                                                                <option value="March" {{ $qualification_details->hsc->month == 'March' ? 'selected' : '' }}>March</option>
+                                                                <option value="April" {{ $qualification_details->hsc->month == 'April' ? 'selected' : '' }}>April</option>
+                                                                <option value="May" {{ $qualification_details->hsc->month == 'May' ? 'selected' : '' }}>May</option>
+                                                                <option value="June" {{ $qualification_details->hsc->month == 'June' ? 'selected' : '' }}>June</option>
+                                                                <option value="July" {{ $qualification_details->hsc->month == 'July' ? 'selected' : '' }}>July</option>
+                                                                <option value="August" {{ $qualification_details->hsc->month == 'August' ? 'selected' : '' }}>August</option>
+                                                                <option value="September" {{ $qualification_details->hsc->month == 'September' ? 'selected' : '' }}>September</option>
+                                                                <option value="October" {{ $qualification_details->hsc->month == 'October' ? 'selected' : '' }}>October</option>
+                                                                <option value="November" {{ $qualification_details->hsc->month == 'November' ? 'selected' : '' }}>November</option>
+                                                                <option value="December" {{ $qualification_details->hsc->month == 'December' ? 'selected' : '' }}>December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_roll"
+                                                                class="form-control chk_blank" value="{{ $qualification_details->hsc->roll }}">
                                                             <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -650,6 +682,36 @@
                                                             <input type="text" name="intermediate_passing_year"
                                                                 class="form-control yearPicker chk_blank"
                                                                 value="{{ $qualification_details->intermediate->passing_year }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="intermediate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January" {{ $qualification_details->intermediate->month == 'January' ? 'selected' : '' }}>January</option>
+                                                                <option value="February" {{ $qualification_details->intermediate->month == 'February' ? 'selected' : '' }}>February</option>
+                                                                <option value="March" {{ $qualification_details->intermediate->month == 'March' ? 'selected' : '' }}>March</option>
+                                                                <option value="April" {{ $qualification_details->intermediate->month == 'April' ? 'selected' : '' }}>April</option>
+                                                                <option value="May" {{ $qualification_details->intermediate->month == 'May' ? 'selected' : '' }}>May</option>
+                                                                <option value="June" {{ $qualification_details->intermediate->month == 'June' ? 'selected' : '' }}>June</option>
+                                                                <option value="July" {{ $qualification_details->intermediate->month == 'July' ? 'selected' : '' }}>July</option>
+                                                                <option value="August" {{ $qualification_details->intermediate->month == 'August' ? 'selected' : '' }}>August</option>
+                                                                <option value="September" {{ $qualification_details->intermediate->month == 'September' ? 'selected' : '' }}>September</option>
+                                                                <option value="October" {{ $qualification_details->intermediate->month == 'October' ? 'selected' : '' }}>October</option>
+                                                                <option value="November" {{ $qualification_details->intermediate->month == 'November' ? 'selected' : '' }}>November</option>
+                                                                <option value="December" {{ $qualification_details->intermediate->month == 'December' ? 'selected' : '' }}>December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_roll"
+                                                                class="form-control chk_blank" value="{{ $qualification_details->intermediate->roll }}">
                                                             <span class="error-msg"></span>
                                                         </div>
                                                     </th>
@@ -718,6 +780,36 @@
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
+                                                            <select name="graduate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January" {{ $qualification_details->graduate->month == 'January' ? 'selected' : '' }}>January</option>
+                                                                <option value="February" {{ $qualification_details->graduate->month == 'February' ? 'selected' : '' }}>February</option>
+                                                                <option value="March" {{ $qualification_details->graduate->month == 'March' ? 'selected' : '' }}>March</option>
+                                                                <option value="April" {{ $qualification_details->graduate->month == 'April' ? 'selected' : '' }}>April</option>
+                                                                <option value="May" {{ $qualification_details->graduate->month == 'May' ? 'selected' : '' }}>May</option>
+                                                                <option value="June" {{ $qualification_details->graduate->month == 'June' ? 'selected' : '' }}>June</option>
+                                                                <option value="July" {{ $qualification_details->graduate->month == 'July' ? 'selected' : '' }}>July</option>
+                                                                <option value="August" {{ $qualification_details->graduate->month == 'August' ? 'selected' : '' }}>August</option>
+                                                                <option value="September" {{ $qualification_details->graduate->month == 'September' ? 'selected' : '' }}>September</option>
+                                                                <option value="October" {{ $qualification_details->graduate->month == 'October' ? 'selected' : '' }}>October</option>
+                                                                <option value="November" {{ $qualification_details->graduate->month == 'November' ? 'selected' : '' }}>November</option>
+                                                                <option value="December" {{ $qualification_details->graduate->month == 'December' ? 'selected' : '' }}>December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_roll"
+                                                                class="form-control chk_blank" value="{{ $qualification_details->graduate->roll }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
                                                             <input type="text" name="graduate_division"
                                                                 class="form-control chk_blank"
                                                                 value="{{ $qualification_details->graduate->division }}">
@@ -778,6 +870,36 @@
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
+                                                            <select name="post_graduate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January" {{ $qualification_details->postGraduate->month == 'January' ? 'selected' : '' }}>January</option>
+                                                                <option value="February" {{ $qualification_details->postGraduate->month == 'February' ? 'selected' : '' }}>February</option>
+                                                                <option value="March" {{ $qualification_details->postGraduate->month == 'March' ? 'selected' : '' }}>March</option>
+                                                                <option value="April" {{ $qualification_details->postGraduate->month == 'April' ? 'selected' : '' }}>April</option>
+                                                                <option value="May" {{ $qualification_details->postGraduate->month == 'May' ? 'selected' : '' }}>May</option>
+                                                                <option value="June" {{ $qualification_details->postGraduate->month == 'June' ? 'selected' : '' }}>June</option>
+                                                                <option value="July" {{ $qualification_details->postGraduate->month == 'July' ? 'selected' : '' }}>July</option>
+                                                                <option value="August" {{ $qualification_details->postGraduate->month == 'August' ? 'selected' : '' }}>August</option>
+                                                                <option value="September" {{ $qualification_details->postGraduate->month == 'September' ? 'selected' : '' }}>September</option>
+                                                                <option value="October" {{ $qualification_details->postGraduate->month == 'October' ? 'selected' : '' }}>October</option>
+                                                                <option value="November" {{ $qualification_details->postGraduate->month == 'November' ? 'selected' : '' }}>November</option>
+                                                                <option value="December" {{ $qualification_details->postGraduate->month == 'December' ? 'selected' : '' }}>December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="post_graduate_roll"
+                                                                class="form-control chk_blank" value="{{ $qualification_details->postGraduate->roll }}">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
                                                             <input type="text" name="post_graduate_division"
                                                                 class="form-control chk_blank"
                                                                 value="{{ $qualification_details->postGraduate->division }}">
@@ -834,6 +956,36 @@
                                                                 class="form-control yearPicker chk_blank"
                                                                 value="{{ $qualification_details->other->passing_year }}">
                                                                 <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="other_graduate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January" {{ $qualification_details->other->month == 'January' ? 'selected' : '' }}>January</option>
+                                                                <option value="February" {{ $qualification_details->other->month == 'February' ? 'selected' : '' }}>February</option>
+                                                                <option value="March" {{ $qualification_details->other->month == 'March' ? 'selected' : '' }}>March</option>
+                                                                <option value="April" {{ $qualification_details->other->month == 'April' ? 'selected' : '' }}>April</option>
+                                                                <option value="May" {{ $qualification_details->other->month == 'May' ? 'selected' : '' }}>May</option>
+                                                                <option value="June" {{ $qualification_details->other->month == 'June' ? 'selected' : '' }}>June</option>
+                                                                <option value="July" {{ $qualification_details->other->month == 'July' ? 'selected' : '' }}>July</option>
+                                                                <option value="August" {{ $qualification_details->other->month == 'August' ? 'selected' : '' }}>August</option>
+                                                                <option value="September" {{ $qualification_details->other->month == 'September' ? 'selected' : '' }}>September</option>
+                                                                <option value="October" {{ $qualification_details->other->month == 'October' ? 'selected' : '' }}>October</option>
+                                                                <option value="November" {{ $qualification_details->other->month == 'November' ? 'selected' : '' }}>November</option>
+                                                                <option value="December" {{ $qualification_details->other->month == 'December' ? 'selected' : '' }}>December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="other_graduate_roll"
+                                                                class="form-control chk_blank" value="{{ $qualification_details->other->roll }}">
+                                                            <span class="error-msg"></span>
                                                         </div>
                                                     </th>
                                                     <th>

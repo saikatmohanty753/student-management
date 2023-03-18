@@ -258,6 +258,14 @@
 
                                                     </th>
                                                     <th>
+                                                        Passing Month
+
+                                                    </th>
+                                                    <th>
+                                                        Roll no
+
+                                                    </th>
+                                                    <th>
                                                         Divn. and Distn.
 
                                                     </th>
@@ -287,6 +295,15 @@
                                                     <td>
 
                                                         <strong> {{ $qualification_details->hsc->passing_year }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong> {{ $qualification_details->hsc->month }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong>
+                                                            {{ $qualification_details->hsc->roll }}</strong>
                                                     </td>
                                                     <td>
 
@@ -327,6 +344,15 @@
                                                     </td>
                                                     <td>
 
+                                                        <strong> {{ $qualification_details->intermediate->month }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong>
+                                                            {{ $qualification_details->intermediate->roll }}</strong>
+                                                    </td>
+                                                    <td>
+
                                                         <strong>
                                                             {{ $qualification_details->intermediate->division }}</strong>
                                                     </td>
@@ -361,6 +387,15 @@
 
                                                         <strong>
                                                             {{ $qualification_details->graduate->passing_year }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong> {{ $qualification_details->graduate->month }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong>
+                                                            {{ $qualification_details->graduate->roll }}</strong>
                                                     </td>
                                                     <td>
 
@@ -401,6 +436,15 @@
                                                     </td>
                                                     <td>
 
+                                                        <strong> {{ $qualification_details->postGraduate->month }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong>
+                                                            {{ $qualification_details->postGraduate->roll }}</strong>
+                                                    </td>
+                                                    <td>
+
                                                         <strong>
                                                             {{ $qualification_details->postGraduate->division }}</strong>
                                                     </td>
@@ -433,6 +477,15 @@
                                                     <td>
 
                                                         <strong> {{ $qualification_details->other->passing_year }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong> {{ $qualification_details->other->month }}</strong>
+                                                    </td>
+                                                    <td>
+
+                                                        <strong>
+                                                            {{ $qualification_details->other->roll }}</strong>
                                                     </td>
                                                     <td>
 

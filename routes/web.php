@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('/new-admission', [AdmissionController::class, 'newAdmission']);
     Route::get('uuc-admission/{id}/{dep}/{depId}', [AdmissionController::class, 'index']);
     Route::post('student-admission', [AdmissionController::class, 'store']);
+   
     Route::post('student-admission/apply', [AdmissionController::class, 'apply']);
 
     Route::get('student-admission/preview/{id}', [AdmissionController::class, 'show']);
