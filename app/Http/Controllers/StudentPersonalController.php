@@ -17,11 +17,14 @@ class StudentPersonalController extends Controller
         $student = StudentDetails::where('id', Auth()->user()->student_id)->first();
        
         // return $notice->semester;
-        $stu_id = Auth()->user()->student_id;
+         $stu_id = Auth()->user()->student_id;
 
+         
          $notification =  Auth::user()->Notifications;
-
-        $semeter = $notification[0]->data['semester'];
+        
+        if (!$notification->empty()) {
+            //return 33;
+            $semeter = $notification[0]->data['semester'];
         $semeter = explode(",",$notification[0]->data['semester']);
         //$notice =  Notice::where('department_id', $student->department_id)->get();
 
@@ -37,6 +40,11 @@ class StudentPersonalController extends Controller
             
             
         }
+        }else{
+            $stu_details =[];
+        }
+
+        
         // return $stu_details;
         
         return view('student_personal.exam.regular_exam_notice',compact('stu_details','student','stu_id'));
