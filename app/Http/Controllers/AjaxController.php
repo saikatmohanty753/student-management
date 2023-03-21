@@ -51,6 +51,7 @@ class AjaxController extends Controller
                 $users = User::whereIn('role_id', [14])->get();
                 foreach ($users as $key => $user) {
                     $user->notice_id = $request->id;
+                    
                     $user->notify(new UucNotice());
                 }
             } elseif ($notice->notice_sub_type == 2) {

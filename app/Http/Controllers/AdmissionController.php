@@ -75,7 +75,7 @@ class AdmissionController extends Controller
             ->where('courses.course_for', $depId)
             ->get();
         $district = District::all();
-        return view('admission.index', compact('course', 'district'));
+        return view('admission.index', compact('course', 'district','depId'));
     }
 
     /**
@@ -105,7 +105,7 @@ class AdmissionController extends Controller
         $student = new StudentApplication();
         $student->academic_year = date('Y');
         $student->admission_date = Carbon::now();
-        $student->clg_id = Carbon::now();
+        //$student->clg_id = Carbon::now();
         $student->clg_id = $clgId;
         $student->department_id = $course->course_for;
         $student->course_id = $request->course;
@@ -261,6 +261,7 @@ class AdmissionController extends Controller
      */
     public function show($id)
     {
+        
         $std_app = StudentApplication::find($id);
         $personal_information = json_decode($std_app->personal_information);
         $present_address = json_decode($std_app->present_address);
@@ -282,6 +283,7 @@ class AdmissionController extends Controller
      */
     public function edit($id)
     {
+        
 
         $district = District::get();
         $std_app = StudentApplication::find($id);
