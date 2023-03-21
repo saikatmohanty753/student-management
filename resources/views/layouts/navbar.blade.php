@@ -301,6 +301,15 @@
                 </a>
             </li>
         @endcan
+        @can('student-details-module')
+            <li>
+                <a href="{{route('exam_notice')}}" title="Student Details" data-filter-tags="Admission">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span class="nav-link-text" data-i18n="nav.application_admission">Exam Notice</span>
+                </a>
+            </li>
+        @endcan
+        
         @can('course-structure-module')
             <li>
                 <a href="{{ url('/academic-course-structure') }}" title="Admission" data-filter-tags="Admission">

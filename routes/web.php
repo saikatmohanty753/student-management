@@ -23,6 +23,7 @@ use App\Http\Controllers\UucStudentController;
 use App\Http\Livewire\Notification;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Mail;
+use App\Http\Controllers\StudentPersonalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -152,4 +153,10 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('dashboard/{id}', [AdmissionController::class, 'student']);
 
     Route::post('/update-profile-image', [AjaxController::class, 'updateProfileImage']);
+
+    // student personal goes here
+    
+    Route::get('exam-notice', [StudentPersonalController::class, 'index'])->name('exam_notice');
+    Route::get('student-apply/{id}', [StudentPersonalController::class, 'student_apply'])->name('student_apply');
+
 });

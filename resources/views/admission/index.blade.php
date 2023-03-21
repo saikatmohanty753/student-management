@@ -388,6 +388,450 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                                @if ($depId == 1)
+                                                <tr>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc"
+                                                                class="form-control chk_blank"
+                                                                placeholder="H.S.C. or equivalent">
+                                                            <p class="help-block">(H.S.C. or equivalent)</p>
+                                                            <span class="error-msg"></span>
+
+                                                        </div>
+
+
+
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" class="form-control chk_blank"
+                                                                name="hsc_board">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_passing_year"
+                                                                class="form-control yearPicker chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="hsc_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_roll"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_division"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_mark" id="hsc_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_total_mark"
+                                                                id="hsc_total_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_percentage"
+                                                                id="hsc_percentage" class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate"
+                                                                class="form-control chk_blank"
+                                                                placeholder="Intermediate + 2">
+                                                            <p class="help-block">(Intermediate + 2)</p><span
+                                                                class="error-msg"></span>
+
+                                                        </div>
+
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_board"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_passing_year"
+                                                                class="form-control yearPicker chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="intermediate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_roll"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_division"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_mark"
+                                                                id="intermediate_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_total_mark"
+                                                                id="intermediate_total_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_percentage"
+                                                                id="intermediate_percentage"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                </tr> 
+                                                @elseif($dep == '2')
+                                                <tr>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc"
+                                                                class="form-control chk_blank"
+                                                                placeholder="H.S.C. or equivalent">
+                                                            <p class="help-block">(H.S.C. or equivalent)</p>
+                                                            <span class="error-msg"></span>
+
+                                                        </div>
+
+
+
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" class="form-control chk_blank"
+                                                                name="hsc_board">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_passing_year"
+                                                                class="form-control yearPicker chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="hsc_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_roll"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_division"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_mark" id="hsc_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_total_mark"
+                                                                id="hsc_total_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="hsc_percentage"
+                                                                id="hsc_percentage" class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate"
+                                                                class="form-control chk_blank"
+                                                                placeholder="Intermediate + 2">
+                                                            <p class="help-block">(Intermediate + 2)</p><span
+                                                                class="error-msg"></span>
+
+                                                        </div>
+
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_board"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_passing_year"
+                                                                class="form-control yearPicker chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="intermediate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_roll"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_division"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_mark"
+                                                                id="intermediate_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_total_mark"
+                                                                id="intermediate_total_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="intermediate_percentage"
+                                                                id="intermediate_percentage"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" class="form-control chk_blank"
+                                                                name="graduate"
+                                                                placeholder="Degree Exam /+3 B.Mus./B.V.A./ B.A.">
+                                                            <p class="help-block">(Degree Exam /+3 B.Mus./ B.V.A./
+                                                                B.A.)</p>
+                                                            <span class="error-msg"></span>
+                                                        </div>
+
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_board"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_passing_year"
+                                                                class="form-control yearPicker chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <select name="graduate_passing_month"
+                                                                class="form-control monthDropdown chk_blank">
+                                                                <option value="">Select Month</option>
+                                                                <option value="January">January</option>
+                                                                <option value="February">February</option>
+                                                                <option value="March">March</option>
+                                                                <option value="April">April</option>
+                                                                <option value="May">May</option>
+                                                                <option value="June">June</option>
+                                                                <option value="July">July</option>
+                                                                <option value="August">August</option>
+                                                                <option value="September">September</option>
+                                                                <option value="October">October</option>
+                                                                <option value="November">November</option>
+                                                                <option value="December">December</option>
+                                                            </select>
+
+
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_roll"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_division"
+                                                                class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_mark" id="graduate_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_total_mark"
+                                                                id="graduate_total_mark"
+                                                                class="form-control numeric chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group input-cont">
+                                                            <input type="text" name="graduate_percentage"
+                                                                id="graduate_percentage" class="form-control chk_blank">
+                                                            <span class="error-msg"></span>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                                @else
                                                 <tr>
                                                     <th>
                                                         <div class="form-group input-cont">
@@ -738,10 +1182,12 @@
                                                         </div>
                                                     </th>
                                                 </tr>
+                                                
+                                                @endif
                                                 <tr>
                                                     <th>
                                                         <div class="form-group input-cont">
-                                                            <input type="text" class="form-control chk_blank"
+                                                            <input type="text" class="form-control"
                                                                 name="other_graduate"
                                                                 placeholder="Any other Qualification"><span
                                                                 class="error-msg"><span class="help-block">(Any other
@@ -751,21 +1197,21 @@
                                                     <th>
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="other_graduate_board"
-                                                                class="form-control chk_blank">
+                                                                class="form-control">
                                                             <span class="error-msg">
                                                         </div>
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="other_graduate_passing_year"
-                                                                class="form-control yearPicker chk_blank">
+                                                                class="form-control yearPicker">
                                                             <span class="error-msg">
                                                         </div>
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
                                                             <select name="other_graduate_passing_month"
-                                                                class="form-control monthDropdown chk_blank">
+                                                                class="form-control monthDropdown">
                                                                 <option value="">Select Month</option>
                                                                 <option value="January">January</option>
                                                                 <option value="February">February</option>
@@ -788,14 +1234,14 @@
                                                     <th>
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="other_graduate_roll"
-                                                                class="form-control chk_blank">
+                                                                class="form-control">
                                                             <span class="error-msg"></span>
                                                         </div>
                                                     </th>
                                                     <th>
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="other_graduate_division"
-                                                                class="form-control chk_blank">
+                                                                class="form-control">
                                                             <span class="error-msg">
                                                         </div>
                                                     </th>
@@ -803,7 +1249,7 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="other_graduate_mark"
                                                                 id="other_graduate_mark"
-                                                                class="form-control numeric chk_blank">
+                                                                class="form-control numeric">
                                                             <span class="error-msg">
                                                         </div>
                                                     </th>
@@ -811,7 +1257,7 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="other_graduate_total_mark"
                                                                 id="other_graduate_total_mark"
-                                                                class="form-control numeric chk_blank">
+                                                                class="form-control numeric">
                                                             <span class="error-msg">
                                                         </div>
                                                     </th>
@@ -819,11 +1265,14 @@
                                                         <div class="form-group input-cont">
                                                             <input type="text" name="other_graduate_percentage"
                                                                 id="other_graduate_percentage"
-                                                                class="form-control chk_blank">
+                                                                class="form-control">
                                                             <span class="error-msg">
                                                         </div>
                                                     </th>
                                                 </tr>
+                                                
+                                                
+                                                
                                             </tbody>
                                         </table>
                                     </div>
