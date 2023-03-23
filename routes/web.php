@@ -23,6 +23,7 @@ use App\Http\Controllers\UucStudentController;
 use App\Http\Livewire\Notification;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Mail;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentPersonalController;
 
 /*
@@ -158,5 +159,24 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     
     Route::get('exam-notice', [StudentPersonalController::class, 'index'])->name('exam_notice');
     Route::get('student-apply/{id}', [StudentPersonalController::class, 'student_apply'])->name('student_apply');
+
+    Route::post('student-app-store/{id}',[StudentPersonalController::class, 'student_app_store'])->name('student_app_store');
+
+    Route::get('student-app-draft/{id}',[StudentPersonalController::class, 'student_app_draft'])->name('student_app_draft');
+
+    Route::post('student-app-draft-store/{id}',[StudentPersonalController::class, 'student_app_draft_store'])->name('student_app_draft_store');
+
+    Route::post('delete-student-examine',[StudentPersonalController::class, 'delete_student_examine'])->name('delete_student_examine');
+    Route::post('delete-student-exam',[StudentPersonalController::class, 'delete_student_exam'])->name('delete_student_exam');
+
+    Route::get('student-app-preview/{id}',[StudentPersonalController::class, 'student_app_preview'])->name('student_app_preview');
+    Route::post('student-app-final/{id}',[StudentPersonalController::class, 'student_app_final'])->name('student_app_final');
+
+    Route::get('payment/{id}',[PaymentController::class, 'payment_page'])->name('payment_page');
+    Route::post('payment-post/{id}',[PaymentController::class, 'payment_post'])->name('payment_post');
+
+    
+
+    // Route::get('student_apply/{id}',[ExamController::class, 'student_apply'])->name('apply_regular_exam');
 
 });

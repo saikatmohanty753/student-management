@@ -90,11 +90,11 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
+                                        <td>{{$edu_hsc->board}}</td>
                                         <td>{{$edu_hsc->passing_year}}</td>
-                                        <td></td>
+                                        <td>{{$edu_hsc->month}}</td>
                                         <td>{{$edu_hsc->division}}</td>
-                                        <td></td>
+                                        <td>{{$edu_hsc->roll}}</td>
                                         <td></td>
                                     </tr>
                                 </tbody>
@@ -120,11 +120,11 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
+                                        <td>{{$edu_intermediate->board}}</td>
                                         <td>{{$edu_intermediate->passing_year}}</td>
-                                        <td></td>
+                                        <td>{{$edu_intermediate->month}}</td>
                                         <td>{{$edu_intermediate->division}}</td>
-                                        <td></td>
+                                        <td>{{$edu_intermediate->roll}}</td>
                                         <td></td>
                                     </tr>
                                 </tbody>
@@ -140,6 +140,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>Sl No. </th>
                                         <th>Year </th>
                                         <th>Name of Examination </th>
                                         <th>Roll No</th>
@@ -185,7 +186,44 @@
                             
 
                         </div>
+
                         <hr>
+
+                        <div class="border rounded p-2 mb-4">
+                            <h4>Payment Section</h4>
+
+                            <hr>
+                            
+
+                            <hr>
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Examination Fees</th>
+                                        <td><span class="exam_fee">{{ $fee[0]->amount }}</span></td>
+                                        <th>Center Charges</th>
+                                        <td><span class="center_fee">{{ $fee[1]->amount }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fee For Marks</th>
+                                        <td><span class="mark_fee">{{ $fee[2]->amount }}</span></td>
+                                        <th>Other Fees</th>
+                                        <td><span class="other_fee">{{ $fee[4]->amount }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Enrolment Fees</th>
+                                        <Td><span class="enrol_fee">{{ $fee[3]->amount }}</span></Td>
+                                        <th><b style="color: red;">Total:</b></th>
+                                        <td>
+                                            
+                                            <span class="fee_total"><b></b></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+
+                        </div>
 
                         <div class="print_div">
                             <h3 class="text-center mb-4">CERTIFICATIE</h3>
@@ -223,11 +261,14 @@
                             </table>
                         </div>
 
-                        <form action="{{route('regular_exam_final',[$id])}}" method="POST">
-                            @csrf
+                        @if ($ug_app->payment_status == 0)
+                        
                         <div class="row">
                             <div class="col-md-12 text-center mt-4">
-                                <button type="submit" class="btn btn-success me-1 waves-effect waves-float waves-light">Submit</button>
+                                <a href="{{route('payment_page',[$id])}}" class="btn btn-warning me-1 waves-effect waves-float waves-light">Payment</a>
+
+                                <input type="hidden" name="pay_amt" id="pay_amt" value="">
+                                
                                 {{-- <a href="{{route('regular_exam_preview',[$id])}}"   class="btn btn-success me-1 waves-effect waves-float waves-light">Preview</a> --}}
                                 <button type="button" class="btn btn-primary waves-effect waves-light print_btn" onclick="window.print()">Print this page</button>
                             </div>
@@ -235,7 +276,23 @@
                         
                             
                         </div>
+                    
+                        @else
+                        <form action="{{route('student_app_final',[$id])}}" method="POST">
+                            @csrf
+                        <div class="row">
+                            <div class="col-md-12 text-center mt-4">
+                                
+                                <button type="submit" class="btn btn-success me-1 waves-effect waves-float waves-light">Submit</button>
+                                <button type="button" class="btn btn-primary waves-effect waves-light print_btn" onclick="window.print()">Print this page</button>
+                            </div>
+                        
+                        
+                            
+                        </div>
                     </form>
+                        @endif
+                        
 
                       
                         
@@ -260,5 +317,20 @@
 @endsection
 
 @section('js')
+<script>
+    $(document).ready(function(){
+        //alert();
+        let exam_fee = parseInt($('.exam_fee').text());
+        let center_fee = parseInt($('.center_fee').text());
+        let mark_fee = parseInt($('.mark_fee').text());
+        let other_fee = parseInt($('.other_fee').text());
+        let enrol_fee = parseInt($('.enrol_fee').text());
 
+        let fee_total = exam_fee + center_fee + mark_fee + other_fee + enrol_fee ;
+        //alert(fee_total);
+        $('.fee_total b').text(fee_total);
+        $('#pay_amt').val(fee_total);
+
+    });
+</script>
 @endsection

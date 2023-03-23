@@ -567,7 +567,7 @@
                                                         </div>
                                                     </th>
                                                 </tr> 
-                                                @elseif($dep == '2')
+                                                @elseif($depId == '2')
                                                 <tr>
                                                     <th>
                                                         <div class="form-group input-cont">

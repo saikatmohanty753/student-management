@@ -161,7 +161,7 @@
                                             <label class="form-label" for="course_name">Name of School<span
                                                     class="text-danger">*</span></label>
                                         <input name="name" type="text" class="form-control chk_blank"
-                                                    id="student_name" value="">
+                                                    id="student_name" value="{{$edu_hsc->board}}">
                                         </div>
                                     </div>
                                 </div>
@@ -185,7 +185,7 @@
                                                 <option value="Feb">Feb.</option>
                                             </select> --}}
                                             <input name="dob" type="text" id="dob"
-                                                class="form-control  chk_blank chk_date" value="">
+                                                class="form-control  chk_blank chk_date" value="{{$edu_hsc->month}}">
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@
                                         <div class="form-group input-cont">
                                             <label class="form-label">Roll No. <span class="text-danger">*</span></label>
                                             <input name="email" type="text" class="form-control chk_blank chk_email"
-                                                id="email" value="">
+                                                id="email" value="{{$edu_hsc->roll}}">
                                         </div>
                                     </div>
                                 </div>
@@ -236,7 +236,7 @@
                                             <label class="form-label" for="course_name">Name of College<span
                                                     class="text-danger">*</span></label>
                                         <input name="name" type="text" class="form-control chk_blank"
-                                                    id="student_name" value="">
+                                                    id="student_name" value="{{$edu_intermediate->board}}">
                                         </div>
                                     </div>
                                 </div>
@@ -259,7 +259,7 @@
                                                 <option value="Jan">Jan</option>
                                                 <option value="Feb">Feb.</option>
                                             </select> --}}
-                                            <input name="dob" type="text" class="form-control  chk_blank chk_date">
+                                            <input name="month" type="text" class="form-control  chk_blank chk_date" value="{{$edu_intermediate->month}}">
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label">Roll No. <span class="text-danger">*</span></label>
-                                            <input name="email" type="text" class="form-control chk_blank chk_email" id="email">
+                                            <input name="email" type="text" class="form-control chk_blank" value="{{$edu_intermediate->roll}}">
                                         </div>
                                     </div>
                                 </div>
@@ -293,7 +293,8 @@
                             </div>
                         </div>
                         
-                       <form action="{{route('regular_exam_store',[$id,$sem_no])}}" id="form_dd" method="post">
+                       {{-- <form action="{{route('regular_exam_store',[$id,$sem_no])}}" id="form_dd" method="post"> --}}
+                       <form action="{{route('student_app_store',[$id])}}" id="form_dd" method="post">
                         @csrf
                         <div class="border rounded p-2 mb-4">
                             <h4>Examination Form Fill up</h4>
@@ -482,7 +483,7 @@
 
                             <hr>
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <div class="col-md-6">
                                   <label class="form-label" for="fee_paid">Fees are Paid:</label>
                                 </div>
@@ -546,7 +547,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> --}}
 
                         </div>
                         <hr>

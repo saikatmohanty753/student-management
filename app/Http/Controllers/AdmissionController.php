@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 use Mail;
 use PDF;
+use PhpParser\Node\Stmt\Return_;
 
 class AdmissionController extends Controller
 {
@@ -61,6 +62,7 @@ class AdmissionController extends Controller
 
     public function index($id, $dep, $depId)
     {
+        
         $count = Notice::whereDate('start_date', '<=', Carbon::now())
             ->whereDate('exp_date', '>', Carbon::now())
             ->where('id', $id)
@@ -68,14 +70,14 @@ class AdmissionController extends Controller
         if ($count == 0) {
             return redirect()->intended('dashboard')->with('error', 'Now the admission process has been stopped.');
         }
-        $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+         $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
             ->where('clg_id', Auth::user()->clg_user_id)
             ->where('admission_year', date('Y'))
             ->join('courses', 'admission_seats.course_id', 'courses.id')
             ->where('courses.course_for', $depId)
             ->get();
         $district = District::all();
-        return view('admission.index', compact('course', 'district','depId'));
+        return view('admission.index', compact('course', 'district','depId','dep'));
     }
 
     /**
@@ -553,6 +555,7 @@ class AdmissionController extends Controller
     public function verifyStudentAdmission(Request $request)
     {
 
+       // return 1;
         if ($request->status == 2) {
             $course_section = Course::where('id', $request->course_id)->first();
             $section_name = CourseFor::where('id', $course_section->course_for)->first('course_for');
