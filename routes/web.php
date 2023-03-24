@@ -179,4 +179,14 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     // Route::get('student_apply/{id}',[ExamController::class, 'student_apply'])->name('apply_regular_exam');
 
+    Route::get('pg-exam-notice', [StudentPersonalController::class, 'pg_exam_notice'])->name('pg_exam_notice');
+    Route::get('student_pglist', [StudentPersonalController::class, 'student_pglist'])->name('student_pglist');
+    Route::get('apply_pg_exam/{id}/',[StudentPersonalController::class, 'apply_pg_exam'])->name('apply_pg_exam');
+    Route::get('pg-exam-store/{id}/{sem_no}',[StudentPersonalController::class, 'apply_pg_exam'])->name('apply_pg_exam');
+    Route::post('/pgexamstore', [StudentPersonalController::class, 'pgexamstore'])->name('pg_exam_store');
+    Route::get('/pgformpreview/{id}', [StudentPersonalController::class, 'pgformpreview'])->name('pgformpreview');
+    Route::get('/pgformdraft/{id}', [StudentPersonalController::class, 'pgformdraft'])->name('pgformdraft');
+    Route::post('/pgexamupdate/{id}', [StudentPersonalController::class, 'pgexamupdate'])->name('pgexamupdate');
+    Route::post('/delete', [StudentPersonalController::class, 'delete'])->name('delete');
+
 });

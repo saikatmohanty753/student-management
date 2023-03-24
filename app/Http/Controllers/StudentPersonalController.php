@@ -71,7 +71,8 @@ class StudentPersonalController extends Controller
         }
 
         
-        // return $stu_details;
+        //return $stu_details;
+        
         
         return view('student_personal.exam.regular_exam_notice',compact('stu_details','student','stu_id','ug_app'));
     }
@@ -81,6 +82,8 @@ class StudentPersonalController extends Controller
         $student_details = StudentDetails::find($id);
         $student_address = StudentAddress::where('student_id', $id)->first();
         $student_education = StudentEducationDetails::where('student_id', $id)->first();
+
+        $dep_id = $student_details->department_id;
 
         if($student_education == '')
         {
@@ -97,11 +100,21 @@ class StudentPersonalController extends Controller
             $edu_hsc = $edu_data->hsc;
             $edu_intermediate = $edu_data->intermediate;
         }
+
+        $edu_graduate = $edu_data->graduate;
         
         $fee = FeesMaster::all();
         
+
+        if($dep_id == 1)
+        {
+            return view('student_personal.exam.regular_exam', compact('student_details', 'student_address', 'edu_hsc', 'edu_intermediate', 'id', 'fee'));
+        }elseif($dep_id == 2){
+            //return 2;
+            return view('student_personal.exam.pgform',compact('student_details', 'student_address', 'edu_hsc', 'edu_intermediate', 'id', 'fee','edu_graduate'));
+        }
        
-        return view('student_personal.exam.regular_exam', compact('student_details', 'student_address', 'edu_hsc', 'edu_intermediate', 'id', 'fee'));
+        
        
         
     }
@@ -287,6 +300,11 @@ class StudentPersonalController extends Controller
         ]);
 
         return redirect()->route('exam_notice');
+    }
+
+    public function apply_pg_exam($id)
+    {
+        return 'pg';
     }
 
 
