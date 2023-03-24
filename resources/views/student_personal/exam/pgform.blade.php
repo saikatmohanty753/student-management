@@ -2,6 +2,8 @@
 @section('content')
     <div class="row">
 
+       
+
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
@@ -325,6 +327,8 @@
                                                 {{-- <input type="hidden" id="" name="id"
                                                     value="{{ $stdid }}"> --}}
                                                 <input name="college_name" id="college_name" type="text"
+                                                    class="form-control">
+                                                    <input hidden name="std_id" id="std_id" type="text" value="{{$student_details->id}}"
                                                     class="form-control">
                                             </div>
                                         </div>
