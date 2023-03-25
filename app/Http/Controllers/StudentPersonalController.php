@@ -295,6 +295,9 @@ class StudentPersonalController extends Controller
         $from_date = $request->from_date;
         $to_date = $request->to_date;
         $search_year = $from_date . '-' . $to_date;
+        $pgexamapp = new PgExaminationApplication;
+        $pgexamapp->stu_id=$std_id;
+        $pgexamapp->save();
 
         $pgexam = new PgExaminationStudent;
         $pgexam->college_name = $request->college_name;
@@ -403,6 +406,7 @@ class StudentPersonalController extends Controller
 
     public function pgexamupdate(Request $request,$pgid)
     {
+        // return $request; 
         
         $std_id = $request->id;
         $from_date = $request->from_date;
@@ -453,14 +457,19 @@ class StudentPersonalController extends Controller
         ];
 
         $pgexam->previous_exam_appearance = json_encode($previousexamappearance);
-
+        // return $pgexam;
         $pgexam->save();
-        $pgid = $pgexam->id;
+         $pgid = $pgexam->id;
 
         if (is_countable($request->bde_year_hid)) {
             for ($i = 0; $i < count($request->bde_year_hid); $i++) {
-                $pgsubject = PgExaminationSubject::where('pg_id','pgid');
-                $pgsubject->pg_id = $pgid;
+                
+               
+                    // If the record does not exist, create a new one
+                    $pgsubject = new PgExaminationSubject();
+                    $pgsubject->pg_id = $pgid;
+               
+                // $pgsubject->pg_id = $pgid;
                 $pgsubject->subject_name = $request->bde_year_hid[$i];
                 $pgsubject->paper_name = $request->bde_exam_hid[$i];
                 $pgsubject->paper_value = $request->bde_paper_hid[$i];
@@ -476,8 +485,10 @@ class StudentPersonalController extends Controller
     }
 
     public function delete(Request $request){
-        // return $request->id;
-        // $pgexam = PgExaminationSubject::where('id',$request->id)->first();
+        
+        $pgexam = PgExaminationSubject::find($request->id);
+        $pgexam->delete();
+        return response()->json('row deleted successfully');
        
         
         
