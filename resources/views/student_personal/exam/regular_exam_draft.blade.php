@@ -648,7 +648,7 @@
 
                                     <button type="submit"
                                         class="btn btn-success me-1 waves-effect waves-float waves-light">Save As
-                                        Drfat</button>
+                                        Draft</button>
                                     <a href="{{ route('student_app_preview', [$id]) }}"
                                         class="btn btn-success me-1 waves-effect waves-float waves-light">Preview</a>
                                 </div>

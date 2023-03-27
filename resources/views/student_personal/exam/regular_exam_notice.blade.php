@@ -6,7 +6,7 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Regular Examination Application (UG)
+                        Regular Examination Applications
                     </h2>
                 </div>
                 <div class="panel-container show">

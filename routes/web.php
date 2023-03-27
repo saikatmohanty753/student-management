@@ -191,6 +191,6 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('/pgformdraft/{id}', [StudentPersonalController::class, 'pgformdraft'])->name('pgformdraft');
     Route::post('/pgexamupdate/{id}', [StudentPersonalController::class, 'pgexamupdate'])->name('pgexamupdate');
     Route::post('/delete', [StudentPersonalController::class, 'delete'])->name('delete');
-    Route::post('pg_student_app_final/{id}',[StudentPersonalController::class, 'pg_student_app_final'])->name('pg_student_app_final');
+    Route::post('student-app-final/{id}',[StudentPersonalController::class, 'pg_student_app_final'])->name('pg_student_app_final');
 
 });

@@ -103,7 +103,7 @@ class PaymentController extends Controller
         $payment->transaction_date = $date;
         $payment->save();
 
-        return redirect()->route('pgformpreview',[$id]);
+        return redirect()->route('student_app_preview',[$id]);
 
     }
 }

@@ -293,7 +293,7 @@
 
                             </div>
                         @else
-                            <form action="{{ route('student_app_final', [$id]) }}" method="POST">
+                            <form action="{{url('student-app-final/'.$id)}}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12 text-center mt-4">

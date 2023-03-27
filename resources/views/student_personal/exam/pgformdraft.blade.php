@@ -310,7 +310,7 @@ dd($student_details);
                                 </div>
                             </div>
                         </div>
-                        
+
                         <form action="{{ route('pgexamupdate', ['id' => $stu_id]) }}" id="form_dd" method="post">
                             @csrf
                             <div class="border rounded p-2 mb-4">
@@ -328,7 +328,6 @@ dd($student_details);
                                             class="" required>
                                     </div> --}}
                                 </div>
-                                
                                 <div class="row ">
                                     {{-- <div class="fw-700 mb-2 text-success">(9).Session of Admission in P.G. Course</div> --}}
 
@@ -340,7 +339,7 @@ dd($student_details);
                                                 <input type="hidden" id="" name="pgid"
                                                     value="{{ $pgid }}">
                                                 <input name="college_name" id="college_name" type="text"
-                                                    class="form-control" value="">
+                                                    class="form-control" value="{{ $pgstd->college_name }}">
                                             </div>
                                         </div>
                                     </div>
@@ -353,7 +352,7 @@ dd($student_details);
                                                     <div class="col-sm-8">
 
                                                         <input name="from_date" id="from_date" type="text"
-                                                            class="form-control yearPicker" value="">
+                                                            class="form-control yearPicker" value="{{ $fromdate }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -362,7 +361,7 @@ dd($student_details);
                                                     <div class="col-sm-8">
 
                                                         <input name="to_date" id="to_date" type="text"
-                                                            class="form-control yearPicker" value="">
+                                                            class="form-control yearPicker" value="{{ $todate }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -571,7 +570,7 @@ dd($student_details);
                                                         class="text-danger">*</span></label>
 
                                                 <input type="text" class="form-control"name="roll1" id="roll1"
-                                                    value="">
+                                                    value="{{ $appearingexam->partIexam->roll1 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -584,40 +583,40 @@ dd($student_details);
                                                     id="month1">
                                                     <option value="">Select Month</option>
                                                     <option value="Jan"
-                                                        >
+                                                        {{ $appearingexam->partIexam->month1 == 'Jan' ? 'selected' : '' }}>
                                                         January</option>
                                                     <option
-                                                        value="Feb">
+                                                        value="Feb"{{ $appearingexam->partIexam->month1 == 'Feb' ? 'selected' : '' }}>
                                                         February</option>
                                                     <option
-                                                        value="Mar">
+                                                        value="Mar"{{ $appearingexam->partIexam->month1 == 'Mar' ? 'selected' : '' }}>
                                                         March</option>
                                                     <option
-                                                        value="Apr">
+                                                        value="Apr"{{ $appearingexam->partIexam->month1 == 'Apr' ? 'selected' : '' }}>
                                                         April</option>
                                                     <option
-                                                        value="May">
+                                                        value="May"{{ $appearingexam->partIexam->month1 == 'May' ? 'selected' : '' }}>
                                                         May</option>
                                                     <option
-                                                        value="Jun">
+                                                        value="Jun"{{ $appearingexam->partIexam->month1 == 'Jun' ? 'selected' : '' }}>
                                                         June</option>
                                                     <option
-                                                        value="Jul">
+                                                        value="Jul"{{ $appearingexam->partIexam->month1 == 'Jul' ? 'selected' : '' }}>
                                                         July</option>
                                                     <option
-                                                        value="Aug">
+                                                        value="Aug"{{ $appearingexam->partIexam->month1 == 'Aug' ? 'selected' : '' }}>
                                                         August</option>
                                                     <option
-                                                        value="Sep">
+                                                        value="Sep"{{ $appearingexam->partIexam->month1 == 'Sep' ? 'selected' : '' }}>
                                                         September</option>
                                                     <option
-                                                        value="Oct">
+                                                        value="Oct"{{ $appearingexam->partIexam->month1 == 'Oct' ? 'selected' : '' }}>
                                                         October</option>
                                                     <option
-                                                        value="Nov">
+                                                        value="Nov"{{ $appearingexam->partIexam->month1 == 'Nov' ? 'selected' : '' }}>
                                                         November</option>
                                                     <option
-                                                        value="Dec">
+                                                        value="Dec"{{ $appearingexam->partIexam->month1 == 'Dec' ? 'selected' : '' }}>
                                                         December</option>
                                                 </select>
                                             </div>
@@ -629,7 +628,7 @@ dd($student_details);
                                                 <label class="form-label">Year<span class="text-danger">*</span></label>
                                                 <input name="year1" id="year1" type="text"
                                                     class="form-control yearPicker"
-                                                    value="">
+                                                    value="{{ $appearingexam->partIexam->year1 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -643,7 +642,7 @@ dd($student_details);
                                                 <label class="form-label">Roll Number<span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="roll2" id="roll2"
-                                                    value="">
+                                                    value="{{ $appearingexam->partIIexam->roll2 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -656,40 +655,40 @@ dd($student_details);
                                                     id="month2">
                                                     <option value="">Select Month</option>
                                                     <option value="Jan"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Jan' ? 'selected' : '' }}>
                                                         January</option>
                                                     <option value="Feb"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Feb' ? 'selected' : '' }}>
                                                         February</option>
                                                     <option value="Mar"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Mar' ? 'selected' : '' }}>
                                                         March</option>
                                                     <option value="Apr"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Apr' ? 'selected' : '' }}>
                                                         April</option>
                                                     <option value="May"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'May' ? 'selected' : '' }}>
                                                         May</option>
                                                     <option value="Jun"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Jun' ? 'selected' : '' }}>
                                                         June</option>
                                                     <option value="Jul"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Jul' ? 'selected' : '' }}>
                                                         July</option>
                                                     <option value="Aug"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Aug' ? 'selected' : '' }}>
                                                         August</option>
                                                     <option value="Sep"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Sep' ? 'selected' : '' }}>
                                                         September</option>
                                                     <option value="Oct"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Oct' ? 'selected' : '' }}>
                                                         October</option>
                                                     <option value="Nov"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Nov' ? 'selected' : '' }}>
                                                         November</option>
                                                     <option value="Dec"
-                                                        >
+                                                        {{ $appearingexam->partIIexam->month2 == 'Dec' ? 'selected' : '' }}>
                                                         December</option>
                                                 </select>
 
@@ -702,7 +701,7 @@ dd($student_details);
                                                 <label class="form-label">Year<span class="text-danger">*</span></label>
                                                 <input name="year2" id="year2" type="text"
                                                     class="form-control yearPicker"
-                                                    value="">
+                                                    value="{{ $appearingexam->partIIexam->year2 }}">
                                                 {{-- <input type="text" class="form-control" value="" name="year2" id="year2" > --}}
                                             </div>
                                         </div>
@@ -730,7 +729,7 @@ dd($student_details);
                                                 <label class="form-label">Roll Number<span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="roll3" id="roll3"
-                                                    value="">
+                                                    value="{{ $previousappearingexam->partIexam->roll3 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -743,40 +742,40 @@ dd($student_details);
                                                     id="month3">
                                                     <option value="">Select Month</option>
                                                     <option value="Jan"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Jan' ? 'selected' : '' }}>
                                                         January</option>
                                                     <option value="Feb"
-                                                       >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Feb' ? 'selected' : '' }}>
                                                         February</option>
                                                     <option value="Mar"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Mar' ? 'selected' : '' }}>
                                                         March</option>
                                                     <option value="Apr"
-                                                       >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Apr' ? 'selected' : '' }}>
                                                         April</option>
                                                     <option value="May"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'May' ? 'selected' : '' }}>
                                                         May</option>
                                                     <option value="Jun"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Jun' ? 'selected' : '' }}>
                                                         June</option>
                                                     <option value="Jul"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Jul' ? 'selected' : '' }}>
                                                         July</option>
                                                     <option value="Aug"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Aug' ? 'selected' : '' }}>
                                                         August</option>
                                                     <option value="Sep"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Sep' ? 'selected' : '' }}>
                                                         September</option>
                                                     <option value="Oct"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Oct' ? 'selected' : '' }}>
                                                         October</option>
                                                     <option value="Nov"
-                                                        >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Nov' ? 'selected' : '' }}>
                                                         November</option>
                                                     <option value="Dec"
-                                                       >
+                                                        {{ $previousappearingexam->partIexam->month3 == 'Dec' ? 'selected' : '' }}>
                                                         December</option>
                                                 </select>
                                             </div>
@@ -788,7 +787,7 @@ dd($student_details);
                                                 <label class="form-label">Year<span class="text-danger">*</span></label>
                                                 <input name="year3" id="year3" type="text"
                                                     class="form-control yearPicker"
-                                                    value="">
+                                                    value="{{ $previousappearingexam->partIexam->year3 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -803,7 +802,7 @@ dd($student_details);
                                                         class="text-danger">*</span></label>
 
                                                 <input type="text" class="form-control" name="roll4" id="roll4"
-                                                    value="">
+                                                    value="{{ $previousappearingexam->partIIexam->roll4 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -816,40 +815,40 @@ dd($student_details);
                                                     id="month4">
                                                     <option value="">Select Month</option>
                                                     <option value="Jan"
-                                                       >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Jan' ? 'selected' : '' }}>
                                                         January</option>
                                                     <option value="Feb"
-                                                       >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Feb' ? 'selected' : '' }}>
                                                         February</option>
                                                     <option value="Mar"
-                                                       >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Mar' ? 'selected' : '' }}>
                                                         March</option>
                                                     <option value="Apr"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Apr' ? 'selected' : '' }}>
                                                         April</option>
                                                     <option value="May"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'May' ? 'selected' : '' }}>
                                                         May</option>
                                                     <option value="Jun"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Jun' ? 'selected' : '' }}>
                                                         June</option>
                                                     <option value="Jul"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Jul' ? 'selected' : '' }}>
                                                         July</option>
                                                     <option value="Aug"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Aug' ? 'selected' : '' }}>
                                                         August</option>
                                                     <option value="Sep"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Sep' ? 'selected' : '' }}>
                                                         September</option>
                                                     <option value="Oct"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Oct' ? 'selected' : '' }}>
                                                         October</option>
                                                     <option value="Nov"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Nov' ? 'selected' : '' }}>
                                                         November</option>
                                                     <option value="Dec"
-                                                        >
+                                                        {{ $previousappearingexam->partIIexam->month4 == 'Dec' ? 'selected' : '' }}>
                                                         December</option>
                                                 </select>
 
@@ -863,7 +862,7 @@ dd($student_details);
 
                                                 <input name="year4" id="year4" type="text"
                                                     class="form-control yearPicker"
-                                                    value="">
+                                                    value="{{ $previousappearingexam->partIIexam->year4 }}">
                                                 {{-- <input type="text" class="form-control" value="" name="year2" id="year2" > --}}
                                             </div>
                                         </div>
@@ -880,7 +879,7 @@ dd($student_details);
                                                 <label class="form-label">Roll Number<span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="roll5" id="roll5"
-                                                    value="">
+                                                    value="{{ $previousappearingexam->whole->roll5 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -893,40 +892,40 @@ dd($student_details);
                                                     id="month5">
                                                     <option value="">Select Month</option>
                                                     <option value="Jan"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Jan' ? 'selected' : '' }}>
                                                         January</option>
                                                     <option value="Feb"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Feb' ? 'selected' : '' }}>
                                                         February</option>
                                                     <option value="Mar"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Mar' ? 'selected' : '' }}>
                                                         March</option>
                                                     <option value="Apr"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Apr' ? 'selected' : '' }}>
                                                         April</option>
                                                     <option value="May"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'May' ? 'selected' : '' }}>
                                                         May</option>
                                                     <option value="Jun"
-                                                       >
+                                                        {{ $previousappearingexam->whole->month5 == 'Jun' ? 'selected' : '' }}>
                                                         June</option>
                                                     <option value="Jul"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Jul' ? 'selected' : '' }}>
                                                         July</option>
                                                     <option value="Aug"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Aug' ? 'selected' : '' }}>
                                                         August</option>
                                                     <option value="Sep"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Sep' ? 'selected' : '' }}>
                                                         September</option>
                                                     <option value="Oct"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Oct' ? 'selected' : '' }}>
                                                         October</option>
                                                     <option value="Nov"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Nov' ? 'selected' : '' }}>
                                                         November</option>
                                                     <option value="Dec"
-                                                        >
+                                                        {{ $previousappearingexam->whole->month5 == 'Dec' ? 'selected' : '' }}>
                                                         December</option>
                                                 </select>
 
@@ -939,7 +938,7 @@ dd($student_details);
                                                 <label class="form-label">Year<span class="text-danger">*</span></label>
                                                 <input name="year5" id="year5" type="text"
                                                     class="form-control yearPicker"
-                                                    value="">
+                                                    value="{{ $previousappearingexam->whole->year5 }}">
                                                 {{-- <input type="text" class="form-control" value="" name="year2" id="year2" > --}}
                                             </div>
                                         </div>
@@ -1041,6 +1040,7 @@ dd($student_details);
 
                             </div>
                             <hr>
+                           
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="list-group">
@@ -1057,19 +1057,12 @@ dd($student_details);
                                     </ul>
                                 </div>
 
-
-                                {{-- <div class="col-md-12 text-center mt-4">
-                                    <button type="submit"
-                                        class="btn btn-success me-1 waves-effect waves-float waves-light">Preview</button>
-                                    <a href="{{ url()->previous() }}" class="btn btn-danger">Back</a>
-                                </div> --}}
-
                                 <div class="col-md-12 text-center mt-4">
 
                                     <button type="submit"
                                         class="btn btn-success me-1 waves-effect waves-float waves-light">Save As
                                         Draft</button>
-                                    <a href="{{ route('pgformpreview', [$stu_id]) }}"
+                                    <a href="{{ route('student_app_preview', [$stu_id]) }}"
                                         class="btn btn-success me-1 waves-effect waves-float waves-light">Preview</a>
                                 </div>
 
