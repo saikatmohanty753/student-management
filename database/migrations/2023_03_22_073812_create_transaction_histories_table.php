@@ -16,6 +16,7 @@ class CreateTransactionHistoriesTable extends Migration
         Schema::create('transaction_histories', function (Blueprint $table) {
             $table->id();
             $table->integer('app_id')->nullable();
+            $table->string('transaction_type')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('transaction_response')->nullable();
             $table->string('payment_request_id')->nullable();

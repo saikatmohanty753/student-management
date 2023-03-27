@@ -873,7 +873,7 @@
 
                                 <div class="col-md-12 text-center mt-4">
                                     <button type="submit"
-                                        class="btn btn-success me-1 waves-effect waves-float waves-light">Preview</button>
+                                        class="btn btn-success me-1 waves-effect waves-float waves-light">Save as Draft</button>
                                 </div>
 
                         </form>

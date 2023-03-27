@@ -175,6 +175,9 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('payment/{id}',[PaymentController::class, 'payment_page'])->name('payment_page');
     Route::post('payment-post/{id}',[PaymentController::class, 'payment_post'])->name('payment_post');
 
+    Route::get('pg-payment/{id}',[PaymentController::class, 'pg_payment_page'])->name('pg_payment_page');
+    Route::post('pg-payment-post/{id}',[PaymentController::class, 'pg_payment_post'])->name('pg_payment_post');
+
     
 
     // Route::get('student_apply/{id}',[ExamController::class, 'student_apply'])->name('apply_regular_exam');
@@ -188,5 +191,6 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('/pgformdraft/{id}', [StudentPersonalController::class, 'pgformdraft'])->name('pgformdraft');
     Route::post('/pgexamupdate/{id}', [StudentPersonalController::class, 'pgexamupdate'])->name('pgexamupdate');
     Route::post('/delete', [StudentPersonalController::class, 'delete'])->name('delete');
+    Route::post('pg_student_app_final/{id}',[StudentPersonalController::class, 'pg_student_app_final'])->name('pg_student_app_final');
 
 });

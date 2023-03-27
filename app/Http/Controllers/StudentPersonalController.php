@@ -256,7 +256,7 @@ class StudentPersonalController extends Controller
 
     public function student_app_preview($id)
     {
-        //return $id;
+        // return $id;
         $ug_app = UgExaminationApplication::where('stu_id', $id)->first();
         $student_details = StudentDetails::find($id);
         $student_address = StudentAddress::where('student_id', $id)->first();
@@ -351,6 +351,7 @@ class StudentPersonalController extends Controller
             for ($i = 0; $i < count($request->bde_year_hid); $i++) {
                 $pgsubject = new PgExaminationSubject();
                 $pgsubject->pg_id = $pgid;
+                $pgsubject->std_id = $std_id;
                 $pgsubject->subject_name = $request->bde_year_hid[$i];
                 $pgsubject->paper_name = $request->bde_exam_hid[$i];
                 $pgsubject->paper_value = $request->bde_paper_hid[$i];
@@ -361,42 +362,48 @@ class StudentPersonalController extends Controller
             }
         }
 
-        return redirect()->route('pgformpreview', ['id' => $pgid]);
+        return redirect()->route('pgformdraft', ['id' => $std_id]);
 
     }
 
-    public function pgformpreview($pgid)
+    public function pgformpreview($std_id)
     {
        
-        $pgstd = PgExaminationStudent::where('id', $pgid)->first();
-        $std_id = $pgstd->std_id;
+       
+        $pgstd = PgExaminationStudent::where('std_id', $std_id)->first();
+        $pgid=$pgstd->id;
+        
+        $pg_app = PgExaminationApplication::where('stu_id', $std_id)->first();
         $student_details = StudentDetails::where('id', $std_id)->first();
 
         $personal_information = json_decode($pgstd->appearing_exam);
         $previousexamappearance = json_decode($pgstd->previous_exam_appearance);
-        $pgstdsub = PgExaminationSubject::where('pg_id', $pgid)->get();
+        $pgstdsub = PgExaminationSubject::where('std_id', $std_id)->get();
         $student_address = StudentAddress::where('student_id', $std_id)->first();
+        $pgfee = FeesMaster::all();
 
-        return view('student_personal.exam.pgformpreview', compact('student_details', 'pgstdsub', 'previousexamappearance', 'personal_information', 'student_address', 'pgstd', 'pgid'));
+        return view('student_personal.exam.pgformpreview', compact('student_details', 'pgstdsub', 'previousexamappearance', 'personal_information', 'student_address', 'pgstd', 'std_id','pgfee','pg_app'));
 
     }
 
-    public function pgformdraft($pgid)
+    public function pgformdraft($stu_id)
     {
 
-        $pgstd = PgExaminationStudent::where('id', $pgid)->first();
-        $std_id = $pgstd->std_id;
+        $pgstd = PgExaminationStudent::where('std_id', $stu_id)->first();
+        $pgid=$pgstd->id;
+        
         $pgyear = $pgstd->batch_year;
         [$fromdate, $todate] = explode('-', $pgyear);
         $appearingexam = json_decode($pgstd->appearing_exam);
         $previousappearingexam = json_decode($pgstd->previous_exam_appearance);
-        $pg_sub = PgExaminationSubject::where('pg_id', $pgid)->get();
-        $student_details = StudentDetails::where('id', $std_id)->first();
-        $student_address = StudentAddress::where('student_id', $std_id)->first();
-        $edu_hsc = StudentEducationDetails::where('student_id', $std_id)->first();
+        $pg_sub = PgExaminationSubject::where('std_id', $stu_id)->get();
+        $student_details = StudentDetails::where('id', $stu_id)->first();
+        $student_address = StudentAddress::where('student_id', $stu_id)->first();
+        $student_education = StudentEducationDetails::where('student_id', $stu_id)->first();
+        $edu_hsc = json_decode($student_education->qualification);
         $pgfee = FeesMaster::all();
 
-        return view('student_personal.exam.pgformdraft', compact('appearingexam', 'previousappearingexam', 'pg_sub', 'std_id', 'student_details', 'student_address', 'edu_hsc', 'pgid', 'std_id', 'pgstd', 'fromdate', 'todate', 'pgfee'));
+        return view('student_personal.exam.pgformdraft', compact('appearingexam', 'previousappearingexam', 'pg_sub', 'student_details', 'student_address', 'edu_hsc', 'pgid', 'stu_id', 'pgstd', 'fromdate', 'todate', 'pgfee'));
 
     }
 
@@ -404,62 +411,63 @@ class StudentPersonalController extends Controller
 
 
 
-    public function pgexamupdate(Request $request,$pgid)
+    public function pgexamupdate(Request $request,$stu_id)
     {
-        // return $request; 
+        // return $request;
+        $pgid=$request->pgid;
         
-        $std_id = $request->id;
-        $from_date = $request->from_date;
-        $to_date = $request->to_date;
-        $search_year = $from_date . '-' . $to_date;
+        //$std_id = $request->id;
+        // $from_date = $request->from_date;
+        // $to_date = $request->to_date;
+        // $search_year = $from_date . '-' . $to_date;
 
-        $pgexam = PgExaminationStudent::where('id',$pgid)->first();
-        $pgexam->college_name = $request->college_name;
-        $pgexam->batch_year = $search_year;
+        // $pgexam = PgExaminationStudent::where('id',$pgid)->first();
+        // $pgexam->college_name = $request->college_name;
+        // $pgexam->batch_year = $search_year;
 
-        $pgexam->std_id = $std_id;
+        // $pgexam->std_id = $std_id;
 
-        $personal_information = [
-            'partIexam' => [
-                'roll1' => $request->roll1,
-                'month1' => $request->month1,
-                'year1' => $request->year1,
+        // $personal_information = [
+        //     'partIexam' => [
+        //         'roll1' => $request->roll1,
+        //         'month1' => $request->month1,
+        //         'year1' => $request->year1,
 
-            ],
-            'partIIexam' => [
-                'roll2' => $request->roll2,
-                'month2' => $request->month2,
-                'year2' => $request->year2,
-            ],
+        //     ],
+        //     'partIIexam' => [
+        //         'roll2' => $request->roll2,
+        //         'month2' => $request->month2,
+        //         'year2' => $request->year2,
+        //     ],
 
-        ];
+        // ];
 
-        $pgexam->appearing_exam = json_encode($personal_information);
+        // $pgexam->appearing_exam = json_encode($personal_information);
 
-        $previousexamappearance = [
-            'partIexam' => [
-                'roll3' => $request->roll3,
-                'month3' => $request->month3,
-                'year3' => $request->year3,
+        // $previousexamappearance = [
+        //     'partIexam' => [
+        //         'roll3' => $request->roll3,
+        //         'month3' => $request->month3,
+        //         'year3' => $request->year3,
 
-            ],
-            'partIIexam' => [
-                'roll4' => $request->roll4,
-                'month4' => $request->month4,
-                'year4' => $request->year4,
-            ],
-            'whole' => [
-                'roll5' => $request->roll5,
-                'month5' => $request->month5,
-                'year5' => $request->year5,
-            ],
+        //     ],
+        //     'partIIexam' => [
+        //         'roll4' => $request->roll4,
+        //         'month4' => $request->month4,
+        //         'year4' => $request->year4,
+        //     ],
+        //     'whole' => [
+        //         'roll5' => $request->roll5,
+        //         'month5' => $request->month5,
+        //         'year5' => $request->year5,
+        //     ],
 
-        ];
+        // ];
 
-        $pgexam->previous_exam_appearance = json_encode($previousexamappearance);
-        // return $pgexam;
-        $pgexam->save();
-         $pgid = $pgexam->id;
+        // $pgexam->previous_exam_appearance = json_encode($previousexamappearance);
+        // // return $pgexam;
+        // $pgexam->save();
+        //  $pgid = $pgexam->id;
 
         if (is_countable($request->bde_year_hid)) {
             for ($i = 0; $i < count($request->bde_year_hid); $i++) {
@@ -468,6 +476,7 @@ class StudentPersonalController extends Controller
                     // If the record does not exist, create a new one
                     $pgsubject = new PgExaminationSubject();
                     $pgsubject->pg_id = $pgid;
+                    $pgsubject->std_id=$stu_id;
                
                 // $pgsubject->pg_id = $pgid;
                 $pgsubject->subject_name = $request->bde_year_hid[$i];
@@ -480,10 +489,12 @@ class StudentPersonalController extends Controller
             }
         }
 
-        return redirect()->route('pgformpreview', ['id' => $pgid]);
+        // return redirect()->route('pgformpreview', ['id' => $stu_id]);
 
+        return redirect()->back()->with('msg', 'The Message');
     }
-
+        
+  
     public function delete(Request $request){
         
         $pgexam = PgExaminationSubject::find($request->id);
@@ -492,6 +503,20 @@ class StudentPersonalController extends Controller
        
         
         
+    }
+
+
+
+    public function pg_student_app_final($id)
+    {
+        
+        $pg_app = DB::table('pg_examination_applications')
+            ->where('stu_id', $id)
+            ->update([
+                'form_status' => 2,
+            ]);
+
+        return redirect()->route('exam_notice');
     }
 
 }

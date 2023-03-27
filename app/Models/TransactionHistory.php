@@ -10,6 +10,7 @@ class TransactionHistory extends Model
     use HasFactory;
     protected $fillable = [
         'app_id',
+        'transaction_type',
         'transaction_id',
         'transaction_response',
         'payment_request_id',
