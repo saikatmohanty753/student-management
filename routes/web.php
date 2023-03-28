@@ -170,7 +170,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::post('delete-student-exam',[StudentPersonalController::class, 'delete_student_exam'])->name('delete_student_exam');
 
     Route::get('student-app-preview/{id}',[StudentPersonalController::class, 'student_app_preview'])->name('student_app_preview');
-    Route::post('student-app-final/{id}',[StudentPersonalController::class, 'student_app_final'])->name('student_app_final');
+    Route::post('ug-student-app-final/{id}',[StudentPersonalController::class, 'ug_student_app_final'])->name('ug_student_app_final');
 
     Route::get('payment/{id}',[PaymentController::class, 'payment_page'])->name('payment_page');
     Route::post('payment-post/{id}',[PaymentController::class, 'payment_post'])->name('payment_post');

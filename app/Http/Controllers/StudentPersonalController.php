@@ -27,7 +27,7 @@ class StudentPersonalController extends Controller
 
         $dep_id = $student->department_id;
         if ($dep_id == 1) {
-            $ug_app = UgExaminationApplication::where('stu_id', $stu_id)->first();
+            $ug_app = UgExaminationApplication::where('stu_id', $stu_id)->latest()->first();
         } else if ($dep_id == 2) {
 
             $ug_app = PgExaminationApplication::where('stu_id', $stu_id)->latest()->first();
@@ -317,9 +317,9 @@ class StudentPersonalController extends Controller
 
     // }
 
-    public function student_app_final($id)
+    public function ug_student_app_final($id)
     {
-        return 1;  
+        // return $id;  
         $ug_app = DB::table('ug_examination_applications')
             ->where('stu_id', $id)
             ->update([
