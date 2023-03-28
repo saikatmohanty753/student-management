@@ -284,7 +284,7 @@ class StudentPersonalController extends Controller
             $pgfee = FeesMaster::all();
             $pgstd = PgExaminationStudent::where('std_id', $id)->first();
             $pgid=$pgstd->id;
-    
+            $student_address = StudentAddress::where('student_id', $id)->first();
             $pg_app = PgExaminationApplication::where('stu_id', $id)->first();
             $personal_information = json_decode($pgstd->appearing_exam);
             $previousexamappearance = json_decode($pgstd->previous_exam_appearance);
