@@ -562,7 +562,7 @@
                     var publish = $(this);
                     var postData = new FormData();
                     postData.append('id', $(this).data('id'));
-                    var url = "/publish-notice";
+                    var url = "{{ url('publish-notice') }}";
 
                     $.ajaxSetup({
                         headers: {
