@@ -17,8 +17,6 @@ class ClgNoticeController extends Controller
      */
     public function index()
     {
-
-
         $notification =  Auth::user()->Notifications;
         $noticeIds = [];
         foreach ($notification as $key => $value) {
