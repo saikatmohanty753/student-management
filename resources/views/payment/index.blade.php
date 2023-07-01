@@ -202,7 +202,7 @@ input:focus:-ms-input-placeholder {
 <body>
     <div class="card mt-50 mb-50">
         <div class="card-title mx-auto">
-            Paymetn Page
+            Payment Page
         </div>
         <div class="nav">
             <ul class="mx-auto">

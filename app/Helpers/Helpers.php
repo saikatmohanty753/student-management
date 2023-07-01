@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Affiliation_feemaster;
 use App\Models\AffiliationType;
+use App\Models\College;
 use App\Models\Course;
 use App\Models\StudentApplication;
 use App\Models\StudentDetails;
@@ -56,5 +57,10 @@ class Helpers
             'certificate' => $cert_app,
         ];
         return $data;
+    }
+
+    public static function clgName($id)
+    {
+        return College::where('id', $id)->pluck('name')->first();
     }
 }

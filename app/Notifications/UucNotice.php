@@ -48,6 +48,19 @@ class UucNotice extends Notification
                     ->line('Thank you for using our application!'); */
     }
 
+
+    protected function buildPayload($notifiable, Notification $notification)
+    {
+        return [
+            'id' => $notification->id,
+            'type' => method_exists($notification, 'databaseType')
+                        ? $notification->databaseType($notifiable)
+                        : get_class($notification),
+            'data' => $this->getData($notifiable, $notification),
+            'read_at' => null,
+        ];
+    }
+
     /**
      * Get the array representation of the notification.
      *

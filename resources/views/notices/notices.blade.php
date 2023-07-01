@@ -42,8 +42,8 @@
                                                 <th>Department</th>
                                                 {{-- <th>Course</th> --}}
                                                 {{-- <th>Semester</th> --}}
-                                                <th>Start date</th>
-                                                <th>End date</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                                 <th>Details</th>
                                                 <th>Is Verified</th>
                                                 <th>Is Published</th>
@@ -103,7 +103,7 @@
 
                                                         @if (Auth::user()->role_id == 11)
                                                             @if ($item->is_verified == 0)
-                                                                <a class="btn btn-outline-primary verified-status"
+                                                                <a class="btn btn-outline-success verified-status"
                                                                     href="javascript:void(0);"
                                                                     data-id="{{ $item->id }}"><i
                                                                         class="fas fa-check-circle"></i></a>
@@ -158,8 +158,8 @@
                                             <tr class="text-dark">
                                                 <th style="width: 10%;">Sl. No</th>
                                                 <th>Notice Type</th>
-                                                <th>Start date</th>
-                                                <th>End date</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                                 <th>Details</th>
                                                 <th>Is Verified</th>
                                                 <th>Status</th>
@@ -270,8 +270,8 @@
                                             <tr class="text-dark">
                                                 <th style="width: 10%;">Sl. No</th>
                                                 <th>Notice Type</th>
-                                                <th>Start date</th>
-                                                <th>End date</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                                 <th>Details</th>
                                                 <th>Is Verified</th>
                                                 <th>Status</th>
@@ -382,8 +382,8 @@
                                             <tr class="text-dark">
                                                 <th style="width: 10%;">Sl. No</th>
                                                 <th>Notice Type</th>
-                                                <th>Start date</th>
-                                                <th>End date</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                                 <th>Details</th>
                                                 <th>Is Verified</th>
                                                 <th>Status</th>
@@ -595,11 +595,11 @@
 
             });
 
-           
+
 
 
                 $('.verified-status').on('click', function() {
-                    
+
                     let id = $(this).data('id');
 
 
@@ -609,6 +609,6 @@
                     $('#exampleModal').modal('show');
                 });
 
-           
+
         </script>
     @endsection

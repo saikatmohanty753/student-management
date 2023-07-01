@@ -17,4 +17,6 @@ class StudentAddress extends Model
     {
         return $this->belongsTo(District::class, 'permanent_district_id', 'id');
     }
+    
+   
 }

@@ -143,14 +143,14 @@
         <div>
             <a href="javascript:void(0);" data-toggle="dropdown" title="drlantern@gotbootstrap.com"
                 class="header-icon d-flex align-items-center justify-content-center ml-2">
-                <img src="{{ asset('backend/img/demo/avatars/avatar-admin.png') }}" class="profile-image rounded-circle"
+                <img src="{{ asset('backend/img/demo/avatars/profile.png') }}" class="profile-image rounded-circle"
                     alt="Admin">
             </a>
             <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
                 <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
                     <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                         <span class="mr-2">
-                            <img src="{{ asset('backend/img/demo/avatars/avatar-admin.png') }}"
+                            <img src="{{ asset('backend/img/demo/avatars/profile.png') }}"
                                 class="rounded-circle profile-image" alt="Admin">
                         </span>
                         <div class="info-card-text">
@@ -166,8 +166,8 @@
                 <a href="{{url('profiledetails/'.Auth::id())}}" class="dropdown-item">
                     <span data-i18n="drpdwn.reset_layout">Profile Details</span>
                 </a>
-                
-                
+
+
                 <a href="javascript:void(0);" class="dropdown-item" data-toggle="modal"
                 data-target="#change-password">
                 <span data-i18n="drpdwn.settings">Change Password</span>

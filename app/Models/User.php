@@ -89,7 +89,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
-    public static function CreateTempCollege($data){
+
+
+    public static function CreateTempCollege($data)
+    {
 
         return User::create([
             'name' => $data['name'],
@@ -98,7 +101,6 @@ class User extends Authenticatable
             'is_active' => 0,
             'password' => Hash::make(12345678),
         ]);
-
     }
 
     public function userdetails()

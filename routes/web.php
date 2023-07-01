@@ -22,7 +22,7 @@ use App\Http\Controllers\PaperSubTypeController;
 use App\Http\Controllers\UucStudentController;
 use App\Http\Livewire\Notification;
 use App\Providers\RouteServiceProvider;
-use App\Http\Controllers\Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentPersonalController;
 
@@ -38,6 +38,7 @@ use App\Http\Controllers\StudentPersonalController;
 */
 
 Route::get('/', function () {
+
     if (Auth::check()) {
         return redirect(RouteServiceProvider::HOME);
     }
@@ -51,6 +52,7 @@ Route::get('test-admission', [AdmissionController::class, 'AdmissionSeat']);
 Route::get('/student', function () {
     return view('studentportal.index');
 });
+
 
 
 Auth::routes();
@@ -102,7 +104,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('/new-admission', [AdmissionController::class, 'newAdmission']);
     Route::get('uuc-admission/{id}/{dep}/{depId}', [AdmissionController::class, 'index']);
     Route::post('student-admission', [AdmissionController::class, 'store']);
-   
+
     Route::post('student-admission/apply', [AdmissionController::class, 'apply']);
 
     Route::get('student-admission/preview/{id}', [AdmissionController::class, 'show']);
@@ -110,7 +112,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::get('student-admission/applied-application/{id}', [AdmissionController::class, 'appliedApplication']);
 
-    Route::get('uuc-admission', [AdmissionController::class, 'admissionList']);
+    Route::get('uuc-admission', [AdmissionController::class, 'admissionList'])->name('admissionList');
+    Route::get('studentadmissionList', [AdmissionController::class, 'studentadmissionList'])->name('studentadmissionList');
     Route::post('draft-student-admission', [AdmissionController::class, 'update']);
 
     Route::get('applied-admission-list/{dep}', [AdmissionController::class, 'collegeList']);
@@ -156,7 +159,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::post('/update-profile-image', [AjaxController::class, 'updateProfileImage']);
 
     // student personal goes here
-    
+
     Route::get('exam-notice', [StudentPersonalController::class, 'index'])->name('exam_notice');
     Route::get('student-apply/{id}', [StudentPersonalController::class, 'student_apply'])->name('student_apply');
 
@@ -178,7 +181,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('pg-payment/{id}',[PaymentController::class, 'pg_payment_page'])->name('pg_payment_page');
     Route::post('pg-payment-post/{id}',[PaymentController::class, 'pg_payment_post'])->name('pg_payment_post');
 
-    
+
 
     // Route::get('student_apply/{id}',[ExamController::class, 'student_apply'])->name('apply_regular_exam');
 
@@ -192,5 +195,9 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::post('/pgexamupdate/{id}', [StudentPersonalController::class, 'pgexamupdate'])->name('pgexamupdate');
     Route::post('/delete', [StudentPersonalController::class, 'delete'])->name('delete');
     Route::post('student-app-final/{id}',[StudentPersonalController::class, 'pg_student_app_final'])->name('pg_student_app_final');
+
+    Route::get('/studentdetailsview/{stu_id}', [UucStudentController::class, 'view'])->name('view');
+    Route::get('/final_preview/{stu_id}', [StudentPersonalController::class, 'final_preview'])->name('ug_final_preview');
+    Route::get('/final_preview/{stu_id}', [StudentPersonalController::class, 'final_preview'])->name('ug_final_preview');
 
 });

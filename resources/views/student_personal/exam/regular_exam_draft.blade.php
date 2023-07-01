@@ -54,7 +54,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
-                                            <label class="form-label">Mother's name <span
+                                            <label class="form-label">Mother's Name <span
                                                     class="text-danger">*</span></label>
                                             <input name="mother_name" value="{{ $student_details->mother_name }}"
                                                 type="text" class="form-control chk_blank" id="mother_name">
@@ -119,9 +119,7 @@
                                         @endphp
                                         <div class="form-group input-cont">
                                             <label class="form-label">Address <span class="text-danger">*</span></label>
-                                            <textarea name="" id="" class="form-control" rows="2">
-                                                {{ $permanent_address }}
-                                            </textarea>
+                                            <textarea name="" id="" class="form-control" rows="2">{{ $permanent_address }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -130,9 +128,7 @@
                                         <div class="form-group input-cont">
                                             <label class="form-label">Local Address <span
                                                     class="text-danger">*</span></label>
-                                            <textarea name="" id="" class="form-control" rows="2">
-                                                {{ $student_address->present_address }},{{ $student_address->presentDistrict->district_name }},{{ $student_address->present_pin_code }},{{ $student_address->present_state }}
-                                            </textarea>
+                                            <textarea name="" id="" class="form-control" rows="2">{{ $student_address->present_address }},{{ $student_address->presentDistrict->district_name }},{{ $student_address->present_pin_code }},{{ $student_address->present_state }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +208,7 @@
                                             <label class="form-label">DOB (As per HSC Certificate) <span
                                                     class="text-danger">*</span></label>
                                             <input name="dob" type="text" id="dob"
-                                                class="form-control chk_blank chk_date">
+                                                class="form-control chk_blank chk_date" value="{{$student_details->dob}}">
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +239,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
-                                            <label class="form-label">Passing year <span
+                                            <label class="form-label">Passing Year <span
                                                     class="text-danger">*</span></label>
                                             <input name="dob" type="text" class="form-control chk_blank chk_date"
                                                 value="{{ $edu_intermediate->passing_year }}">
@@ -291,7 +287,7 @@
                                             <label class="form-label">DOB (As per HSC Certificate) <span
                                                     class="text-danger">*</span></label>
                                             <input name="dob" type="text" id="dob"
-                                                class="form-control chk_blank chk_date">
+                                                class="form-control chk_blank chk_date" value="{{$student_details->dob}}">
                                         </div>
                                     </div>
                                 </div>
@@ -627,7 +623,7 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-12">
+                                {{-- <div class="col-md-12">
                                     <ul class="list-group">
                                         <li class="list-group">
                                             <p>I submit the above particulars for consideration by the University
@@ -642,7 +638,7 @@
                                                 examination.</p>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-md-12 text-center mt-4">
 

@@ -1,81 +1,147 @@
 <!Doctype html>
 <html>
-    <head>
-        <title></title>
-    </head>
-    <body>
 
-        <div style="border-radius: 4px;">
-            <table style="position: relative;top: -4px;padding-bottom:
-                8px;width:83%;">
-                <tr>
-                    <td>
-                        <img src="backend/img/favicon/logo.jpg" style="width: 85px;margin-left:
-                            70px;">
+<head>
+    <title></title>
+    <style>
+        .pdf_head,
+        .pdf_footer {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: space-between;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .Pdf_wrapper {
+            border: 3px double #811616;
+            padding: 15px;
+        }
+
+        .pdf_txt {
+            margin: 40px 0px;
+        }
+
+        img{max-width: 100%;}
+
+        .col-sm-1,
+            .col-sm-2,
+            .col-sm-3,
+            .col-sm-4,
+            .col-sm-5,
+            .col-sm-6,
+            .col-sm-7,
+            .col-sm-8,
+            .col-sm-9,
+            .col-sm-10,
+            .col-sm-11,
+            .col-sm-12 {
+                float: left;
+                padding: 0;
+            }
+
+            .col-sm-12 {
+                width: 100%;
+            }
+
+            .col-sm-11 {
+                width: 91.66666667%;
+            }
+
+            .col-sm-10 {
+                width: 83.33333333%;
+            }
+
+            .col-sm-9 {
+                width: 75%;
+            }
+
+            .col-sm-8 {
+                width: 66.66666667%;
+            }
+
+            .col-sm-7 {
+                width: 58.33333333%;
+            }
+
+            .col-sm-6 {
+                width: 50%;
+            }
+
+            .col-sm-5 {
+                width: 41.66666667%;
+            }
+
+            .col-sm-4 {
+                width: 33.33333333%;
+            }
+
+            .col-sm-3 {
+                width: 25%;
+            }
+
+            .col-sm-2 {
+                width: 16.66666667%;
+            }
+
+            .col-sm-1 {
+                width: 8.33333333%;
+            }
 
 
-                    </td>
-                    <td>
-                        <h2 style="text-align:center;margin-left: 120px;">UTKAL UNIVERSITY OF
-                            CULTURE</h2>
-                        <h5 style="text-align:center;margin-left: 120px;">REGISTRATION RECEIPT</h5>
-                    </td>
-                </tr>
+        
 
-            </table>
-            <table style="position: relative;top: -4px;background-color:
-                #ffffff;padding-bottom: 16px;background-image:
-                linear-gradient(0deg, #0072ac00, transparent);margin-right: 32px;">
-                <tr>
-                    <td>
+        /* @page {
+            size: auto;
+            margin: 0;
+        } */
+    </style>
+</head>
 
-                        <p style="text-align:justify;">
-                            Mr/Ms,<strong> {{$name}}</strong>
-                            of <strong>Amulya Bharat Sangeet Kala Parisad
-                                Mahavidyalay,Gunupur </strong>has been enrolled
-                            as student of Utkul University of Culture, Madanpur,
-                            Bhubaneswar for <strong>Bachelor of Performing Art
-                            </strong>Programme for the session 2022-21.
-                        </p>
-                        <p style="text-align:justify;">
-                            His/Her Registration Number is <strong>{{$reg_no}}.</strong>
-                        </p>
+<body>
 
-                        {{-- <p>
-                            Thanking You.
-                        </p> --}}
-
-
-
-
-
-                    </td>
-
-                </tr>
-            </table>
-            <table style="position: relative;top: -4px;background-color:
-                #ffffff;padding-bottom: 16px;background-image:
-                linear-gradient(0deg, #0072ac00, transparent);margin-left:
-                55px;margin-right: 32px;width: 83%;margin-top: 59px;">
-                <tr>
-                    <td>
-                        <p style="text-align:center;">
-                            <strong>Ink Signature of the Principal / Chairman,</strong><br
-                                />
-                            <strong>P.G.Council, UUC with Seal </strong>
-
-                        </p>
-                    </td>
-                    <td>
-                        <p style="text-align:center;">
-                            <strong>Controller of Examinations</strong>
-
-                        </p>
-
-                    </td>
-                </tr>
-
-            </table>
+    <div class="Pdf_wrapper">
+        <div class="pdf_head">
+            <div class="col-sm-3">
+                <img src="backend/img/favicon/logo.jpg">
+            </div>
+            <div class="col-sm-6" style="text-align:center; ">
+                <h2 style="font-size: 12pt; margin-bottom: 0; padding-bottom:0; line-height: 0px;">UTKAL UNIVERSITY OF CULTURE</h2>
+                <h5 style="font-size: 9pt; margin-bottom: 0; padding-bottom:0; line-height: 0px;">REGISRTATION RECEIPT</h5>
+            </div>
+            <div class="col-sm-3">
+                <img src="backend/img/barcode.png" alt="" style="max-width: 80%; text-align: right;">
+            </div>
+            <div style="clear: both;"></div>
         </div>
-    </body>
+        
+        <div class="pdf_txt">
+            <div class="col-sm-12">
+                <p style="line-height: 25px; text-align: justify; font-size: 9pt;">
+                    Mr./Ms. <b>{{ $name }}</b> of <b>{{ $clg }}</b>, <b>{{ $city }}</b> has been
+                    enrolled as
+                    student of utkal university of Culture, Madanpur, Bhubaneswar for Bachelor of Performing Art Programme
+                    for the session {{ $session_yr }}, His/Her Registration Number is <b>{{ $reg_no }}</b>.
+                </p>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="pdf_footer">
+           
+                <div class="col-sm-6" style="text-align: left;">
+                    <i><b style=" font-size: 7pt;">Ink Signature of the Principal / Chairman, P.G.Council, UUC With Seal</b></i>
+                </div>
+                
+           
+           
+                <div class="col-sm-6" style="text-align: right;">
+                    <b><i style="font-size: 7pt;">Controller Of Examination</i></b>
+                </div>
+                <div style="clear: both;"></div>
+            
+        </div>
+    </div>
+
+</body>
+
 </html>

@@ -69,8 +69,10 @@
                                     <td colspan="2">{{ $permanent_address }}</td>
                                 </tr>
                                 <tr>
-                                    <th colspan="2">Caste Category : </th>
-                                    <td colspan="2">{{ $student_details->cast }}</td>
+                                    <th>Caste Category : </th>
+                                    <td>{{ $student_details->cast }}</td>
+                                    <th>DOB:</th>
+                                    <td>{{ $student_details->dob }}</td>
                                 </tr>
                             </table>
 
@@ -89,7 +91,7 @@
                                         <th>Passing Month</th>
                                         <th>Division </th>
                                         <th>Roll No</th>
-                                        <th>DOB</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,7 +101,7 @@
                                         <td>{{ $edu_hsc->month }}</td>
                                         <td>{{ $edu_hsc->division }}</td>
                                         <td>{{ $edu_hsc->roll }}</td>
-                                        <td></td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -120,7 +122,7 @@
                                         <th>Passing Month</th>
                                         <th>Division </th>
                                         <th>Roll No</th>
-                                        <th>DOB</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -130,7 +132,7 @@
                                         <td>{{ $edu_intermediate->month }}</td>
                                         <td>{{ $edu_intermediate->division }}</td>
                                         <td>{{ $edu_intermediate->roll }}</td>
-                                        <td></td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -285,15 +287,14 @@
                                     <input type="hidden" name="pay_amt" id="pay_amt" value="">
 
                                     {{-- <a href="{{route('regular_exam_preview',[$id])}}"   class="btn btn-success me-1 waves-effect waves-float waves-light">Preview</a> --}}
-                                    <button type="button" class="btn btn-primary waves-effect waves-light print_btn"
-                                        onclick="window.print()">Print this page</button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light print_btn" onclick="window.print()">Print this page</button>
                                 </div>
 
 
 
                             </div>
                         @else
-                              <form action="{{route('ug_student_app_final', [$id])}}" method="POST">
+                            <form action="{{ route('ug_student_app_final', [$id]) }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12 text-center mt-4">
@@ -347,4 +348,12 @@
 
         });
     </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            $("prt").click(function() {
+                alert(1);
+            });
+        });
+    </script> --}}
 @endsection

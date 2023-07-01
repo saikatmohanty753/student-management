@@ -6,6 +6,7 @@ use App\Models\College;
 use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\StudentDetails;
+use App\Models\StudentApplication;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -24,7 +25,6 @@ class UucStudentController extends Controller
         return view('uuc-student.index', compact('department', 'course', 'college'));
     }
 
-
     public function uucStudent(Request $request)
     {
         if ($request->ajax()) {
@@ -37,7 +37,7 @@ class UucStudentController extends Controller
             return Datatables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('view', function ($row) {
-                    $btn = '<a href="'.route('uuc-students.show', [$row->id]).'" id="' . $row->id . '" class="edit btn btn-info btn-sm">View</a>';
+                    $btn = '<a href="' . route('uuc-students.show', [$row->id]) . '" id="' . $row->id . '" class="edit btn btn-info btn-sm">View</a>';
                     return $btn;
                 })
                 ->filter(function ($instance) use ($request) {
@@ -124,5 +124,31 @@ class UucStudentController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function view($id)
+    {
+
+        // return $id;
+        // $std_app = StudentApplication::find($id);
+        //   $studentdetails=StudentDetails::find($id);
+        $studentdetails = StudentDetails::select('sd.*', 'colleges.name as std_clg_name', 'course_fors.course_for as departmentname', 'courses.name as coursename', 'student_addresses.*', 'student_education_details.*', 'student_education_details.qualification as qualification', 'student_documents.*', 'prsdis.district_name as present_dis', 'perdis.district_name as per_district')
+            ->where('sd.id', $id)
+            ->from('student_details as sd')
+            ->leftJoin('colleges', 'sd.clg_id', '=', 'colleges.id')
+            ->leftJoin('course_fors', 'sd.department_id', '=', 'course_fors.id')
+            ->leftJoin('courses', 'sd.course_id', '=', 'courses.id')
+            ->leftJoin('student_addresses', 'sd.id', '=', 'student_addresses.student_id')
+            ->leftJoin('student_education_details', 'sd.id', '=', 'student_education_details.student_id')
+            ->leftJoin('student_documents', 'sd.id', '=', 'student_documents.student_id')
+            ->leftJoin('district as prsdis', 'student_addresses.present_district_id', '=', 'prsdis.id')
+            ->leftJoin('district as perdis', 'student_addresses.permanent_district_id', '=', 'perdis.id')
+            ->first();
+
+        $qualification_details = json_decode($studentdetails->qualification);
+        // do something with $qualification_details
+
+        // $qualification_details = json_decode($studentdetails->qualification);
+
+        return view('uuc-student.uuc_student_view', compact('studentdetails', 'qualification_details'));
     }
 }

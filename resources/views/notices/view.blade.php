@@ -11,9 +11,9 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        
+
                         <div
-                            class="panel-content d-flex py-2 mt-2 border-faded border-left-0 border-right-0 text-muted bg-success-500">
+                            class="panel-content d-flex py-2 mt-2 border-faded border-left-0 border-right-0 text-muted bg-primary-500">
                             <h6 class="text-light">
                                 Notice Details
                             </h6>
@@ -34,10 +34,10 @@
                                                         Department <strong>: {{$data->course}}</strong>
                                                     </td>
                                                     {{-- <td>
-                                                        Course<strong> : {{$data->couse_name}} </strong> 
+                                                        Course<strong> : {{$data->couse_name}} </strong>
                                                     </td> --}}
                                                     <td>
-                                                        Start date<strong> : 
+                                                        Start date<strong> :
                                                             {{ Carbon\Carbon::parse($data->start_date)->format('d-m-Y') }}</strong>
                                                     </td>
                                                 </tr>
@@ -55,8 +55,8 @@
                                         <div
                                         class="panel-content border-faded border-top-0 border-left-0 border-right-0 border-bottom-0 d-flex flex-row justify-content-center">
                                         <a href="{{ url('notices/') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
-            
-            
+
+
                                     </div>
                                     </div>
                                 </div>
@@ -66,6 +66,5 @@
                 </div>
             </div>
         </div>
-        
+
     @endsection
-  

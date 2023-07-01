@@ -157,16 +157,13 @@ class PermissionTableSeeder extends Seeder
             'course-structure-create',
             'course-structure-edit',
             'course-structure-delete',
-            
+
             'student-details-module',
             'student-details-list',
             'student-details-create',
             'student-details-edit',
             'student-details-delete',
             
-
-
-
         ];
         foreach ($permissions as $permission) {
             // $permission = Permission::create(['guard_name' => 'admin', 'name' => $permission]);

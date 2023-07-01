@@ -91,7 +91,7 @@
                             <div class="row mb-2">
                                 <div class="col-md-12">
                                     <div class="form-group input-cont start_date">
-                                        <label class="form-label">Start date<span class="text-danger">*</span></label>
+                                        <label class="form-label">Start Date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank fromDate"
                                             placeholder="Enter Start Date" name="start_date" id="start_date">
                                         <span class="error-msg"></span>
@@ -101,7 +101,7 @@
                             <div class="row mb-2">
                                 <div class="col-md-12">
                                     <div class="form-group input-cont end_date ">
-                                        <label class="form-label">Expiry date<span class="text-danger">*</span></label>
+                                        <label class="form-label">Expiry Date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank toDate"
                                             placeholder="Enter End Date" name="exp_date" id="exp_date">
                                         <span class="error-msg"></span>

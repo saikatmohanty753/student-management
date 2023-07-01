@@ -27,6 +27,12 @@
     <link rel="stylesheet" media="screen, print" href="{{ asset('backend/css/notifications/toastr/toastr.css') }}">
     @livewireStyles
 
+    <style>
+        .notification {
+	height: 317px !important;
+}
+    </style>
+
 </head>
 
 <body class="mod-bg-1 ">

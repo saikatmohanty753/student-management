@@ -8,7 +8,7 @@
                         Filter <span class="fw-300"><i>Course Details</i></span>
 
                     </h2>
-                    <select name="" id="session" class="float-right">
+                    <select name="session" id="session" class="float-right">
                         @for ($i = date('Y') - 4; $i <= date('Y') + 1; $i++)
                             <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}
                             </option>
@@ -25,7 +25,8 @@
                                     <label class="form-label" for="single-placeholder">
                                         Department
                                     </label>
-                                    <select name="" id="dep" class="form-control select2 get-course">
+
+                                    <select name="dep" id="dep" class="form-control select2 get-course">
                                         <option value="">Choose Department</option>
                                         @foreach ($department as $item)
                                             <option value="{{ $item->id }}" data-id="{{ $item->semester }}">
@@ -39,7 +40,7 @@
                                     <label class="form-label" for="single-placeholder">
                                         Course
                                     </label>
-                                    <select name="" id="course" class="form-control select2">
+                                    <select name="course" id="course" class="form-control select2">
                                         <option value="">Choose Course</option>
                                         @foreach ($course as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -67,7 +68,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="text-fade table table-bordered display no-footer dt-table">
+                        <table class="text-fade table table-bordered display no-footer data-table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -81,34 +82,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($application as $key => $item)
-                                @php
-                                    $std = json_decode($item->personal_information);
 
-                                @endphp
-                                    <tr>
-                                        <td>{{ ++$key }}</td>
-                                        <td>{{ $item->department->course_for }}</td>
-                                        <td>{{ $item->course->name }}</td>
-                                        <td>{{ $std ? $std->name : '' }}</td>
-                                        <td>{{ $std ? $std->gender : '' }}</td>
-                                        <td>{{ $std ? $std->mobile : '' }}</td>
-                                        <td>
-                                            <span class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
-                                        </td>
-                                        <td>
-                                            @if ($item->status != 4)
-                                                <a href="{{ url('student-admission/applied-application/' . $item->id) }}"
-                                                    class="btn  waves-effect waves-themed btn-outline-primary">
-                                                    <i class="fa-solid fa-eye"></i></a>
-                                            @else
-                                                <a href="{{ url('student-admission/edit/' . $item->id) }}"
-                                                    class="btn  waves-effect waves-themed btn-outline-primary">
-                                                    <i class="fa-solid fa-eye"></i></a>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -116,4 +90,90 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        $(function() {
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('studentadmissionList') }}',
+                    data: function(d) {
+                        d.dep = $('#dep').val();
+                        d.course = $('#course').val();
+                        d.session = $('#session').val();
+                    }
+                },
+
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'course_for',
+                        name: 'course_for'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'personal_information.name',
+                        name: 'personal_information.name',
+                        render: function(data) {
+                            return data ? data : '-'; // Show '-' if name is null/empty
+                        }
+                    },
+                    {
+                        data: 'personal_information.gender',
+                        name: 'personal_information.gender',
+                        render: function(data) {
+                            return data ? data : '-'; // Show '-' if gender is null/empty
+                        }
+                    },
+                    {
+                        data: 'personal_information.mobile',
+                        name: 'personal_information.mobile',
+                        render: function(data) {
+                            return data ? data : '-'; // Show '-' if mobile is null/empty
+                        }
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                       
+                    },  
+                    {
+                            data: null,
+                            render: function(data, type, row) {
+
+
+                                return '<a href="{{ url('student-admission/applied-application/') }}/' + data.id +
+                                    '" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</a>';
+
+
+
+
+
+                            }
+
+                        }
+                    
+                ]
+
+
+            });
+
+            $('#session').change(function() {
+                table.draw();
+            });
+            $('#dep').change(function() {
+                table.draw();
+            });
+            $('#course').change(function() {
+                table.draw();
+            });
+        });
+    </script>
 @endsection

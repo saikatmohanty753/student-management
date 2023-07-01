@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'ASC')->whereIn('role_id', [9, 10, 11, 12, 16, 17])->get();
+        $data = User::orderBy('id', 'ASC')->whereIn('role_id', [9, 10, 11, 12, 16, 17,22])->get();
         return view('users.index', compact('data'));
         // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -47,7 +47,7 @@ class UserController extends Controller
     public function create()
 
     {
-        $ids = [10, 16, 18];
+        $ids = [10, 16, 18,22];
         $roles = Role::whereIn('id', $ids)->get();
 
         return view('users.create', compact('roles'));
@@ -136,7 +136,7 @@ class UserController extends Controller
     {
 
         $user = User::find($id);
-        $ids = [10, 16, 18];
+        $ids = [10,16,18,22];
         $roles = Role::whereIn('id', $ids)->get();
 
         return view('users.edit', compact('user', 'roles'));

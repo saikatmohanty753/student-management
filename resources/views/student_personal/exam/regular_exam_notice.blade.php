@@ -31,36 +31,67 @@
                                 <table class="table table-bordered table-hover table-striped w-100 dataTable dtr-inline">
                                     <thead>
                                         <tr>
-                                            <th>sl no</th>
-                                            <th>notice type</th>
-                                            <th>notice details</th>
-                                            <th>End date</th>
-                                            <th>action</th>
+                                            <th>Sl No</th>
+                                            <th>Notice Type</th>
+                                            <th>Notice Details</th>
+                                            <th>End Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($stu_details as $key => $item)
+                                        @php
+                                            //dd($item['notice_id']);
+                                            //dd($item);
+                                        @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
                                                 <td>{{ $item['notice_name'] }}</td>
                                                 <td>{{ $item['details'] }}</td>
                                                 <td>{{ Carbon\Carbon::parse($item['end_date'])->format('d-m-Y') }}</td>
                                                 <td>
-                                                    @if ($ug_app == '')
+                                                    {{-- @if ($ug_app == '')
                                                     <a href="{{ route('student_apply', [$stu_id]) }}">Apply
                                                         Student</a>
                                                     @else
-                                                        @if ($ug_app->form_status == 1)
+                                                        @if (($ug_app->form_status == 1) && ($ug_app->notice_id != ''))
                                                             <a href="{{ route('student_app_preview', [$stu_id]) }}">complete
                                                                 form</a>
-                                                        @elseif($ug_app->form_status == 2)
-                                                            already applied
+                                                        @elseif(($ug_app->form_status == 2) && ($ug_app->notice_id != ''))
+                                                       
+                                                           
+                                                            <a href="{{ route('ug_final_preview', [$stu_id]) }}">View Form</a>
                                                         @else
                                                             <a href="{{ route('student_apply', [$stu_id]) }}">Apply
                                                                 Student</a>
                                                         @endif
-                                                    @endif
-
+                                                    @endif --}}
+                                                
+                                                {{-- @php
+                                                    dd($value)
+                                                @endphp --}}
+                                                
+                                                
+                                                @if ($item['notice_present_ug_app'] == 0)
+                                                <a href="{{ route('student_apply', $item['notice_id']) }}">Apply
+                                                    Student</a>
+                                                @else
+                                               
+                                                        @if (($item['form_status'] == 1))
+                                                            <a href="{{ route('student_app_preview', $item['app_id'])}}">complete
+                                                                form</a>
+                                                        @else
+                                                       
+                                                        
+                                                            <a href="{{ route('ug_final_preview', $item['app_id']) }}">View Form</a>
+                                                       
+                                                        @endif
+                                                   
+                                                {{-- <a href="{{ route('ug_final_preview', [$stu_id]) }}">View Form</a> --}}
+                                                @endif
+                                                
+                                                
+                                                
 
                                                 </td>
                                             </tr>

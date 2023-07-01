@@ -20,7 +20,7 @@
                                 $url = url('uuc-admission/' . $data->id . '/' . str_slug($data->course) . '/' . $data->department_id);
                             @endphp
                             <h6 class="mt-2">{{ $data->details }}</h6> <a href="{{ $url }}" target="_blank">Click
-                                hear for admission</a>
+                                here for admission</a>
                         </div>
                     </div>
                 </div>

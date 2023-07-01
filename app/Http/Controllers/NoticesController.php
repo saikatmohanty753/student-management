@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\Notice;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class NoticesController extends Controller
@@ -26,10 +27,11 @@ class NoticesController extends Controller
     }
     public function index()
     {
-        $notice = Notice::where([['notice_sub_type', '1'], ['notice_type', 1]])->get();
-        $clgNotice = Notice::where([['notice_sub_type', '2'], ['notice_type', 1]])->get();
-         $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->get();
-        $eventNotice = Notice::where([['notice_sub_type', '4'], ['notice_type', 1]])->get();
+       
+        $notice = Notice::where([['notice_sub_type', '1'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
+        $clgNotice = Notice::where([['notice_sub_type', '2'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
+        $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
+        $eventNotice = Notice::where([['notice_sub_type', '4'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
         return view('notices.notices', compact('notice', 'clgNotice', 'studentNotice', 'eventNotice'));
     }
 
@@ -110,8 +112,12 @@ class NoticesController extends Controller
     {
         $course = Course::all();
         $dept = CourseFor::all();
-        $notice=Notice::find($id);
-        return view('notices.edit', compact('course', 'dept','notice'));
+        $notice = Notice::find($id);
+        if ($notice->is_verified == 0) {
+            return view('notices.edit', compact('course', 'dept', 'notice'));
+        } else {
+            return redirect()->action([NoticesController::class, 'index'])->with('error', 'Notice can not be modified.');
+        }
     }
 
     /**
@@ -121,9 +127,10 @@ class NoticesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         //  return $request->notice_type;
+
         $startDate = Carbon::parse($request->start_date);
         $startDate->hour   = 00;
         $startDate->minute = 00;
@@ -146,18 +153,20 @@ class NoticesController extends Controller
         $notice->details = $request->details;
         $notice->payment_last_date = $request->fee_payment != '' ? $fee_payment : '';
         $notice->session = Carbon::parse($request->exp_date)->format('Y');
-        $notice->save();
-
-        return redirect()->action([NoticesController::class, 'index'])->with('success', 'Notice Updated Successfully');
-
+        if ($notice->is_verified == 0) {
+            $notice->save();
+            return redirect()->action([NoticesController::class, 'index'])->with('success', 'Notice Updated Successfully');
+        } else {
+            return redirect()->action([NoticesController::class, 'index'])->with('error', 'Notice can not be modified.');
+        }
     }
 
     public function status(Request $request)
     {
-       
-        
+
+
         $status = Notice::find($request->id);
-        $status->is_verified=$request->verified;
+        $status->is_verified = $request->verified;
         $status->save();
         return redirect()->back();
     }
@@ -175,18 +184,15 @@ class NoticesController extends Controller
      */
     public function destroy($id)
     {
+      
         $count = Notice::where([['id', $id], ['status', 0]])->count();
         if ($count == 1) {
             Notice::find($id)->delete();
             return redirect()->route('notices.index')
-            ->with('success', 'Notice deleted successfully');
-        }else{
+                ->with('success', 'Notice deleted successfully');
+        } else {
             return redirect()->route('notices.index')
-            ->with('error', 'Notice can not be deleted..');
+                ->with('error', 'Notice can not be deleted..');
         }
-
     }
-
-
-
 }

@@ -9,17 +9,17 @@ use App\Models\PgExaminationApplication;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
-
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
     public function payment_page($id)
     {
+    
+        $stud_id = Auth::user()->student_id;
         
 
-        
-
-        $student = StudentDetails::find($id);
+        $student = StudentDetails::find($stud_id);
 
 
         
@@ -33,7 +33,7 @@ class PaymentController extends Controller
         //$ug_app = UgExaminationApplication::where('stu_id',$id)->first('id');
 
         DB::table('ug_examination_applications')
-              ->where('stu_id', $id)
+              ->where('id', $id)
               ->update(['payment_status' => 1]);
 
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -42,7 +42,7 @@ class PaymentController extends Controller
         $rand_chars = 'PAY'.$rand_chars;
         $paymentstatus = "success";
         $date = Carbon::now()->format('Y-m-d');
-        $ug_app = UgExaminationApplication::where('stu_id',$id)->first(['id']);
+        $ug_app = UgExaminationApplication::where('id',$id)->first(['id']);
 
         $app_id = $ug_app->id;
         $payment = new TransactionHistory();
@@ -65,25 +65,26 @@ class PaymentController extends Controller
     public function pg_payment_page($id)
     {
         
+        
+        $stud_id = Auth::user()->student_id;
+
+        $student = StudentDetails::find($stud_id);
+
 
         
-
-        $student = StudentDetails::find($id);
-
-
         
-        
-       return view('payment.pgpayment',compact('student','id'));
+       return view('payment.pgpayment',compact('student','stud_id','id'));
     }
 
     public function pg_payment_post($id)
     {
-       
+      // return $id;
         //$ug_app = UgExaminationApplication::where('stu_id',$id)->first('id');
 
         DB::table('pg_examination_applications')
-              ->where('stu_id', $id)
+              ->where('id', $id)
               ->update(['payment_status' => 1]);
+              //->update(['payment_status' => 1]);
 
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $length = 22;
@@ -91,7 +92,7 @@ class PaymentController extends Controller
         $rand_chars = 'PAY'.$rand_chars;
         $paymentstatus = "success";
         $date = Carbon::now()->format('Y-m-d');
-        $pg_app = PgExaminationApplication::where('stu_id',$id)->first(['id']);
+        $pg_app = PgExaminationApplication::where('id',$id)->first(['id']);
 
         $app_id = $pg_app->id;
         $payment = new TransactionHistory();

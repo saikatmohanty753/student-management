@@ -59,8 +59,9 @@ class RoleController extends Controller
     public function index(Request $request)
 
     {
+        
 
-        $roles = Role::whereIn('id', [3, 9, 10, 11, 14, 18])->orderBy('id', 'ASC')->get();
+        $roles = Role::whereIn('id', [3, 9, 10, 11, 14, 18,22])->orderBy('id', 'ASC')->get();
 
         return view('roles.index', compact('roles'))
 

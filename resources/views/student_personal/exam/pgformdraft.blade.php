@@ -311,7 +311,7 @@ dd($student_details);
                             </div>
                         </div>
 
-                        <form action="{{ route('pgexamupdate', ['id' => $stu_id]) }}" id="form_dd" method="post">
+                        <form action="{{ route('pgexamupdate', [$stu_id]) }}" id="form_dd" method="post">
                             @csrf
                             <div class="border rounded p-2 mb-4">
                                 <h4>Examination Form Fill up</h4>
@@ -1048,12 +1048,12 @@ dd($student_details);
                                             <p>I submit the above particulars for consideration by the University
                                                 authorities to -admit me for the above examination.</p>
                                         </li> --}}
-                                        <li class="list-group">
+                                        {{-- <li class="list-group">
                                             <p>I hereby undertake to abide by the decision of the University in regard to my
                                                 result in case it is found later that my admission is irregular.I,further
                                                 agree that the Orissa Examination Act-2 of 1988 is applicable to me for this
                                                 examination and I will use blue pen in all my answer scripts.</p>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </div>
 

@@ -78,7 +78,7 @@
 
                         </div>
 
-                        
+
                         <div class="border rounded p-2 mb-4">
                             <h4>Student Details</h4>
 
@@ -87,8 +87,8 @@
                                 <thead>
                                     <tr>
                                         <th>Student Name</th>
-                                                <th>College Name</th>
-                                                <th>Batch_Year</th>
+                                        <th>College Name</th>
+                                        <th>Batch_Year</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -117,11 +117,11 @@
                                 <thead>
                                     <tr>
                                         <th>Roll No</th>
-                                                <th>Month</th>
-                                                <th>Year</th>
+                                        <th>Month</th>
+                                        <th>Year</th>
                                     </tr>
                                 </thead>
-                                
+
                                 <tbody>
                                     <tr>
                                         <td>
@@ -158,8 +158,8 @@
                                 <thead>
                                     <tr>
                                         <th>Roll No</th>
-                                                <th>Month</th>
-                                                <th>Year</th>
+                                        <th>Month</th>
+                                        <th>Year</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -220,19 +220,19 @@
                                 <tbody>
                                     <tr>
                                         @foreach ($pgstdsub as $key => $value)
-                                        <tr>
+                                    <tr>
 
-                                            <td>{{ $value->pg_id }}</td>
-                                            <td>{{ $value->subject_name }}</td>
-                                            <td>{{ $value->paper_name }}</td>
-                                            <td>{{ $value->paper_value }}</td>
-                                            <td>{{ $value->special_paper }}</td>
-                                            <td>{{ $value->special_paper_value }}</td>
+                                        <td>{{ $value->pg_id }}</td>
+                                        <td>{{ $value->subject_name }}</td>
+                                        <td>{{ $value->paper_name }}</td>
+                                        <td>{{ $value->paper_value }}</td>
+                                        <td>{{ $value->special_paper }}</td>
+                                        <td>{{ $value->special_paper_value }}</td>
 
 
 
-                                        </tr>
-                                        @endforeach
+                                    </tr>
+                                    @endforeach
                                     </tr>
                                 </tbody>
                             </table>
@@ -240,9 +240,9 @@
                         </div>
 
 
-                      
 
-                        
+
+
 
                         <hr>
 
@@ -370,7 +370,8 @@
             let provision_fee = parseInt($('.provision_fee').text());
             let late_fee = parseInt($('.late_fee').text());
 
-            let fee_total = exam_fee + app_fee + centre_fee + mark_fee + rereg_fee+paper_fee+provision_fee+late_fee;
+            let fee_total = exam_fee + app_fee + centre_fee + mark_fee + rereg_fee + paper_fee + provision_fee +
+                late_fee;
             //alert(fee_total);
             $('.fee_total b').text(fee_total);
             $('#pay_amt').val(fee_total);

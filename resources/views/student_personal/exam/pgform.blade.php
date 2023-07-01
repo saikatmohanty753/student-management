@@ -119,9 +119,7 @@
                                         <div class="form-group input-cont">
                                             <label class="form-label">Permanenet Address <span
                                                     class="text-danger">*</span></label>
-                                            <textarea name="" id="" class="form-control" rows="2">
-                                                {{ $permanent_address }}
-                                            </textarea>
+                                            <textarea name="" id="" class="form-control" rows="2">{{ $permanent_address }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +215,7 @@
                                             <label class="form-label">DOB (As per HSC Certificate) <span
                                                     class="text-danger">*</span></label>
                                             <input name="dob" type="text" id="dob"
-                                                class="form-control chk_blank chk_date">
+                                                class="form-control chk_blank chk_date" value="{{ $student_details->dob }}">
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +290,7 @@
                                             <label class="form-label">DOB (As per HSC Certificate) <span
                                                     class="text-danger">*</span></label>
                                             <input name="dob" type="text" id="dob"
-                                                class="form-control chk_blank chk_date">
+                                                class="form-control chk_blank chk_date" value="{{ $student_details->dob }}">
                                         </div>
                                     </div>
                                 </div>
@@ -857,10 +855,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="list-group">
-                                        {{-- <li class="list-group">
-                                            <p>I submit the above particulars for consideration by the University
+                                        <li class="list-group">
+                                            <p><input type="checkbox" required style="margin-right: 10px;"> submit the above particulars for consideration by the University
                                                 authorities to -admit me for the above examination.</p>
-                                        </li> --}}
+                                        </li>
                                         <li class="list-group">
                                             <p>I hereby undertake to abide by the decision of the University in regard to my
                                                 result in case it is found later that my admission is irregular.I,further
@@ -872,6 +870,7 @@
 
 
                                 <div class="col-md-12 text-center mt-4">
+                                    <input type="hidden" name="notice_id" value="{{$notice_id}}">
                                     <button type="submit"
                                         class="btn btn-success me-1 waves-effect waves-float waves-light">Save as Draft</button>
                                 </div>

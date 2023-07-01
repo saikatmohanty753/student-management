@@ -53,7 +53,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
-                                            <label class="form-label">Mother's name <span
+                                            <label class="form-label">Mother's Name <span
                                                     class="text-danger">*</span></label>
                                             <input name="mother_name" value="{{$student_details->mother_name}}" type="text" class="form-control chk_blank"
                                                 id="mother_name">
@@ -123,9 +123,7 @@
                                         @endphp
                                         <div class="form-group input-cont">
                                             <label class="form-label">Address <span class="text-danger">*</span></label>
-                                            <textarea name="" id="" class="form-control" rows="2">
-                                                {{$permanent_address}}
-                                            </textarea>
+                                            <textarea name="" id="" class="form-control" rows="2">{{$permanent_address}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -133,12 +131,7 @@
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label">Local Address <span class="text-danger">*</span></label>
-                                            <textarea name="" id="" class="form-control" rows="2">
-                                                @if ($student_address)
-                                                {{$student_address->present_address}},{{$student_address->presentDistrict->district_name}},{{$student_address->present_pin_code}},{{$student_address->present_state}}
-                                                @endif
-                                                
-                                            </textarea>
+                                            <textarea name="" id="" class="form-control" rows="2">@if($student_address){{$student_address->present_address}},{{$student_address->presentDistrict->district_name}},{{$student_address->present_pin_code}},{{$student_address->present_state}}@endif</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -214,7 +207,7 @@
                                         <div class="form-group input-cont">
                                             <label class="form-label">DOB (As per HSC Certificate) <span class="text-danger">*</span></label>
                                             <input name="dob" type="text" id="dob"
-                                                class="form-control chk_blank chk_date">
+                                                class="form-control chk_blank chk_date" value="{{$student_details->dob}}">
                                         </div>
                                     </div>
                                 </div>
@@ -286,7 +279,7 @@
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label">DOB (As per HSC Certificate) <span class="text-danger">*</span></label>
-                                            <input name="dob" type="text" id="dob" class="form-control chk_blank chk_date">
+                                            <input name="dob" type="text" id="dob" class="form-control chk_blank chk_date" value="{{$student_details->dob}}">
                                         </div>
                                     </div>
                                 </div>
@@ -555,7 +548,7 @@
                             <div class="col-md-12">
                                 <ul class="list-group">
                                     <li class="list-group">
-                                        <p>I submit the above particulars for consideration by the University authorities to -admit me for the above examination.</p>
+                                        <p><input type="checkbox" required style="margin-right: 10px "> submit the above particulars for consideration by the University authorities to -admit me for the above examination.</p>
                                     </li>
                                     <li class="list-group">
                                         <p>I shall not indulge in any undesirable activities which will affect the prestige of my Institution of
@@ -566,6 +559,7 @@
                             </div>
 
                             <div class="col-md-12 text-center mt-4">
+                                <input type="hidden" name="notice_id" value="{{$notice_id}}">
                                 <button type="submit" class="btn btn-success me-1 waves-effect waves-float waves-light">Save As Draft</button>
                             </div>
 
