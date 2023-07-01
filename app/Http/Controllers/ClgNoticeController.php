@@ -22,10 +22,10 @@ class ClgNoticeController extends Controller
         $notification =  Auth::user()->Notifications;
         $noticeIds = [];
         foreach ($notification as $key => $value) {
-            if ($value['data']['notice_type_id'] == 1) {
-                if ($value['data']['notice_sub_type_id'] == 2 || $value['data']['notice_sub_type_id'] == 4 ||$value['data']['notice_sub_type_id'] == 3) {
+            if ($value->data['notice_type_id'] == 1) {
+                if (in_array($value->data['notice_sub_type_id'],[2,4,3,1])) {
                     $noticeIds[] = [
-                        'notice_id' => $value['data']['notice_id'],
+                        'notice_id' => $value->data['notice_id'],
                         'notification_id' => $value->id
                     ];
                 }
