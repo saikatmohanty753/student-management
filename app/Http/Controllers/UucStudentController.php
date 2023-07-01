@@ -8,7 +8,7 @@ use App\Models\CourseFor;
 use App\Models\StudentDetails;
 use App\Models\StudentApplication;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
+use DataTables;
 
 class UucStudentController extends Controller
 {
@@ -33,7 +33,8 @@ class UucStudentController extends Controller
                 ->join('course_fors as cf', 'sd.department_id', 'cf.id')
                 ->join('courses', 'sd.course_id', 'courses.id')
                 ->join('colleges', 'sd.clg_id', 'colleges.id');
-            // ->get();
+
+               // ->get();
             return Datatables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('view', function ($row) {
