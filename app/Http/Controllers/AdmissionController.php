@@ -113,6 +113,17 @@ class AdmissionController extends Controller
         * New Validation code added by Saikat
         * 03-07-2023
         **************************************/
+        $student_check = DB::table('student_applications')->where('email',$request->email)->where('status',3);
+
+        if($student_check->exists())
+        {
+            $student_check = $student_check->first();
+            if($this->getDiffYear($student_check->admission_date,date('Y-m-d')) < 1 && $request->course == $student_check->course_id)
+            {
+                return redirect()->back()->with('error','This student addmission form has been rejected for applied course on '.date('d-m-Y',strtotime($student_check->admission_date)));
+            }
+        }
+
         $users_exists = DB::table('users')->where('is_active',1)->where('email',$request->email);
         if($users_exists->exists())
         {
@@ -146,6 +157,8 @@ class AdmissionController extends Controller
         $student->department_id = $course->course_for;
         $student->course_id = $request->course;
         $student->app_status = 1;
+        $student->email = $request->email;
+
         $student_details = [
             'name' => $request->name,
             'email' => $request->email,
@@ -299,6 +312,15 @@ class AdmissionController extends Controller
         }
         return $batch_arr;
     }
+
+    public function getDiffYear($start,$end)
+    {
+        $diff = abs(strtotime($end)-strtotime($start));
+        $years = floor($diff / (365*60*60*24));
+        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+        return $years;
+    }
     /**
      * Display the specified resource.
      *
@@ -364,7 +386,44 @@ class AdmissionController extends Controller
         if ($this->checkSeatAvl($clgId, $request->course) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
         }
+        /**************************************
+        * New Validation code added by Saikat
+        * 03-07-2023
+        **************************************/
+        $student_check = DB::table('student_applications')->where('email',$request->email)->where('status',3);
 
+        if($student_check->exists())
+        {
+            $student_check = $student_check->first();
+            if($this->getDiffYear($student_check->admission_date,date('Y-m-d')) < 1 && $request->course == $student_check->course_id)
+            {
+                return redirect()->back()->with('error','This student addmission form has been rejected for applied course on '.date('d-m-Y',strtotime($student_check->admission_date)));
+            }
+        }
+
+        $users_exists = DB::table('users')->where('is_active',1)->where('email',$request->email);
+        if($users_exists->exists())
+        {
+            $users_exists = $users_exists->first();
+            $student_details = DB::table('student_details')->where('id',$users_exists->student_id);
+            if($student_details->exists())
+            {
+                $student_details = $student_details->first();
+                $arr_batch = $this->getBatch($student_details->batch_year);
+                if($arr_batch['to'] < date('Y'))
+                {
+                    return redirect()->back()->with('error','Enrolled in the applied course in not ended');
+                }
+                if($student_details->course_id == $request->course)
+                {
+                    return redirect()->back()->with('error','Already enrolled in the applied course');
+                }
+            }
+            return redirect()->back()->with('error','Email id already exists');
+        }
+        /* **********************************
+        * Ends here
+        *************************************/
         $id = $request->hid;
         $course = Course::find($request->course);
         $student = StudentApplication::find($id);
@@ -375,6 +434,7 @@ class AdmissionController extends Controller
         $student->department_id = $course->course_for;
         $student->course_id = $request->course;
         $student->app_status = 1;
+        $student->email = $request->email;
 
         $student_details = [
             'name' => $request->name,
@@ -757,6 +817,7 @@ class AdmissionController extends Controller
             $doc->migration_cert = $documents->migration_cert;
             $doc->save();
         } else {
+
             $student_app = StudentApplication::where('id', $request->id)->first();
             $student_app->remarks = $request->remarks;
             $student_app->status = $request->status;
