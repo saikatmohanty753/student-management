@@ -105,7 +105,6 @@
                         d.session = $('#session').val();
                     }
                 },
-
                 columns: [{
                         data: 'id',
                         name: 'id'
@@ -142,24 +141,18 @@
                     {
                         data: 'status',
                         name: 'status',
-                       
-                    },  
+
+                    },
                     {
                             data: null,
                             render: function(data, type, row) {
-
-
                                 return '<a href="{{ url('student-admission/applied-application/') }}/' + data.id +
                                     '" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</a>';
-
-
-
-
 
                             }
 
                         }
-                    
+
                 ]
 
 

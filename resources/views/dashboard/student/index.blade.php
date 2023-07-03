@@ -19,7 +19,7 @@
                                         <label for="imageUpload"></label>
                                     </div>
                                     <div class="avatar-preview">
-                                        @if ($student->profile_picture == '')
+                                        @if (empty($student->profile_picture))
                                             <div id="imagePreview"
                                                 style="background-image: url('{{ asset('backend/img/profile.png') }}');">
                                             </div>
@@ -277,7 +277,6 @@
                     });
                 }
             });
-
         });
     </script>
 @endsection

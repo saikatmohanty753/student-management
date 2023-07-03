@@ -104,11 +104,39 @@ class AdmissionController extends Controller
      */
     public function store(Request $request)
     {
-
+        //dump($request->all());
         $clgId = Auth::user()->clg_user_id;
         if ($this->checkSeatAvl($clgId, $request->course) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
         }
+        /**************************************
+        * New Validation code added by Saikat
+        * 03-07-2023
+        **************************************/
+        $users_exists = DB::table('users')->where('is_active',1)->where('email',$request->email);
+        if($users_exists->exists())
+        {
+            $users_exists = $users_exists->first();
+            $student_details = DB::table('student_details')->where('id',$users_exists->student_id);
+            if($student_details->exists())
+            {
+                $student_details = $student_details->first();
+                $arr_batch = $this->getBatch($student_details->batch_year);
+                if($arr_batch['to'] < date('Y'))
+                {
+                    return redirect()->back()->with('error','Enrolled in the applied course in not ended');
+                }
+                if($student_details->course_id == $request->course)
+                {
+                    return redirect()->back()->with('error','Already enrolled in the applied course');
+                }
+            }
+            return redirect()->back()->with('error','Email id already exists');
+        }
+        /* **********************************
+        * Ends here
+        *************************************/
+
         $course = Course::find($request->course);
         $student = new StudentApplication();
         $student->academic_year = date('Y');
@@ -118,7 +146,6 @@ class AdmissionController extends Controller
         $student->department_id = $course->course_for;
         $student->course_id = $request->course;
         $student->app_status = 1;
-
         $student_details = [
             'name' => $request->name,
             'email' => $request->email,
@@ -246,6 +273,7 @@ class AdmissionController extends Controller
                 'percentage' => $request->other_graduate_percentage,
             ],
         ];
+        //dd('ok');
         $student->personal_information = json_encode($student_details);
         $student->present_address = json_encode($present_address);
         $student->permanent_address = json_encode($permanent_address);
@@ -258,6 +286,19 @@ class AdmissionController extends Controller
         return redirect()->action([AdmissionController::class, 'show'], ['id' => $student->id])->with('success', 'Application saved in draft.');
     }
 
+    public function getBatch($batch)
+    {
+        $batch_arr = array('to'=>'','from'=>'');
+        if(!empty($batch))
+        {
+            $arr_batch = explode('-',$batch);
+            $batch_arr = array(
+                'to'=>$arr_batch[1],
+                'from'=>$arr_batch[0],
+            );
+        }
+        return $batch_arr;
+    }
     /**
      * Display the specified resource.
      *
@@ -549,8 +590,8 @@ class AdmissionController extends Controller
             // Decode personal_information field for each row
             foreach ($data as $row) {
                 $row->personal_information = json_decode($row->personal_information);
+                $row->status = $row->applicationStatus();
             }
-
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->make(true);
@@ -758,7 +799,7 @@ class AdmissionController extends Controller
 
     public function admissionDetails(Request $request, $id)
     {
-     
+
         $std_app = StudentApplication::find($id);
         $personal_information = json_decode($std_app->personal_information);
         $present_address = json_decode($std_app->present_address);
