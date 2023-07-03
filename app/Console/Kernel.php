@@ -23,7 +23,6 @@ class Kernel extends ConsoleKernel
         $schedule->call('\App\Http\Controllers\AdmissionController@AdmissionSeat')->yearlyOn(1, 1, '00:00');
         // $schedule->command('inspire')->hourly();
         $schedule->command('publish-notice:cron')->everyMinute();
-        $schedule->command('update:project-data')->everyMinute();
 
     }
 
