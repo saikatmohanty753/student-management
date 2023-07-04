@@ -54,6 +54,10 @@ class StudentApplication extends Model
             return  $this->applicationStatus = "Rejected";
         } elseif ($chk == 4) {
             return  $this->applicationStatus = "Application-Backed";
+        }elseif ($chk == 5) {
+            return  $this->applicationStatus = "Apply";
+        }elseif ($chk == 6) {
+            return  $this->applicationStatus = "Pending for verification";
         } else {
             return '';
         }

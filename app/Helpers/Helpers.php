@@ -46,7 +46,7 @@ class Helpers
     public static function application()
     {
         $ug_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['department_id', 1]])->count();
-        $pg_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['department_id', 2]])->count();
+        $pg_app = StudentApplication::where([['academic_year', date('Y')], ['department_id', 2]])->whereIn('status',[1,5,6])->count();
         $mphil_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['department_id', 3]])->count();
         $cert_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['department_id', 4]])->count();
         $data = [

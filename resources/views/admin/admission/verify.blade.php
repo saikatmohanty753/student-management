@@ -353,14 +353,6 @@
 
                             </div>
                         </div>
-
-
-
-
-
-
-
-
                         <div
                             class="panel-content d-flex py-2 mt-2 border-faded border-left-0 border-right-0 text-muted bg-primary-500">
                             <h6 class="text-light">
@@ -416,6 +408,44 @@
                                 Application Status
                             </h6>
                         </div>
+                        @if($std_app->status == 5)
+                        <div class="panel-tag border-left-0">
+                            <form action="{{ url('university-student-approval') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $std_app->id }}">
+                                <input type="hidden" name="course_id" value="{{ $std_app->course_id }}">
+                                <div class="row">
+                                    <div class="col-sm-12 d-flex">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="">Status</label>
+                                                <select class="form-control" name="status" required>
+                                                    <option value="">Select</option>
+                                                    <option value="6">Approved</option>
+                                                    <option value="3">Rejected</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Remarks</label>
+                                                <textarea name="remarks" class="form-control" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="panel-content border-faded border-top-0 border-left-0 border-right-0 border-bottom-0 d-flex flex-row justify-content-center">
+                                    <a href="{{ url('applied-admission-list') }}" class="btn btn-secondary"
+                                        data-dismiss="modal">Back</a>
+
+                                    <button class="btn btn-outline-success waves-effect waves-themed ml-4"
+                                        type="submit">Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        @else
                         <div class="panel-tag border-left-0">
                             <form action="{{ url('uuc-verify-admission') }}" method="post">
                                 @csrf
@@ -423,21 +453,21 @@
                                 <input type="hidden" name="course_id" value="{{ $std_app->course_id }}">
                                 <div class="row">
                                     <div class="col-sm-12 d-flex">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Remarks</label>
-                                                <textarea name="remarks" class="form-control"></textarea>
-                                            </div>
-                                        </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="">Status</label>
-                                                <select class="form-control" name="status" id="regStatus">
+                                                <select class="form-control" name="status" id="regStatus" required>
                                                     <option value="">Select</option>
                                                     <option value="2">Verified</option>
                                                     <option value="3">Rejected</option>
                                                     <option value="4">Backed</option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Remarks</label>
+                                                <textarea name="remarks" class="form-control" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-3 d-none regIssue">
@@ -464,7 +494,7 @@
                                 </div>
                             </form>
                         </div>
-
+                        @endif
 
                     </div>
                 </div>

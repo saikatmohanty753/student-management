@@ -43,7 +43,7 @@ class AdmissionController extends Controller
             ->groupBy('affiliation_masters.course')
             ->groupBy('affiliation_masters.college_name')
             ->get();
-
+        $arr = array();
         foreach ($course as $key => $value) {
             $crs = Course::where('id', $value->course)->first(['course_for']);
             $chk = DB::table('admission_seats')
@@ -62,6 +62,11 @@ class AdmissionController extends Controller
                     'consumption_seat' => 0,
                     'created_at' => Carbon::now(),
                 ]);
+                $arr = [
+                    $value->college_name,
+                    $value->total_seat_no,
+                    $value->total_seat_no,
+                ];
             }
         }
     }
@@ -632,8 +637,9 @@ class AdmissionController extends Controller
                 ->join('course_fors as dep', 'dep.id', '=', 'student_applications.department_id')
                 ->join('courses as course', 'course.id', '=', 'student_applications.course_id')
                 ->where('clg_id', $clgId)
-                ->where('academic_year', 2023)
-                ->where('student_applications.status', 1);
+                ->where('academic_year', date('Y'))
+                ->where('student_applications.is_university', 1)
+                ->whereIn('student_applications.status', [1,5,6]);
 
             if ($request->get('dep') != '') {
                 $data->where('student_applications.department_id', $request->get('dep'));
@@ -942,14 +948,14 @@ class AdmissionController extends Controller
     public function collegeList($dep)
     {
         $dep_id = $this->depId($dep);
-        $student_app = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['department_id', $dep_id]])->groupBy('clg_id')->get(['clg_id']);
+        $student_app = StudentApplication::where([['academic_year', date('Y')], ['department_id', $dep_id]])->whereIn('status',[1])->groupBy('clg_id')->get(['clg_id']);
         $college = College::where('status', 1)->whereIn('id', $student_app)->get(['id', 'name']);
         return view('admin.admission.colleges', compact('college', 'dep'));
     }
     public function courseList($dep, $clg_id)
     {
         $dep_id = $this->depId($dep);
-        $app_course = StudentApplication::where([['academic_year', date('Y')], ['status', 1], ['clg_id', $clg_id], ['department_id', $dep_id]])->groupBy('course_id')->get(['course_id']);
+        $app_course = StudentApplication::where([['academic_year', date('Y')], ['clg_id', $clg_id], ['department_id', $dep_id]])->whereIn('status',[1])->groupBy('course_id')->get(['course_id']);
         $course = Course::whereIn('id', $app_course)->get(['id', 'name']);
         $clg = College::find($clg_id);
         $clg_name = $clg->name;
@@ -959,8 +965,9 @@ class AdmissionController extends Controller
     public function applyApplication($dep, $clg_id, $course_id)
     {
         $dep_id = $this->depId($dep);
-        $application = StudentApplication::where([['academic_year', date('Y')], ['clg_id', $clg_id], ['department_id', $dep_id], ['course_id', $course_id], ['status', 1]])->get();
-        return view('admin.admission.apply-application', compact('application'));
+        $application = StudentApplication::where([['academic_year', date('Y')], ['clg_id', $clg_id], ['department_id', $dep_id], ['course_id', $course_id]])->whereIn('status',[1])->get();
+
+        return view('admin.admission.apply-application', compact('application','dep_id','course_id','clg_id'));
     }
     public function depId($dep)
     {

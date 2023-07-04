@@ -25,6 +25,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentPersonalController;
+use App\Http\Controllers\UniversityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::get('/', function () {
 });
 Route::get('test-admission', [AdmissionController::class, 'AdmissionSeat']);
 
+
 // Route::get('/student, function () {
 //     return view('colleges.create_user');
 // });
@@ -53,7 +55,13 @@ Route::get('/student', function () {
     return view('studentportal.index');
 });
 
+Route::get('form/{clg_id?}',[UniversityController::class,'index']);
+Route::post('university-student-admission', [UniversityController::class, 'store'])->name('university-student-admission');
+Route::post('university-student-approval', [UniversityController::class, 'verifyStudentAdmission'])->name('university-student-approval');
+Route::post('university-student-final-approval', [UniversityController::class, 'verifyStudentFinalAdmission'])->name('university-student-final-approval');
 
+Route::get('success/{hash}',[UniversityController::class,'success'])->name('uni-success');
+Route::post('getEmailStatus',[UniversityController::class,'getEmailStatus'])->name('getEmailStatus');
 
 Auth::routes();
 
@@ -110,7 +118,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('student-admission/preview/{id}', [AdmissionController::class, 'show']);
     Route::get('student-admission/edit/{id}', [AdmissionController::class, 'edit']);
 
-    Route::get('student-admission/applied-application/{id}', [AdmissionController::class, 'appliedApplication']);
+    Route::get('student-admission/applied-application/{id}', [AdmissionController::class, 'appliedApplication'])->name('applied-dep');
 
     Route::get('uuc-admission', [AdmissionController::class, 'admissionList'])->name('admissionList');
     Route::get('studentadmissionList', [AdmissionController::class, 'studentadmissionList'])->name('studentadmissionList');
