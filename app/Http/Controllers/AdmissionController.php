@@ -941,7 +941,6 @@ class AdmissionController extends Controller
                 $notice[] = $data;
             }
         }
-        // return $notice;
         return view('admission.new-admission', compact('notice'));
     }
 
