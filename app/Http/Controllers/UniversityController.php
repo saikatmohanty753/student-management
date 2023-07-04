@@ -36,7 +36,7 @@ class UniversityController extends Controller
         }
         $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
             ->where('clg_id', $clg_id)
-            ->where('admission_year1', date('Y'))
+            ->where('admission_year', date('Y'))
             ->join('courses', 'admission_seats.course_id', 'courses.id')
             ->where('courses.course_for', 2)
             ->get();
