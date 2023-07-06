@@ -42,7 +42,7 @@ class ProjectCommands extends Command
      */
     public function handle()
     {
-        /* Artisan::call('migrate'); */
+        Artisan::call('migrate');
         Artisan::call('db:seed --class=PermissionTableSeeder');
         $style = new OutputFormatterStyle('green', '', array('bold', 'blink'));
         $this->command->getFormatter()->setStyle('fire', $style);
