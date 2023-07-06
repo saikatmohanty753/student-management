@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'ASC')->whereIn('role_id', [9, 10, 11, 12, 16, 17,22])->get();
+        $data = User::orderBy('id', 'ASC')->whereIn('role_id', [9, 10, 11, 12, 16, 17,22,23])->get();
         return view('users.index', compact('data'));
         // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -47,7 +47,7 @@ class UserController extends Controller
     public function create()
 
     {
-        $ids = [10, 16, 18,22];
+        $ids = [10, 16, 18,22,23];
         $roles = Role::whereIn('id', $ids)->get();
 
         return view('users.create', compact('roles'));
@@ -223,7 +223,7 @@ class UserController extends Controller
 
         //  $clguser = User::where('clg_user_id', $id)->get();
 
-        $roles = Role::whereIn('id', [13, 14])->get();
+        $roles = Role::whereIn('id', [13, 14,23])->get();
         return view('colleges.create_user', compact('roles', 'id', 'data'));
     }
 
@@ -321,21 +321,21 @@ class UserController extends Controller
     //     if (Hash::check($request->old_password, $user->password)) {
 
     //         $user=User::all();
-            
+
     //         $user->password= Hash::make($request->password);
     //         // $user->password_changed_at= Carbon::now();
     //         $user->update();
     //         // session()->forget('sesdata');
     //         // session()->flush();
     //         // auth::logout();
-           
+
     //         return redirect('/dashboard')->with('success', 'Password has been changed...');
     //     }else {
-    
+
     //         return back()->with('password-error', 'Old password does not match...');
     //     }
-           
-            
+
+
     // }
 
     public function changepassword(Request $request)
@@ -343,7 +343,7 @@ class UserController extends Controller
     Validator::make($request->all(), [
                 'old_password' => 'required',
                 'password' => 'required|min:8|confirmed',
-            ], 
+            ],
             /* [
                 'password.required' => 'Use 8 or more characters with a mix of uppercase lowercase letters, numbers & symbols',
                 'password.regex' => 'Use 8 or more characters with a mix of uppercase lowercase letters, numbers & symbols',
@@ -367,7 +367,7 @@ public function profiledetails($id){
        $user = User::where('id',$id)->get();
     //    $role= User::select('rol.*','users.*')
     //      ->leftJoin("roles as rol", "users.role_id", "=", "rol.id")
-        
+
     //     ->get();
 
     return view('users.userdetails',compact('user'));

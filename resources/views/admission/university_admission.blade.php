@@ -1329,6 +1329,22 @@
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <div class="form-group">
+                                            <label class="form-label">Signatue<span class="text-danger">*</span></label>
+                                            <div class="custom-file  input-cont">
+                                                <input type="file"
+                                                    class="custom-file-input form-control chk_blank chk_5mb_file_only"
+                                                    name="signature" id="signature">
+                                                <small
+                                                    class="form-text text-secondary">{{ __('common.file_format') }}</small>
+                                                <label class="custom-file-label">Choose
+                                                    file...</label>
+                                                <span class="error-msg"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
                                             <label class="form-label">Aadhaar Card<span
                                                     class="text-danger">*</span></label>
                                             <div class="custom-file input-cont">

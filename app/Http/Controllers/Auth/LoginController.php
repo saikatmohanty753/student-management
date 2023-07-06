@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use DB;
 
 class LoginController extends Controller
 {
@@ -48,6 +50,9 @@ class LoginController extends Controller
                 'password' => ['required'],
             ]);
         $credentials['is_active'] = 1;
+        /* $users = DB::table('users')->where('email',$request->email)->first();
+        dump(Hash::check($request->password, $users->password),$request->password,$credentials,Auth::attempt($credentials));
+        dd($users); */
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('dashboard');

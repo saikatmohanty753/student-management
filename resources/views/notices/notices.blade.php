@@ -19,8 +19,11 @@
                     <div class="panel-content">
 
                         <ul class="nav nav-tabs nav-tabs-clean" role="tablist">
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-uuc-notice"
+                                        role="tab" aria-selected="false">UUC PG Admission Notices</a></li>
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab-academic-notice"
-                                    role="tab" aria-selected="true">Admission Notices</a></li>
+                                role="tab" aria-selected="true">Admission Notices</a></li>
+
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-college-notices"
                                     role="tab" aria-selected="false">College Notices</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-student-notices"
@@ -30,6 +33,121 @@
 
                         </ul>
                         <div class="tab-content p-3">
+                            <div class="tab-pane fade" id="tab-uuc-notice" role="tabpanel"
+                                aria-labelledby="tab-uuc-notice">
+                                <div class="table-responsive">
+                                    <table
+                                        class="text-fade table table-bordered display no-footer datatable table-responsive-lg dt-table">
+                                        <thead>
+                                            <tr class="text-dark">
+                                                <th style="width: 10%;">Sl. No</th>
+                                                <th>Notice Type</th>
+                                                <th>Department</th>
+                                                {{-- <th>Course</th> --}}
+                                                {{-- <th>Semester</th> --}}
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Details</th>
+                                                <th>Is Verified</th>
+                                                <th>Is Published</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($uucNotice as $key => $item)
+                                                <tr>
+                                                    <td>{{ ++$key }}</td>
+                                                    <td><span class="badge badge-primary">UUC PG Admission Notice</span>
+                                                    </td>
+                                                    <td>{{ $item->department_id != '' ? $item->department->course_for : '' }}
+                                                    </td>
+                                                    {{-- <td>{{ $item->course_id != '' ? $item->course->name : 'N/A' }}</td> --}}
+                                                    {{-- <td>{{ $item->semester != '' ? $item->semester : 'N/A' }}</td> --}}
+                                                    <td>{{ Carbon\Carbon::parse($item->start_date)->format('d-m-Y') }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($item->exp_date)->format('d-m-Y') }}</td>
+                                                    <td>{{ Str::limit($item->details, 40) }}</td>
+                                                    <td>
+                                                        {!! $item->is_verified == 0
+                                                            ? '<span class="badge badge-warning">Not Verified</span>'
+                                                            : '<span class="badge badge-success">Verified</span>' !!}
+                                                    </td>
+                                                    <td class="ispublish">
+                                                        {{-- {{ $item->status == 1 ? 'Published' : 'Not Published' }} --}}
+                                                        @can('notice-edit')
+                                                            @if ($item->is_verified == 1)
+                                                                @if ($item->status == 0)
+                                                                    <div class="custom-control custom-switch">
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input publish"
+                                                                            id="customSwitch{{ $key }}"
+                                                                            {{ $item->status == 1 ? 'checked disabled' : '' }}
+                                                                            data-id="{{ $item->id }}">
+                                                                        <label class="custom-control-label publish"
+                                                                            for="customSwitch{{ $key }}"></label>
+                                                                    </div>
+                                                                @else
+                                                                    {!! $item->noticeStatus() !!}
+                                                                @endif
+                                                            @else
+                                                                {!! $item->noticeStatus() !!}
+                                                            @endif
+                                                        @else
+                                                            {!! $item->noticeStatus() !!}
+                                                        @endcan
+
+                                                    </td>
+                                                    <td><a href="{{ url('notice/view/' . $item->id) }}"
+                                                            class="btn  waves-effect waves-themed btn-outline-primary">
+                                                            <i class="fa-solid fa-eye"></i></a>
+
+                                                        @if (Auth::user()->role_id == 11)
+                                                            @if ($item->is_verified == 0)
+                                                                <a class="btn btn-outline-success verified-status"
+                                                                    href="javascript:void(0);"
+                                                                    data-id="{{ $item->id }}"><i
+                                                                        class="fas fa-check-circle"></i></a>
+                                                            @endif
+                                                        @endif
+
+                                                        @can('notice-edit')
+                                                            @if ($item->is_verified == 0)
+                                                                <a class="btn btn-outline-primary"
+                                                                    href="{{ route('notices.edit', $item->id) }}"><i
+                                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                            @endif
+                                                        @endcan
+
+
+
+
+
+                                                        @if ($item->status == 0)
+                                                            @if ($item->is_verified == 0)
+                                                                @can('notice-delete')
+                                                                    {!! Form::open([
+                                                                        'method' => 'DELETE',
+                                                                        'route' => ['notices.destroy', $item->id],
+                                                                        'style' => 'display:inline',
+                                                                        'id' => 'deleteForm',
+                                                                    ]) !!}
+                                                                    {!! Form::button('<i class="fa fa-trash"></i>', [
+                                                                        'type' => 'submit',
+                                                                        'class' => 'btn btn-outline-danger delNotice',
+                                                                        'id' => 'deleteThis',
+                                                                    ]) !!} {!! Form::close() !!}
+                                                                @endcan
+                                                            @endif
+                                                        @endif
+
+                                                    </td>
+
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <div class="tab-pane fade active show" id="tab-academic-notice" role="tabpanel"
                                 aria-labelledby="tab-academic-notice">
                                 <div class="table-responsive">

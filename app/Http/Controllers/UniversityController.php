@@ -34,6 +34,11 @@ class UniversityController extends Controller
         {
             $clg_id = 85;
         }
+        $notice = Notice::where('notice_sub_type',5)->whereDate('start_date','<=',date('Y-m-d'))->whereDate('exp_date','>=',date('d-m-Y'))->where('is_verified',1);
+        if(!$notice->exists())
+        {
+            return redirect()->route('login')->with('error','Admission is closed');
+        }
         $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
             ->where('clg_id', $clg_id)
             ->where('admission_year', date('Y'))
@@ -149,6 +154,15 @@ class UniversityController extends Controller
             $documents['profile'] = $profile ? $profile : '';
         } else {
             $documents['profile'] = '';
+        }
+        if ($request->file('signature')) {
+            $file = $request->file('signature');
+            $filename = time() . uniqid(rand()) . $file->getClientOriginalName();
+            $file->move(public_path('/student-documents/profile-photo'), $filename);
+            $signature = '/student-documents/profile-photo/' . $filename;
+            $documents['signature'] = $signature ? $signature : '';
+        } else {
+            $documents['signature'] = '';
         }
         if ($request->file('aadhaar_card')) {
             $file = $request->file('aadhaar_card');
@@ -338,7 +352,7 @@ class UniversityController extends Controller
             }
         }
 
-        return redirect()->route('admissionList')->with('success', 'Application examined successfully.');
+        return redirect()->route('pgadmissionList')->with('success', 'Application examined successfully.');
     }
     public function success($hash)
     {
@@ -508,7 +522,7 @@ class UniversityController extends Controller
             $student_app->save();
         }
 
-        return redirect()->route('admissionList')->with('success', 'Application examined successfully.');
+        return redirect()->route('pgadmissionList')->with('success', 'Application examined successfully.');
     }
     public function encrypt($data)
     {
@@ -546,5 +560,87 @@ class UniversityController extends Controller
             });
         }
         return response()->json(['status' => 'success', 'message' => 'Report has been sent successfully.']);
+    }
+
+    public function admissionList(Request $request)
+    {
+        /* $clg_courses = DB::table('admission_seats')
+            ->where('clg_id', Auth::user()->clg_user_id)
+            ->groupBy('course_id')
+            ->pluck('course_id')
+            ->all(); */
+        $clg_courses = DB::table('student_applications')->where('is_university',1)->pluck('course_id')->toArray();
+        $clg_courses = array_unique($clg_courses);
+        $department = CourseFor::where('id',2)->get();
+        $course = Course::whereIn('id', $clg_courses)->get();
+        return view('uuc_admission.list', compact('department', 'course'));
+    }
+    public function appliedApplication($id)
+    {
+        // return $id;
+        $district = District::get();
+        $std_app = StudentApplication::find($id);
+        $personal_information = json_decode($std_app->personal_information);
+        $present_address = json_decode($std_app->present_address);
+        $present_address->district = $std_app->presentDis();
+        $permanent_address = json_decode($std_app->permanent_address);
+        $permanent_address->district = $std_app->presentDis();
+        $prv_clg_info = json_decode($std_app->prv_clg_info);
+        $documents = json_decode($std_app->documents);
+        $qualification_details = json_decode($std_app->qualification_details);
+
+        $clg_courses = DB::table('student_applications')->where('is_university',1)->pluck('clg_id')->toArray();
+        $clg_courses = array_unique($clg_courses);
+
+        $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+            ->whereIn('clg_id', $clg_courses)
+            ->where('admission_year', date('Y'))
+            ->join('courses', 'admission_seats.course_id', 'courses.id')
+            ->where('courses.course_for', 2)
+            ->get();
+
+        $student = StudentDetails::where('id', $id)->first();
+
+        // $district = District::get();
+        // $documents = StudentDocuments::where('id', $id)->first();
+        // $student  = StudentDetails::where('id', $id)->first();
+        // $education = StudentEducationDetails::where('id', $id)->first();
+        // $address = StudentAddress::where('id', $id)->first();
+        return view('uuc_admission.apply_app', compact('std_app', 'present_address', 'personal_information', 'permanent_address', 'course', 'district', 'prv_clg_info', 'qualification_details', 'documents', 'student'));
+    }
+    public function studentadmissionList(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $clgId = Auth::user()->clg_user_id;
+            $data = StudentApplication::select('student_applications.*', 'dep.course_for', 'course.name')
+                ->join('course_fors as dep', 'dep.id', '=', 'student_applications.department_id')
+                ->join('courses as course', 'course.id', '=', 'student_applications.course_id')
+                /* ->where('clg_id', $clgId) */
+                ->where('academic_year', date('Y'))
+                ->where('student_applications.is_university', 1)
+                ->whereIn('student_applications.status', [1,5,6]);
+
+            if ($request->get('dep') != '') {
+                $data->where('student_applications.department_id', $request->get('dep'));
+            }
+            if ($request->get('course') != '') {
+                $data->where('student_applications.course_id', $request->get('course'));
+            }
+            if ($request->get('session') != '') {
+                $data->where('student_applications.academic_year', $request->get('session'));
+            }
+
+            $data = $data->orderBy('id','desc')->get();
+
+            // Decode personal_information field for each row
+            foreach ($data as $row) {
+                $row->personal_information = json_decode($row->personal_information);
+                $row->status = $row->applicationStatus();
+            }
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->make(true);
+        }
     }
 }

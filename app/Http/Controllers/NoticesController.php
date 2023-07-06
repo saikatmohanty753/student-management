@@ -27,12 +27,13 @@ class NoticesController extends Controller
     }
     public function index()
     {
-       
+
         $notice = Notice::where([['notice_sub_type', '1'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
+        $uucNotice = Notice::where([['notice_sub_type', '5'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
         $clgNotice = Notice::where([['notice_sub_type', '2'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
         $studentNotice = Notice::where([['notice_sub_type', '3'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
         $eventNotice = Notice::where([['notice_sub_type', '4'], ['notice_type', 1]])->orderBy('id', 'desc')->get();
-        return view('notices.notices', compact('notice', 'clgNotice', 'studentNotice', 'eventNotice'));
+        return view('notices.notices', compact('notice', 'clgNotice', 'studentNotice', 'eventNotice','uucNotice'));
     }
 
     public function create()
@@ -113,6 +114,7 @@ class NoticesController extends Controller
         $course = Course::all();
         $dept = CourseFor::all();
         $notice = Notice::find($id);
+
         if ($notice->is_verified == 0) {
             return view('notices.edit', compact('course', 'dept', 'notice'));
         } else {
@@ -184,7 +186,7 @@ class NoticesController extends Controller
      */
     public function destroy($id)
     {
-      
+
         $count = Notice::where([['id', $id], ['status', 0]])->count();
         if ($count == 1) {
             Notice::find($id)->delete();

@@ -18,6 +18,7 @@ class DashboardController extends Controller
     {
 
         $chk_role = $this->checkUser(Auth::user()->role_id);
+
         if ($chk_role == 0) {
             Auth::logout();
             return redirect('/login')->with('error', 'The username and password you entered did not match our records');
@@ -35,6 +36,8 @@ class DashboardController extends Controller
             return $this->collegeAcademicSection();
         } elseif (Auth::user()->role_id == 3) {
             return $this->studentDashboard();
+        }elseif (Auth::user()->role_id == 23) {
+            return $this->academicSection();
         } else {
             Auth::logout();
             return redirect('/login')->with('error', 'The username and password you entered did not match our records');
@@ -43,7 +46,7 @@ class DashboardController extends Controller
 
     public function checkUser($id)
     {
-        $role = [3, 10, 11, 14, 16, 18];
+        $role = [3, 10, 11, 14, 16, 18,23];
         return in_array($id, $role) == true ? 1 : 0;
     }
 

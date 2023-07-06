@@ -163,7 +163,13 @@ class PermissionTableSeeder extends Seeder
             'student-details-create',
             'student-details-edit',
             'student-details-delete',
-            
+
+            'uuc-pg-admission-module',
+            'uuc-pg-admission-list',
+            'uuc-pg-admission-create',
+            'uuc-pg-admission-edit',
+            'uuc-pg-admission-delete'
+
         ];
         foreach ($permissions as $permission) {
             // $permission = Permission::create(['guard_name' => 'admin', 'name' => $permission]);

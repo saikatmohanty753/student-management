@@ -319,6 +319,16 @@
                 </a>
             </li>
         @endcan
+        {{-- UUC PG ADMISSION --}}
+        @can('uuc-pg-admission-module')
+        <li class="{{ request()->is('uuc-pg-admission*') ? 'active' : '' }}">
+            <a href="{{ route('pgadmissionList') }}" title="Student Details" data-filter-tags="Admission">
+                <i class="fas fa-user-graduate"></i>
+                <span class="nav-link-text" data-i18n="nav.application_admission">UUC PG Students</span>
+            </a>
+        </li>
+        @endcan
+        {{-- ENDS HERE --}}
         @can('student-module')
             <li class="{{ request()->is('college-students*') ? 'active' : '' }}">
                 <a href="{{ url('/college-students') }}" title="Student Details" data-filter-tags="Admission">

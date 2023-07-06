@@ -33,12 +33,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Notice Type<span class="text-danger">*</span></label>
-                                        <select class="form-select form-control notice-type select2" name="notice_type">
+                                        <select class="form-select form-control notice-type select2" name="notice_type" onchange="selectDepart(this)">
                                             <option value="" selected>Select Notice Type</option>
                                             <option value="1" class="admission">Admission Notice</option>
                                             <option value="2" class="exam">College Notice</option>
                                             <option value="3" class="student">Student Notice</option>
                                             <option value="4" class="other">Event Notice</option>
+                                            <option value="5" class="admission">UUC PG Admission Notice</option>
                                         </select>
 
                                     </div>
@@ -160,7 +161,7 @@
     <script>
         $('.notice-type').on('change', function() {
             // console.log(this.value);
-            if (this.value == 1) {
+            if (this.value == 1 || this.value == 5) {
                 $('.department').removeClass('d-none');
                 $('.fee-payment').removeClass('d-none');
                 $('.publish-date').removeClass('d-none');
@@ -170,8 +171,6 @@
                 $('#course_name').removeClass('chk_blank');
                 $('#semester').removeClass('chk_blank');
                 // $('#publish-date').addClass('chk_blank');
-
-
             } else {
                 $('.department').addClass('d-none');
                 $('.fee-payment').addClass('d-none');
@@ -236,5 +235,23 @@
                 $(this)[0].submit();
             }
         });
+        function selectDepart(d)
+        {
+            if(d.value == 5)
+            {
+                $('#department option').each(function(){
+                    if($(this).val() != 2)
+                    {
+                        $(this).attr('disabled','disabled');
+                    }
+                });
+
+            }else{
+                $('#department option').each(function(){
+                    $(this).removeAttr("disabled");
+                });
+            }
+            $("#department").select2();
+        }
     </script>
 @endsection

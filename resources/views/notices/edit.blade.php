@@ -37,12 +37,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Notice Type<span class="text-danger">*</span></label>
-                                        <select class="form-select form-control notice-type select2" name="notice_type" id="notice_type">
+                                        <select class="form-select form-control notice-type select2" name="notice_type" id="notice_type" onchange="selectDepart(this)">
                                             <option value="">Select Notice Type</option>
                                             <option value="1"{{ $notice->notice_sub_type == 1 ? 'selected' : '' }} class="admission">Admission Notice</option>
                                             <option value="2" {{ $notice->notice_sub_type == 2 ? 'selected' : '' }}  class="exam">College Notice</option>
                                             <option value="3" {{ $notice->notice_sub_type == 3 ? 'selected' : '' }}  class="student">Student Notice</option>
                                             <option value="4" {{ $notice->notice_sub_type == 4 ? 'selected' : '' }} class="other">Event Notice</option>
+                                            <option value="5" {{ $notice->notice_sub_type == 5 ? 'selected' : '' }} class="admission">UUC PG Admission Notice</option>
                                         </select>
 
                                     </div>
@@ -50,12 +51,12 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <div class="form-group input-cont department {{ $notice->notice_sub_type == 1? '' : 'd-none'}}">
+                                    <div class="form-group input-cont department {{ in_array($notice->notice_sub_type,[1,5]) ? '' : 'd-none'}}">
                                         <label class="form-label">Department<span class="text-danger">*</span></label>
-                                        <select class="form-select form-control select2 {{ $notice->notice_sub_type == 1 ? 'chk_blank' : ''}}" name="department" id="department">
+                                        <select class="form-select form-control select2 {{ in_array($notice->notice_sub_type,[1,5]) ? 'chk_blank' : ''}}" name="department" id="department">
                                             <option value="">Select Department</option>
                                             @foreach ($dept as $item)
-                                            <option value="{{ $item->id }}"
+                                            <option value="{{ $item->id }}" {{ ($notice->notice_sub_type == 5 && $item->id!=2)?'disabled':'' }}
                                                 {{ $notice->department_id == $item->id ? 'selected' : '' }} >
                                                 {{ $item->course_for }}</option>
                                         @endforeach
@@ -99,7 +100,7 @@
                                     <div class="form-group input-cont start_date">
                                         <label class="form-label">Start date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank fromDate"
-                                            placeholder="Enter Start Date" name="start_date" id="start_date" value="{{ $notice->start_date }}">
+                                            placeholder="Enter Start Date" name="start_date" id="start_date" value="{{ date('d-m-Y',strtotime($notice->start_date)) }}">
                                         <span class="error-msg"></span>
                                     </div>
                                 </div>
@@ -109,19 +110,19 @@
                                     <div class="form-group input-cont end_date ">
                                         <label class="form-label">Expiry date<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank toDate"
-                                            placeholder="Enter End Date" name="exp_date" id="exp_date" value="{{ $notice->exp_date }}">
+                                            placeholder="Enter End Date" name="exp_date" id="exp_date" value="{{ date('d-m-Y',strtotime($notice->exp_date)) }}">
                                         <span class="error-msg"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <div class="form-group input-cont fee-payment d-none">
+                                    <div class="form-group input-cont fee-payment {{ in_array($notice->notice_sub_type,[1,5]) ? '' : 'd-none'}}">
                                         <label class="form-label">Last Date Of Fee Payment<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control chk_blank datepicker-1"
                                             placeholder="Enter Last Date Of Fee Payment" name="fee_payment"
-                                            id="fee_payment" value="{{$notice->payment_last_date}}">
+                                            id="fee_payment" value="{{ date('d-m-Y',strtotime($notice->payment_last_date)) }}">
                                         <span class="error-msg"></span>
                                     </div>
                                 </div>
@@ -166,7 +167,7 @@
     <script>
         $('.notice-type').on('change', function() {
             // console.log(this.value);
-            if (this.value == 1) {
+            if (this.value == 1 || this.value == 5) {
                 $('.department').removeClass('d-none');
                 $('.fee-payment').removeClass('d-none');
                 $('.publish-date').removeClass('d-none');
@@ -242,24 +243,23 @@
                 $(this)[0].submit();
             }
         });
+        function selectDepart(d)
+        {
+            if(d.value == 5)
+            {
+                $('#department option').each(function(){
+                    if($(this).val() != 2)
+                    {
+                        $(this).attr('disabled','disabled');
+                    }
+                });
 
-
-
-//         $(document).ready(function() {
-            
-//   $("#department").show();
-
-//   $(".notice-type").on("change", function() {
-//     if (this.value == 1) {
-//         $("#department").show();
-
-//     }else{
-//         $("#department").hide();
-//     }
-// });
-// });
-
-       
-      
+            }else{
+                $('#department option').each(function(){
+                    $(this).removeAttr("disabled");
+                });
+            }
+            $("#department").select2();
+        }
     </script>
 @endsection

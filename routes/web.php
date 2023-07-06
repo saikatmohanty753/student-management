@@ -63,6 +63,10 @@ Route::post('university-student-final-approval', [UniversityController::class, '
 Route::get('success/{hash}',[UniversityController::class,'success'])->name('uni-success');
 Route::post('getEmailStatus',[UniversityController::class,'getEmailStatus'])->name('getEmailStatus');
 
+Route::get('uuc-pg-admission', [UniversityController::class, 'admissionList'])->name('pgadmissionList');
+Route::get('pg-uuc-applied-application/{id}', [UniversityController::class, 'appliedApplication']);
+Route::get('studentpgadmissionList', [UniversityController::class, 'studentadmissionList'])->name('studentpgadmissionList');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

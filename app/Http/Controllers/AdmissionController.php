@@ -623,6 +623,8 @@ class AdmissionController extends Controller
             ->groupBy('course_id')
             ->pluck('course_id')
             ->all();
+        /* dump(Auth::user()->clg_user_id);
+        dd($clg_courses); */
         $department = CourseFor::all();
         $course = Course::whereIn('id', $clg_courses)->get();
         return view('admission.list', compact('department', 'course'));
@@ -638,8 +640,7 @@ class AdmissionController extends Controller
                 ->join('courses as course', 'course.id', '=', 'student_applications.course_id')
                 ->where('clg_id', $clgId)
                 ->where('academic_year', date('Y'))
-                ->where('student_applications.is_university', 1)
-                ->whereIn('student_applications.status', [1,5,6]);
+                ->whereIn('student_applications.status', [1]);
 
             if ($request->get('dep') != '') {
                 $data->where('student_applications.department_id', $request->get('dep'));
