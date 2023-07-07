@@ -30,7 +30,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
-                                            <label class="form-label" for="descipline">Desipline<span
+                                            <label class="form-label" for="descipline">Discipline<span
                                                     class="text-danger">*</span></label>
                                             <select class="custom-select form-control select2 chk_blank" name="course"
                                                 id="descipline" onchange="getCourse(this.value)">
