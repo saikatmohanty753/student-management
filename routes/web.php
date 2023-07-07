@@ -66,6 +66,7 @@ Route::post('getEmailStatus',[UniversityController::class,'getEmailStatus'])->na
 Route::get('uuc-pg-admission', [UniversityController::class, 'admissionList'])->name('pgadmissionList');
 Route::get('pg-uuc-applied-application/{id}', [UniversityController::class, 'appliedApplication']);
 Route::get('studentpgadmissionList', [UniversityController::class, 'studentadmissionList'])->name('studentpgadmissionList');
+Route::get('getCourse', [UniversityController::class, 'getCourse'])->name('getCourse');
 
 Auth::routes();
 

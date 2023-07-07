@@ -27,7 +27,22 @@
                                 <div class="col-md-6 col-12" style="display:none;">
 
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-3 col-12">
+                                    <div class="mb-2">
+                                        <div class="form-group input-cont">
+                                            <label class="form-label" for="descipline">Desipline<span
+                                                    class="text-danger">*</span></label>
+                                            <select class="custom-select form-control select2 chk_blank" name="course"
+                                                id="descipline" onchange="getCourse(this.value)">
+                                                <option value="">Select Course</option>
+                                                <option value="MPA">MPA</option>
+                                                <option value="MVA">MVA</option>
+                                            </select>
+                                            <span class="error-msg"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label" for="course_name">Course Name<span
@@ -41,7 +56,6 @@
                                                         data-total="{{ $item->total_strength }}"
                                                         data-occupied="{{ $item->consumption_seat }}">{{ $item->name }}
                                                     </option>
-                                                    {{-- <option value="{{ $item->id }}">{{ $item->name }}</option> --}}
                                                 @endforeach
                                             </select>
                                             <span class="error-msg"></span>
@@ -1379,7 +1393,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Migration Certificate</label>
                                             <div class="custom-file input-cont">
-                                                <input type="file" class="custom-file-input form-control chk_blank"
+                                                <input type="file" class="custom-file-input form-control"
                                                     name="migration_cert" id="migration_cert">
                                                 <small
                                                     class="form-text text-secondary">{{ __('common.file_format') }}</small>
@@ -1544,6 +1558,29 @@
                 });
             }
         }
+        function getCourse(code)
+        {
+            $('#course_name').empty();
+            $.ajax({
+                url:"{{ route('getCourse') }}",
+                type:"GET",
+                data:{"_token":"{{ csrf_token() }}","clg_id":{{ session()->get('clg') }},"code":code},
+                dataType:"JSON",
+                success:function(res)
+                {
+                    $('.seat-div').addClass('d-none');
+                    $('#course_name').html(res.msg);
+                }
+            })
+        }
+        $('#is_migration').on('change',function(){
+            if(this.value == 1)
+            {
+                $('#is_migration').addClass('chk_blank');
+            }else{
+                $('#is_migration').removeClass('chk_blank');
+            }
+        })
     </script>
 
     <script>

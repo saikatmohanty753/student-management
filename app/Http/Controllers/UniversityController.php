@@ -25,9 +25,16 @@ use App\Models\City;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail as FacadesMail;
+use App\Repositories\CustomRepository;
 
 class UniversityController extends Controller
 {
+    private $app;
+    public function __construct(CustomRepository $app)
+    {
+        $this->app = $app;
+    }
+
     public function index($clg_id='')
     {
         if(empty($clg_id))
@@ -45,11 +52,37 @@ class UniversityController extends Controller
             ->join('courses', 'admission_seats.course_id', 'courses.id')
             ->where('courses.course_for', 2)
             ->get();
+
         $district = DB::table('district')->get();
         $depId = 2;
         session()->put('clg',$clg_id);
         $clg_id = $this->encrypt($clg_id);
         return view('admission.university_admission',compact('course', 'district','depId','clg_id'));
+    }
+    public function getCourse(Request $request)
+    {
+        if(!empty($request->clg_id) && !empty($request->code))
+        {
+
+            $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
+                        ->where('clg_id', $request->clg_id)
+                        ->where('main_course_code', $request->code)
+                        ->where('admission_year', date('Y'))
+                        ->join('courses', 'admission_seats.course_id', 'courses.id')
+                        ->where('courses.course_for', 2)
+                        ->get();
+            $options = '<option value="">Select Course</option>';
+            if(isset($course) && count($course) > 0){
+                foreach ($course as $item)
+                {
+                    $options .= '<option value="'.$item->course_id.'" data-id="'.$item->available_seat.'" data-total="'.$item->total_strength.'" data-occupied="'.$item->consumption_seat.'">'.$item->name.'</option>';
+                }
+            }
+            return response()->json(['status'=>1,'msg'=>$options]);
+        }else{
+            return response()->json(['status'=>0,'msg'=>'<option value="" data-id="" data-total="" data-occupied=""> --Select-- </option>']);
+        }
+
     }
     public function store(Request $request)
     {
@@ -111,8 +144,17 @@ class UniversityController extends Controller
         $student->course_id = $request->course;
         $student->app_status = 1;
         $student->email = $request->email;
+        $student->descipline = $request->descipline;
         $student->is_university = 1;
-
+        $student_app = $this->app->genAppNo($request->course);
+        if(!empty($student_app['application_no']))
+        {
+            $student->application_no = $student_app['application_no'];
+        }
+        if(!empty($student_app['app_count_no']))
+        {
+            $student->app_count_no = $student_app['app_count_no'];
+        }
         $student_details = [
             'name' => $request->name,
             'email' => $request->email,
@@ -124,6 +166,8 @@ class UniversityController extends Controller
             'cast' => $request->cast_category,
             'specially_abled' => $request->specially_abled,
             'aadhaar_no' => $request->aadhaar_no,
+            'application_no'=> (!empty($student_app['application_no']))?$student_app['application_no']:'',
+            'app_count_no'=> (!empty($student_app['app_count_no']))?$student_app['app_count_no']:''
         ];
         $present_address = [
             'present_state' => $request->present_state,

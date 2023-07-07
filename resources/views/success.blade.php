@@ -98,7 +98,7 @@
                             </svg>
 						</div>
 						<h2 class="info-card_label">Successful</h2>
-						<div class="info-card_message"><span style="text-decoration: underline;font-weight:bold;color:#03a9f4">{{ $hash->name }}</span>, you have successfully applied for admission in UUC. Please wait you will be notified futher in your given email if any progress made in your admission process.</div>
+						<div class="info-card_message"><span style="text-decoration: underline;font-weight:bold;color:#03a9f4">{{ $hash->name }}</span>, you have successfully applied for admission in UUC with application no. <span style="text-decoration: underline;font-weight:bold;color:#03a9f4">{{ $hash->application_no }}</span>. Please wait you will be notified futher in your given email if any progress made in your admission process.</div>
 						<a  href="{{ route('login') }}" class="btn btn-primary">Go to Back</a>
 					</div>
 				</div>
