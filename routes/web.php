@@ -67,6 +67,8 @@ Route::get('uuc-pg-admission', [UniversityController::class, 'admissionList'])->
 Route::get('pg-uuc-applied-application/{id}', [UniversityController::class, 'appliedApplication']);
 Route::get('studentpgadmissionList', [UniversityController::class, 'studentadmissionList'])->name('studentpgadmissionList');
 Route::get('getCourse', [UniversityController::class, 'getCourse'])->name('getCourse');
+Route::get('finalAdmissionList', [UniversityController::class, 'finalAdmissionList'])->name('finalAdmissionList');
+Route::get('finalAdmissionListAjax', [UniversityController::class, 'finalAdmissionListAjax'])->name('finalAdmissionListAjax');
 
 Auth::routes();
 

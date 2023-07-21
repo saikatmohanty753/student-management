@@ -27,7 +27,7 @@
                                 <div class="col-md-6 col-12" style="display:none;">
 
                                 </div>
-                                <div class="col-md-3 col-12">
+                                {{-- <div class="col-md-3 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label" for="descipline">Discipline<span
@@ -41,8 +41,8 @@
                                             <span class="error-msg"></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-12">
+                                </div> --}}
+                                <div class="col-md-6 col-12">
                                     <div class="mb-2">
                                         <div class="form-group input-cont">
                                             <label class="form-label" for="course_name">Course Name<span

@@ -19,12 +19,17 @@ class CustomRepository implements CustomInterface{
             return $appInfo;
         }
         $course_data = $course_data->first();
-        define('APP_CODE',$course_data->main_course_code);
+        define('APP_CODE',strtoupper($course_data->main_course_code));
         $desipline_code = explode($course_data->main_course_code.'_',$course_data->sub_course_code);
         $desi_code = '';
         if(empty($desipline_code[1]))
         {
-            $desi_code = 'NO';
+            if(!empty($desipline_code[0]))
+            {
+                $desi_code = $desipline_code[0];
+            }else{
+                $desi_code = strtoupper(substr($course_data->name,4));
+            }
         }else{
             $desi_code = $desipline_code[1];
         }
@@ -116,5 +121,12 @@ class CustomRepository implements CustomInterface{
     public function decrypt($str)
     {
         return Crypt::decryptString($str);
+    }
+
+    public function createModel()
+    {
+        $content = "";
+
+        return $content;
     }
 }

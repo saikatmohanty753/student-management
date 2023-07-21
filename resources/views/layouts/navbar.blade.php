@@ -321,10 +321,16 @@
         @endcan
         {{-- UUC PG ADMISSION --}}
         @can('uuc-pg-admission-module')
-        <li class="{{ request()->is('uuc-pg-admission*') ? 'active' : '' }}">
+        <li class="{{ request()->is('uuc-pg-admission/*') ? 'active' : '' }}">
             <a href="{{ route('pgadmissionList') }}" title="Student Details" data-filter-tags="Admission">
                 <i class="fas fa-user-graduate"></i>
                 <span class="nav-link-text" data-i18n="nav.application_admission">UUC PG Students</span>
+            </a>
+        </li>
+        <li class="{{ request()->is('finalAdmissionList/*') ? 'active' : '' }}">
+            <a href="{{ route('finalAdmissionList') }}" title="Student Details" data-filter-tags="Admission">
+                <i class="fas fa-book-open-reader"></i>
+                <span class="nav-link-text" data-i18n="nav.application_admission">UUC PG Admission List</span>
             </a>
         </li>
         @endcan

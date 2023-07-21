@@ -9,11 +9,14 @@ use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\District;
 use App\Models\Notice;
+use Illuminate\Support\Facades\Artisan;
 use App\Models\StudentAddress;
 use App\Models\StudentApplication;
 use App\Models\StudentDetails;
 use App\Models\StudentDocuments;
 use App\Models\StudentEducationDetails;
+use App\Models\StudentLog;
+use App\Models\StudentDetailList;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,6 +27,9 @@ use Illuminate\Support\Facades\Mail as FacadesMail;
 use Mail;
 use PDF;
 use Yajra\DataTables\DataTables;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use App\Repositories\CustomRepository;
 
 class AdmissionController extends Controller
 {
@@ -32,9 +38,11 @@ class AdmissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    private $app;
+    public function __construct(CustomRepository $app)
     {
         $this->middleware('permission:verify-admission-edit', ['only' => ['verifyAdmission', 'verifyStudentAdmission']]);
+        $this->app = $app;
     }
 
     public function AdmissionSeat()
@@ -118,43 +126,116 @@ class AdmissionController extends Controller
         * New Validation code added by Saikat
         * 03-07-2023
         **************************************/
-        $student_check = DB::table('student_applications')->where('email',$request->email)->where('status',3);
+        $studentApplicationTable = 'student'.$clgId.'_applications';
+        $studentUserTable = 'student'.$clgId.'_users';
+        $studentApplicationModel = 'Student'.$clgId.'Application';
+        $studentUserModel = 'Student'.$clgId.'User';
+        if (Schema::hasTable($studentApplicationTable)) {
 
-        if($student_check->exists())
-        {
-            $student_check = $student_check->first();
-            if($this->getDiffYear($student_check->admission_date,date('Y-m-d')) < 1 && $request->course == $student_check->course_id)
-            {
-                return redirect()->back()->with('error','This student addmission form has been rejected for applied course on '.date('d-m-Y',strtotime($student_check->admission_date)));
-            }
-        }
+            $student_check = DB::table($studentApplicationTable)->where('email',$request->email)->where('status',3);
 
-        $users_exists = DB::table('users')->where('is_active',1)->where('email',$request->email);
-        if($users_exists->exists())
-        {
-            $users_exists = $users_exists->first();
-            $student_details = DB::table('student_details')->where('id',$users_exists->student_id);
-            if($student_details->exists())
+            if($student_check->exists())
             {
-                $student_details = $student_details->first();
-                $arr_batch = $this->getBatch($student_details->batch_year);
-                if($arr_batch['to'] < date('Y'))
+                $student_check = $student_check->first();
+                if($this->getDiffYear($student_check->admission_date,date('Y-m-d')) < 1 && $request->course == $student_check->course_id)
                 {
-                    return redirect()->back()->with('error','Enrolled in the applied course in not ended');
-                }
-                if($student_details->course_id == $request->course)
-                {
-                    return redirect()->back()->with('error','Already enrolled in the applied course');
+                    return redirect()->back()->with('error','This student addmission form has been rejected for applied course on '.date('d-m-Y',strtotime($student_check->admission_date)));
                 }
             }
-            return redirect()->back()->with('error','Email id already exists');
+
+            $users_exists = DB::table('users')->where('is_active',1)->where('email',$request->email);
+            if($users_exists->exists())
+            {
+                $users_exists = $users_exists->first();
+                $student_details = DB::table('student_details')->where('id',$users_exists->student_id);
+                if($student_details->exists())
+                {
+                    $student_details = $student_details->first();
+                    $arr_batch = $this->getBatch($student_details->batch_year);
+                    if($arr_batch['to'] < date('Y'))
+                    {
+                        return redirect()->back()->with('error','Enrolled in the applied course in not ended');
+                    }
+                    if($student_details->course_id == $request->course)
+                    {
+                        return redirect()->back()->with('error','Already enrolled in the applied course');
+                    }
+                }
+                return redirect()->back()->with('error','Email id already exists');
+            }
         }
         /* **********************************
         * Ends here
         *************************************/
 
         $course = Course::find($request->course);
-        $student = new StudentApplication();
+
+        if (!Schema::hasTable($studentApplicationTable)) {
+            Schema::create($studentApplicationTable, function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('academic_year','200')->nullable();
+                $table->date('admission_date')->nullable();
+                $table->string('clg_id','200')->nullable();
+                $table->string('email','200')->nullable();
+                $table->tinyInteger('is_university')->default(0);
+                $table->integer('department_id')->unsigned()->nullable();
+                $table->integer('course_id')->unsigned()->nullable();
+                $table->text('personal_information')->nullable();
+                $table->text('present_address')->nullable();
+                $table->text('permanent_address')->nullable();
+                $table->text('prv_clg_info')->nullable();
+                $table->text('qualification_details')->nullable();
+                $table->text('documents')->nullable();
+                $table->enum('app_status', ['0', '1'])->nullable();
+                $table->integer('status')->unsigned()->nullable();
+                $table->text('remarks')->nullable();
+                $table->text('remarks_app_university')->nullable();
+                $table->string('application_no','200')->nullable();
+                $table->string('app_count_no','200')->nullable();
+                $table->string('descipline','200')->nullable();
+                $table->timestamps();
+            });
+            Artisan::call('make:model '.$studentApplicationModel);
+            if (Schema::hasTable($studentApplicationTable)) {
+                $liststudent = new StudentDetailList;
+                $liststudent->clg_id = $clgId;
+                $liststudent->table_name = $studentApplicationTable;
+                $liststudent->model = $studentApplicationModel;
+                $liststudent->type = 1;
+                $liststudent->save();
+            }
+        }
+        if (!Schema::hasTable($studentUserTable)) {
+            Schema::create($studentUserTable, function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name','200')->nullable();
+                $table->string('email')->unique()->nullable();
+                $table->integer('role_id')->unsigned()->nullable();
+                $table->string('clg_id','200')->nullable();
+                $table->tinyInteger('is_active')->default(1);
+                $table->timestamp('email_verified_at')->nullable();
+                $table->string('password', 200)->nullable();
+                $table->string('remember_token','200')->nullable();
+                $table->string('batch_year','200')->nullable();
+                $table->bigInteger('mob_no')->nullable();
+                $table->integer('clg_user_id')->unsigned()->nullable();
+                $table->integer('student_id')->unsigned()->nullable();
+                $table->timestamps();
+            });
+            Artisan::call('make:model '.$studentUserModel);
+        }
+        if (Schema::hasTable($studentUserTable)) {
+            $liststudent = new StudentDetailList;
+            $liststudent->clg_id = $clgId;
+            $liststudent->table_name = $studentUserTable;
+            $liststudent->model = $studentUserModel;
+            $liststudent->type = 2;
+            $liststudent->save();
+        }
+
+        $class = modelFn($studentApplicationModel);
+
+        $student = new $class;
         $student->academic_year = date('Y');
         $student->admission_date = Carbon::now();
         //$student->clg_id = Carbon::now();
@@ -300,7 +381,7 @@ class AdmissionController extends Controller
         $student->documents = json_encode($documents);
         $student->qualification_details = json_encode($qualification_details);
         $student->save();
-        // return $student;
+
         return redirect()->action([AdmissionController::class, 'show'], ['id' => $student->id])->with('success', 'Application saved in draft.');
     }
 
@@ -334,13 +415,14 @@ class AdmissionController extends Controller
      */
     public function show($id)
     {
-
-        $std_app = StudentApplication::find($id);
+        $clgId = Auth::user()->clg_user_id;
+        $class = $studentApplicationModel = 'Student'.$clgId.'Application';
+        $std_app = modelFn($class)::where('id',$id)->first();
         $personal_information = json_decode($std_app->personal_information);
         $present_address = json_decode($std_app->present_address);
-        $present_address->district = $std_app->presentDis();
+        $present_address->district = presentDis($std_app->present_address);
         $permanent_address = json_decode($std_app->permanent_address);
-        $permanent_address->district = $std_app->presentDis();
+        $permanent_address->district = permanentDis($std_app->permanent_address);
         $prv_clg_info = json_decode($std_app->prv_clg_info);
         $documents = json_decode($std_app->documents);
         $qualification_details = json_decode($std_app->qualification_details);
@@ -358,7 +440,10 @@ class AdmissionController extends Controller
     {
 
         $district = District::get();
-        $std_app = StudentApplication::find($id);
+        $clgId = Auth::user()->clg_user_id;
+        $class = $studentApplicationModel = 'Student'.$clgId.'Application';
+        $std_app = modelFn($class)::find($id);
+        //$std_app = StudentApplication::find($id);
         $personal_information = json_decode($std_app->personal_information);
         $present_address = json_decode($std_app->present_address);
         $present_address->district = $std_app->presentDis();
@@ -395,7 +480,8 @@ class AdmissionController extends Controller
         * New Validation code added by Saikat
         * 03-07-2023
         **************************************/
-        $student_check = DB::table('student_applications')->where('email',$request->email)->where('status',3);
+        $class = $studentApplicationModel = 'Student'.$clgId.'Application';
+        $student_check = DB::table($studentApplicationModel)->where('email',$request->email)->where('status',3);
 
         if($student_check->exists())
         {
@@ -431,7 +517,9 @@ class AdmissionController extends Controller
         *************************************/
         $id = $request->hid;
         $course = Course::find($request->course);
-        $student = StudentApplication::find($id);
+
+        $student = modelFn($class)::find($id);
+        //$student = StudentApplication::find($id);
         $student->academic_year = date('Y');
         $student->admission_date = Carbon::now();
         $student->clg_id = Carbon::now();
@@ -590,8 +678,10 @@ class AdmissionController extends Controller
     }
     public function apply(Request $request)
     {
-        $application = StudentApplication::find($request->id);
         $clgId = Auth::user()->clg_user_id;
+        $class = 'Student'.$clgId.'Application';
+        $application = modelFn($class)::find($id);
+        //$application = StudentApplication::find($request->id);
         if ($this->checkSeatAvl($clgId, $application->course_id) == 0) {
             return redirect()->action([AdmissionController::class, 'admissionList'])->with('error', 'You have already fill up all the seats');
         }
@@ -635,21 +725,23 @@ class AdmissionController extends Controller
 
         if ($request->ajax()) {
             $clgId = Auth::user()->clg_user_id;
-            $data = StudentApplication::select('student_applications.*', 'dep.course_for', 'course.name')
-                ->join('course_fors as dep', 'dep.id', '=', 'student_applications.department_id')
-                ->join('courses as course', 'course.id', '=', 'student_applications.course_id')
+            $class = 'Student'.$clgId.'Application';
+            $studentApplicationTable = 'student'.$clgId.'_applications';
+            $data = modelFn($class)::select($studentApplicationTable.'.*', 'dep.course_for', 'course.name')
+                ->join('course_fors as dep', 'dep.id', '=', $studentApplicationTable.'.department_id')
+                ->join('courses as course', 'course.id', '=', $studentApplicationTable.'.course_id')
                 ->where('clg_id', $clgId)
                 ->where('academic_year', date('Y'))
-                ->whereIn('student_applications.status', [1]);
+                ->whereIn($studentApplicationTable.'.status', [1]);
 
             if ($request->get('dep') != '') {
-                $data->where('student_applications.department_id', $request->get('dep'));
+                $data->where($studentApplicationTable.'.department_id', $request->get('dep'));
             }
             if ($request->get('course') != '') {
-                $data->where('student_applications.course_id', $request->get('course'));
+                $data->where($studentApplicationTable.'.course_id', $request->get('course'));
             }
             if ($request->get('session') != '') {
-                $data->where('student_applications.academic_year', $request->get('session'));
+                $data->where($studentApplicationTable.'.academic_year', $request->get('session'));
             }
 
             $data = $data->get();
@@ -667,23 +759,19 @@ class AdmissionController extends Controller
 
     public function appliedAdmissionList(Request $request)
     {
-        $application = StudentApplication::where('status', 1)->orderBy('id', 'desc')->get();
-        $verified_application = StudentApplication::where('status', 2)->orderBy('id', 'desc')->get();
-        $rejected_application = StudentApplication::where('status', 3)->orderBy('id', 'desc')->get();
+        $clgId = Auth::user()->clg_user_id;
+        $class = 'Student'.$clgId.'Application';
+        $application = modelFn($class)::where('status', 1)->orderBy('id', 'desc')->get();
+        $verified_application = modelFn($class)::where('status', 2)->orderBy('id', 'desc')->get();
+        $rejected_application = modelFn($class)::where('status', 3)->orderBy('id', 'desc')->get();
         return view('admin.admission.index', compact('application', 'verified_application', 'rejected_application'));
     }
 
     public function verifyAdmission(Request $request, $id)
     {
-
-        /*  $student = StudentDetails::where('id', $id)->first();
-        $education = StudentEducationDetails::where('id', $id)->first();
-        $address = StudentAddress::where('id', $id)->first();
-        $documents = StudentDocuments::where('id', $id)->first();
-
-        return view('admin.admission.verify', compact('id', 'student', 'address', 'education', 'documents')); */
-
-        $std_app = StudentApplication::find($id);
+        $clgId = Auth::user()->clg_user_id;
+        $class = 'Student'.$clgId.'Application';
+        $std_app = modelFn($class)::find($id);
         $personal_information = json_decode($std_app->personal_information);
         $present_address = json_decode($std_app->present_address);
         $present_address->district = $std_app->presentDis();
@@ -725,7 +813,9 @@ class AdmissionController extends Controller
                 $year = date('Y', strtotime($year4));
             }
 
-            $std_app = StudentApplication::where('id', $request->id)->first();
+            $clgId = Auth::user()->clg_user_id;
+            $class = 'Student'.$clgId.'Application';
+            $std_app = modelFn($class)::where('id', $request->id)->first();
             $std_app->remarks = $request->remarks;
             $std_app->status = $request->status;
             $std_app->save();
@@ -740,6 +830,8 @@ class AdmissionController extends Controller
             $student->clg_id = $std_app->clg_id;
             $student->department_id = $std_app->department_id;
             $student->course_id = $std_app->course_id;
+            $student->student_id = $request->id;
+
             $student->name = $info->name;
             $student->email = $info->email;
             $student->mobile = $info->mobile;
@@ -771,8 +863,8 @@ class AdmissionController extends Controller
             $this->generatePDF($info->email, $info->name, $regdNo, $request->issued, $std_app->clg_id, date('Y') . '-' . $year);
 
             //dd('demo ee');
-            $count = User::where('email', $student->email)->count();
-            if ($count == 0) {
+            $urs = User::where('email', $student->email);
+            if (!$urs->exists()) {
                 $user = new User();
                 $user->name = $student->name;
                 $user->email = $student->email;
@@ -782,7 +874,20 @@ class AdmissionController extends Controller
                 $user->role_id = 3;
                 $user->batch_year = date('Y') . '-' . $year;
                 $user->password = Hash::make(12345678);
-                $user->save();
+                if($user->save())
+                {
+                    $student_logs = new StudentLog;
+                    $student_logs->user_id = $user->id;
+                    $student_logs->student_id = $std_app->id;
+                    $student_logs->course_id = $std_app->course_id;
+                    $student_logs->department_id = $std_app->department_id;
+                    $student_logs->clg_id = $std_app->clg_id;
+                    $student_logs->updated_by = Auth::user()->id;
+                    $student_logs->name = $student->name;
+                    $student_logs->email = $student->email;
+                    $student_logs->updated_on = date('Y-m-d h:i:s');
+                    $student_logs->save();
+                }
                 $user->assignRole(3);
                 $data = [
                     "name" => $user->name,
@@ -794,6 +899,33 @@ class AdmissionController extends Controller
                     $message->to($user->email);
                     $message->subject('Login credential for UUC');
                 });
+            }else{
+                $urs = $urs->first();
+                $student_details = DB::table('student_applications')->where('id',$urs->student_id)->first();
+                if($std_app->course_id != $student_details->course_id)
+                {
+                    $batch = $this->getBatch($student_details->batch_year);
+                    if($batch[1] < date('Y'))
+                    {
+                        $urs->student_id = $std_app->id;
+                        $urs->batch_year = date('Y') . '-' . $year;
+                        $urs->clg_id = $student->clg_id;
+                        if($urs->update())
+                        {
+                            $student_logs = new StudentLog;
+                            $student_logs->user_id = $urs->id;
+                            $student_logs->student_id = $std_app->id;
+                            $student_logs->course_id = $std_app->course_id;
+                            $student_logs->department_id = $std_app->department_id;
+                            $student_logs->clg_id = $std_app->clg_id;
+                            $student_logs->updated_by = Auth::user()->id;
+                            $student_logs->name = $urs->name;
+                            $student_logs->email = $urs->email;
+                            $student_logs->updated_on = date('Y-m-d h:i:s');
+                            $student_logs->save();
+                        }
+                    }
+                }
             }
 
             $std_id = $student->id;

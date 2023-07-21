@@ -72,6 +72,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Application Number</th>
                                     <th>Department</th>
                                     <th>Course</th>
                                     <th>Student Name</th>
@@ -106,8 +107,12 @@
                     }
                 },
                 columns: [{
-                        data: 'id',
-                        name: 'id'
+                        data: 'count',
+                        name: 'count'
+                    },
+                    {
+                        data: 'application_no',
+                        name: 'application_no'
                     },
                     {
                         data: 'course_for',

@@ -20,12 +20,15 @@ use App\Models\StudentDetails;
 use App\Models\StudentDocuments;
 use App\Models\StudentEducationDetails;
 use App\Models\AdmissionSeat;
+use App\Models\StudentDetailList;
+use App\Models\StudentLog;
 use App\Models\User;
 use App\Models\City;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 use App\Repositories\CustomRepository;
+
 
 class UniversityController extends Controller
 {
@@ -144,7 +147,7 @@ class UniversityController extends Controller
         $student->course_id = $request->course;
         $student->app_status = 1;
         $student->email = $request->email;
-        $student->descipline = $request->descipline;
+        /* $student->descipline = $request->descipline; */
         $student->is_university = 1;
         $student_app = $this->app->genAppNo($request->course);
         if(!empty($student_app['application_no']))
@@ -471,10 +474,82 @@ class UniversityController extends Controller
             $qualification = json_decode($std_app->qualification_details);
             $documents = json_decode($std_app->documents);
 
+            $user_id = '';
+            $users = User::where('email', $std_app->email);
+            if (!$users->exists()) {
+                $user = new User();
+                $user->name = $info->name;
+                $user->email = $info->email;
+                $user->mob_no = $info->mobile;
+                $user->clg_id = $std_app->clg_id;
+                $user->student_id = $request->id;
+                $user->role_id = 3;
+                $user->batch_year = date('Y') . '-' . $year;
+                $user->password = Hash::make(12345678);
+                if($user->save())
+                {
+                    $user_id = $user->id;
+                    $student_logs = new StudentLog;
+                    $student_logs->user_id = $user->id;
+                    $student_logs->is_university = 1;
+                    $student_logs->student_id = $std_app->id;
+                    $student_logs->course_id = $std_app->course_id;
+                    $student_logs->department_id = $std_app->department_id;
+                    $student_logs->clg_id = $std_app->clg_id;
+                    $student_logs->updated_by = Auth::user()->id;
+                    $student_logs->name = $info->name;
+                    $student_logs->email = $info->email;
+                    $student_logs->updated_on = date('Y-m-d h:i:s');
+                    $student_logs->save();
+                }
+                $user->assignRole(3);
+                $data = [
+                    "name" => $user->name,
+                    "user_name" => $user->email,
+                    "password" => 12345678,
+                ];
+
+                Mail::send('mail.credential', compact('data'), function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('Login credential for UUC');
+                });
+            }else{
+                $users = $users->first();
+                $user_id = $users->id;
+                $student_details = DB::table('student_applications')->where('id',$users->student_id)->first();
+
+                if($std_app->course_id != $student_details->course_id)
+                {
+                    $batch = $this->getBatch($student_details->batch_year);
+                    if($batch[1] < date('Y'))
+                    {
+                        $users->student_id = $std_app->id;
+                        $users->batch_year = date('Y') . '-' . $year;
+                        $users->clg_id = $student->clg_id;
+                        if($users->update())
+                        {
+                            $student_logs = new StudentLog;
+                            $student_logs->user_id = $users->id;
+                            $student_logs->is_university = 1;
+                            $student_logs->student_id = $std_app->id;
+                            $student_logs->course_id = $std_app->course_id;
+                            $student_logs->department_id = $std_app->department_id;
+                            $student_logs->clg_id = $std_app->clg_id;
+                            $student_logs->updated_by = Auth::user()->id;
+                            $student_logs->name = $users->name;
+                            $student_logs->email = $users->email;
+                            $student_logs->updated_on = date('Y-m-d h:i:s');
+                            $student_logs->save();
+                        }
+                    }
+                }
+            }
             $student = new StudentDetails();
             $student->clg_id = $std_app->clg_id;
             $student->department_id = $std_app->department_id;
             $student->course_id = $std_app->course_id;
+            $student->student_id = $request->id;
+            $student->user_id = $user_id;
             $student->name = $info->name;
             $student->email = $info->email;
             $student->mobile = $info->mobile;
@@ -505,35 +580,10 @@ class UniversityController extends Controller
 
             $this->generatePDF($info->email, $info->name, $regdNo, $request->issued, $std_app->clg_id, date('Y') . '-' . $year);
 
-            //dd('demo ee');
-            $count = User::where('email', $student->email)->count();
-            if ($count == 0) {
-                $user = new User();
-                $user->name = $student->name;
-                $user->email = $student->email;
-                $user->mob_no = $student->mobile;
-                $user->clg_id = $student->clg_id;
-                $user->student_id = $student->id;
-                $user->role_id = 3;
-                $user->batch_year = date('Y') . '-' . $year;
-                $user->password = Hash::make(12345678);
-                $user->save();
-                $user->assignRole(3);
-                $data = [
-                    "name" => $user->name,
-                    "user_name" => $user->email,
-                    "password" => 12345678,
-                ];
-
-                Mail::send('mail.credential', compact('data'), function ($message) use ($user) {
-                    $message->to($user->email);
-                    $message->subject('Login credential for UUC');
-                });
-            }
-
-            $std_id = $student->id;
+            $std_id = $request->id;
             $address = new StudentAddress();
             $address->student_id = $std_id;
+            $address->user_id = $user_id;
             $address->present_state = $prs_address->present_state;
             $address->present_district_id = $prs_address->present_district_id;
             $address->present_pin_code = $prs_address->present_pin_code;
@@ -543,8 +593,10 @@ class UniversityController extends Controller
             $address->permanent_pin_code = $per_address->permanent_pin_code;
             $address->permanent_address = $per_address->permanent_address;
             $address->save();
+
             $education = new StudentEducationDetails();
             $education->student_id = $std_id;
+            $education->user_id = $user_id;
             $education->clg_name = $clg_info->clg_name;
             $education->year_of_passing = $clg_info->year_of_passing;
             $education->course_name = $clg_info->course_name;
@@ -553,6 +605,7 @@ class UniversityController extends Controller
             $education->save();
             $doc = new StudentDocuments();
             $doc->student_id = $std_id;
+            $doc->user_id = $user_id;
             $doc->photo = $documents->profile;
             $doc->aadhaar_card = $documents->aadhaar_card;
             $doc->hsc_cert = $documents->hsc_cert;
@@ -678,13 +731,27 @@ class UniversityController extends Controller
             $data = $data->orderBy('id','desc')->get();
 
             // Decode personal_information field for each row
+            $i = 1;
             foreach ($data as $row) {
                 $row->personal_information = json_decode($row->personal_information);
                 $row->status = $row->applicationStatus();
+                $row->count = $i++;
             }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->make(true);
         }
+    }
+    public function finalAdmissionList()
+    {
+        return view('uuc_admission.admission_list');
+    }
+
+    public function finalAdmissionListAjax(Request $request)
+    {
+        $student_data = StudentApplication::where('is_university',1)->where('status',2)->orderBy('id','desc')->get();
+        $course = DB::table('courses')->pluck('name','id');
+        $department = DB::table('course_fors')->pluck('course_for','id');
+        return response()->json([view('uuc_admission.admission_list_ajax',compact('student_data','course','department'))->render()]);
     }
 }

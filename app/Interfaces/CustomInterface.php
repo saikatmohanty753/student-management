@@ -8,4 +8,6 @@ interface CustomInterface{
     public function encrypt($str);
 
     public function decrypt($str);
+
+    public function createModel();
 }

@@ -1,1 +1,13 @@
 ***************** Admisssion *********************
+1)  student_logs
+2)  student_addresses
+3)  student_applications
+4)  student_details
+5)  student_documents
+6)  student_education_details
+7)  users
+8)  courses
+9)  course_fors
+10) course_types
+11) notices
+12) notifications
