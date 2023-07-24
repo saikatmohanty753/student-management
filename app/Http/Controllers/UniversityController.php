@@ -21,6 +21,7 @@ use App\Models\StudentDocuments;
 use App\Models\StudentEducationDetails;
 use App\Models\AdmissionSeat;
 use App\Models\StudentDetailList;
+use App\Models\StudentUser;
 use App\Models\StudentLog;
 use App\Models\User;
 use App\Models\City;
@@ -475,9 +476,9 @@ class UniversityController extends Controller
             $documents = json_decode($std_app->documents);
 
             $user_id = '';
-            $users = User::where('email', $std_app->email);
+            $users = StudentUser::where('email', $std_app->email);
             if (!$users->exists()) {
-                $user = new User();
+                $user = new StudentUser();
                 $user->name = $info->name;
                 $user->email = $info->email;
                 $user->mob_no = $info->mobile;
@@ -753,5 +754,21 @@ class UniversityController extends Controller
         $course = DB::table('courses')->pluck('name','id');
         $department = DB::table('course_fors')->pluck('course_for','id');
         return response()->json([view('uuc_admission.admission_list_ajax',compact('student_data','course','department'))->render()]);
+    }
+
+    public function admissionDetails(Request $request, $id)
+    {
+        $std_app = StudentApplication::find($id);
+        $clg_id = $std_app->clg_id;
+        $personal_information = json_decode($std_app->personal_information);
+        $present_address = json_decode($std_app->present_address);
+        $present_address->district = $std_app->presentDis();
+        $permanent_address = json_decode($std_app->permanent_address);
+        $permanent_address->district = $std_app->presentDis();
+        $prv_clg_info = json_decode($std_app->prv_clg_info);
+        $documents = json_decode($std_app->documents);
+        $qualification_details = json_decode($std_app->qualification_details);
+
+        return view('admin.admission.view', compact('id', 'std_app', 'personal_information', 'present_address', 'permanent_address', 'prv_clg_info', 'documents', 'qualification_details'));
     }
 }

@@ -4,6 +4,7 @@ use App\Models\College;
 use App\Models\Course;
 use App\Models\CourseFor;
 use App\Models\District;
+use Illuminate\Support\Facades\Schema;
 
 if(!function_exists('modelFn'))
 {
@@ -70,4 +71,17 @@ function permanentDis($permanent_address)
     $district = District::where('id', $present_address->permanent_district_id)->first();
     return $district->district_name;
 
+}
+
+if(!function_exists('getAdmissionCountSatatus'))
+{
+    function getAdmissionCountSatatus($clgId,$status)
+    {
+        $table = 'student'.$clgId.'_applications';
+        $count = 0;
+        if (Schema::hasTable($table)) {
+            $count = DB::table($table)->where('status',$status)->get()->count();
+        }
+        return $count;
+    }
 }

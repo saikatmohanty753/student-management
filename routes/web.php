@@ -69,6 +69,7 @@ Route::get('studentpgadmissionList', [UniversityController::class, 'studentadmis
 Route::get('getCourse', [UniversityController::class, 'getCourse'])->name('getCourse');
 Route::get('finalAdmissionList', [UniversityController::class, 'finalAdmissionList'])->name('finalAdmissionList');
 Route::get('finalAdmissionListAjax', [UniversityController::class, 'finalAdmissionListAjax'])->name('finalAdmissionListAjax');
+Route::get('preview-app/{id}', [UniversityController::class, 'admissionDetails'])->name('admissionDetails');
 
 Auth::routes();
 
@@ -135,10 +136,12 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('applied-admission-list/{dep}/{clg_id}', [AdmissionController::class, 'courseList']);
     Route::get('applied-admission-list/{dep}/{clg_id}/{course}', [AdmissionController::class, 'applyApplication']);
 
-    Route::get('applied-admission-list', [AdmissionController::class, 'appliedAdmissionList']);
-    Route::get('uuc-verify-admission/{id}', [AdmissionController::class, 'verifyAdmission']);
+    Route::get('college-list-ad',[AdmissionController::class,'collegeAdList'])->name('college-list-ad');
+
+    Route::get('applied-admission-lst/{clgId}', [AdmissionController::class, 'appliedAdmissionList'])->name('applied-admission-list-ad');
+    Route::get('uuc-verify-admission/{id}/{clg_id}', [AdmissionController::class, 'verifyAdmission']);
     Route::post('uuc-verify-admission', [AdmissionController::class, 'verifyStudentAdmission']);
-    Route::get('uuc-applicant-admission-details/{id}', [AdmissionController::class, 'admissionDetails']);
+    Route::get('uuc-applicant-admission-details/{id}/{clg_id}', [AdmissionController::class, 'admissionDetails']);
 
     Route::get('academic-notices', [ClgNoticeController::class, 'index']);
     Route::get('view-notice/{id}/{notification_id}', [ClgNoticeController::class, 'show']);

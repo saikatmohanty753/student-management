@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class Student2Application extends Model
+class Student2Details extends Model
 {
  
 use HasFactory;
 
-   protected $table = 'student2_applications';
+   protected $table = 'student2_details';
  public $applicationStatus; 
  public $present_dis_id;
 

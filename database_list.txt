@@ -11,3 +11,6 @@
 10) course_types
 11) notices
 12) notifications
+13) student_users
+14) student_detail_lists
+

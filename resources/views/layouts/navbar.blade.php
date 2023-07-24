@@ -296,20 +296,19 @@
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('applied-admission-list') ? 'active' : '' }}">
-                        <a href="{{ url('/applied-admission-list') }}" title="Admission" data-filter-tags="Admission">
+                    <li class="{{ request()->is('college-list-ad') ? 'active' : '' }}">
+                        <a href="{{ url('/college-list-ad') }}" title="Admission" data-filter-tags="Admission">
                             <span class="nav-link-text" data-i18n="nav.application_admission">Application Status</span>
                         </a>
                     </li>
+                    {{-- <li class="{{ request()->is('applied-admission-list') ? 'active' : '' }}">
+                        <a href="{{ url('/applied-admission-list') }}" title="Admission" data-filter-tags="Admission">
+                            <span class="nav-link-text" data-i18n="nav.application_admission">Application Status</span>
+                        </a>
+                    </li> --}}
 
                 </ul>
             </li>
-            {{-- <li>
-                <a href="{{ url('/applied-admission-list') }}" title="Admission" data-filter-tags="Admission">
-                    <i class="fa-solid fa-book-open-reader"></i>
-                    <span class="nav-link-text" data-i18n="nav.application_admission">Admissions-Old</span>
-                </a>
-            </li> --}}
         @endcan
         @can('uuc-student-module')
             <li class="{{ request()->is('uuc-students*') ? 'active' : '' }}">

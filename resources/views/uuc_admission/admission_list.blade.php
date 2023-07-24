@@ -6,10 +6,7 @@
                 <div class="panel-hdr">
                     <h2>
                         Filter <span class="fw-300"><i>Admission Detail</i></span>
-
                     </h2>
-
-
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
@@ -61,10 +58,12 @@
         });
         function getAdmissionList()
         {
+            var start_date = $('#start_date').val()
+            var to_date = $('#to_date').val()
             $.ajax({
                 url:"{{ route('finalAdmissionListAjax') }}",
                 type:"GET",
-                data:{"_token":"{{ csrf_token() }}"},
+                data:{"_token":"{{ csrf_token() }}","start_date":start_date,"to_date":to_date},
                 dataType:"JSON",
                 success:function(res)
                 {

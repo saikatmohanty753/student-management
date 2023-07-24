@@ -27,23 +27,11 @@
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
                                             <tbody>
-                                                {{-- <tr>
-                                                    <td>
-                                                        Department Name:
-                                                    </td>
-                                                    <td>
-                                                        <strong>PG</strong>
-                                                    </td>
-                                                </tr> --}}
                                                 <tr>
-
                                                     <th style="width:25%;">Course Name:</th>
                                                     <td style="width:25%;">{{ $std_app->course->name }}</td>
                                                     <th style="width:25%;">Name:</th>
                                                     <td style="width:25%;">{{ $personal_information->name }}</td>
-
-
-
                                                 </tr>
                                                 <tr>
                                                     <th style="width:25%;">Father's Name:</th>
@@ -58,9 +46,7 @@
                                                     </td>
                                                     <th>Mobile No</th>
                                                     <td>{{ $personal_information->mobile }}</td>
-
                                                 </tr>
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -85,10 +71,7 @@
                                                 <tr>
                                                     <th>Aadhar No:</th>
                                                     <td>{{ $personal_information->aadhaar_no }}</td>
-
                                                 </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -122,7 +105,6 @@
                                                     <th>Present Address:</th>
                                                     <td>{{ $present_address->present_address }}</td>
                                                 </tr>
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -157,10 +139,7 @@
                                                     <td>{{ $permanent_address->permanent_pin_code }}</td>
                                                     <th>Permanent Address:</th>
                                                     <td>{{ $permanent_address->permanent_address }}</td>
-
                                                 </tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -195,12 +174,7 @@
                                                     <td>{{ $prv_clg_info->course_name }}</td>
                                                     <th>Migration Certificate is availiable</th>
                                                     <td>{{ $prv_clg_info->is_migration_cert == 0 ? 'No' : 'Yes' }}</td>
-
                                                 </tr>
-
-
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -208,7 +182,6 @@
 
                             </div>
                         </div>
-
                         <div
                             class="panel-content d-flex py-2 mt-2 border-faded border-left-0 border-right-0 text-muted bg-primary-500">
                             <h6 class="text-light">
@@ -283,11 +256,7 @@
                                                     </td>
                                                     <td>{{ isset($qualification_details->hsc->percentage) ? $qualification_details->hsc->percentage : 'N/A' }}
                                                     </td>
-
-
-
                                                 </tr>
-
                                                 <tr>
                                                     <td>{{ isset($qualification_details->intermediate->course) ? $qualification_details->intermediate->course : 'N/A' }}
                                                     </td>
@@ -307,12 +276,7 @@
                                                     </td>
                                                     <td>{{ isset($qualification_details->intermediate->percentage) ? $qualification_details->intermediate->percentage : 'N/A' }}
                                                     </td>
-
-
-
                                                 </tr>
-
-
                                                 @if ($std_app->department_id == 2 || $std_app->department_id == 3)
                                                     <tr>
                                                         <td>{{ isset($qualification_details->graduate->course) ? $qualification_details->graduate->course : 'N/A' }}
@@ -384,8 +348,6 @@
                                         </table>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                         <div
@@ -407,8 +369,6 @@
                                                     <th style="width:25%;">Aadhaar Card</th>
                                                     <th style="width:25%;">HSC Certificate</th>
                                                     <th style="width:25%;">Migration Certificate</th>
-
-
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
@@ -428,34 +388,6 @@
                                                             {{ !empty($documents->migration_cert) ? 'View Upload File' : 'Not Uploaded' }}</a>
                                                     </td>
                                                 </tr>
-                                                {{-- <tr>
-                                                    <td>
-                                                        Photo <strong>: <strong>:<a href="javascript:void(0)"
-                                                                    onclick="upload_image_view('{{ asset($documents->profile) }}')">
-                                                                    {{ !empty($documents->profile) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
-                                                    </td>
-                                                    <td>
-                                                        Aadhaar Card <strong>: <strong>:<a href="javascript:void(0)"
-                                                                    onclick="upload_image_view('{{ asset($documents->aadhaar_card) }}')">
-                                                                    {{ !empty($documents->aadhaar_card) ? 'View Upload File' : 'Not Uploaded' }}</a></strong></strong>
-                                                    </td>
-                                                    <td>
-                                                        HSC Certificate<strong>: <strong>:<a href="javascript:void(0)"
-                                                                    onclick="upload_image_view('{{ asset($documents->hsc_cert) }}')">
-                                                                    {{ !empty($documents->hsc_cert) ? 'View Upload File' : 'Not Uploaded' }}</a></strong>
-                                                        </strong>
-                                                    </td>
-                                                    <td>
-                                                        Migration Certificate
-                                                        <strong>:
-                                                            <a href="javascript:void(0)"
-                                                                onclick="upload_image_view('{{ asset($documents->migration_cert) }}')">
-                                                                {{ !empty($documents->migration_cert) ? 'View Upload File' : 'Not Uploaded' }}</a>
-
-                                                        </strong>
-                                                    </td>
-                                                </tr> --}}
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -463,8 +395,6 @@
 
                             </div>
                         </div>
-
-
                         <form action="{{ url('student-admission/apply') }}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{ $std_app->id }}">
@@ -478,17 +408,11 @@
                                 </button>
                             </div>
                         </form>
-
-
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-
-
     <!-- // upload image view -->
     <div class="modal fade" id="upload_image_view" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

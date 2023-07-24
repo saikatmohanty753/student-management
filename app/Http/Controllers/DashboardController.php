@@ -10,15 +10,16 @@ use App\Models\StudentDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use PDF;
 
 class DashboardController extends Controller
 {
     public function dashboard()
     {
-
+        //dd(Auth::user());
+        Log::critical(Auth::user());
         $chk_role = $this->checkUser(Auth::user()->role_id);
-
         if ($chk_role == 0) {
             Auth::logout();
             return redirect('/login')->with('error', 'The username and password you entered did not match our records');

@@ -48,16 +48,16 @@
                                         <th>Caste Category</th>
                                         <td>{{ $personal_information->cast }}</td>
                                     </tr>
-                                                
+
                                             <tr>
                                                 <th>If Specially
                                                     Abled:</th>
                                                 <td>{{ $personal_information->specially_abled == 1 ? 'Yes' : 'No' }}</td>
                                                 <th>Mobile No:</th>
                                                 <td>{{ $personal_information->mobile }}</td>
-                                            
-                                                </tr>    
-                                                
+
+                                                </tr>
+
 
                                             </tbody>
                                         </table>
@@ -75,16 +75,16 @@
                                                 </tr>
                                                 <tr>
                                                     <th>DOB:</th>
-                                                    <td>{{ $personal_information->dob }}</td>
+                                                    <td>{{ date('d-m-Y',strtotime($personal_information->dob)) }}</td>
                                                     <th>Gender:</th>
                                                     <td>{{ $personal_information->gender }}</td>
                                                 </tr>
-                                                
+
                                                <tr>
                                                 <th>Aadhar No:</th>
                                                 <td>{{ $personal_information->aadhaar_no }}</td>
                                                </tr>
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -118,7 +118,7 @@
                                                     <th>Present Address:</th>
                                                     <td>{{ $present_address->present_address }}</td>
                                                 </tr>
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -153,7 +153,7 @@
                                                     <th>Permanent Address:</th>
                                                     <td>{{ $permanent_address->permanent_address }}</td>
                                                 </tr>
-                                               
+
 
                                             </tbody>
                                         </table>
@@ -189,7 +189,7 @@
                                                     <th>Migration Certificate is availiable:</th>
                                                     <td>{{ $prv_clg_info->is_migration_cert == 0 ? 'No' : 'Yes' }}</td>
                                                 </tr>
-                                               
+
 
 
 
@@ -392,7 +392,7 @@
                                                         {{ !empty($documents->migration_cert) ? 'View Upload File' : 'Not Uploaded' }}</a></td>
 
                                                 </tr>
-                                              
+
 
                                             </tbody>
                                         </table>

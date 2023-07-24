@@ -26,7 +26,9 @@
                 <td>{{ @$student_details->name }}</td>
                 <td>{{ @$student_details->gender }}</td>
                 <td>{{ @$student_details->mobile }}</td>
-                <td></td>
+                <td>
+                    <a href="{{ route('admissionDetails',[$student->id]) }}" target="__blank" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                </td>
             </tr>
             @endforeach
             @endif

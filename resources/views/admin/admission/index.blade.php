@@ -55,7 +55,7 @@
                                                 <span
                                                     class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                             </td>
-                                            <td><a href="{{ url('/uuc-verify-admission/' . $item->id) }}"
+                                            <td><a href="{{ url('/uuc-verify-admission/' . $item->id.'/'.$item->clg_id) }}"
                                                     class="btn btn-outline-success waves-effect waves-themed"><i
                                                         class="fa-solid fa-eye"></i></a></td>
                                         </tr>
@@ -104,7 +104,7 @@
                                                 <span
                                                     class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                             </td> --}}
-                                            <td><a href="{{ url('/uuc-applicant-admission-details/' . $item->id) }}"><i
+                                            <td><a href="{{ url('/uuc-applicant-admission-details/' . $item->id.'/'.$item->clg_id) }}"><i
                                                         class="fa-solid fa-eye"></i> View</a></td>
 
                                         </tr>
@@ -149,7 +149,7 @@
                                                 <span
                                                     class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                             </td>
-                                            <td><a href="{{ url('/uuc-applicant-admission-details/' . $item->id) }}"><i
+                                            <td><a href="{{ url('/uuc-applicant-admission-details/' . $item->id.'/'.$item->clg_id) }}"><i
                                                         class="fa-solid fa-eye"></i> View</a></td>
                                         </tr>
                                     @endforeach

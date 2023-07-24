@@ -41,7 +41,7 @@
                                                 class="badge badge-{{ $item->statusColor() }}">{{ $item->applicationStatus() }}</span>
                                         </td>
                                         <td>
-                                            <a href="{{ url('/uuc-verify-admission/' . $item->id) }}"
+                                            <a href="{{ url('/uuc-verify-admission/' . $item->id.'/'.$clg_id) }}"
                                                 class="btn btn-outline-success waves-effect waves-themed"><i
                                                     class="fa-solid fa-eye"></i></a>
                                         </td>

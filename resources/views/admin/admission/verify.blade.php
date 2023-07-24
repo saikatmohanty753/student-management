@@ -414,6 +414,7 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $std_app->id }}">
                                 <input type="hidden" name="course_id" value="{{ $std_app->course_id }}">
+                                <input type="hidden" name="clg_id" value="{{ $clg_id }}">
                                 <div class="row">
                                     <div class="col-sm-12 d-flex">
                                         <div class="col-md-3">
@@ -451,6 +452,7 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $std_app->id }}">
                                 <input type="hidden" name="course_id" value="{{ $std_app->course_id }}">
+                                <input type="hidden" name="clg_id" value="{{ $clg_id }}">
                                 <div class="row">
                                     <div class="col-sm-12 d-flex">
                                         <div class="col-md-3">
