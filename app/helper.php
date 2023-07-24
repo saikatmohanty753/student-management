@@ -14,63 +14,83 @@ if(!function_exists('modelFn'))
         return $object;
     }
 }
-
-function districtName($clg_id)
+if(!function_exists('districtName'))
 {
-    $clg = District::where('id', $clg_id)->first();
-    return $clg->name;
-}
-function applicationStatus($status)
-{
-    $chk = $status;
-    if ($chk == 1) {
-        return $applicationStatus = "Applied";
-    } elseif ($chk == 2) {
-        return  $applicationStatus = "Approved";
-    } elseif ($chk == 3) {
-        return  $applicationStatus = "Rejected";
-    } elseif ($chk == 4) {
-        return  $applicationStatus = "Application-Backed";
-    }elseif ($chk == 5) {
-        return  $applicationStatus = "Apply";
-    }elseif ($chk == 6) {
-        return  $applicationStatus = "Pending for verification";
-    } else {
-        return '';
-    }
-}
-function statusColor($status)
-{
-    $chk = $status;
-    if ($chk == 1) {
-        return "primary";
-    } elseif ($chk == 2) {
-        return  "success";
-    } elseif ($chk == 3) {
-        return  "danger";
-    } else {
-        return  "warning";
+    function districtName($clg_id)
+    {
+        $clg = District::where('id', $clg_id)->first();
+        return $clg->name;
     }
 }
 
-function collegeName($clg_id)
+if(!function_exists('applicationStatus'))
 {
-    $clg = College::where('id', $clg_id)->first();
-    return $clg->name;
+    function applicationStatus($status)
+    {
+        $chk = $status;
+        if ($chk == 1) {
+            return $applicationStatus = "Applied";
+        } elseif ($chk == 2) {
+            return  $applicationStatus = "Approved";
+        } elseif ($chk == 3) {
+            return  $applicationStatus = "Rejected";
+        } elseif ($chk == 4) {
+            return  $applicationStatus = "Application-Backed";
+        }elseif ($chk == 5) {
+            return  $applicationStatus = "Apply";
+        }elseif ($chk == 6) {
+            return  $applicationStatus = "Pending for verification";
+        } else {
+            return '';
+        }
+    }
 }
 
-function presentDis($present_address)
+if(!function_exists('statusColor'))
 {
-    $present_address = json_decode($present_address);
-    $district = District::where('id', $present_address->present_district_id)->first();
-    return $district->district_name;
+    function statusColor($status)
+    {
+        $chk = $status;
+        if ($chk == 1) {
+            return "primary";
+        } elseif ($chk == 2) {
+            return  "success";
+        } elseif ($chk == 3) {
+            return  "danger";
+        } else {
+            return  "warning";
+        }
+    }
 }
-function permanentDis($permanent_address)
-{
-    $present_address = json_decode($permanent_address);
-    $district = District::where('id', $present_address->permanent_district_id)->first();
-    return $district->district_name;
 
+if(!function_exists('collegeName'))
+{
+    function collegeName($clg_id)
+    {
+        $clg = College::where('id', $clg_id)->first();
+        return $clg->name;
+    }
+}
+
+if(!function_exists('presentDis'))
+{
+    function presentDis($present_address)
+    {
+        $present_address = json_decode($present_address);
+        $district = District::where('id', $present_address->present_district_id)->first();
+        return $district->district_name;
+    }
+}
+
+if(!function_exists('permanentDis'))
+{
+    function permanentDis($permanent_address)
+    {
+        $present_address = json_decode($permanent_address);
+        $district = District::where('id', $present_address->permanent_district_id)->first();
+        return $district->district_name;
+
+    }
 }
 
 if(!function_exists('getAdmissionCountSatatus'))

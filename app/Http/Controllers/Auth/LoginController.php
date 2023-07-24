@@ -73,7 +73,7 @@ class LoginController extends Controller
                         {
                             Auth::login($users);
                             session()->put('user',$users);
-                            Log::alert($users);
+                            Log::alert(Auth::user());
                             return redirect()->intended('dashboard');
                         }
                     }
