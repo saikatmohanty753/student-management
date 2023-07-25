@@ -129,8 +129,10 @@ class AdmissionController extends Controller
         **************************************/
         $studentApplicationTable = 'student'.$clgId.'_applications';
         $studentUserTable = 'student'.$clgId.'_users';
+        $studentDetailTable = 'student'.$clgId.'_details';
         $studentApplicationModel = 'Student'.$clgId.'Application';
         $studentUserModel = 'Student'.$clgId.'User';
+        $studentDetailModel = 'Student'.$clgId.'Details';
 
         if (Schema::hasTable($studentApplicationTable)) {
 
@@ -144,26 +146,27 @@ class AdmissionController extends Controller
                     return redirect()->back()->with('error','This student addmission form has been rejected for applied course on '.date('d-m-Y',strtotime($student_check->admission_date)));
                 }
             }
-
-            $users_exists = DB::table('users')->where('is_active',1)->where('email',$request->email);
-            if($users_exists->exists())
-            {
-                $users_exists = $users_exists->first();
-                $student_details = DB::table('student_details')->where('id',$users_exists->student_id);
-                if($student_details->exists())
+            if (Schema::hasTable($studentUserTable)) {
+                $users_exists = DB::table($studentUserTable)->where('is_active',1)->where('email',$request->email);
+                if($users_exists->exists())
                 {
-                    $student_details = $student_details->first();
-                    $arr_batch = $this->getBatch($student_details->batch_year);
-                    if($arr_batch['to'] < date('Y'))
+                    $users_exists = $users_exists->first();
+                    $student_details = DB::table($studentDetailTable)->where('id',$users_exists->student_id);
+                    if($student_details->exists())
                     {
-                        return redirect()->back()->with('error','Enrolled in the applied course in not ended');
+                        $student_details = $student_details->first();
+                        $arr_batch = $this->getBatch($student_details->batch_year);
+                        if($arr_batch['to'] < date('Y'))
+                        {
+                            return redirect()->back()->with('error','Enrolled in the applied course in not ended');
+                        }
+                        if($student_details->course_id == $request->course)
+                        {
+                            return redirect()->back()->with('error','Already enrolled in the applied course');
+                        }
                     }
-                    if($student_details->course_id == $request->course)
-                    {
-                        return redirect()->back()->with('error','Already enrolled in the applied course');
-                    }
+                    return redirect()->back()->with('error','Email id already exists');
                 }
-                return redirect()->back()->with('error','Email id already exists');
             }
         }
         /* **********************************

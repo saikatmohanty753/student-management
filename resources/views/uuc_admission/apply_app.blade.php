@@ -15,7 +15,7 @@
                 <div class="panel-hdr">
                     <h2>
                         Applied Application Details<span
-                            class="badge badge-{{ $student->statusColor() }} position-absolute pos-right">{{ $student->applicationStatus() }}</span>
+                            class="badge badge-{{ $std_app->statusColor() }} position-absolute pos-right">{{ $std_app->applicationStatus() }}</span>
                     </h2>
                 </div>
                 <div class="panel-container show">
@@ -441,6 +441,7 @@
                             <form action="{{ url('university-student-approval') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $std_app->id }}">
+                                <input type="hidden" name="clg_id" value="{{ $std_app->clg_id }}">
                                 <input type="hidden" name="course_id" value="{{ $std_app->course_id }}">
                                 <div class="row">
                                     <div class="col-sm-12 d-flex">
@@ -478,6 +479,7 @@
                             <form action="{{ url('university-student-final-approval') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $std_app->id }}">
+                                <input type="hidden" name="clg_id" value="{{ $std_app->clg_id }}">
                                 <input type="hidden" name="course_id" value="{{ $std_app->course_id }}">
                                 <div class="row">
                                     <div class="col-sm-12 d-flex">

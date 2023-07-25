@@ -60,10 +60,6 @@ class LoginController extends Controller
                 if(!empty($request->clg_id))
                 {
                     $model = 'Student'.$request->clg_id.'User';
-                    if($request->clg_id == 85)
-                    {
-                        $model = 'StudentUser';
-                    }
                     $users = modelFn($model)::where('email',$request->email)->where('is_active',1);
                     if($users->exists())
                     {

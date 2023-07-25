@@ -16,7 +16,9 @@ use App\Models\District;
 use App\Models\Notice;
 use App\Models\StudentAddress;
 use App\Models\StudentApplication;
+use App\Models\Student85Application;
 use App\Models\StudentDetails;
+use App\Models\Student85Details;
 use App\Models\StudentDocuments;
 use App\Models\StudentEducationDetails;
 use App\Models\AdmissionSeat;
@@ -29,6 +31,10 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 use App\Repositories\CustomRepository;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 
 
 class UniversityController extends Controller
@@ -106,41 +112,124 @@ class UniversityController extends Controller
         if ($this->checkSeatAvl($clgId, $request->course) == 0) {
             return redirect()->back()->with('error', 'You have already fill up all the seats');
         }
-        $student_check = DB::table('student_applications')->where('email',$request->email)->where('status',3);
 
-        if($student_check->exists())
-        {
-            $student_check = $student_check->first();
-            if($this->getDiffYear($student_check->admission_date,date('Y-m-d')) < 1 && $request->course == $student_check->course_id)
-            {
-                return redirect()->back()->with('error','Your addmission form has been rejected for the applied course on '.date('d-m-Y',strtotime($student_check->admission_date)));
-            }
-        }
+        $studentApplicationTable = 'student'.$clgId.'_applications';
+        $studentUserTable = 'student'.$clgId.'_users';
+        $studentDetailTable = 'student'.$clgId.'_details';
+        $studentApplicationModel = 'Student'.$clgId.'Application';
+        $studentUserModel = 'Student'.$clgId.'User';
+        $studentDetailModel = 'Student'.$clgId.'Details';
 
-        $users_exists = DB::table('users')->where('is_active',1)->where('email',$request->email);
-        if($users_exists->exists())
-        {
-            $users_exists = $users_exists->first();
-            $student_details = DB::table('student_details')->where('id',$users_exists->student_id);
-            if($student_details->exists())
+        if (Schema::hasTable($studentApplicationTable)) {
+
+            $student_check = DB::table($studentApplicationTable)->where('email',$request->email)->where('status',3);
+
+            if($student_check->exists())
             {
-                $student_details = $student_details->first();
-                $arr_batch = $this->getBatch($student_details->batch_year);
-                if($arr_batch['to'] < date('Y'))
+                $student_check = $student_check->first();
+                if($this->getDiffYear($student_check->admission_date,date('Y-m-d')) < 1 && $request->course == $student_check->course_id)
                 {
-                    return redirect()->back()->with('error','Enrolled in the applied course in not ended');
-                }
-                if($student_details->course_id == $request->course)
-                {
-                    return redirect()->back()->with('error','Already enrolled in the applied course');
+                    return redirect()->back()->with('error','This student addmission form has been rejected for applied course on '.date('d-m-Y',strtotime($student_check->admission_date)));
                 }
             }
-            return redirect()->back()->with('error','Email id already exists');
+            if (Schema::hasTable($studentUserTable)) {
+                $users_exists = DB::table($studentUserTable)->where('is_active',1)->where('email',$request->email);
+                if($users_exists->exists())
+                {
+                    $users_exists = $users_exists->first();
+                    $student_details = DB::table($studentDetailTable)->where('id',$users_exists->student_id);
+                    if($student_details->exists())
+                    {
+                        $student_details = $student_details->first();
+                        $arr_batch = $this->getBatch($student_details->batch_year);
+                        if($arr_batch['to'] < date('Y'))
+                        {
+                            return redirect()->back()->with('error','Enrolled in the applied course in not ended');
+                        }
+                        if($student_details->course_id == $request->course)
+                        {
+                            return redirect()->back()->with('error','Already enrolled in the applied course');
+                        }
+                    }
+                    return redirect()->back()->with('error','Email id already exists');
+                }
+            }
         }
 
         $course = Course::find($request->course);
+        if (!Schema::hasTable($studentApplicationTable)) {
+            Schema::create($studentApplicationTable, function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('academic_year','200')->nullable();
+                $table->date('admission_date')->nullable();
+                $table->string('clg_id','200')->nullable();
+                $table->string('email','200')->nullable();
+                $table->tinyInteger('is_university')->default(0);
+                $table->integer('department_id')->unsigned()->nullable();
+                $table->integer('course_id')->unsigned()->nullable();
+                $table->text('personal_information')->nullable();
+                $table->text('present_address')->nullable();
+                $table->text('permanent_address')->nullable();
+                $table->text('prv_clg_info')->nullable();
+                $table->text('qualification_details')->nullable();
+                $table->text('documents')->nullable();
+                $table->enum('app_status', ['0', '1'])->nullable();
+                $table->integer('status')->unsigned()->nullable();
+                $table->text('remarks')->nullable();
+                $table->text('remarks_app_university')->nullable();
+                $table->string('application_no','200')->nullable();
+                $table->string('app_count_no','200')->nullable();
+                $table->string('descipline','200')->nullable();
+                $table->timestamps();
+            });
+            $modelPath = app_path('Models'.'\\'.$studentApplicationModel . '.php');
+            $modelTemp = $this->modelTemplate($studentApplicationModel,$studentApplicationTable);
+            if (!File::exists($modelPath)) {
+                File::put($modelPath, $modelTemp);
+            }
+            if (Schema::hasTable($studentApplicationTable)) {
+                $liststudent = new StudentDetailList;
+                $liststudent->clg_id = $clgId;
+                $liststudent->table_name = $studentApplicationTable;
+                $liststudent->model = $studentApplicationModel;
+                $liststudent->type = 2;
+                $liststudent->save();
+            }
+        }
+        if (!Schema::hasTable($studentUserTable)) {
+            Schema::create($studentUserTable, function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name','200')->nullable();
+                $table->string('email')->unique()->nullable();
+                $table->integer('role_id')->unsigned()->nullable();
+                $table->string('clg_id','200')->nullable();
+                $table->tinyInteger('is_active')->default(1);
+                $table->timestamp('email_verified_at')->nullable();
+                $table->string('password', 200)->nullable();
+                $table->string('remember_token','200')->nullable();
+                $table->string('batch_year','200')->nullable();
+                $table->bigInteger('mob_no')->nullable();
+                $table->integer('clg_user_id')->unsigned()->nullable();
+                $table->integer('student_id')->unsigned()->nullable();
+                $table->timestamps();
+            });
+            $modelPath = app_path('Models'.'\\'.$studentUserModel . '.php');
+            $modelTemp = $this->modelUserTemplate($studentUserModel,$studentUserTable);
+            if (!File::exists($modelPath)) {
+                File::put($modelPath, $modelTemp);
+            }
+        }
+        if (Schema::hasTable($studentUserTable)) {
+            $liststudent = new StudentDetailList;
+            $liststudent->clg_id = $clgId;
+            $liststudent->table_name = $studentUserTable;
+            $liststudent->model = $studentUserModel;
+            $liststudent->type = 1;
+            $liststudent->save();
+        }
+        $class = modelFn($studentApplicationModel);
         $email = $request->email;
-        $student = new StudentApplication();
+        $student = new $class;
         $student->academic_year = date('Y');
         $student->admission_date = Carbon::now();
         $student->clg_id = $clgId;
@@ -360,8 +449,9 @@ class UniversityController extends Controller
 
     public function verifyStudentAdmission(Request $request)
     {
-
-        $student_app = StudentApplication::where('id', $request->id)->first();
+        $clgId = $request->clg_id;
+        $class = 'Student'.$clgId.'Application';
+        $student_app = modelFn($class)::where('id', $request->id)->first();
         if ($request->status == 6) {
             $email = $student_app->email;
             $data = array(
@@ -414,7 +504,7 @@ class UniversityController extends Controller
 
     public function getEmailStatus(Request $request)
     {
-        $student_check = DB::table('student_applications')->where('email',$request->email)->where('status',3);
+        $student_check = DB::table('student85_applications')->where('email',$request->email)->where('status',3);
 
         if($student_check->exists())
         {
@@ -429,7 +519,7 @@ class UniversityController extends Controller
         if($users_exists->exists())
         {
             $users_exists = $users_exists->first();
-            $student_details = DB::table('student_details')->where('id',$users_exists->student_id);
+            $student_details = DB::table('student85_details')->where('id',$users_exists->student_id);
             if($student_details->exists())
             {
                 $student_details = $student_details->first();
@@ -463,8 +553,12 @@ class UniversityController extends Controller
                 $year4 = Carbon::now()->addYear(1);
                 $year = date('Y', strtotime($year4));
             }
+            $clgId = $request->clg_id;
+            $class = 'Student'.$clgId.'Application';
+            $classTable = 'student'.$clgId.'_applications';
+            $classUser = 'Student'.$clgId.'User';
+            $std_app = modelFn($class)::where('id', $request->id)->first();
 
-            $std_app = StudentApplication::where('id', $request->id)->first();
             $std_app->remarks = $request->remarks;
             $std_app->status = $request->status;
             $std_app->save();
@@ -475,10 +569,61 @@ class UniversityController extends Controller
             $qualification = json_decode($std_app->qualification_details);
             $documents = json_decode($std_app->documents);
 
+            $studentDetailsTable = 'student'.$std_app->clg_id.'_details';
+            $studentDetailsModel = 'Student'.$std_app->clg_id.'Details';
+
+            if (!Schema::hasTable($studentDetailsTable)) {
+                Schema::create($studentDetailsTable, function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->string('clg_id')->nullable();
+                    $table->integer('student_id')->nullable();
+                    $table->integer('current_semester')->nullable();
+                    $table->integer('user_id')->nullable();
+                    $table->integer('department_id')->nullable();
+                    $table->integer('course_id')->nullable();
+                    $table->string('name')->nullable();
+                    $table->string('email')->nullable();
+                    $table->string('mobile')->nullable();
+                    $table->string('mother_name')->nullable();
+                    $table->string('father_name')->nullable();
+                    $table->string('gender')->nullable();
+                    $table->date('dob')->nullable();
+                    $table->string('cast')->nullable();
+                    $table->enum('specially_abled', ['0', '1'])->default('0');
+                    $table->string('aadhaar_no')->nullable();
+                    $table->string('roll_no')->nullable();
+                    $table->string('regd_no')->nullable();
+                    $table->enum('regd_no_issued', ['0', '1'])->default('0');
+                    $table->enum('app_status', ['0', '1'])->default('0');
+                    $table->integer('status')->nullable();
+                    $table->text('remarks')->nullable();
+                    $table->string('batch_year')->nullable();
+                    $table->string('admission_year')->nullable();
+                    $table->string('profile_picture')->nullable();
+                    $table->string('addmission_exam')->nullable();
+                    $table->string('completed_semester')->nullable();
+                    $table->timestamps();
+                });
+                $modelPath = app_path('Models'.'\\'.$studentDetailsModel . '.php');
+                $modelTemp = $this->modelTemplate($studentDetailsModel,$studentDetailsTable);
+                if (!File::exists($modelPath)) {
+                    File::put($modelPath, $modelTemp);
+                }
+                if (Schema::hasTable($studentDetailsTable)) {
+                    $liststudent = new StudentDetailList;
+                    $liststudent->clg_id = $std_app->clg_id;
+                    $liststudent->table_name = $studentDetailsTable;
+                    $liststudent->model = $studentDetailsModel;
+                    $liststudent->type = 4;
+                    $liststudent->save();
+                }
+            }
+
             $user_id = '';
-            $users = StudentUser::where('email', $std_app->email);
+            $users = modelFn($classUser)::where('email', $std_app->email);
             if (!$users->exists()) {
-                $user = new StudentUser();
+                $userModel = modelFn($classUser);
+                $user = new $userModel;
                 $user->name = $info->name;
                 $user->email = $info->email;
                 $user->mob_no = $info->mobile;
@@ -503,7 +648,6 @@ class UniversityController extends Controller
                     $student_logs->updated_on = date('Y-m-d h:i:s');
                     $student_logs->save();
                 }
-                $user->assignRole(3);
                 $data = [
                     "name" => $user->name,
                     "user_name" => $user->email,
@@ -517,7 +661,7 @@ class UniversityController extends Controller
             }else{
                 $users = $users->first();
                 $user_id = $users->id;
-                $student_details = DB::table('student_applications')->where('id',$users->student_id)->first();
+                $student_details = DB::table($classTable)->where('id',$users->student_id)->first();
 
                 if($std_app->course_id != $student_details->course_id)
                 {
@@ -545,7 +689,9 @@ class UniversityController extends Controller
                     }
                 }
             }
-            $student = new StudentDetails();
+
+            $detailClass = modelFn($studentDetailsModel);
+            $student = new $detailClass;
             $student->clg_id = $std_app->clg_id;
             $student->department_id = $std_app->department_id;
             $student->course_id = $std_app->course_id;
@@ -566,7 +712,7 @@ class UniversityController extends Controller
             $student->batch_year = date('Y') . '-' . $year;
             $student->save();
 
-            $std = StudentDetails::where('regd_no', '!=', null)->latest()->first();
+            $std = modelFn($studentDetailsModel)::where('regd_no', '!=', null)->latest()->first();
             if ($std) {
                 $regdNo = $std->regd_no;
                 $regdNo = substr($regdNo, 5);
@@ -577,12 +723,93 @@ class UniversityController extends Controller
                 $regdNo = str_pad($student->id, 5, '0', STR_PAD_LEFT);
                 $regdNo = 'UUC' . date('y') . $regdNo;
             }
-            StudentDetails::where('id', $student->id)->update(['regd_no' => $regdNo]);
+            modelFn($studentDetailsModel)::where('id', $student->id)->update(['regd_no' => $regdNo]);
 
             $this->generatePDF($info->email, $info->name, $regdNo, $request->issued, $std_app->clg_id, date('Y') . '-' . $year);
 
             $std_id = $request->id;
-            $address = new StudentAddress();
+
+            $studentAddressTable = 'student'.$request->clg_id.'_addresses';
+            $studentAddressModel = 'Student'.$request->clg_id.'Address';
+            if (!Schema::hasTable($studentAddressTable)) {
+                Schema::create($studentAddressTable, function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->integer('student_id')->nullable();
+                    $table->integer('user_id')->nullable();
+                    $table->string('present_state')->nullable();
+                    $table->string('present_district_id')->nullable();
+                    $table->string('present_pin_code')->nullable();
+                    $table->text('present_address')->nullable();
+                    $table->string('permanent_state')->nullable();
+                    $table->string('permanent_district_id')->nullable();
+                    $table->string('permanent_pin_code')->nullable();
+                    $table->text('permanent_address')->nullable();
+                    $table->timestamps();
+                });
+                $modelPath = app_path('Models'.'\\'.$studentAddressModel . '.php');
+                $modelTemp = $this->modelAdressTemplate($studentAddressModel,$studentAddressTable);
+                if (!File::exists($modelPath)) {
+                    File::put($modelPath, $modelTemp);
+                }
+                if (Schema::hasTable($studentAddressTable)) {
+                    $liststudent = new StudentDetailList;
+                    $liststudent->clg_id = $request->clg_id;
+                    $liststudent->table_name = $studentAddressTable;
+                    $liststudent->model = $studentAddressModel;
+                    $liststudent->type = 3;
+                    $liststudent->save();
+                }
+            }
+            $studentEduTable = 'student'.$request->clg_id.'_education_details';
+            $studentEduModel = 'Student'.$request->clg_id.'EducationDetails';
+            if (!Schema::hasTable($studentEduTable)) {
+                Schema::create($studentEduTable, function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->integer('student_id')->nullable();
+                    $table->integer('user_id')->nullable();
+                    $table->string('clg_name')->nullable();
+                    $table->string('year_of_passing')->nullable();
+                    $table->string('course_name')->nullable();
+                    $table->text('qualification')->nullable();
+                    $table->enum('is_migration_cert', ['0', '1'])->default('0');
+                    $table->timestamps();
+                });
+                Artisan::call('make:model '.$studentEduModel);
+                if (Schema::hasTable($studentEduTable)) {
+                    $liststudent = new StudentDetailList;
+                    $liststudent->clg_id = $request->clg_id;
+                    $liststudent->table_name = $studentEduTable;
+                    $liststudent->model = $studentEduModel;
+                    $liststudent->type = 5;
+                    $liststudent->save();
+                }
+            }
+            $studentDocTable = 'student'.$request->clg_id.'_documents';
+            $studentDocModel = 'Student'.$request->clg_id.'Documents';
+            if (!Schema::hasTable($studentDocTable)) {
+                Schema::create($studentDocTable, function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->integer('student_id')->nullable();
+                    $table->integer('user_id')->nullable();
+                    $table->text('photo')->nullable();
+                    $table->text('aadhaar_card')->nullable();
+                    $table->text('hsc_cert')->nullable();
+                    $table->text('migration_cert')->nullable();
+                    $table->timestamps();
+                });
+                Artisan::call('make:model '.$studentDocModel);
+                if (Schema::hasTable($studentDocTable)) {
+                    $liststudent = new StudentDetailList;
+                    $liststudent->clg_id = $request->clg_id;
+                    $liststudent->table_name = $studentDocTable;
+                    $liststudent->model = $studentDocModel;
+                    $liststudent->type = 6;
+                    $liststudent->save();
+                }
+            }
+
+            $adressClass = modelFn($studentAddressModel);
+            $address = new $adressClass;
             $address->student_id = $std_id;
             $address->user_id = $user_id;
             $address->present_state = $prs_address->present_state;
@@ -595,7 +822,8 @@ class UniversityController extends Controller
             $address->permanent_address = $per_address->permanent_address;
             $address->save();
 
-            $education = new StudentEducationDetails();
+            $eduClass = modelFn($studentEduModel);
+            $education = new $eduClass;
             $education->student_id = $std_id;
             $education->user_id = $user_id;
             $education->clg_name = $clg_info->clg_name;
@@ -604,7 +832,9 @@ class UniversityController extends Controller
             $education->is_migration_cert = $clg_info->is_migration_cert;
             $education->qualification = json_encode($qualification);
             $education->save();
-            $doc = new StudentDocuments();
+
+            $docClass = modelFn($studentDocModel);
+            $doc = new $docClass;
             $doc->student_id = $std_id;
             $doc->user_id = $user_id;
             $doc->photo = $documents->profile;
@@ -614,7 +844,7 @@ class UniversityController extends Controller
             $doc->save();
         } else {
 
-            $student_app = StudentApplication::where('id', $request->id)->first();
+            $student_app = modelFn($class)::where('id', $request->id)->first();
             $student_app->remarks = $request->remarks;
             $student_app->status = $request->status;
             $student_app->save();
@@ -667,7 +897,7 @@ class UniversityController extends Controller
             ->groupBy('course_id')
             ->pluck('course_id')
             ->all(); */
-        $clg_courses = DB::table('student_applications')->where('is_university',1)->pluck('course_id')->toArray();
+        $clg_courses = DB::table('student85_applications')->where('is_university',1)->pluck('course_id')->toArray();
         $clg_courses = array_unique($clg_courses);
         $department = CourseFor::where('id',2)->get();
         $course = Course::whereIn('id', $clg_courses)->get();
@@ -677,7 +907,7 @@ class UniversityController extends Controller
     {
         // return $id;
         $district = District::get();
-        $std_app = StudentApplication::find($id);
+        $std_app = Student85Application::find($id);
         $personal_information = json_decode($std_app->personal_information);
         $present_address = json_decode($std_app->present_address);
         $present_address->district = $std_app->presentDis();
@@ -687,7 +917,7 @@ class UniversityController extends Controller
         $documents = json_decode($std_app->documents);
         $qualification_details = json_decode($std_app->qualification_details);
 
-        $clg_courses = DB::table('student_applications')->where('is_university',1)->pluck('clg_id')->toArray();
+        $clg_courses = DB::table('student85_applications')->where('is_university',1)->pluck('clg_id')->toArray();
         $clg_courses = array_unique($clg_courses);
 
         $course = DB::table('admission_seats')->select('admission_seats.*', 'courses.name')
@@ -697,36 +927,31 @@ class UniversityController extends Controller
             ->where('courses.course_for', 2)
             ->get();
 
-        $student = StudentDetails::where('id', $id)->first();
+        //$student = Student85Details::where('id', $id)->first();
 
-        // $district = District::get();
-        // $documents = StudentDocuments::where('id', $id)->first();
-        // $student  = StudentDetails::where('id', $id)->first();
-        // $education = StudentEducationDetails::where('id', $id)->first();
-        // $address = StudentAddress::where('id', $id)->first();
-        return view('uuc_admission.apply_app', compact('std_app', 'present_address', 'personal_information', 'permanent_address', 'course', 'district', 'prv_clg_info', 'qualification_details', 'documents', 'student'));
+        return view('uuc_admission.apply_app', compact('std_app', 'present_address', 'personal_information', 'permanent_address', 'course', 'district', 'prv_clg_info', 'qualification_details', 'documents'));
     }
     public function studentadmissionList(Request $request)
     {
 
         if ($request->ajax()) {
             $clgId = Auth::user()->clg_user_id;
-            $data = StudentApplication::select('student_applications.*', 'dep.course_for', 'course.name')
-                ->join('course_fors as dep', 'dep.id', '=', 'student_applications.department_id')
-                ->join('courses as course', 'course.id', '=', 'student_applications.course_id')
+            $data = Student85Application::select('student85_applications.*', 'dep.course_for', 'course.name')
+                ->join('course_fors as dep', 'dep.id', '=', 'student85_applications.department_id')
+                ->join('courses as course', 'course.id', '=', 'student85_applications.course_id')
                 /* ->where('clg_id', $clgId) */
                 ->where('academic_year', date('Y'))
-                ->where('student_applications.is_university', 1)
-                ->whereIn('student_applications.status', [1,5,6]);
+                ->where('student85_applications.is_university', 1)
+                ->whereIn('student85_applications.status', [1,5,6]);
 
             if ($request->get('dep') != '') {
-                $data->where('student_applications.department_id', $request->get('dep'));
+                $data->where('student85_applications.department_id', $request->get('dep'));
             }
             if ($request->get('course') != '') {
-                $data->where('student_applications.course_id', $request->get('course'));
+                $data->where('student85_applications.course_id', $request->get('course'));
             }
             if ($request->get('session') != '') {
-                $data->where('student_applications.academic_year', $request->get('session'));
+                $data->where('student85_applications.academic_year', $request->get('session'));
             }
 
             $data = $data->orderBy('id','desc')->get();
@@ -750,7 +975,7 @@ class UniversityController extends Controller
 
     public function finalAdmissionListAjax(Request $request)
     {
-        $student_data = StudentApplication::where('is_university',1)->where('status',2)->orderBy('id','desc')->get();
+        $student_data = Student85Application::where('is_university',1)->where('status',2)->orderBy('id','desc')->get();
         $course = DB::table('courses')->pluck('name','id');
         $department = DB::table('course_fors')->pluck('course_for','id');
         return response()->json([view('uuc_admission.admission_list_ajax',compact('student_data','course','department'))->render()]);
@@ -758,7 +983,7 @@ class UniversityController extends Controller
 
     public function admissionDetails(Request $request, $id)
     {
-        $std_app = StudentApplication::find($id);
+        $std_app = Student85Application::find($id);
         $clg_id = $std_app->clg_id;
         $personal_information = json_decode($std_app->personal_information);
         $present_address = json_decode($std_app->present_address);
@@ -770,5 +995,23 @@ class UniversityController extends Controller
         $qualification_details = json_decode($std_app->qualification_details);
 
         return view('admin.admission.view', compact('id', 'std_app', 'personal_information', 'present_address', 'permanent_address', 'prv_clg_info', 'documents', 'qualification_details'));
+    }
+
+    public function modelTemplate($modelName,$tableName)
+    {
+        $modelTemplate = "<?php\n\nnamespace App\Models;\n\nuse Illuminate\Database\Eloquent\Model;\nuse Illuminate\Database\Eloquent\Factories\HasFactory;\nuse Illuminate\Database\Eloquent\Casts\Attribute;\n\nclass {$modelName} extends Model\n{\n \nuse HasFactory;\n\n   protected \$table = '{$tableName}';\n public \$applicationStatus; \n public \$present_dis_id;\n\n public function course(){\n return \$this->belongsTo(Course::class, 'course_id', 'id');\n}\n\n public function department(){\n\n return \$this->belongsTo(CourseFor::class, 'department_id', 'id');\n}\n public function districtName(){\n \$clg = District::where('id', \$this->clg_id)->first();\n return \$clg->name;\n} \n public function permanentDis(){\n \$present_address = json_decode(\$this->permanent_address);\n \$district = District::where('id', \$present_address->present_district_id)->first();\n return \$district->district_name;\n } \n public function presentDis(){\n \$present_address = json_decode(\$this->present_address);\n \$district = District::where('id', \$present_address->present_district_id)->first();\n return \$district->district_name;\n} \n public function collegeName(){\n \$clg = College::where('id', \$this->clg_id)->first();\n return \$clg->name;\n }\n public function applicationStatus(){\n \$chk = \$this->status;\n if (\$chk == 1) {\n return \$this->applicationStatus = 'Applied';\n } elseif (\$chk == 2) {\n return  \$this->applicationStatus = 'Approved';\n } elseif (\$chk == 3) {\n return  \$this->applicationStatus = 'Rejected';\n } elseif (\$chk == 4) {\n return  \$this->applicationStatus = 'Application-Backed';\n }elseif (\$chk == 5) {\n return  \$this->applicationStatus = 'Apply';\n }elseif (\$chk == 6) {\n return  \$this->applicationStatus = 'Pending for verification';\n } else {\n return '';\n }\n } \n public function statusColor(){\n \$chk = \$this->status;\n \tif (\$chk == 1) {\n\t return 'primary';\n} elseif (\$chk == 2) {\n \t return  'success';\n \t } elseif (\$chk == 3) {\n \t return  'danger'; } else {\n \treturn  'warning';\n}\n} \n}\n";
+        return $modelTemplate;
+    }
+
+    public function modelAdressTemplate($modelName,$tableName)
+    {
+        $modelTemplate = "<?php\n\nnamespace App\Models;\n\nuse Illuminate\Database\Eloquent\Model;\nuse Illuminate\Database\Eloquent\Factories\HasFactory;\nuse Illuminate\Database\Eloquent\Casts\Attribute;\n\nclass {$modelName} extends Model\n{\n \nuse HasFactory;\n\n   protected \$table = '{$tableName}';\n public function presentDistrict(){\n return \$this->belongsTo(\District::class, 'present_district_id', 'id');\n}\n\n public function permanentDistrict(){\n return \$this->belongsTo(District::class, 'permanent_district_id', 'id');\n}  \n}\n";
+        return $modelTemplate;
+    }
+
+    public function modelUserTemplate($modelName,$tableName)
+    {
+        $modelTemplate = "<?php\n\nnamespace App\Models;\n\nuse Illuminate\Database\Eloquent\Model;\nuse Illuminate\Database\Eloquent\Factories\HasFactory;\nuse Illuminate\Database\Eloquent\Casts\Attribute; \n use Illuminate\Foundation\Auth\User as Authenticatable; \n use Illuminate\Notifications\Notifiable;\nuse Illuminate\Support\Facades\Hash;\nuse Spatie\Permission\Traits\HasRoles; \n\nclass {$modelName} extends Authenticatable\n{\n \nuse HasFactory, Notifiable, HasRoles;\n\n   protected \$table = '{$tableName}';\n public function role():BelongsToMany\n{\n\t return \$this->BelongsToMany(Role::class, 'role_id', 'id');\n}\n public function userdetails(){\n \t return \$this->belongsTo(Role::class, 'role_id', 'id');\n} \n}\n";
+        return $modelTemplate;
     }
 }

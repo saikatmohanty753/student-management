@@ -16,7 +16,7 @@
             @if(!empty($student_data))
             @foreach ($student_data as $key=>$student)
             @php
-                $student_details = DB::table('student_details')->where('student_id',$student->id)->first();
+                $student_details = DB::table('student85_details')->where('student_id',$student->id)->first();
             @endphp
             <tr>
                 <td>{{ $key+1 }}</td>
