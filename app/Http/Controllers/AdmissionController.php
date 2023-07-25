@@ -1130,9 +1130,6 @@ class AdmissionController extends Controller
 
     public function generatePDF($email, $name, $reg_no, $issued, $clg_id, $session_yr)
     {
-
-        // dd('123');
-
         $clg = College::where('id', $clg_id)->first(['name', 'city']);
         $city = City::where('id', $clg->city)->first(['city_name']);
         $data = ['email' => $email, 'name' => $name, 'reg_no' => $reg_no, 'clg' => $clg->name, 'city' => $city->city_name, 'session_yr' => $session_yr];
@@ -1147,8 +1144,7 @@ class AdmissionController extends Controller
             mkdir($path, 0777, true);
         }
         file_put_contents('registration_card/' . $reg_no . '.pdf', $pdf->output());
-        // $to_email = $user['to'];
-        // Mail::to($to_email)->send(new SendPDFMail($pdf));
+
         if ($issued == 1) {
             FacadesMail::send('pdf.test', $data, function ($message) use ($pdf, $user) {
                 $message->to($user['to'])
@@ -1176,7 +1172,6 @@ class AdmissionController extends Controller
     }
     public function appliedApplication($id)
     {
-        // return $id;
         $district = District::get();
         $clgId = Auth::user()->clg_user_id;
         $class = 'Student'.$clgId.'Application';
