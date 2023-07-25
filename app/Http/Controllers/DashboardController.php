@@ -84,7 +84,7 @@ class DashboardController extends Controller
             ->first();
         $std_id = Auth::user()->student_id;
         $class = 'Student'.Auth::user()->clg_id.'Details';
-        $student = modelFn($class)::find($std_id);
+        $student = modelFn($class)::where('id',$std_id)->orderBy('id','desc')->first();
 
         return view('dashboard.student.index', compact('student', 'collegeName'));
     }
