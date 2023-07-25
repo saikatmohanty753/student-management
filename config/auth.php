@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'dynamic_user',
         ],
     ],
 
@@ -60,8 +60,8 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
+        'dynamic_user' => [
+            'driver' => 'dynamic_user',
             'model' => App\Models\User::class,
         ],
 

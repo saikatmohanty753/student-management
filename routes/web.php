@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentPersonalController;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,6 @@ use App\Http\Controllers\UniversityController;
 */
 
 Route::get('/', function () {
-
     if (Auth::check()) {
         return redirect(RouteServiceProvider::HOME);
     }
@@ -48,9 +48,6 @@ Route::get('/', function () {
 Route::get('test-admission', [AdmissionController::class, 'AdmissionSeat']);
 
 
-// Route::get('/student, function () {
-//     return view('colleges.create_user');
-// });
 Route::get('/student', function () {
     return view('studentportal.index');
 });
@@ -75,7 +72,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth', 'prevent-back']], function () {
-    Route::get('dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dash-login');
     Route::post('changepassword', [UserController::class, 'changepassword']);
     Route::get('profiledetails/{id}', [UserController::class, 'profiledetails']);
     Route::resource('users', UserController::class);
@@ -171,8 +168,6 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
 
     Route::resource('uuc-students', UucStudentController::class);
     Route::get('uuc-student', [UucStudentController::class, 'uucStudent']);
-
-    Route::get('dashboard/{id}', [AdmissionController::class, 'student']);
 
     Route::post('/update-profile-image', [AjaxController::class, 'updateProfileImage']);
 

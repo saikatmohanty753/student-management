@@ -1291,25 +1291,6 @@ class AdmissionController extends Controller
         return $dep_id;
     }
 
-    // public function student()
-    // {
-    //     $student = User::select('col.name as college')
-    //     ->leftjoin('colleges as col','users.clg_id','=','col.id')
-    //     ->get();
-    //     return view('dashboard.student.index',compact('student'));
-    // }
-
-    /*  public function student($id)
-{
-$collegeName = College::select('name')
-->where('id', Auth::user()->clg_id)
-->pluck('name')
-->first();
-$student=StudentDetails::find($id);
-
-return view('dashboard.student.index', compact('student','collegeName'));
-} */
-
     public function modelTemplate($modelName,$tableName)
     {
         $modelTemplate = "<?php\n\nnamespace App\Models;\n\nuse Illuminate\Database\Eloquent\Model;\nuse Illuminate\Database\Eloquent\Factories\HasFactory;\nuse Illuminate\Database\Eloquent\Casts\Attribute;\n\nclass {$modelName} extends Model\n{\n \nuse HasFactory;\n\n   protected \$table = '{$tableName}';\n public \$applicationStatus; \n public \$present_dis_id;\n\n public function course(){\n return \$this->belongsTo(Course::class, 'course_id', 'id');\n}\n\n public function department(){\n\n return \$this->belongsTo(CourseFor::class, 'department_id', 'id');\n}\n public function districtName(){\n \$clg = District::where('id', \$this->clg_id)->first();\n return \$clg->name;\n} \n public function permanentDis(){\n \$present_address = json_decode(\$this->permanent_address);\n \$district = District::where('id', \$present_address->present_district_id)->first();\n return \$district->district_name;\n } \n public function presentDis(){\n \$present_address = json_decode(\$this->present_address);\n \$district = District::where('id', \$present_address->present_district_id)->first();\n return \$district->district_name;\n} \n public function collegeName(){\n \$clg = College::where('id', \$this->clg_id)->first();\n return \$clg->name;\n }\n public function applicationStatus(){\n \$chk = \$this->status;\n if (\$chk == 1) {\n return \$this->applicationStatus = 'Applied';\n } elseif (\$chk == 2) {\n return  \$this->applicationStatus = 'Approved';\n } elseif (\$chk == 3) {\n return  \$this->applicationStatus = 'Rejected';\n } elseif (\$chk == 4) {\n return  \$this->applicationStatus = 'Application-Backed';\n }elseif (\$chk == 5) {\n return  \$this->applicationStatus = 'Apply';\n }elseif (\$chk == 6) {\n return  \$this->applicationStatus = 'Pending for verification';\n } else {\n return '';\n }\n } \n public function statusColor(){\n \$chk = \$this->status;\n \tif (\$chk == 1) {\n\t return 'primary';\n} elseif (\$chk == 2) {\n \t return  'success';\n \t } elseif (\$chk == 3) {\n \t return  'danger'; } else {\n \treturn  'warning';\n}\n} \n}\n";
@@ -1332,5 +1313,9 @@ return view('dashboard.student.index', compact('student','collegeName'));
     {
         $colleges = DB::table('colleges')->where('status',1)->orderBy('name','asc')->get();
         return view('admission.college_admission_list',compact('colleges'));
+    }
+    public function dashStudent()
+    {
+        dd(Auth::user());
     }
 }

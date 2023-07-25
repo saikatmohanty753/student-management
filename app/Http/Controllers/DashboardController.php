@@ -19,6 +19,7 @@ class DashboardController extends Controller
     {
         //dd(Auth::user());
         Log::critical(Auth::user());
+        Log::info(session()->get('user'));
         $chk_role = $this->checkUser(Auth::user()->role_id);
         if ($chk_role == 0) {
             Auth::logout();
@@ -77,16 +78,13 @@ class DashboardController extends Controller
     }
     public function studentDashboard()
     {
-
-
-        // return $pdf->download('registration_card/UUC2300010.pdf');
-
         $collegeName = College::select('name')
             ->where('id', Auth::user()->clg_id)
             ->pluck('name')
             ->first();
         $std_id = Auth::user()->student_id;
-        $student = StudentDetails::find($std_id);
+        $class = 'Student'.Auth::user()->clg_id.'Details';
+        $student = modelFn($class)::find($std_id);
 
         return view('dashboard.student.index', compact('student', 'collegeName'));
     }

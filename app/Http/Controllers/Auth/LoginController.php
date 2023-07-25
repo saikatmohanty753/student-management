@@ -51,9 +51,8 @@ class LoginController extends Controller
                 'password' => ['required'],
             ]);
         $credentials['is_active'] = 1;
-        /* $users = DB::table('users')->where('email',$request->email)->first();
-        dump(Hash::check($request->password, $users->password),$request->password,$credentials,Auth::attempt($credentials));
-        dd($users); */
+        $credentials['type'] = $request->type;
+        $credentials['clg_id'] = (!empty($request->clg_id))?$request->clg_id:0;
         if(!empty($request->type))
         {
             if($request->type == 1)
@@ -69,17 +68,24 @@ class LoginController extends Controller
                     if($users->exists())
                     {
                         $users = $users->first();
-                        if(Hash::check($request->password, $users->password))
-                        {
-                            Auth::login($users);
-                            session()->put('user',$users);
-                            Log::alert(Auth::user());
+                        if (Auth::attempt($credentials)) {
+                            session()->put('user',Auth::user());
+                            $request->session()->regenerate();
                             return redirect()->intended('dashboard');
                         }
+                        /* if(Hash::check($request->password, $users->password))
+                        {
+                            Auth::login($users,true);
+                            session()->put('user',$users);
+                            Log::alert(Auth::user());
+                            return redirect()->route('dash-login');
+                        } */
                     }
                 }
             }else{
+
                 if (Auth::attempt($credentials)) {
+                    session()->put('user',Auth::user());
                     $request->session()->regenerate();
                     return redirect()->intended('dashboard');
                 }
@@ -89,4 +95,6 @@ class LoginController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+
+
 }
